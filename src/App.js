@@ -1,8 +1,9 @@
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
-      <h1>bbbs</h1>
+      <Header />
     </>
   );
 }
