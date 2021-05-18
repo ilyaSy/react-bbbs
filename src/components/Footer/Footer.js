@@ -1,6 +1,10 @@
+import {Link} from 'react-router-dom';
+
 import logoSbss from '../../assets/img/logoSBSS.svg'
 
+import {pages} from '../../config/config';
 import './footer.css'
+
 const Footer = () => {
   return(
     <footer className="footer">
@@ -13,27 +17,20 @@ const Footer = () => {
           <nav className="footer__menu">
             <ul className="footer__list footer__list_type_nav">
               <li className="footer__list-item">
-                <a href="/" className="footer__list-link">О проекте</a>
+                <Link to="/about" className="footer__list-link">О проекте</Link>
               </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link calender-open">Календарь
-                </a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link">Куда пойти</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link">Вопросы</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link">Читать и смотреть</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link">Права детей</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link">Истории</a>
-              </li>
+              {
+                pages.map(page => (
+                  <li className="footer__list-item">
+                    <Link
+                      key={page.url}
+                      to={page.url}
+                      className={`footer__list-link ${page.url === '/calendar' ? 'calender-open' : ''}`}>
+                        {page.title}
+                    </Link>
+                  </li>
+                ))
+              }
             </ul>
           </nav>
           <nav className="footer__menu">
