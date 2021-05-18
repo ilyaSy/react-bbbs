@@ -122,3 +122,43 @@
   border: none;
   background-color: transparent;
 }
+
+@media (max-width: 1250px) {
+
+  .button_color_blue_onclick {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .button {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_color_blue {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_place_calendar-round {
+    width: 40px;
+    height: 40px;
+  }
+
+  .button_color_blue-round {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 320px) {
+
+  .button-close {
+    top: 15px;
+    right: 15px;
+  }
+}
