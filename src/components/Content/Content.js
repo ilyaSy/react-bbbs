@@ -1,5 +1,6 @@
 import MainPage from '../MainPage/MainPage';
 import {Switch, Route} from 'react-router-dom';
+import Calendar from "../../config/pages/Calendar/Calendar";
 
 export default function Content () {
   return (
@@ -9,7 +10,7 @@ export default function Content () {
       </Route>
 
       <Route exact path="/calendar">
-        {/* <Calendar /> */}
+        <Calendar />
       </Route>
 
       <Route exact path="/about">

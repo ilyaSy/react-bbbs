@@ -11,9 +11,14 @@ const Header = () => {
         <button type="button" className="header__burger-btn" />
         <nav className="header__menu">
           <ul className="header__list">
-            {pages.map(page => (
-              <li className="header__list-item calender-open">
-                <Link key={page.url} to={page.url} className="header__list-link">{page.title}</Link>
+            {pages.map((page) => (
+              <li className="header__list-item calender-open" key={page.url}>
+                <Link
+                  to={page.url}
+                  className="header__list-link"
+                >
+                  {page.title}
+                </Link>
               </li>
             ))}
           </ul>
@@ -28,6 +33,10 @@ const Header = () => {
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
+                <a href="/" className="header__burger-link">О проекте</a>
+              </li>
+              <li className="header__burger-item">
+                <a href="/" className="header__burger-link calender-open">Календарь</a>
                 <a href="/" className="header__burger-link">О проекте</a>
               </li>
               <li className="header__burger-item">
@@ -47,12 +56,26 @@ const Header = () => {
               </li>
               <li className="header__burger-item">
                 <a href="/" className="header__burger-link">Истории</a>
+                <a href="/" className="header__burger-link">Права детей</a>
+              </li>
+              <li className="header__burger-item">
+                <a href="/" className="header__burger-link">Истории</a>
               </li>
             </ul>
           </nav>
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
+                <a href="/" className="header__burger-link" target="_blank" rel="noopener">facebook</a>
+              </li>
+              <li className="header__burger-item">
+                <a href="/" className="header__burger-link" target="_blank" rel="noopener">vkontakte</a>
+              </li>
+              <li className="header__burger-item">
+                <a href="/" className="header__burger-link" target="_blank" rel="noopener">instagram</a>
+              </li>
+              <li className="header__burger-item">
+                <a href="/" className="header__burger-link" target="_blank" rel="noopener">youtube</a>
                 <a href="/" className="header__burger-link" target="_blank" rel="noopener">facebook</a>
               </li>
               <li className="header__burger-item">

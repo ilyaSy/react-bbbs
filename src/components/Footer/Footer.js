@@ -20,10 +20,9 @@ const Footer = () => {
                 <Link to="/about" className="footer__list-link">О проекте</Link>
               </li>
               {
-                pages.map(page => (
-                  <li className="footer__list-item">
+                pages.map((page) => (
+                  <li className="footer__list-item" key={page.url}>
                     <Link
-                      key={page.url}
                       to={page.url}
                       className={`footer__list-link ${page.url === '/calendar' ? 'calender-open' : ''}`}>
                         {page.title}
