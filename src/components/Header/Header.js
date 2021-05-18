@@ -33,6 +33,7 @@ const Header = () => {
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
+<<<<<<< HEAD
                 <a href="/" className="header__burger-link">О проекте</a>
               </li>
               <li className="header__burger-item">
@@ -60,7 +61,22 @@ const Header = () => {
               </li>
               <li className="header__burger-item">
                 <a href="/" className="header__burger-link">Истории</a>
+=======
+                <Link to="/about" className="footer__list-link">О проекте</Link>
+>>>>>>> Fix: header burger links
               </li>
+              {
+                pages.map(page => (
+                  <li className="header__burger-item">
+                    <Link
+                      key={page.url}
+                      to={page.url}
+                      className={`header__burger-link ${page.url === '/calendar' ? 'calender-open' : ''}`}>
+                        {page.title}
+                    </Link>
+                  </li>
+                ))
+              }
             </ul>
           </nav>
           <nav className="header__menu-burger">
