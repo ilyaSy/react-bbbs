@@ -1,30 +1,41 @@
+import {useState, useEffect, createRef} from 'react';
 import {Link} from 'react-router-dom';
 
 import {pages, socialLinks} from '../../config/config';
 import './header.css'
 
 const Header = () => {
+  const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+  const burger = createRef(null);
+  const burgerBtn = createRef(null);
+
+  useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setIsBurgerOpened(false)
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      console.log(e)
+      // if (e.target !== burger && e.target !== burgerBtn) {
+      //   setIsBurgerOpened(false)
+      // }
+    });
+  }, [])
+
+  const handleToggleBurger = () => { setIsBurgerOpened(!isBurgerOpened) }
+
   return(
     <header className="header">
       <div className="header__wrapper">
         <a className="header__logo" href="/" />
-        <button type="button" className="header__burger-btn" />
+        <button ref={burgerBtn} type="button" className="header__burger-btn" onClick={handleToggleBurger}/>
         <nav className="header__menu">
           <ul className="header__list">
-<<<<<<< HEAD
-            {pages.map((page) => (
-              <li className="header__list-item calender-open" key={page.url}>
-                <Link
-                  to={page.url}
-                  className="header__list-link"
-                >
-                  {page.title}
-                </Link>
-=======
             {pages.map(page => (
               <li className="header__list-item calender-open" key={page.url}>
                 <Link to={page.url} className="header__list-link">{page.title}</Link>
->>>>>>> Fix: keys
               </li>
             ))}
           </ul>
@@ -34,42 +45,12 @@ const Header = () => {
           <button type="button" className="header__button-login header__button-login_unauthorized" />
         </nav>
       </div>
-      <div className="header__burger header__burger_hidden">
+      <div ref={burger} className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
         <div className="header__burger-wrapper">
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
-<<<<<<< HEAD
-                <a href="/" className="header__burger-link">О проекте</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link calender-open">Календарь</a>
-                <a href="/" className="header__burger-link">О проекте</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link calender-open">Календарь</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Куда пойти</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Вопросы</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Читать и смотреть</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Права детей</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Истории</a>
-                <a href="/" className="header__burger-link">Права детей</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link">Истории</a>
-=======
-                <Link to="/about" className="footer__list-link">О проекте</Link>
->>>>>>> Fix: header burger links
+                <Link to="/about" className="header__burger-link">О проекте</Link>
               </li>
               {
                 pages.map(page => (
@@ -86,30 +67,6 @@ const Header = () => {
           </nav>
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
-<<<<<<< HEAD
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">facebook</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">vkontakte</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">instagram</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">youtube</a>
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">facebook</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">vkontakte</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">instagram</a>
-              </li>
-              <li className="header__burger-item">
-                <a href="/" className="header__burger-link" target="_blank" rel="noopener">youtube</a>
-              </li>
-=======
               {
                 socialLinks.map(social => (
                   <li className="header__burger-item" key={social.title}>
@@ -117,7 +74,6 @@ const Header = () => {
                   </li>
                 ))
               }
->>>>>>> Fix: keys
             </ul>
           </nav>
         </div>
