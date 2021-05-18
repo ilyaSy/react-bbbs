@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-import {pages} from '../../config/config';
+import {pages, socialLinks} from '../../config/config';
 import './header.css'
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
         <button type="button" className="header__burger-btn" />
         <nav className="header__menu">
           <ul className="header__list">
+<<<<<<< HEAD
             {pages.map((page) => (
               <li className="header__list-item calender-open" key={page.url}>
                 <Link
@@ -19,6 +20,11 @@ const Header = () => {
                 >
                   {page.title}
                 </Link>
+=======
+            {pages.map(page => (
+              <li className="header__list-item calender-open" key={page.url}>
+                <Link to={page.url} className="header__list-link">{page.title}</Link>
+>>>>>>> Fix: keys
               </li>
             ))}
           </ul>
@@ -67,9 +73,8 @@ const Header = () => {
               </li>
               {
                 pages.map(page => (
-                  <li className="header__burger-item">
+                  <li className="header__burger-item" key={page.url}>
                     <Link
-                      key={page.url}
                       to={page.url}
                       className={`header__burger-link ${page.url === '/calendar' ? 'calender-open' : ''}`}>
                         {page.title}
@@ -81,6 +86,7 @@ const Header = () => {
           </nav>
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
+<<<<<<< HEAD
               <li className="header__burger-item">
                 <a href="/" className="header__burger-link" target="_blank" rel="noopener">facebook</a>
               </li>
@@ -103,6 +109,15 @@ const Header = () => {
               <li className="header__burger-item">
                 <a href="/" className="header__burger-link" target="_blank" rel="noopener">youtube</a>
               </li>
+=======
+              {
+                socialLinks.map(social => (
+                  <li className="header__burger-item" key={social.title}>
+                    <a href={social.url} className="header__burger-link" target="_blank" rel="noopener">{social.title}</a>
+                  </li>
+                ))
+              }
+>>>>>>> Fix: keys
             </ul>
           </nav>
         </div>

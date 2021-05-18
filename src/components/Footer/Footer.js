@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 
 import logoSbss from '../../assets/img/logoSBSS.svg'
 
-import {pages} from '../../config/config';
+import {pages, socialLinks} from '../../config/config';
 import './footer.css'
 
 const Footer = () => {
@@ -34,18 +34,13 @@ const Footer = () => {
           </nav>
           <nav className="footer__menu">
             <ul className="footer__list footer__list_type_social">
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link" target="_blank" rel="noopener">facebook</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link" target="_blank" rel="noopener">vkontakte</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link" target="_blank" rel="noopener">instagram</a>
-              </li>
-              <li className="footer__list-item">
-                <a href="/" className="footer__list-link" target="_blank" rel="noopener">youtube</a>
-              </li>
+              {
+                socialLinks.map(social => (
+                  <li className="footer__list-item" key={social.title}>
+                    <a href={social.url} className="footer__list-link" target="_blank" rel="noopener">{social.title}</a>
+                  </li>
+                ))
+              }
             </ul>
           </nav>
         </div>
