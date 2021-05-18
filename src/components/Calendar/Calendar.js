@@ -1,6 +1,7 @@
-import Button from "../../../components/Button/Button";
+import Button from "../Button/Button";
 import './Calendar.css'
-import CalendarCard from "../../../components/CalendarCard/CalendarCard";
+import CalendarCard from "../CalendarCard/CalendarCard";
+
 const Calendar = () => {
   return(
     <section className="grid-calendar content">

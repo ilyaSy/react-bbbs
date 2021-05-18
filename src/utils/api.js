@@ -1,58 +1,50 @@
-import {tokenAuth, groupId, apiURL} from '../utils/constants';
+import {apiURL} from '../config/config';
 
 export class Api{
-  constructor({tokenAuth, groupId, apiURL}){
-    this._apiURL = `${apiURL}/${groupId}`;
+  constructor(){
+    // this._apiURL = `${apiURL}/${groupId}`;
     this._headers = { 
-      authorization: tokenAuth,
+      // authorization: tokenAuth,
       'Content-Type': 'application/json'
     };
   }
 
-  getInitialCards(){
-    return fetch(`${this._apiURL}/cards`, {headers: this._headers})
-      .then(this._handleApiResult.bind(null, 'getInitialCards'))
+  login(userData){
+    return fetch(`${apiURL}/token/`, {method: 'POST', headers: this._headers, body: JSON.stringify(userData)})
+      .then(this._handleApiResult.bind(null, 'getCities'))
   }
 
-  addCard(cardData){
-    return fetch(`${this._apiURL}/cards`, {method: 'POST', headers: this._headers, body: JSON.stringify(cardData)})
+  getCities(){
+    return fetch(`${apiURL}/cities/`, {headers: this._headers})
+      .then(this._handleApiResult.bind(null, 'getCities'))
+  }
+
+  getMain(){
+    return fetch(`${apiURL}/main/`, {headers: this._headers})
+      .then(this._handleApiResult.bind(null, 'getMain'))
+  }
+
+  getEvents(){
+    return fetch(`${apiURL}/afisha/events/`, {headers: this._headers})
+      .then(this._handleApiResult.bind(null, 'getEvents'))
+  }
+
+  setEvent(eventData){
+    return fetch(`${apiURL}/afisha/event-participants`, {method: 'POST', headers: this._headers, body: JSON.stringify(eventData)})
       .then(this._handleApiResult.bind(null, 'addCard'))
-  }
-  
-  toggleLikeCard(cardId, isLiked){
-    return fetch(`${this._apiURL}/cards/likes/${cardId}`, {method: isLiked ? 'DELETE' : 'PUT', headers: this._headers})
-      .then(this._handleApiResult.bind(null, 'likeCard'))
-  }
-
-  deleteCard(cardId){
-    return fetch(`${this._apiURL}/cards/${cardId}`, {method: 'DELETE', headers: this._headers,})
-      .then(this._handleApiResult.bind(null, 'deleteCard'))
-  }
-
-  editUserInfo(userData){
-    return fetch(`${this._apiURL}/users/me`, {method: 'PATCH', headers: this._headers, body: JSON.stringify(userData)})
-      .then(this._handleApiResult.bind(null, 'editUserInfo'))
-  } 
-
-  getUserInfo(){
-    return fetch(`${this._apiURL}/users/me`, {headers: this._headers})
-      .then(this._handleApiResult.bind(null, 'getUserInfo'))
-  }
-
-  setUserAvatar(avatar){
-    return fetch(`${this._apiURL}/users/me/avatar`, {method: 'PATCH', headers: this._headers, body: JSON.stringify(avatar)})
-      .then(this._handleApiResult.bind(null, 'setUserAvatar'))
   }
 
   _handleApiResult(fnName, res){
-    return res.ok ? res.json() : Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+    if (res.ok) {
+      // return res.json();
+    }
+    else {
+      throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+    }
+    // Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
 }
 
-const api = new Api({
-  tokenAuth: tokenAuth,
-  groupId: groupId,
-  apiURL: apiURL
-});
+const api = new Api();
 
 export default api;
