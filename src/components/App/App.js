@@ -15,7 +15,6 @@ function App() {
     <div class="root">
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Calendar />
         <Content />
         <Footer />
       </CurrentUserContext.Provider>
