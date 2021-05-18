@@ -11,9 +11,14 @@ const Header = () => {
         <button type="button" className="header__burger-btn" />
         <nav className="header__menu">
           <ul className="header__list">
-            {pages.map(page => (
-              <li className="header__list-item calender-open">
-                <Link key={page.url} to={page.url} className="header__list-link">{page.title}</Link>
+            {pages.map((page) => (
+              <li className="header__list-item calender-open" key={page.url}>
+                <Link
+                  to={page.url}
+                  className="header__list-link"
+                >
+                  {page.title}
+                </Link>
               </li>
             ))}
           </ul>
