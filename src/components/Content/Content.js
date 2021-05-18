@@ -15,6 +15,14 @@ export default function Content () {
       <Route exact path="/about">
         {/* <About /> */}
       </Route>
+
+      <Route exact path="/where-to-go">
+        {/* <WhereToGo /> */}
+      </Route>
+
+      <Route exact path="/questions">
+        {/* <Questions /> */}
+      </Route>
     </Switch>
   )
 }

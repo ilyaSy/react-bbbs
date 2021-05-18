@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom';
 
+import {pages} from '../../config/config';
 import './header.css'
+
 const Header = () => {
   return(
     <header className="header">
@@ -9,25 +11,11 @@ const Header = () => {
         <button type="button" className="header__burger-btn" />
         <nav className="header__menu">
           <ul className="header__list">
-            <li className="header__list-item calender-open">
-              {/* <a href="/" className="header__list-link">Календарь</a> */}
-              <Link to="/calendar" className="header__list-link">Календарь</Link>
-            </li>
-            <li className="header__list-item">
-              <a href="/" className="header__list-link">Куда пойти</a>
-            </li>
-            <li className="header__list-item">
-              <a href="/" className="header__list-link">Вопросы</a>
-            </li>
-            <li className="header__list-item">
-              <a href="/" className="header__list-link">Читать и смотреть</a>
-            </li>
-            <li className="header__list-item">
-              <a href="/" className="header__list-link">Права детей</a>
-            </li>
-            <li className="header__list-item">
-              <a href="/" className="header__list-link">Истории</a>
-            </li>
+            {pages.map(page => (
+              <li className="header__list-item calender-open">
+                <Link key={page.url} to={page.url} className="header__list-link">{page.title}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
         <nav className="header__action">
