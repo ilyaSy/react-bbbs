@@ -1,3 +1,5 @@
+export const apiURL = "http://127.0.0.1:8000/api/v1";
+
 export const pages = [
   {
     url: '/calendar',
@@ -16,11 +18,30 @@ export const pages = [
     title: 'Читать и смотреть'
   },
   {
-    url: '/',
+    url: '/rights',
     title: 'Права детей'
   },
   {
-    url: '/',
+    url: '/stories',
     title: 'Истории'
   },
 ]
+
+export const socialLinks = [
+  {
+    url: 'https://www.facebook.com/BigBrothers.BigSisters.Russia/',
+    title: 'facebook',
+  },
+  {
+    url: 'https://vk.com/big.brothers.big.sisters',
+    title: 'vkontakte',
+  },
+  {
+    url: 'https://www.instagram.com/nastavniki_org/',
+    title: 'instagram',
+  },
+  {
+    url: 'https://www.youtube.com/user/Nastavniki/',
+    title: 'youtube',
+  },
+];
