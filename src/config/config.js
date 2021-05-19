@@ -1,31 +1,31 @@
-export const apiURL = "http://127.0.0.1:8000/api/v1";
+export const apiURL = 'http://127.0.0.1:8000/api/v1';
 
 export const pages = [
   {
     url: '/calendar',
-    title: 'Календарь'
+    title: 'Календарь',
   },
   {
     url: '/where-to-go',
-    title: 'Куда пойти'
+    title: 'Куда пойти',
   },
   {
     url: '/questions',
-    title: 'Вопросы'
+    title: 'Вопросы',
   },
   {
     url: '/read-watch',
-    title: 'Читать и смотреть'
+    title: 'Читать и смотреть',
   },
   {
     url: '/rights',
-    title: 'Права детей'
+    title: 'Права детей',
   },
   {
     url: '/stories',
-    title: 'Истории'
+    title: 'Истории',
   },
-]
+];
 
 export const socialLinks = [
   {
