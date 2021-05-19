@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { pages, socialLinks } from '../../config/config';
@@ -7,8 +7,8 @@ import './header.css';
 
 const Header = () => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
-  const burger = createRef();
-  const burgerBtn = createRef();
+  // const burger = createRef();
+  // const burgerBtn = createRef();
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
@@ -34,7 +34,7 @@ const Header = () => {
       <div className="header__wrapper">
         <Link to="/" className="header__logo" />
         <Button
-          ref={burgerBtn}
+          // ref={burgerBtn}
           type="button"
           className="header__burger-btn"
           onClick={handleToggleBurger}
@@ -60,7 +60,7 @@ const Header = () => {
         </nav>
       </div>
       <div
-        ref={burger}
+        // ref={burger}
         className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}
       >
         <div className="header__burger-wrapper">
