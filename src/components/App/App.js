@@ -8,7 +8,9 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  setCurrentUser(null);
+  if (false) {
+    setCurrentUser(null);
+  }
 
   return (
     <div className="root">

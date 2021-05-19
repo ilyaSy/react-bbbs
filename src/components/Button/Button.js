@@ -10,6 +10,7 @@ const Button = ({ children, className }) => (
 
 Button.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.element.isRequired])
+    .isRequired,
 };
 export default Button;
