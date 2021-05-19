@@ -4,10 +4,11 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Content from '../Content/Content';
 
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  setCurrentUser(null);
 
   return (
     <div className="root">
