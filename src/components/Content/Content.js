@@ -1,9 +1,9 @@
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import MainPage from '../MainPage/MainPage';
 import Calendar from '../Calendar/Calendar';
 
-export default function Content () {
+export default function Content() {
   return (
     <Switch>
       <Route exact path="/">
@@ -26,5 +26,5 @@ export default function Content () {
         {/* <Questions /> */}
       </Route>
     </Switch>
-  )
+  );
 }
