@@ -1,15 +1,15 @@
 import './button.css';
 import PropTypes from 'prop-types';
 
-const Button = ({ children, className, type }) => (
-  <button className={className} type={type}>
+const Button = ({ children, className }) => (
+  <button className={className} type="button">
     {children}
   </button>
 );
+//  type: PropTypes.string.isRequired,
 
-Button.PropTypes = {
-  children: PropTypes.arrayOf(PropTypes.string),
+Button.propTypes = {
   className: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 export default Button;
