@@ -2,6 +2,7 @@ import { useState, useEffect, createRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { pages, socialLinks } from '../../config/config';
+import Button from '../Button/Button';
 import './header.css';
 
 const Header = () => {
@@ -31,8 +32,8 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__wrapper">
-        <a className="header__logo" href="/" />
-        <button
+        <Link to="/" className="header__logo" />
+        <Button
           ref={burgerBtn}
           type="button"
           className="header__burger-btn"
@@ -50,8 +51,8 @@ const Header = () => {
           </ul>
         </nav>
         <nav className="header__action">
-          <a className="header__button-search" href="/" />
-          <button
+          <Link className="header__button-search" to="/" />
+          <Button
             type="button"
             className="header__button-login header__button-login_unauthorized"
           />
