@@ -7,21 +7,12 @@ import './header.css';
 
 const Header = () => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
-  // const burger = createRef();
-  // const burgerBtn = createRef();
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         setIsBurgerOpened(false);
       }
-    });
-
-    document.addEventListener('click', (e) => {
-      console.log(e);
-      // if (e.target !== burger && e.target !== burgerBtn) {
-      //   setIsBurgerOpened(false)
-      // }
     });
   }, []);
 
@@ -33,12 +24,7 @@ const Header = () => {
     <header className="header">
       <div className="header__wrapper">
         <Link to="/" className="header__logo" />
-        <Button
-          // ref={burgerBtn}
-          type="button"
-          className="header__burger-btn"
-          onClick={handleToggleBurger}
-        >
+        <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>
           &nbsp;
         </Button>
         <nav className="header__menu">
@@ -59,10 +45,7 @@ const Header = () => {
           </Button>
         </nav>
       </div>
-      <div
-        // ref={burger}
-        className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}
-      >
+      <div className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
         <div className="header__burger-wrapper">
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
