@@ -7,8 +7,8 @@ import './header.css';
 
 const Header = () => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
-  const burger = createRef(null);
-  const burgerBtn = createRef(null);
+  const burger = createRef();
+  const burgerBtn = createRef();
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
@@ -38,7 +38,9 @@ const Header = () => {
           type="button"
           className="header__burger-btn"
           onClick={handleToggleBurger}
-        />
+        >
+          &nbsp;
+        </Button>
         <nav className="header__menu">
           <ul className="header__list">
             {pages.map((page) => (
@@ -52,10 +54,9 @@ const Header = () => {
         </nav>
         <nav className="header__action">
           <Link className="header__button-search" to="/" />
-          <Button
-            type="button"
-            className="header__button-login header__button-login_unauthorized"
-          />
+          <Button type="button" className="header__button-login header__button-login_unauthorized">
+            &nbsp;
+          </Button>
         </nav>
       </div>
       <div
