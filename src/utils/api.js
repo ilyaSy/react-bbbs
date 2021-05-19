@@ -1,58 +1,58 @@
-import { apiURL } from '../config/config';
+import axios from 'axios';
+import { apiURL, TEST_MODE } from '../config/config';
+import setMockAdapter from './serverApi';
+
+if (TEST_MODE) {
+  setMockAdapter();
+}
+
+axios.defaults.headers.get['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export class Api {
   constructor() {
-    // this._apiURL = `${apiURL}/${groupId}`;
     this._headers = {
       // authorization: tokenAuth,
-      'Content-Type': 'application/json',
     };
   }
 
   login(userData) {
-    return fetch(`${apiURL}/token/`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(userData),
-    }).then(this._handleApiResult.bind(null, 'getCities'));
+    return axios.post(`${apiURL}/token/`, userData).then(this._handleApiResult.bind(null, 'login'));
   }
 
   getCities() {
-    return fetch(`${apiURL}/cities/`, { headers: this._headers }).then(
-      this._handleApiResult.bind(null, 'getCities')
-    );
+    return axios.get(`${apiURL}/cities/`).then(this._handleApiResult.bind(null, 'getCities'));
   }
 
   getMain() {
-    return fetch(`${apiURL}/main/`, { headers: this._headers }).then(
-      this._handleApiResult.bind(null, 'getMain')
-    );
+    return axios.get(`${apiURL}/main/`).then(this._handleApiResult.bind(null, 'getMain'));
   }
 
   getEvents() {
-    return fetch(`${apiURL}/afisha/events/`, { headers: this._headers }).then(
-      this._handleApiResult.bind(null, 'getEvents')
-    );
+    return axios
+      .get(`${apiURL}/afisha/events/`)
+      .then(this._handleApiResult.bind(null, 'getEvents'));
   }
 
   setEvent(eventData) {
-    return fetch(`${apiURL}/afisha/event-participants`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(eventData),
-    }).then(this._handleApiResult.bind(null, 'addCard'));
+    return axios
+      .post(`${apiURL}/afisha/event-participants`, eventData)
+      .then(this._handleApiResult.bind(null, 'setEvent'));
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _handleApiResult(fnName, res) {
-    if (res.ok) {
-      // return res.json();
+    if (TEST_MODE) {
+      return res.data;
+      // eslint-disable-next-line no-else-return
+    } else if (res.ok) {
+      return res.json();
     } else {
       throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
     }
-    // Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+    //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
 }
 
 const api = new Api();
-
 export default api;
