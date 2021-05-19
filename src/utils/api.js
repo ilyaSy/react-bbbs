@@ -1,21 +1,23 @@
 import axios from 'axios';
-import { apiURL } from '../config/config';
+import { apiURL, TEST_MODE } from '../config/config';
+import setMockAdapter from './serverApi';
 
-axios.defaults.headers.common['Content-Type'] = 'application/json';
+if (TEST_MODE) {
+  setMockAdapter();
+}
+
+axios.defaults.headers.get['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export class Api {
   constructor() {
-    // this._apiURL = `${apiURL}/${groupId}`;
     this._headers = {
       // authorization: tokenAuth,
-      // 'Content-Type': 'application/json',
     };
   }
 
   login(userData) {
-    return axios
-      .post(`${apiURL}/token/`, userData)
-      .then(this._handleApiResult.bind(null, 'getCities'));
+    return axios.post(`${apiURL}/token/`, userData).then(this._handleApiResult.bind(null, 'login'));
   }
 
   getCities() {
@@ -35,17 +37,20 @@ export class Api {
   setEvent(eventData) {
     return axios
       .post(`${apiURL}/afisha/event-participants`, eventData)
-      .then(this._handleApiResult.bind(null, 'addCard'));
+      .then(this._handleApiResult.bind(null, 'setEvent'));
   }
 
   // eslint-disable-next-line class-methods-use-this
   _handleApiResult(fnName, res) {
-    if (res.ok) {
-      // return res.json();
+    if (TEST_MODE) {
+      return res.data;
+      // eslint-disable-next-line no-else-return
+    } else if (res.ok) {
+      return res.json();
     } else {
       throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
     }
-    // Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+    //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
 }
 

@@ -1,29 +1,32 @@
 import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import MockAdapter from 'axios-mock-adapter';
+import { apiURL } from '../config/config';
 import { eventsGet, eventPost, mainGet, loginPost, citiesGet } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
-//  get main page
-mock.onGet('/main/').reply(200, mainGet);
+export default function setMockAdapter() {
+  // login
+  const postLogin = (config) => {
+    console.log(config);
+    return [200, loginPost];
+  };
+  mock.onPost(`${apiURL}/token/`).reply(postLogin);
 
-//  get cities
-mock.onGet('/cities/').reply(200, citiesGet);
+  //  get main page
+  mock.onGet(`${apiURL}/main/`).reply(200, mainGet);
 
-// get events
-mock.onGet('/afisha/events/').reply(200, eventsGet);
+  //  get cities
+  mock.onGet(`${apiURL}/cities/`).reply(200, citiesGet);
 
-// login
-const postLogin = (config) => {
-  console.log(config);
-  return [200, loginPost];
-};
-mock.onPost('/token/').reply(postLogin);
+  // get events
+  mock.onGet(`${apiURL}/afisha/events/`).reply(200, eventsGet);
 
-// set event
-const postEvent = (config) => {
-  console.log(config);
-  return [200, eventPost];
-};
-mock.onPost('/token/').reply(postEvent);
+  // set event
+  const postEvent = (config) => {
+    console.log(config);
+    return [200, eventPost];
+  };
+  mock.onPost(`${apiURL}/afisha/event-participants/`).reply(postEvent);
+}
