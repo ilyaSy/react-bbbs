@@ -9,3 +9,5 @@ MainPageSection.propTypes = {
   className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
+
+export default MainPageSection;
