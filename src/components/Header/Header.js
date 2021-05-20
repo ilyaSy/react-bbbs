@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
 import './header.css';
 
-const Header = () => {
+const Header = ({ openModal }) => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
   useEffect(() => {
@@ -39,8 +39,12 @@ const Header = () => {
           </ul>
         </nav>
         <nav className="header__action">
-          <Link className="header__button-search" to="/" />
-          <Button type="button" className="header__button-login header__button-login_unauthorized">
+          <Link className="header__button-search" to="/" onClick={openModal} />
+          <Button
+            type="button"
+            className="header__button-login header__button-login_unauthorized"
+            onClick={openModal}
+          >
             &nbsp;
           </Button>
         </nav>
@@ -90,4 +94,7 @@ const Header = () => {
   );
 };
 
+Header.propTypes = {
+  openModal: PropTypes.func.isRequired,
+};
 export default Header;
