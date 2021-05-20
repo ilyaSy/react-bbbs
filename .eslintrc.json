@@ -27,6 +27,12 @@
         "react/state-in-constructor": "off",
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "import/no-unresolved": [
+          "error",
+          {
+            "ignore": [ "svg" ]
+          }
+        ]
     }
 }
