@@ -28,8 +28,10 @@ export default function Content() {
       </Route>
 
       <Route exact path="/questions">
-        {/* Вопросы */}
+        {/* questions */}
       </Route>
+
+      {/* Нужен роут в профиль для PerAcc */}
     </Switch>
   );
 }
