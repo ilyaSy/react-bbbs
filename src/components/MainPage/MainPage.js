@@ -7,6 +7,7 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Intro from '../Intro/Intro';
 import Story from '../Story/Story';
+import MainVideo from '../MainVideo/MainVideo';
 import { mainGet as mainPageData } from '../../utils/serverApiTestConfig';
 
 export default function MainPage({ mainData }) {
@@ -16,19 +17,22 @@ export default function MainPage({ mainData }) {
   }
 
   return (
-    <div>
-      <MainPageSection className="mainpage__block">
-        <MoviesContainer movies={mainData?.movies} />
-      </MainPageSection>
+    <MainPageSection className="mainpage">
       <MainPageSection className="mainpage__intro">
         <Intro />
         <Story history={mainPageData.history} />
+      </MainPageSection>
+      <MainPageSection className="mainpage__block">
+        <MoviesContainer movies={mainData?.movies} />
+      </MainPageSection>
+      <MainPageSection className="mainpage__blocks">
+        <MainVideo video={mainPageData.video} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
         <QuestionsContainer questions={mainData?.questions} place="main" />
       </MainPageSection>
-    </div>
+    </MainPageSection>
   );
 }
 
