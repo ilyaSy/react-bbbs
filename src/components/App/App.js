@@ -10,13 +10,14 @@ import AuthPopup from '../AuthPopup/AuthPopup';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mainData, setMainData] = useState(null);
+  const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openAuthModal = () => {
+    setIsAuthModalOpened(true);
   };
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeAuthModal = () => {
+    setIsAuthModalOpened(false);
   };
 
   const handleSubmitAuth = (userName, password) => {
@@ -27,7 +28,7 @@ function App() {
           localStorage.setItem('jwtAccess', data.access);
           localStorage.setItem('jwtRefresh', data.refresh);
           setCurrentUser(userName);
-          closeModal();
+          closeAuthModal();
         }
       })
       .catch((err) => {
@@ -44,7 +45,7 @@ function App() {
 
     Api.getMain()
       .then((data) => {
-        console.log(data);
+        setMainData(data);
       })
       .catch((err) => {
         console.log(`Error: ошибка ${err}`);
@@ -54,13 +55,13 @@ function App() {
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header openModal={openModal} />
-        <Content openModal={openModal} />
+        <Header openAuthModal={openAuthModal} />
+        <Content mainData={mainData} openAuthModal={openAuthModal} />
         <Footer />
 
         <AuthPopup
-          isModalOpen={isModalOpen}
-          closeModal={closeModal}
+          isAuthModalOpened={isAuthModalOpened}
+          closeAuthModal={closeAuthModal}
           submitModal={handleSubmitAuth}
         />
       </CurrentUserContext.Provider>

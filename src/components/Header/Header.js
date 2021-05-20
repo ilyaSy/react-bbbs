@@ -5,7 +5,7 @@ import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
 import './header.css';
 
-const Header = ({ openModal }) => {
+const Header = ({ openAuthModal }) => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Header = ({ openModal }) => {
           <Button
             type="button"
             className="header__button-login header__button-login_unauthorized"
-            onClick={openModal}
+            onClick={openAuthModal}
           >
             &nbsp;
           </Button>
@@ -95,6 +95,6 @@ const Header = ({ openModal }) => {
 };
 
 Header.propTypes = {
-  openModal: PropTypes.func.isRequired,
+  openAuthModal: PropTypes.func.isRequired,
 };
 export default Header;

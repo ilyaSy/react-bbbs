@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import './QuestionsContainer.css';
 import Question from '../Question/Question';
-import questionDataDummy from '../../utils/questionDataDummy';
+// import questionDataDummy from '../../utils/questionDataDummy';
 
-const QuestionsContainer = ({ place }) => (
+const QuestionsContainer = ({ questions, place }) => (
   <ul
     className={`questions ${
       place === 'main' ? 'questions_place_mainpage' : 'questions__page-list'
     }`}
   >
-    {questionDataDummy.map(({ title, tags }) => (
+    {questions.map(({ title, tags }) => (
       <Question title={title} tags={tags} place={place} />
     ))}
   </ul>
@@ -17,6 +17,11 @@ const QuestionsContainer = ({ place }) => (
 
 QuestionsContainer.propTypes = {
   place: PropTypes.string.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.any),
+};
+
+QuestionsContainer.defaultProps = {
+  questions: [],
 };
 
 export default QuestionsContainer;

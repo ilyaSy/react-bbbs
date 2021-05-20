@@ -1,15 +1,16 @@
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import MainPage from '../MainPage/MainPage';
 import Calendar from '../Calendar/Calendar';
 import WhereToGo from '../WhereToGo/WhereToGo';
 import './content.css';
 
-export default function Content() {
+export default function Content({ mainData }) {
   return (
     <Switch>
       <main className="content root__section">
         <Route exact path="/">
-          <MainPage />
+          <MainPage mainData={mainData} />
         </Route>
 
         <Route exact path="/calendar">
@@ -35,3 +36,9 @@ export default function Content() {
     </Switch>
   );
 }
+
+Content.propTypes = {
+  mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+Content.defaultProps = {};

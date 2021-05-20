@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './authPopup.css';
 
-const AuthPopup = ({ isModalOpen, closeModal, submitModal }) => {
+const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
   const [login, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,12 +23,12 @@ const AuthPopup = ({ isModalOpen, closeModal, submitModal }) => {
   };
 
   return (
-    <div className={isModalOpen ? 'popup popup_type_login popup_opened' : 'popup popup_type_login'}>
+    <div className={`popup popup_type_login ${isAuthModalOpened ? 'popup_opened' : ''}`}>
       <div className="login">
         <Button
           type="button"
           className="popup__button-close popup__button-close_place_login"
-          onClick={closeModal}
+          onClick={closeAuthModal}
         />
         <h3 className="login__title">Вход</h3>
         <div className="login__texts">
@@ -83,8 +83,8 @@ const AuthPopup = ({ isModalOpen, closeModal, submitModal }) => {
 };
 
 AuthPopup.propTypes = {
-  isModalOpen: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
+  isAuthModalOpened: PropTypes.bool.isRequired,
+  closeAuthModal: PropTypes.func.isRequired,
   submitModal: PropTypes.func.isRequired,
 };
 export default AuthPopup;
