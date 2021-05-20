@@ -1,42 +1,36 @@
 import PropTypes from 'prop-types';
-import { getDay, getMonth, getDate, getHours, getMinutes } from 'date-fns';
-import { weekDays, months } from '../../utils/serverApiTestConfig';
+// import { weekDays, months } from '../../utils/serverApiTestConfig';
 import Button from '../Button/Button';
+import format from '../../utils/format';
 import './CalendarCard.css';
 
 const CalendarCard = ({ event }) => {
-  const { address, contact, title, seats, startAt, endAt } = event;
+  const { address, contact, title, seats, startAt, endAt, booked } = event;
 
-  const weekDay = getDay(new Date(startAt));
-  const month = getMonth(new Date(startAt));
-  const day = getDate(new Date(startAt));
-  const startHour = getHours(new Date(startAt));
-  const endHour = getHours(new Date(endAt));
-  const startMinute = getMinutes(new Date(startAt));
-  const endMinute = getMinutes(new Date(endAt));
+  const startAtDate = new Date(startAt);
+  const endAtDate = new Date(endAt);
 
-  const addZero = (num) => {
-    if (num < 10) {
-      return `0${num}`;
-    }
-    return num;
-  }; // Идиотизм наверно, но умнее ничего не придумал ;D
+  const day = format(startAtDate, 'dd');
+  const startTime = format(startAtDate, 'KK:mm');
+  const endTime = format(endAtDate, 'KK:mm');
+  const monthName = format(startAtDate, 'LLLL');
+  const dayName = format(startAtDate, 'EEEE');
 
   return (
-    <div className="calendar">
+    <div className={`calendar ${booked ? 'calendar_onclick' : ''}`}>
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
         <p className="calendar__date">
-          {months[month]} / {weekDays[weekDay]}
+          {monthName} / {dayName}
         </p>
         <h2 className="calendar__event">{title}</h2>
         <p className="calendar__day">{day}</p>
       </div>
       <ul className="calendar__contacts">
         <li className="calendar__contacts-item">
-          <p className="calendar__time">{`${addZero(startHour)}:${addZero(startMinute)}–${addZero(
-            endHour
-          )}:${addZero(endMinute)}`}</p>
+          <p className="calendar__time">
+            {startTime}-{endTime}
+          </p>
         </li>
         <li className="calendar__contacts-item">
           <p className="calendar__adress">{address}</p>
@@ -47,13 +41,22 @@ const CalendarCard = ({ event }) => {
       </ul>
       <div className="calendar__sign-up">
         <div className="calendar__sign-up_flex">
-          <Button
-            className="button button_color_blue button_color_blue_onclick button_color_blue-open"
-            type="button"
-          >
-            Отменить запись
-          </Button>
-          <p className="calendar__sign-up__type_text">Осталось {seats} мест</p>
+          {booked ? (
+            <Button
+              className="button button_color_blue button_color_blue_onclick button_color_blue-open"
+              type="button"
+              disabled={seats > 0 ? false : 'disabled'}
+            >
+              Отменить запись
+            </Button>
+          ) : (
+            <Button className="button button_color_blue button_color_blue-nonactive" type="button">
+              Записаться
+            </Button>
+          )}
+          <p className="calendar__sign-up__type_text">
+            {seats > 0 ? `Осталось ${seats} мест` : 'Запись закрыта'}
+          </p>
         </div>
         <Button
           className="button_color_blue button_color_blue-round button_color_blue-open"
@@ -80,19 +83,20 @@ CalendarCard.propTypes = {
   event: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
-  address: PropTypes.string,
-  contact: PropTypes.string,
-  title: PropTypes.string,
-  seats: PropTypes.number,
-  startAt: PropTypes.string,
-  endAt: PropTypes.string,
+  // address: PropTypes.string,
+  // contact: PropTypes.string,
+  // title: PropTypes.string,
+  // seats: PropTypes.number,
+  // startAt: PropTypes.string,
+  // endAt: PropTypes.string,
 };
+
 CalendarCard.defaultProps = {
-  address: '',
-  contact: '',
-  title: '',
-  startAt: '',
-  endAt: '',
-  seats: 0,
+  // address: '',
+  // contact: '',
+  // title: '',
+  // startAt: '',
+  // endAt: '',
+  // seats: 0,
 };
 export default CalendarCard;

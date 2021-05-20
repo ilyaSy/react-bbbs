@@ -1,12 +1,29 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './authPopup.css';
 
-const AuthPopup = ({ modalIsOpen, closeModal }) => {
-  console.log(modalIsOpen);
+const AuthPopup = ({ isModalOpen, closeModal, submitModal }) => {
+  const [login, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = (event) => {
+    if (event.target.name === 'login') {
+      setUserName(event.target.value);
+    }
+    if (event.target.name === 'password') {
+      setPassword(event.target.value);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    submitModal(login, password);
+  };
+
   return (
-    <div className={modalIsOpen ? 'popup popup_type_login popup_opened' : 'popup popup_type_login'}>
+    <div className={isModalOpen ? 'popup popup_type_login popup_opened' : 'popup popup_type_login'}>
       <div className="login">
         <Button
           type="button"
@@ -23,7 +40,12 @@ const AuthPopup = ({ modalIsOpen, closeModal }) => {
             свяжитесь с&nbsp;вашим куратором.
           </p>
         </div>
-        <form className="popup__form popup__form_type_login" name="login" noValidate>
+        <form
+          className="popup__form popup__form_type_login"
+          name="login"
+          noValidate
+          onSubmit={handleSubmit}
+        >
           <input
             type="text"
             name="login"
@@ -32,6 +54,8 @@ const AuthPopup = ({ modalIsOpen, closeModal }) => {
             className="popup__input popup__input_type_login"
             required
             minLength="2"
+            value={login}
+            onChange={handleChange}
           />
           <span className="popup__error popup__error_type_login" />
           <input
@@ -42,6 +66,8 @@ const AuthPopup = ({ modalIsOpen, closeModal }) => {
             className="popup__input popup__input_type_password"
             required
             minLength="2"
+            value={password}
+            onChange={handleChange}
           />
           <span className="popup__error popup__error_type_password" />
           <Link className="login__link" to="/">
@@ -57,7 +83,8 @@ const AuthPopup = ({ modalIsOpen, closeModal }) => {
 };
 
 AuthPopup.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
+  submitModal: PropTypes.func.isRequired,
 };
 export default AuthPopup;

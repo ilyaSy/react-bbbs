@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
+// import { format } from 'date-fns';
+// import format from '../../utils/format';
 
 import Button from '../Button/Button';
 import CalendarCard from '../CalendarCard/CalendarCard';
-import api from '../../utils/api';
+import Api from '../../utils/api';
 import './Calendar.css';
 import { months } from './calendarTest';
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
+  // const [months, setMonths] = useState([]);
   useEffect(() => {
-    api
-      .getEvents()
+    Api.getEvents()
       .then((data) => {
         setEvents(data);
+        // setMonths(data.map(date => Date(date.startAt).))
+        // console.log(
+        //   data
+        //     .map((date) =>
+        //       format(new Date(date.startAt), 'LLLL')
+        //     )
+        //     .filter((el, i, array) => array.indexOf(el) === i)
+        // );
       })
       .catch((err) => {
         console.log(`Error: Calendar get events ${err}`);
