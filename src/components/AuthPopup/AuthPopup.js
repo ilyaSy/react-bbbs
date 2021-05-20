@@ -78,6 +78,34 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
           </Button>
         </form>
       </div>
+      <form className="popup__form popup__form_type_login" name="login" noValidate>
+        <input
+          type="text"
+          name="login"
+          placeholder="Логин"
+          id="login"
+          className="popup__input popup__input_type_login"
+          required
+          minLength="2"
+        />
+        <span className="popup__error popup__error_type_login" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          id="password"
+          className="popup__input popup__input_type_password"
+          required
+          minLength="2"
+        />
+        <span className="popup__error popup__error_type_password" />
+        <Link className="login__link" to="/">
+          Забыли пароль?
+        </Link>
+        <Button type="submit" className="button popup__submit-btn popup__submit-btn_type_login">
+          Войти
+        </Button>
+      </form>
     </div>
   );
 };
