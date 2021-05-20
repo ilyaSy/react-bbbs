@@ -28,7 +28,7 @@ export default function Content() {
       </Route>
 
       <Route exact path="/questions">
-        {/* <Questions /> */}
+        {/* Вопросы */}
       </Route>
     </Switch>
   );
