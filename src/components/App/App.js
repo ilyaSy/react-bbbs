@@ -12,10 +12,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openAuthModal = () => {
+  const openModal = () => {
     setIsModalOpen(true);
   };
-  const closeAuthModal = () => {
+  const closeModal = () => {
     setIsModalOpen(false);
   };
 
@@ -27,7 +27,7 @@ function App() {
           localStorage.setItem('jwtAccess', data.access);
           localStorage.setItem('jwtRefresh', data.refresh);
           setCurrentUser(userName);
-          closeAuthModal();
+          closeModal();
         }
       })
       .catch((err) => {
@@ -36,6 +36,12 @@ function App() {
   };
 
   useEffect(() => {
+    // const jwt = localStorage.getItem('jwtAccess');
+    // if (jwt) {
+    //   Api.setAuthHeader(jwt);
+    //   setCurrentUser(userName);
+    // }
+
     Api.getMain()
       .then((data) => {
         console.log(data);
@@ -48,13 +54,13 @@ function App() {
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header openModal={openAuthModal} />
-        <Content openModal={openAuthModal} />
+        <Header openModal={openModal} />
+        <Content openModal={openModal} />
         <Footer />
 
         <AuthPopup
           isModalOpen={isModalOpen}
-          closeModal={closeAuthModal}
+          closeModal={closeModal}
           submitModal={handleSubmitAuth}
         />
       </CurrentUserContext.Provider>

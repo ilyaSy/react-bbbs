@@ -39,7 +39,7 @@ const Header = ({ openModal }) => {
           </ul>
         </nav>
         <nav className="header__action">
-          <Link className="header__button-search" to="/" onClick={openModal} />
+          <Link className="header__button-search" to="/search" />
           <Button
             type="button"
             className="header__button-login header__button-login_unauthorized"

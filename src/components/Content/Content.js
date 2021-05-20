@@ -7,31 +7,31 @@ import './content.css';
 export default function Content() {
   return (
     <Switch>
-      <Route exact path="/">
-        <main className="content root__section">
+      <main className="content root__section">
+        <Route exact path="/">
           <MainPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/calendar">
-        <Calendar />
-      </Route>
+        <Route exact path="/calendar">
+          <Calendar />
+        </Route>
 
-      <Route exact path="/about">
-        {/* <About /> */}
-      </Route>
+        <Route exact path="/about">
+          {/* <About /> */}
+        </Route>
 
-      <Route exact path="/where-to-go">
-        <main className="content root__section">
+        <Route exact path="/where-to-go">
           <WhereToGo />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/questions">
-        {/* questions */}
-      </Route>
+        <Route exact path="/questions">
+          {/* Вопросы */}
+        </Route>
 
-      {/* Нужен роут в профиль для PerAcc */}
+        <Route exact path="/search">
+          {/* Задать вопрос */}
+        </Route>
+      </main>
     </Switch>
   );
 }
