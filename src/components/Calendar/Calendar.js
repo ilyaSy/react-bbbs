@@ -8,7 +8,6 @@ import { months } from './calendarTest';
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
-
   useEffect(() => {
     api
       .getEvents()
@@ -32,7 +31,7 @@ const Calendar = () => {
       </div>
       <div className="grid-calendar__grid">
         {events.map((event) => (
-          <CalendarCard key={event.id} />
+          <CalendarCard event={event} key={event.id} />
         ))}
       </div>
     </section>
