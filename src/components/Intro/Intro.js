@@ -1,6 +1,7 @@
-import logoSbbsBlue from '../../assets/img/logoSBBS-blue.svg';
+import './Intro.css';
+import logoSbbsBlue from '../../assets/img/logoSBSS-blue.svg';
 
-const Intro = () => {
+const Intro = () => (
   <div className="bbbs">
     <div className="bbbs__logo">
       <a
@@ -18,7 +19,7 @@ const Intro = () => {
         Братья Старшие Сестры&raquo;.Созданная для поддержки наставников программы.
       </p>
     </div>
-  </div>;
-};
+  </div>
+);
 
 export default Intro;
