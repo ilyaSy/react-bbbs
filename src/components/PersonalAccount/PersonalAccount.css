@@ -243,7 +243,7 @@
 }
 
 .personal-account__feedback-button_good-active,
-.personal-account__radio:checked + .personal-account__feedback-button_good {
+.personal-account__feedback-button_good:checked > .personal-account__radio:checked {
   background-image: url('../../assets/img/feedback-good-color.svg');
 }
 

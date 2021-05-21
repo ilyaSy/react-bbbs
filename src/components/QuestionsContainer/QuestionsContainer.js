@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import './QuestionsContainer.css';
 import Question from '../Question/Question';
-// import questionDataDummy from '../../utils/questionDataDummy';
 
 const QuestionsContainer = ({ questions, place }) => (
   <ul

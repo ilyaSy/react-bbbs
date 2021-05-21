@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Movie from '../Movie/Movie';
 import './MoviesContainer.css';
 
-// const MoviesContainer = ({ children }) => <ul className="movies">{children}</ul>;
 function MoviesContainer({ movies }) {
   return (
     <ul className="movies">

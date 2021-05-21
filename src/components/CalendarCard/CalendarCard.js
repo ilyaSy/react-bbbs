@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// import { weekDays, months } from '../../utils/serverApiTestConfig';
 import Button from '../Button/Button';
 import format from '../../utils/format';
 import './CalendarCard.css';

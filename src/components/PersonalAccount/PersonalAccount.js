@@ -42,39 +42,44 @@ const PersonalAccount = () => (
           name="description"
         />
         <div className="personal-account__feedback">
-          <input
-            className="personal-account__radio"
-            type="radio"
-            id="good"
-            name="feedback"
-            value="good"
-          />
           <label
             htmlFor="good"
             className="personal-account__label personal-account__feedback-button personal-account__feedback-button_good"
-          />
-          <input
-            className="personal-account__radio"
-            type="radio"
-            id="normal"
-            name="feedback"
-            value="normal"
-          />
+          >
+            <input
+              className="personal-account__radio"
+              type="radio"
+              id="good"
+              name="feedback"
+              value="good"
+            />
+          </label>
+
           <label
             htmlFor="normal"
             className="personal-account__label personal-account__feedback-button personal-account__feedback-button_normal"
-          />
-          <input
-            className="personal-account__radio"
-            type="radio"
-            id="bad"
-            name="feedback"
-            value="bad"
-          />
+          >
+            <input
+              className="personal-account__radio"
+              type="radio"
+              id="normal"
+              name="feedback"
+              value="normal"
+            />
+          </label>
+
           <label
             htmlFor="bad"
             className="personal-account__label personal-account__feedback-button personal-account__feedback-button_bad"
-          />
+          >
+            <input
+              className="personal-account__radio"
+              type="radio"
+              id="bad"
+              name="feedback"
+              value="bad"
+            />
+          </label>
           <p className="personal-account__feedback-text">Оцените проведенное время</p>
         </div>
         <div className="personal-account__submit">

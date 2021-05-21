@@ -40,12 +40,12 @@ export default class Api {
   static _handleApiResult(fnName, res) {
     if (TEST_MODE) {
       return res.data;
-      // eslint-disable-next-line no-else-return
-    } else if (res.ok) {
-      return res.json();
-    } else {
-      throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
     }
-    //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+
+    return res.ok
+      ? res.json()
+      : Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
+  // throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+  //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
 }
