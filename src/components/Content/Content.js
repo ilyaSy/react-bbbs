@@ -35,7 +35,6 @@ export default function Content({ mainData, openAuthModal, onLogout }) {
 
       <Route exact path="/about">
         {/* <About /> */}
-        {/* <Redirect to={{ pathname: '/', state: { isAuthModalOpened: true } }} /> */}
       </Route>
 
       <Route exact path="/where-to-go">
@@ -58,9 +57,10 @@ export default function Content({ mainData, openAuthModal, onLogout }) {
         {/* Задать вопрос */}
       </Route>
 
-      <Route exact path="/personal-account">
+      <ProtectedRoute path="/personal-account" component={PersonalAccount} onLogout={onLogout} />
+      {/* <Route exact path="/personal-account">
         <PersonalAccount onLogout={onLogout} />
-      </Route>
+      </Route> */}
     </Switch>
   );
 }

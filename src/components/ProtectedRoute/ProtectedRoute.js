@@ -5,11 +5,17 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 export default function ProtectedRoute({ component: Component, path, onLogout }) {
   const currentUser = useContext(CurrentUserContext);
+
+  let className = 'content root__section';
+  if (path !== '/calendar' || path !== '/personal-account') {
+    className = '';
+  }
+
   return (
     <Route>
       {currentUser ? (
-        <main className={`${path !== '/calendar' && 'content root__section'}`}>
-          <Component path={path} onLogout={onLogout} />
+        <main className={className}>
+          <Component exact path={path} onLogout={onLogout} />
         </main>
       ) : (
         <Redirect to={{ pathname: '/', state: { isAuthModalOpened: true } }} />
