@@ -53,19 +53,19 @@ function App() {
   }, []);
 
   return (
-    <div className="root">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header openAuthModal={openAuthModal} />
-        <Content mainData={mainData} openAuthModal={openAuthModal} />
-        <Footer />
+    // <div className="root">
+    <CurrentUserContext.Provider value={currentUser}>
+      <Header openAuthModal={openAuthModal} />
+      <Content mainData={mainData} openAuthModal={openAuthModal} />
+      <Footer />
 
-        <AuthPopup
-          isAuthModalOpened={isAuthModalOpened}
-          closeAuthModal={closeAuthModal}
-          submitModal={handleSubmitAuth}
-        />
-      </CurrentUserContext.Provider>
-    </div>
+      <AuthPopup
+        isAuthModalOpened={isAuthModalOpened}
+        closeAuthModal={closeAuthModal}
+        submitModal={handleSubmitAuth}
+      />
+    </CurrentUserContext.Provider>
+    // </div>
   );
 }
 

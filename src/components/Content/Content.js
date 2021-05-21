@@ -9,35 +9,39 @@ import './content.css';
 export default function Content({ mainData }) {
   return (
     <Switch>
-      <main className="content root__section">
-        <Route exact path="/">
+      <Route exact path="/">
+        <main className="content root__section">
           <MainPage mainData={mainData} />
-        </Route>
+        </main>
+      </Route>
 
-        <Route exact path="/calendar">
+      <Route exact path="/calendar">
+        <main>
           <Calendar />
-        </Route>
+        </main>
+      </Route>
 
-        <Route exact path="/about">
-          {/* <About /> */}
-        </Route>
+      <Route exact path="/about">
+        {/* <About /> */}
+      </Route>
 
-        <Route exact path="/where-to-go">
+      <Route exact path="/where-to-go">
+        <main className="content root__section">
           <WhereToGo />
-        </Route>
+        </main>
+      </Route>
 
-        <Route exact path="/questions">
-          {/* Вопросы */}
-        </Route>
+      <Route exact path="/questions">
+        {/* Вопросы */}
+      </Route>
 
-        <Route exact path="/search">
-          {/* Задать вопрос */}
-        </Route>
+      <Route exact path="/search">
+        {/* Задать вопрос */}
+      </Route>
 
-        <Route exact path="/personal-account">
-          <PersonalAccount />
-        </Route>
-      </main>
+      <Route exact path="/personal-account">
+        <PersonalAccount />
+      </Route>
     </Switch>
   );
 }
