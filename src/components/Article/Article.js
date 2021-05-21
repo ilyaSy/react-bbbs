@@ -13,7 +13,7 @@ const Article = ({ article }) => (
 );
 
 Article.propTypes = {
-  article: PropTypes.objectOf(PropTypes.string).isRequired,
+  article: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
 };
 
 export default Article;

@@ -23,8 +23,8 @@ export default function MainPage({ mainData }) {
         <Intro />
         <Story history={mainPageData.history} />
       </MainPageSection>
-      <MainPageSection>
-        <Article article={mainPageData.articles[0]} className="mainpage__block" />
+      <MainPageSection className="mainpage__block">
+        <Article article={mainPageData.articles[0]} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer movies={mainData?.movies} />
@@ -36,8 +36,8 @@ export default function MainPage({ mainData }) {
         <FacebookPlugin />
         <QuestionsContainer questions={mainData?.questions} place="main" />
       </MainPageSection>
-      <MainPageSection>
-        <Article article={mainPageData.articles[1]} className="mainpage__block" />
+      <MainPageSection className="mainpage__block">
+        <Article article={mainPageData.articles[1]} />
       </MainPageSection>
     </MainPageSection>
   );
