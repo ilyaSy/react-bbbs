@@ -60,7 +60,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal }) => {
             {booked ? (
               <Button
                 className="button button_color_blue button_color_blue_onclick button_color_blue-open"
-                type="button"
+                type="submit"
                 disabled={seats > 0 ? false : 'disabled'}
               >
                 Отменить запись
@@ -68,7 +68,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal }) => {
             ) : (
               <Button
                 className="button button_color_blue button_color_blue-nonactive"
-                type="button"
+                type="submit"
               >
                 Записаться
               </Button>
