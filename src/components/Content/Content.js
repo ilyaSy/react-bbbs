@@ -6,6 +6,7 @@ import Calendar from '../Calendar/Calendar';
 import WhereToGo from '../WhereToGo/WhereToGo';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import About from '../About/About';
 import './content.css';
 
 export default function Content({
@@ -45,7 +46,9 @@ export default function Content({
       </Route> */}
 
       <Route exact path="/about">
-        {/* <About /> */}
+        <main className="content root__section">
+          <About />
+        </main>
       </Route>
 
       <Route exact path="/where-to-go">
@@ -71,11 +74,13 @@ export default function Content({
 }
 
 Content.propTypes = {
-  mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+  mainData: PropTypes.objectOf(PropTypes.any),
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
   handlerRegisterSubmit: PropTypes.func.isRequired,
 };
 
-Content.defaultProps = {};
+Content.defaultProps = {
+  mainData: {},
+};

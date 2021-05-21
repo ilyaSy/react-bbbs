@@ -15,8 +15,8 @@ Story.propTypes = {
 
 Story.defaultProps = {
   history: {
-    imageUrl: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    imageUrl: '../../assets/img/story-back.png',
+    title: 'История',
   },
 };
 

@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Content from '../Content/Content';
 import Api from '../../utils/api';
+import './App.css';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import AuthPopup from '../AuthPopup/AuthPopup';
