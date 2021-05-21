@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './authPopup.css';
+import Popup from '../Popup/Popup';
 
 const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
   const [login, setUserName] = useState('');
@@ -23,7 +24,7 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
   };
 
   return (
-    <div className={`popup popup_type_login ${isAuthModalOpened ? 'popup_opened' : ''}`}>
+    <Popup popupType="popup_type_login" isOpen={isAuthModalOpened}>
       <div className="login">
         <Button
           type="button"
@@ -78,7 +79,7 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
           </Button>
         </form>
       </div>
-    </div>
+    </Popup>
   );
 };
 

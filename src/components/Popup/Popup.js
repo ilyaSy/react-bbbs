@@ -1,0 +1,16 @@
+import PropTypes from 'prop-types';
+import './popup.css';
+
+const Popup = ({ popupType, isOpen, children }) => (
+  <div className={`popup ${popupType} ${isOpen ? 'popup_opened' : ''}`}>{children}</div>
+);
+
+Popup.propTypes = {
+  popupType: PropTypes.string,
+  isOpen: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+};
+Popup.defaultProps = {
+  popupType: '',
+};
+export default Popup;

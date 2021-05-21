@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import format from '../../utils/format';
 import './CalendarCard.css';
 
-const CalendarCard = ({ event }) => {
+const CalendarCard = ({ event, handleCalendarCardClick }) => {
   const { address, contact, title, seats, startAt, endAt, booked } = event;
 
   const startAtDate = new Date(startAt);
@@ -15,8 +15,15 @@ const CalendarCard = ({ event }) => {
   const monthName = format(startAtDate, 'LLLL');
   const dayName = format(startAtDate, 'EEEE');
 
+  const handlerCardClick = () => {
+    handleCalendarCardClick({
+      ...event,
+      isOpen: true,
+    });
+  };
+
   return (
-    <div className={`calendar ${booked ? 'calendar_onclick' : ''}`}>
+    <Button className={`calendar ${booked ? 'calendar_onclick' : ''}`} onClick={handlerCardClick}>
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
         <p className="calendar__date">
@@ -74,7 +81,7 @@ const CalendarCard = ({ event }) => {
           </svg>
         </Button>
       </div>
-    </div>
+    </Button>
   );
 };
 
@@ -82,6 +89,7 @@ CalendarCard.propTypes = {
   event: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
+  handleCalendarCardClick: PropTypes.func.isRequired,
   // address: PropTypes.string,
   // contact: PropTypes.string,
   // title: PropTypes.string,

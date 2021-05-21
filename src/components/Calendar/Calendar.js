@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 // import { format } from 'date-fns';
 // import format from '../../utils/format';
@@ -6,9 +7,9 @@ import Button from '../Button/Button';
 import CalendarCard from '../CalendarCard/CalendarCard';
 import Api from '../../utils/api';
 import './Calendar.css';
-import { months } from './calendarTest';
+import months from './calendarTest';
 
-const Calendar = () => {
+const Calendar = ({ handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
   // const [months, setMonths] = useState([]);
   useEffect(() => {
@@ -41,10 +42,18 @@ const Calendar = () => {
       </div>
       <div className="grid-calendar__grid">
         {events.map((event) => (
-          <CalendarCard event={event} key={event.id} />
+          <CalendarCard
+            event={event}
+            key={event.id}
+            handleCalendarCardClick={handleCalendarCardClick}
+          />
         ))}
       </div>
     </section>
   );
 };
+Calendar.propTypes = {
+  handleCalendarCardClick: PropTypes.func.isRequired,
+};
+Calendar.defaultProps = {};
 export default Calendar;

@@ -8,7 +8,7 @@ import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './content.css';
 
-export default function Content({ mainData, openAuthModal, onLogout }) {
+export default function Content({ mainData, openAuthModal, onLogout, handleCalendarCardClick }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -25,7 +25,11 @@ export default function Content({ mainData, openAuthModal, onLogout }) {
         </main>
       </Route>
 
-      <ProtectedRoute path="/calendar" component={Calendar} />
+      <ProtectedRoute
+        path="/calendar"
+        component={Calendar}
+        handleCalendarCardClick={handleCalendarCardClick}
+      />
 
       {/* <Route exact path="/calendar">
         <main>
@@ -35,12 +39,6 @@ export default function Content({ mainData, openAuthModal, onLogout }) {
 
       <Route exact path="/about">
         {/* <About /> */}
-      </Route>
-
-      <Route exact path="/where-to-go">
-        <main className="content root__section">
-          <WhereToGo />
-        </main>
       </Route>
 
       <Route exact path="/where-to-go">
@@ -69,6 +67,7 @@ Content.propTypes = {
   mainData: PropTypes.objectOf(PropTypes.any).isRequired,
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
+  handleCalendarCardClick: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {};
