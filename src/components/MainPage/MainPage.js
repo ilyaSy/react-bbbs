@@ -42,7 +42,9 @@ export default function MainPage({ mainData }) {
 }
 
 MainPage.propTypes = {
-  mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+  mainData: PropTypes.objectOf(PropTypes.any),
 };
 
-MainPage.defaultProps = {};
+MainPage.defaultProps = {
+  mainData: {},
+};

@@ -18,8 +18,8 @@ Article.propTypes = {
 
 Article.defaultProps = {
   article: {
-    color: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    color: '#C8CAD1',
+    title: 'Статья отсутствует',
   },
 };
 

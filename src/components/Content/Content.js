@@ -74,11 +74,13 @@ export default function Content({
 }
 
 Content.propTypes = {
-  mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+  mainData: PropTypes.objectOf(PropTypes.any),
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
   handlerRegisterSubmit: PropTypes.func.isRequired,
 };
 
-Content.defaultProps = {};
+Content.defaultProps = {
+  mainData: {},
+};
