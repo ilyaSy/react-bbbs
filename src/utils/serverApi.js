@@ -9,7 +9,8 @@ const mock = new MockAdapter(axios, { delayResponse: 100 });
 export default function setMockAdapter() {
   // login
   const postLogin = (config) => {
-    console.log(config);
+    const userData = JSON.parse(config.data);
+    console.log(userData.userName, userData.password);
     return [200, loginPost];
   };
   mock.onPost(`${apiURL}/token/`).reply(postLogin);

@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './header.css';
 
-const Header = ({ openModal }) => {
+const Header = ({ openAuthModal }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const history = useHistory();
+
+  const handleButtonLoginClick = () => {
+    if (currentUser) {
+      history.push('/personal-account');
+    } else {
+      openAuthModal();
+    }
+  };
+
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
   useEffect(() => {
@@ -39,11 +51,13 @@ const Header = ({ openModal }) => {
           </ul>
         </nav>
         <nav className="header__action">
-          <Link className="header__button-search" to="/" onClick={openModal} />
+          <Link className="header__button-search" to="/search" />
           <Button
             type="button"
-            className="header__button-login header__button-login_unauthorized"
-            onClick={openModal}
+            className={`header__button-login header__button-login_${
+              currentUser ? '' : 'un'
+            }authorized`}
+            onClick={handleButtonLoginClick}
           >
             &nbsp;
           </Button>
@@ -95,6 +109,6 @@ const Header = ({ openModal }) => {
 };
 
 Header.propTypes = {
-  openModal: PropTypes.func.isRequired,
+  openAuthModal: PropTypes.func.isRequired,
 };
 export default Header;

@@ -1,24 +1,32 @@
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import MainPageSection from '../MainPageSection/MainPageSection';
 import FacebookPlugin from '../FacebookPlugin/FacebookPlugin';
 import QuestionsContainer from '../QuestionsContainer/QuestionsContainer';
-import Movie from '../Movie/Movie';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
-import videoDataDummy from '../../utils/videoDataDummy';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-export default function MainPage() {
+export default function MainPage({ mainData }) {
+  const currentUser = useContext(CurrentUserContext);
+  if (false) {
+    console.log(currentUser);
+  }
+
   return (
     <div>
       <MainPageSection className="mainpage__block">
-        <MoviesContainer>
-          {videoDataDummy.map(({ tags, title, caption, poster, link }) => (
-            <Movie tags={tags} title={title} caption={caption} poster={poster} link={link} />
-          ))}
-        </MoviesContainer>
+        <MoviesContainer movies={mainData?.movies} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
-        <QuestionsContainer place="main" />
+        <QuestionsContainer questions={mainData?.questions} place="main" />
       </MainPageSection>
     </div>
   );
 }
+
+MainPage.propTypes = {
+  mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+MainPage.defaultProps = {};

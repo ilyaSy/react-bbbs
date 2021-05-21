@@ -1,34 +1,9 @@
-/* eslint-disable import/prefer-default-export */
 export const loginPost = {
   refresh:
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyMDU4NTM1NSwianRpIjoiNGY5YTc5ZmZmNDEzNDM5NmJlNjhlZTVhNjk4MWNjMDgiLCJ1c2VyX2lkIjoxfQ.9pi-sEjkVsU7yxnP26Xvf-E98CVp9HgRvE_sHI7Mi_E',
   access:
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs',
 };
-
-export const weekDays = [
-  'воскресенье',
-  'понедельник',
-  'вторник',
-  'среда',
-  'четверг',
-  'пятница',
-  'суббота',
-];
-export const months = [
-  'январь',
-  'февраль',
-  'март',
-  'апрель',
-  'май',
-  'июнь',
-  'июль',
-  'август',
-  'сентябрь',
-  'октябрь',
-  'ноябрь',
-  'декабрь',
-];
 
 export const citiesGet = [
   {
@@ -66,8 +41,8 @@ export const eventsGet = [
     title: 'Субботний meet up: учимся проходить интевью',
     description:
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
-    startAt: '2021-01-10T06:00:00Z',
-    endAt: '2021-01-10T08:00:00Z',
+    startAt: '2021-01-06T06:00:00Z',
+    endAt: '2021-01-06T08:00:00Z',
     seats: 100,
     takenSeats: 0,
     city: 1,
@@ -80,8 +55,8 @@ export const eventsGet = [
     title: 'Субботний meet up: учимся проходить интевью',
     description:
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
-    startAt: '2021-05-10T06:00:00Z',
-    endAt: '2021-05-10T08:00:00Z',
+    startAt: '2021-05-09T06:00:00Z',
+    endAt: '2021-05-09T08:00:00Z',
     seats: 100,
     takenSeats: 0,
     city: 1,
@@ -94,9 +69,9 @@ export const eventsGet = [
     title: 'Субботний meet up: учимся проходить интевью',
     description:
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
-    startAt: '2021-05-10T06:00:00Z',
-    endAt: '2021-05-10T08:00:00Z',
-    seats: 100,
+    startAt: '2021-05-12T06:00:00Z',
+    endAt: '2021-05-12T08:00:00Z',
+    seats: 0,
     takenSeats: 0,
     city: 1,
   },

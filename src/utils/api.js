@@ -9,50 +9,48 @@ if (TEST_MODE) {
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export class Api {
-  constructor() {
-    this._headers = {
-      // authorization: tokenAuth,
-    };
+export default class Api {
+  static setAuthHeader(authHeader) {
+    axios.defaults.headers.get.Authorization = `Bearer ${authHeader}`;
+    axios.defaults.headers.post.Authorization = `Bearer ${authHeader}`;
   }
 
-  login(userData) {
-    return axios.post(`${apiURL}/token/`, userData).then(this._handleApiResult.bind(null, 'login'));
+  static removeAuthHeader() {
+    axios.defaults.headers.get.Authorization = '';
+    axios.defaults.headers.post.Authorization = '';
   }
 
-  getCities() {
-    return axios.get(`${apiURL}/cities/`).then(this._handleApiResult.bind(null, 'getCities'));
+  static login(userData) {
+    return axios.post(`${apiURL}/token/`, userData).then(Api._handleApiResult.bind(null, 'login'));
   }
 
-  getMain() {
-    return axios.get(`${apiURL}/main/`).then(this._handleApiResult.bind(null, 'getMain'));
+  static getCities() {
+    return axios.get(`${apiURL}/cities/`).then(Api._handleApiResult.bind(null, 'getCities'));
   }
 
-  getEvents() {
-    return axios
-      .get(`${apiURL}/afisha/events/`)
-      .then(this._handleApiResult.bind(null, 'getEvents'));
+  static getMain() {
+    return axios.get(`${apiURL}/main/`).then(Api._handleApiResult.bind(null, 'getMain'));
   }
 
-  setEvent(eventData) {
+  static getEvents() {
+    return axios.get(`${apiURL}/afisha/events/`).then(Api._handleApiResult.bind(null, 'getEvents'));
+  }
+
+  static setEvent(eventData) {
     return axios
       .post(`${apiURL}/afisha/event-participants`, eventData)
-      .then(this._handleApiResult.bind(null, 'setEvent'));
+      .then(Api._handleApiResult.bind(null, 'setEvent'));
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  _handleApiResult(fnName, res) {
+  static _handleApiResult(fnName, res) {
     if (TEST_MODE) {
       return res.data;
-      // eslint-disable-next-line no-else-return
-    } else if (res.ok) {
-      return res.json();
-    } else {
-      throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
     }
-    //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
-  }
-}
 
-const api = new Api();
-export default api;
+    return res.ok
+      ? res.json()
+      : Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+  }
+  // throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+  //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
+}
