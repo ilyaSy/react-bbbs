@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import format from '../../utils/format';
 import './CalendarCard.css';
 
-const CalendarCard = ({ event, handleCalendarCardClick, handlerConfirmRegisterSubmit }) => {
+const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit }) => {
   const { address, contact, title, seats, startAt, endAt, booked } = event;
 
   const startAtDate = new Date(startAt);
@@ -21,9 +21,9 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerConfirmRegisterSu
       isOpen: true,
     });
   };
-  const handlerConfirmSubmit = (evt) => {
+  const handlerSubmit = (evt) => {
     evt.preventDefault();
-    handlerConfirmRegisterSubmit();
+    handlerRegisterSubmit();
   };
 
   return (
@@ -63,7 +63,7 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerConfirmRegisterSu
             <Button
               className="button button_color_blue button_color_blue-nonactive"
               type="submit"
-              onClick={handlerConfirmSubmit}
+              onClick={handlerSubmit}
             >
               Записаться
             </Button>
@@ -98,7 +98,7 @@ CalendarCard.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
+  handlerRegisterSubmit: PropTypes.func.isRequired,
   // address: PropTypes.string,
   // contact: PropTypes.string,
   // title: PropTypes.string,

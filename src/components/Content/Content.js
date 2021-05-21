@@ -13,7 +13,7 @@ export default function Content({
   openAuthModal,
   onLogout,
   handleCalendarCardClick,
-  handlerConfirmRegisterSubmit,
+  handlerRegisterSubmit,
 }) {
   const location = useLocation();
 
@@ -35,7 +35,7 @@ export default function Content({
         path="/calendar"
         component={Calendar}
         handleCalendarCardClick={handleCalendarCardClick}
-        handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
+        handlerRegisterSubmit={handlerRegisterSubmit}
       />
 
       {/* <Route exact path="/calendar">
@@ -75,7 +75,7 @@ Content.propTypes = {
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
+  handlerRegisterSubmit: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {};

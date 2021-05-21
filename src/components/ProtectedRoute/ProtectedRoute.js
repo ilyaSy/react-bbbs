@@ -8,7 +8,7 @@ export default function ProtectedRoute({
   path,
   onLogout,
   handleCalendarCardClick,
-  handlerConfirmRegisterSubmit,
+  handlerRegisterSubmit,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -26,7 +26,7 @@ export default function ProtectedRoute({
             path={path}
             onLogout={onLogout}
             handleCalendarCardClick={handleCalendarCardClick}
-            handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
+            handlerRegisterSubmit={handlerRegisterSubmit}
           />
         </main>
       ) : (
@@ -41,7 +41,7 @@ ProtectedRoute.propTypes = {
   path: PropTypes.string.isRequired,
   onLogout: PropTypes.func,
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
+  handlerRegisterSubmit: PropTypes.func.isRequired,
 };
 
 ProtectedRoute.defaultProps = {

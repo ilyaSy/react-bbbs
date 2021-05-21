@@ -4,7 +4,7 @@ import Popup from '../Popup/Popup';
 import format from '../../utils/format';
 import './PopupMeet.css';
 
-const PopupMeet = ({ selectedCalendarCard, closeModal }) => {
+const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) => {
   const {
     address,
     contact,
@@ -25,6 +25,11 @@ const PopupMeet = ({ selectedCalendarCard, closeModal }) => {
   const endTime = !endAt || format(endAtDate, 'KK:mm');
   const monthName = !startAt || format(startAtDate, 'LLLL');
   const dayName = !startAt || format(startAtDate, 'EEEE');
+
+  const handlerSubmit = (evt) => {
+    evt.preventDefault();
+    handlerRegisterSubmit();
+  };
 
   return (
     <Popup popupType="popup__meet" isOpen={isOpen}>
@@ -69,6 +74,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal }) => {
               <Button
                 className="button button_color_blue button_color_blue-nonactive"
                 type="submit"
+                onClick={handlerSubmit}
               >
                 Записаться
               </Button>
@@ -88,6 +94,7 @@ PopupMeet.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
   closeModal: PropTypes.func.isRequired,
+  handlerRegisterSubmit: PropTypes.func.isRequired,
 };
 
 PopupMeet.defaultProps = {};
