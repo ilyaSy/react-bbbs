@@ -9,11 +9,13 @@ import Api from '../../utils/api';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import AuthPopup from '../AuthPopup/AuthPopup';
 import PopupMeet from '../PopupMeet/PopupMeet';
+import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
+  const [isConfirmRegisterOpened, setIsConfirmRegisterOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState({});
   const history = useHistory();
 
@@ -22,6 +24,7 @@ function App() {
   };
   const closeAllModal = () => {
     setIsAuthModalOpened(false);
+    setIsConfirmRegisterOpened(false);
     setSelectedCalendarCard({
       isOpen: false,
     });
@@ -53,6 +56,9 @@ function App() {
   const handleCalendarCardClick = (calendarCard) => {
     setSelectedCalendarCard(calendarCard);
   };
+  const handlerConfirmRegisterSubmit = () => {
+    setIsConfirmRegisterOpened(true);
+  };
 
   useEffect(() => {
     // const jwt = localStorage.getItem('jwt');
@@ -78,6 +84,7 @@ function App() {
         openAuthModal={openAuthModal}
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
+        handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
       />
       <Footer />
 
@@ -86,7 +93,12 @@ function App() {
         closeAuthModal={closeAllModal}
         submitModal={handleSubmitAuth}
       />
-      <PopupMeet closeModal={closeAllModal} selectedCalendarCard={selectedCalendarCard} />
+      <PopupMeet
+        closeModal={closeAllModal}
+        selectedCalendarCard={selectedCalendarCard}
+        handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
+      />
+      <PopupConfirmRegister closeModal={closeAllModal} isOpen={isConfirmRegisterOpened} />
     </CurrentUserContext.Provider>
   );
 }

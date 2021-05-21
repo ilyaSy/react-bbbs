@@ -8,7 +8,13 @@ import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './content.css';
 
-export default function Content({ mainData, openAuthModal, onLogout, handleCalendarCardClick }) {
+export default function Content({
+  mainData,
+  openAuthModal,
+  onLogout,
+  handleCalendarCardClick,
+  handlerConfirmRegisterSubmit,
+}) {
   const location = useLocation();
 
   useEffect(() => {
@@ -29,6 +35,7 @@ export default function Content({ mainData, openAuthModal, onLogout, handleCalen
         path="/calendar"
         component={Calendar}
         handleCalendarCardClick={handleCalendarCardClick}
+        handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
       />
 
       {/* <Route exact path="/calendar">
@@ -68,6 +75,7 @@ Content.propTypes = {
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
+  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {};

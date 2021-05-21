@@ -9,7 +9,7 @@ import Api from '../../utils/api';
 import './Calendar.css';
 import months from './calendarTest';
 
-const Calendar = ({ handleCalendarCardClick }) => {
+const Calendar = ({ handleCalendarCardClick, handlerConfirmRegisterSubmit }) => {
   const [events, setEvents] = useState([]);
   // const [months, setMonths] = useState([]);
   useEffect(() => {
@@ -46,6 +46,7 @@ const Calendar = ({ handleCalendarCardClick }) => {
             event={event}
             key={event.id}
             handleCalendarCardClick={handleCalendarCardClick}
+            handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
           />
         ))}
       </div>
@@ -54,6 +55,7 @@ const Calendar = ({ handleCalendarCardClick }) => {
 };
 Calendar.propTypes = {
   handleCalendarCardClick: PropTypes.func.isRequired,
+  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
 };
 Calendar.defaultProps = {};
 export default Calendar;
