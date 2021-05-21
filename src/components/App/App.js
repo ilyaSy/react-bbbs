@@ -21,7 +21,6 @@ function App() {
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState({});
   const history = useHistory();
-  console.log(isRegisterSuccessModalOpened);
 
   const openAuthModal = () => {
     setIsAuthModalOpened(true);

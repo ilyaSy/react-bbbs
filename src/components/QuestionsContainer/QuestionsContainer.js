@@ -9,7 +9,7 @@ const QuestionsContainer = ({ questions, place }) => (
     }`}
   >
     {questions.map(({ title, tags }) => (
-      <Question title={title} tags={tags} place={place} />
+      <Question title={title} tags={tags} place={place} key={`${Math.random()}_${title}`} />
     ))}
   </ul>
 );

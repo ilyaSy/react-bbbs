@@ -17,7 +17,11 @@ const PopupRegisterSuccess = ({ isOpen, closeModal }) => (
         {' '}
         Если у вас не получится прийти — отмените, пожалуйста, запись.
       </h2>
-      <Button type="button" className="button button_color_black success__button">
+      <Button
+        type="button"
+        className="button button_color_black success__button"
+        onClick={closeModal}
+      >
         Вернуться к календарю
       </Button>
     </div>

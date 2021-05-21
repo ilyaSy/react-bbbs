@@ -49,13 +49,12 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit })
           <p className="calendar__phone">{contact}</p>
         </li>
       </ul>
-      <div className="calendar__sign-up">
+      <form className="calendar__sign-up" onSubmit={handlerSubmit}>
         <div className="calendar__sign-up_flex">
           {booked ? (
             <Button
               className="button button_color_blue button_color_blue_onclick button_color_blue-open"
               type="submit"
-              disabled={seats > 0 ? false : 'disabled'}
             >
               Отменить запись
             </Button>
@@ -63,7 +62,7 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit })
             <Button
               className="button button_color_blue button_color_blue-nonactive"
               type="submit"
-              onClick={handlerSubmit}
+              disabled={seats > 0 ? false : 'disabled'}
             >
               Записаться
             </Button>
@@ -88,7 +87,7 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit })
             <circle cx="26.6667" cy="19.9999" r="1.66667" fill="#224CFF" />
           </svg>
         </Button>
-      </div>
+      </form>
     </Button>
   );
 };
