@@ -10,7 +10,14 @@ const Story = ({ history }) => (
 );
 
 Story.propTypes = {
-  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
+  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+};
+
+Story.defaultProps = {
+  history: {
+    imageUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  },
 };
 
 export default Story;

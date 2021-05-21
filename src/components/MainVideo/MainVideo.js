@@ -19,7 +19,16 @@ const MainVideo = ({ video }) => (
 );
 
 MainVideo.propTypes = {
-  video: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
+  video: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+};
+
+MainVideo.defaultProps = {
+  video: {
+    link: '/',
+    title: '',
+    info: 'Что-то пошло не так, здесь должно быть видео',
+    imageUrl: '../../assets/img/mainvideo.png',
+  },
 };
 
 export default MainVideo;

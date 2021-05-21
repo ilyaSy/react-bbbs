@@ -9,35 +9,33 @@ import Intro from '../Intro/Intro';
 import Story from '../Story/Story';
 import MainVideo from '../MainVideo/MainVideo';
 import Article from '../Article/Article';
-import { mainGet as mainPageData } from '../../utils/serverApiTestConfig';
 
 export default function MainPage({ mainData }) {
   const currentUser = useContext(CurrentUserContext);
   if (false) {
     console.log(currentUser);
   }
-
   return (
     <MainPageSection className="mainpage">
       <MainPageSection className="mainpage__intro">
         <Intro />
-        <Story history={mainPageData.history} />
+        <Story history={mainData?.history} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
-        <Article article={mainPageData.articles[0]} />
+        <Article article={mainData?.articles[0]} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer movies={mainData?.movies} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <MainVideo video={mainPageData.video} />
+        <MainVideo video={mainData?.video} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
         <QuestionsContainer questions={mainData?.questions} place="main" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
-        <Article article={mainPageData.articles[1]} />
+        <Article article={mainData?.articles[1]} />
       </MainPageSection>
     </MainPageSection>
   );
