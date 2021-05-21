@@ -1,12 +1,22 @@
-import { Switch, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MainPage from '../MainPage/MainPage';
 import Calendar from '../Calendar/Calendar';
 import WhereToGo from '../WhereToGo/WhereToGo';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './content.css';
 
-export default function Content({ mainData, onLogout }) {
+export default function Content({ mainData, openAuthModal, onLogout }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.isAuthModalOpened) {
+      openAuthModal();
+    }
+  }, [location]);
+
   return (
     <Switch>
       <Route exact path="/">
@@ -15,14 +25,23 @@ export default function Content({ mainData, onLogout }) {
         </main>
       </Route>
 
-      <Route exact path="/calendar">
+      <ProtectedRoute path="/calendar" component={Calendar} />
+
+      {/* <Route exact path="/calendar">
         <main>
           <Calendar />
         </main>
-      </Route>
+      </Route> */}
 
       <Route exact path="/about">
         {/* <About /> */}
+        {/* <Redirect to={{ pathname: '/', state: { isAuthModalOpened: true } }} /> */}
+      </Route>
+
+      <Route exact path="/where-to-go">
+        <main className="content root__section">
+          <WhereToGo />
+        </main>
       </Route>
 
       <Route exact path="/where-to-go">
@@ -49,6 +68,7 @@ export default function Content({ mainData, onLogout }) {
 Content.propTypes = {
   mainData: PropTypes.objectOf(PropTypes.any).isRequired,
   onLogout: PropTypes.func.isRequired,
+  openAuthModal: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {};

@@ -15,6 +15,11 @@ export default class Api {
     axios.defaults.headers.post.Authorization = `Bearer ${authHeader}`;
   }
 
+  static removeAuthHeader() {
+    axios.defaults.headers.get.Authorization = '';
+    axios.defaults.headers.post.Authorization = '';
+  }
+
   static login(userData) {
     return axios.post(`${apiURL}/token/`, userData).then(Api._handleApiResult.bind(null, 'login'));
   }

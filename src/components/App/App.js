@@ -25,8 +25,9 @@ function App() {
 
   const logout = () => {
     setCurrentUser(null);
-    localStorage.removeItem('jwtAccess');
-    localStorage.removeItem('jwtRefresh');
+    localStorage.removeItem('jwt');
+    Api.removeAuthHeader();
+    // localStorage.removeItem('jwtRefresh');
     history.push('/');
   };
 
@@ -35,8 +36,8 @@ function App() {
       .then((data) => {
         if (data.refresh && data.access) {
           Api.setAuthHeader(data.access);
-          localStorage.setItem('jwtAccess', data.access);
-          localStorage.setItem('jwtRefresh', data.refresh);
+          localStorage.setItem('jwt', data.access);
+          // localStorage.setItem('jwtRefresh', data.refresh);
           setCurrentUser(userName);
           closeAuthModal();
         }
@@ -47,7 +48,7 @@ function App() {
   };
 
   useEffect(() => {
-    // const jwt = localStorage.getItem('jwtAccess');
+    // const jwt = localStorage.getItem('jwt');
     // if (jwt) {
     //   Api.setAuthHeader(jwt);
     //   setCurrentUser(userName);
@@ -63,7 +64,6 @@ function App() {
   }, []);
 
   return (
-    // <div className="root">
     <CurrentUserContext.Provider value={currentUser}>
       <Header openAuthModal={openAuthModal} />
       <Content mainData={mainData} openAuthModal={openAuthModal} onLogout={logout} />
@@ -75,7 +75,6 @@ function App() {
         submitModal={handleSubmitAuth}
       />
     </CurrentUserContext.Provider>
-    // </div>
   );
 }
 
