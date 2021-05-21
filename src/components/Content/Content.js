@@ -43,12 +43,6 @@ export default function Content({ mainData, openAuthModal, onLogout }) {
         </main>
       </Route>
 
-      <Route exact path="/where-to-go">
-        <main className="content root__section">
-          <WhereToGo />
-        </main>
-      </Route>
-
       <Route exact path="/questions">
         {/* Вопросы */}
       </Route>
