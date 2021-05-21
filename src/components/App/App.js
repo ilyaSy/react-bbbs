@@ -8,19 +8,23 @@ import Api from '../../utils/api';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import AuthPopup from '../AuthPopup/AuthPopup';
+import PopupMeet from '../PopupMeet/PopupMeet';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
-
+  const [selectedCalendarCard, setSelectedCalendarCard] = useState({});
   const history = useHistory();
 
   const openAuthModal = () => {
     setIsAuthModalOpened(true);
   };
-  const closeAuthModal = () => {
+  const closeAllModal = () => {
     setIsAuthModalOpened(false);
+    setSelectedCalendarCard({
+      isOpen: false,
+    });
   };
 
   const logout = () => {
@@ -39,12 +43,15 @@ function App() {
           localStorage.setItem('jwt', data.access);
           // localStorage.setItem('jwtRefresh', data.refresh);
           setCurrentUser(userName);
-          closeAuthModal();
+          closeAllModal();
         }
       })
       .catch((err) => {
         console.log(`Error ошибка: ${err}`);
       });
+  };
+  const handleCalendarCardClick = (calendarCard) => {
+    setSelectedCalendarCard(calendarCard);
   };
 
   useEffect(() => {
@@ -66,14 +73,20 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header openAuthModal={openAuthModal} />
-      <Content mainData={mainData} openAuthModal={openAuthModal} onLogout={logout} />
+      <Content
+        mainData={mainData}
+        openAuthModal={openAuthModal}
+        onLogout={logout}
+        handleCalendarCardClick={handleCalendarCardClick}
+      />
       <Footer />
 
       <AuthPopup
         isAuthModalOpened={isAuthModalOpened}
-        closeAuthModal={closeAuthModal}
+        closeAuthModal={closeAllModal}
         submitModal={handleSubmitAuth}
       />
+      <PopupMeet closeModal={closeAllModal} selectedCalendarCard={selectedCalendarCard} />
     </CurrentUserContext.Provider>
   );
 }
