@@ -6,7 +6,7 @@ import WhereToGo from '../WhereToGo/WhereToGo';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import './content.css';
 
-export default function Content({ mainData }) {
+export default function Content({ mainData, onLogout }) {
   return (
     <Switch>
       <Route exact path="/">
@@ -40,7 +40,7 @@ export default function Content({ mainData }) {
       </Route>
 
       <Route exact path="/personal-account">
-        <PersonalAccount />
+        <PersonalAccount onLogout={onLogout} />
       </Route>
     </Switch>
   );
@@ -48,6 +48,7 @@ export default function Content({ mainData }) {
 
 Content.propTypes = {
   mainData: PropTypes.objectOf(PropTypes.any).isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {};

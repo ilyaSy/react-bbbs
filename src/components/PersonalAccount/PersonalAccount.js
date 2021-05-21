@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Button from '../Button/Button';
 import './PersonalAccount.css';
 
-const PersonalAccount = () => {
+const PersonalAccount = ({ onLogout }) => {
   const [feedback, setFeedback] = useState('');
 
   const handleToggleFeedback = (event) => {
@@ -15,7 +17,12 @@ const PersonalAccount = () => {
         <Button className="personal-account__feedback-btn personal-account__text">
           Изменить ваш город
         </Button>
-        <Button className="personal-account__feedback-btn personal-account__text">Выйти</Button>
+        <Button
+          className="personal-account__feedback-btn personal-account__text"
+          onClick={onLogout}
+        >
+          Выйти
+        </Button>
       </div>
       <div className="personal-account__events">
         <h2 className="personal-account__title">У вас нет записи на мероприятия</h2>
@@ -114,3 +121,9 @@ const PersonalAccount = () => {
   );
 };
 export default PersonalAccount;
+
+PersonalAccount.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
+
+PersonalAccount.defaultProps = {};

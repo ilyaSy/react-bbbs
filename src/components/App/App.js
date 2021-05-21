@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -13,11 +14,20 @@ function App() {
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
 
+  const history = useHistory();
+
   const openAuthModal = () => {
     setIsAuthModalOpened(true);
   };
   const closeAuthModal = () => {
     setIsAuthModalOpened(false);
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('jwtAccess');
+    localStorage.removeItem('jwtRefresh');
+    history.push('/');
   };
 
   const handleSubmitAuth = (userName, password) => {
@@ -56,7 +66,7 @@ function App() {
     // <div className="root">
     <CurrentUserContext.Provider value={currentUser}>
       <Header openAuthModal={openAuthModal} />
-      <Content mainData={mainData} openAuthModal={openAuthModal} />
+      <Content mainData={mainData} openAuthModal={openAuthModal} onLogout={logout} />
       <Footer />
 
       <AuthPopup
