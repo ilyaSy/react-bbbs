@@ -13,6 +13,7 @@ import AuthPopup from '../AuthPopup/AuthPopup';
 import PopupMeet from '../PopupMeet/PopupMeet';
 import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupPlaces from '../PopupPlaces/PopupPlaces';
 
 function App() {
@@ -98,6 +99,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <ScrollToTop />
       <Header openAuthModal={openAuthModal} />
       <Content
         mainData={mainData}
