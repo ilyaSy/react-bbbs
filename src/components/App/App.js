@@ -112,7 +112,7 @@ function App() {
       <PopupMeet
         closeModal={closeAllModal}
         selectedCalendarCard={selectedCalendarCard}
-        handlerRegisterSubmit={handlerRegisterSubmit}
+        handlerRegisterSubmit={handlerConfirmRegisterSubmit}
       />
       <PopupConfirmRegister
         closeModal={closeAllModal}
