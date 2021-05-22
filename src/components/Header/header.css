@@ -7,6 +7,14 @@
   position: relative;
 }
 
+.header_sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: rgba(243, 242, 242, 1);
+  z-index: 10;
+}
+
 .header__wrapper {
   width: calc(100% - 150px);
   max-width: 1770px;
@@ -26,14 +34,14 @@
   padding: 0;
   text-decoration: none;
   cursor: pointer;
-  background-image: url("../../assets/img/logo.svg");
+  background-image: url('../../assets/img/logo.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 
 .header__logo:hover {
-  background-image: url("../../assets/img/logo-hover.svg");
+  background-image: url('../../assets/img/logo-hover.svg');
 }
 
 .header__list {
@@ -75,7 +83,7 @@
 }
 
 .header__list-link:hover {
-  color: #224CFF;
+  color: #224cff;
 }
 
 .header__action {
@@ -86,7 +94,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
 
 .header__button-search {
   width: 30px;
@@ -120,7 +127,7 @@
   display: block;
   width: 0.7px;
   height: 20px;
-  background-color: #A7A6A6;
+  background-color: #a7a6a6;
   left: -20px;
   top: 2px;
   position: relative;
@@ -189,9 +196,8 @@
 }
 
 .header__burger-link:hover {
-  color: #224CFF;
+  color: #224cff;
 }
-
 
 .header__burger-btn {
   display: none;
@@ -206,7 +212,6 @@
   cursor: pointer;
 }
 
-
 .header__personal {
   margin-bottom: 30px;
   display: flex;
@@ -214,7 +219,7 @@
 
 .header__city {
   margin: 0 75px 0 0;
-  color: #A7A6A6;
+  color: #a7a6a6;
   font-family: 'PT Proto', Arial, sans-serif;
   font-size: 15px;
   line-height: 21px;
@@ -226,12 +231,12 @@
 }
 
 .header__change:hover {
-  color: #224CFF;
+  color: #224cff;
 }
 
 .header__logout {
   margin: 0;
-  color: #A7A6A6;
+  color: #a7a6a6;
   font-family: 'PT Proto', Arial, sans-serif;
   font-size: 15px;
   line-height: 21px;
@@ -240,7 +245,7 @@
 }
 
 .header__logout:hover {
-  color: #224CFF;
+  color: #224cff;
 }
 
 /* селекторы для страницы поиска */
@@ -279,7 +284,7 @@
   font-size: 18px;
   line-height: 26px;
   font-weight: 400;
-  color: #A7A6A6;
+  color: #a7a6a6;
 }
 
 /* медиа-запросы */
@@ -290,15 +295,12 @@
   }
 }
 
-
 @media (max-width: 1330px) {
   .header__list {
     flex-wrap: wrap-reverse;
     width: 400px;
   }
 }
-
-
 
 @media (max-width: 1024px) {
   .header__wrapper {
@@ -420,5 +422,4 @@
     font-size: 15px;
     line-height: 21px;
   }
-
 }

@@ -5,6 +5,7 @@ import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './header.css';
+import useScrollPosition from '../../utils/hooks/useScrollPosition';
 
 const Header = ({ openAuthModal }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -17,6 +18,16 @@ const Header = ({ openAuthModal }) => {
       openAuthModal();
     }
   };
+
+  const [shouldBeVisible, setShouldBeVisible] = useState(false);
+
+  useScrollPosition(
+    ({ previousPos, currentPos }) => {
+      const isVisible = currentPos.y > previousPos.y;
+      if (isVisible !== shouldBeVisible) setShouldBeVisible(isVisible);
+    },
+    [shouldBeVisible]
+  );
 
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
 
@@ -33,7 +44,7 @@ const Header = ({ openAuthModal }) => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${shouldBeVisible ? 'header_sticky' : ''}`}>
       <div className="header__wrapper">
         <Link to="/" className="header__logo" />
         <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>
