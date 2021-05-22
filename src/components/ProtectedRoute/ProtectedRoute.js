@@ -37,13 +37,16 @@ export default function ProtectedRoute({
 }
 
 ProtectedRoute.propTypes = {
-  component: PropTypes.element.isRequired,
+  // PropTypes.element.isRequired, линтер ругаетсяна елеменрт
+  component: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
   onLogout: PropTypes.func,
-  handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerRegisterSubmit: PropTypes.func.isRequired,
+  handleCalendarCardClick: PropTypes.func,
+  handlerRegisterSubmit: PropTypes.func,
 };
 
 ProtectedRoute.defaultProps = {
+  handleCalendarCardClick: () => {},
+  handlerRegisterSubmit: () => {},
   onLogout: () => {},
 };

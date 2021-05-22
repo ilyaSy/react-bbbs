@@ -14,6 +14,11 @@
   letter-spacing: 0.2px;
   cursor: pointer;
 }
+.button:disabled {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+  cursor: pointer;
+}
 
 .button:hover {
   background-color: #e0e0e0;

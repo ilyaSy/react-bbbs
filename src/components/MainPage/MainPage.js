@@ -12,8 +12,8 @@ import Article from '../Article/Article';
 
 export default function MainPage({ mainData }) {
   const currentUser = useContext(CurrentUserContext);
-  if (false) {
-    console.log(currentUser);
+  if (currentUser === '1000') {
+    return false;
   }
   return (
     <MainPageSection className="mainpage">

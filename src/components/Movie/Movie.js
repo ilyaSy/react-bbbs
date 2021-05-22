@@ -12,7 +12,7 @@ const Movie = ({ tags, title, info, imageUrl, link }) => {
         <img className="movie__poster" src={imageUrl} alt="" />
         <div className="movie__tags">
           {tagsText.map((tagText) => (
-            <Tag tagText={tagText} />
+            <Tag tagText={tagText} key={`${tagText}_${Math.random()}`} />
           ))}
         </div>
       </div>

@@ -73,8 +73,9 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
             ) : (
               <Button
                 className="button button_color_blue button_color_blue-nonactive"
-                type="submit"
+                type="button"
                 onClick={handlerSubmit}
+                disabled={seats > 0 ? false : 'disable'}
               >
                 Записаться
               </Button>
