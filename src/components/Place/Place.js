@@ -2,15 +2,13 @@ import './Place.css';
 import PropTypes from 'prop-types';
 import Tag from '../Tag/Tag';
 
-// TO DO: chosen + id props
-
 const Place = ({ place }) => (
   <section className="event-soon-card">
     <div className="event-soon">
       <div className="event-soon__content-wrapper">
         <section className="profile-grid">
           <div className="profile-grid__column profile-grid__column_size_wide event-soon__description event-soon__description_size_big">
-            <Tag modifier="tag_place_event" tagText="Выбор наставника" />
+            {place.chosen && <Tag modifier="tag_place_event" tagText="Выбор наставника" />}
             <div className="event-soon__caption">
               <div className="event-soon__title">{place.title}</div>
               <div className="event-soon__subtitle">{place.name}</div>
@@ -36,7 +34,7 @@ const Place = ({ place }) => (
 );
 
 Place.propTypes = {
-  place: PropTypes.objectOf(PropTypes.string),
+  place: PropTypes.objectOf(PropTypes.any),
 };
 
 Place.defaultProps = {
@@ -47,6 +45,7 @@ Place.defaultProps = {
     title: 'Место',
     name: '',
     link: '',
+    chosen: false,
   },
 };
 

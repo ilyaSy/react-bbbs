@@ -13,6 +13,7 @@ import AuthPopup from '../AuthPopup/AuthPopup';
 import PopupMeet from '../PopupMeet/PopupMeet';
 import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
+import PopupPlaces from '../PopupPlaces/PopupPlaces';
 
 function App() {
   const {
@@ -25,16 +26,19 @@ function App() {
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
+  const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState({});
   const history = useHistory();
 
   const openAuthModal = () => {
     setIsAuthModalOpened(true);
   };
+
   const closeAllModal = () => {
     setIsAuthModalOpened(false);
     setIsConfirmRegisterOpened(false);
     setIsRegisterSuccessModalOpened(false);
+    setIsPlacePopupOpened(false);
     setSelectedCalendarCard({
       isOpen: false,
     });
@@ -72,6 +76,9 @@ function App() {
   const handlerConfirmRegisterSubmit = () => {
     setIsRegisterSuccessModalOpened(true);
   };
+  const handleRecommentdPlace = () => {
+    setIsPlacePopupOpened(true);
+  };
 
   useEffect(() => {
     // const jwt = localStorage.getItem('jwt');
@@ -98,6 +105,7 @@ function App() {
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
         handlerRegisterSubmit={handlerRegisterSubmit}
+        onRecommendPlace={handleRecommentdPlace}
       />
       <Footer />
 
@@ -119,6 +127,7 @@ function App() {
         isOpen={isConfirmRegisterModalOpened}
         handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
       />
+      <PopupPlaces isOpen={isPlacePopupOpened} onClose={closeAllModal} />
       <PopupRegisterSuccess closeModal={closeAllModal} isOpen={isRegisterSuccessModalOpened} />
     </CurrentUserContext.Provider>
   );
