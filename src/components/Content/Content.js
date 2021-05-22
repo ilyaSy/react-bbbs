@@ -15,6 +15,7 @@ export default function Content({
   onLogout,
   handleCalendarCardClick,
   handlerRegisterSubmit,
+  onRecommendPlace,
 }) {
   const location = useLocation();
 
@@ -53,7 +54,7 @@ export default function Content({
 
       <Route exact path="/where-to-go">
         <main className="content root__section">
-          <WhereToGo />
+          <WhereToGo onRecommendPlace={onRecommendPlace} />
         </main>
       </Route>
 
@@ -79,6 +80,7 @@ Content.propTypes = {
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
   handlerRegisterSubmit: PropTypes.func.isRequired,
+  onRecommendPlace: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {
