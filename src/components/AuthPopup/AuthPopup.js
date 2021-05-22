@@ -1,28 +1,21 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './authPopup.css';
 import Popup from '../Popup/Popup';
 
-const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
-  const [login, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChange = (event) => {
-    if (event.target.name === 'login') {
-      setUserName(event.target.value);
-    }
-    if (event.target.name === 'password') {
-      setPassword(event.target.value);
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const AuthPopup = ({
+  isAuthModalOpened,
+  closeAuthModal,
+  register,
+  handleSubmit,
+  errors,
+  submitModal,
+}) => {
+  //  Подключил библиотекук реакт-форм.     register, handleSubmit и errors - это все оттуда
+  const onSubmit = ({ login, password }) => {
     submitModal(login, password);
   };
-
   return (
     <Popup popupType="popup_type_login" isOpen={isAuthModalOpened}>
       <div className="login">
@@ -41,40 +34,51 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
             свяжитесь с&nbsp;вашим куратором.
           </p>
         </div>
+
         <form
           className="popup__form popup__form_type_login"
           name="login"
-          noValidate
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <input
+            {...register('login', {
+              required: 'Поле пустое',
+              minLength: { value: 4, message: 'Должно быть минимум 4 символа' },
+            })}
             type="text"
-            name="login"
             placeholder="Логин"
             id="login"
             className="popup__input popup__input_type_login"
-            required
-            minLength="2"
-            value={login}
-            onChange={handleChange}
           />
-          <span className="popup__error popup__error_type_login" />
+          {errors.login && (
+            <span className="popup__error popup__error_type_login">{errors.login.message}</span>
+          )}
+
           <input
+            {...register('password', {
+              required: 'Поле пустое',
+              minLength: { value: 4, message: 'Должно быть минимум 4 символа' },
+            })}
             type="password"
-            name="password"
             placeholder="Пароль"
             id="password"
             className="popup__input popup__input_type_password"
-            required
-            minLength="2"
-            value={password}
-            onChange={handleChange}
           />
-          <span className="popup__error popup__error_type_password" />
+          {errors.password && (
+            <span className="popup__error popup__error_type_password">
+              {errors.password.message}
+            </span>
+          )}
+
           <Link className="login__link" to="/">
             Забыли пароль?
           </Link>
-          <Button type="submit" className="button popup__submit-btn popup__submit-btn_type_login">
+
+          <Button
+            type="submit"
+            className="button popup__submit-btn popup__submit-btn_type_login"
+            disabled={errors.login || errors.password ? 'disabled' : null}
+          >
             Войти
           </Button>
         </form>
@@ -87,5 +91,16 @@ AuthPopup.propTypes = {
   isAuthModalOpened: PropTypes.bool.isRequired,
   closeAuthModal: PropTypes.func.isRequired,
   submitModal: PropTypes.func.isRequired,
+  register: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  errors: PropTypes.objectOf(PropTypes.string),
+};
+AuthPopup.defaultProps = {
+  register: () => {},
+  handleSubmit: () => {},
+  errors: {
+    login: '',
+    password: '',
+  },
 };
 export default AuthPopup;

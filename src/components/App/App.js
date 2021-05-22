@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -14,6 +15,11 @@ import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
 
 function App() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [currentUser, setCurrentUser] = useState(null);
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
@@ -99,6 +105,9 @@ function App() {
         isAuthModalOpened={isAuthModalOpened}
         closeAuthModal={closeAllModal}
         submitModal={handleSubmitAuth}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
       />
       <PopupMeet
         closeModal={closeAllModal}
