@@ -9,6 +9,7 @@ import Intro from '../Intro/Intro';
 import Story from '../Story/Story';
 import MainVideo from '../MainVideo/MainVideo';
 import Article from '../Article/Article';
+import Place from '../Place/Place';
 
 export default function MainPage({ mainData }) {
   const currentUser = useContext(CurrentUserContext);
@@ -23,6 +24,9 @@ export default function MainPage({ mainData }) {
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <Article article={mainData?.articles[0]} />
+      </MainPageSection>
+      <MainPageSection className="mainpage__blocks">
+        <Place place={mainData?.place} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer movies={mainData?.movies} />
