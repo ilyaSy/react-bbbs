@@ -125,6 +125,7 @@
   line-height: 19px;
   letter-spacing: 0.2px;
   color: #a7a6a6;
+  outline: none;
 }
 
 .popup__input::placeholder {
@@ -135,6 +136,13 @@
   letter-spacing: 0.2px;
   color: #a7a6a6;
   margin: 0;
+}
+
+.popup__input-error::placeholder {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  color: #ff4e4e;
 }
 
 .popup__submit-btn {
