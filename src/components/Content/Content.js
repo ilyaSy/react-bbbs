@@ -7,7 +7,7 @@ import WhereToGo from '../WhereToGo/WhereToGo';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import About from '../About/About';
-import StoryPage from '../StoryPage/StotyPage';
+import StoryPage from '../StoryPage/StoryPage';
 import './content.css';
 
 export default function Content({
