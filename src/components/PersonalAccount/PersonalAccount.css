@@ -169,6 +169,9 @@
   line-height: 19px;
   text-align: left;
 }
+.personal-account__input-error::placeholder {
+  color: #ff4e4e;
+}
 
 .personal-account__input_type_place {
   grid-column: 1/2;
@@ -431,6 +434,7 @@
   font-size: 15px;
   line-height: 19px;
   color: #224cff;
+  border: none;
 }
 
 .personal-account__photo-opened {
