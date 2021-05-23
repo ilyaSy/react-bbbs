@@ -7,6 +7,7 @@ import WhereToGo from '../WhereToGo/WhereToGo';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import About from '../About/About';
+import StoryPage from '../StoryPage/StotyPage';
 import './content.css';
 
 export default function Content({
@@ -40,11 +41,11 @@ export default function Content({
         handlerRegisterSubmit={handlerRegisterSubmit}
       />
 
-      {/* <Route exact path="/calendar">
+      <Route exact path="/stories">
         <main>
-          <Calendar />
+          <StoryPage />
         </main>
-      </Route> */}
+      </Route>
 
       <Route exact path="/about">
         <main className="content root__section">
