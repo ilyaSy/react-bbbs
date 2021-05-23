@@ -36,7 +36,7 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
           <h2 className="storypage__heading">{fullStory.heading}</h2>
           <p className="storypage__together">{fullStory.together}</p>
           <p className="storypage__text">{fullStory.text}</p>
-          <p className="storypage__paragraph">{fullStory.p1}</p>
+          <p className="storypage__paragraph">{fullStory.p[0]}</p>
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
@@ -67,9 +67,9 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
             />
           </div>
 
-          {fullStory.p.map((paragraph) => (
-            <p className="storypage__paragraph">{paragraph}</p>
-          ))}
+          <p className="storypage__paragraph">{fullStory.p[1]}</p>
+          <p className="storypage__paragraph">{fullStory.p[2]}</p>
+          <p className="storypage__paragraph">{fullStory.p[3]}</p>
 
           <a className="storypage__link" href={fullStory.link}>
             {fullStory.writeTo}

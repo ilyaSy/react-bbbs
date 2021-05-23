@@ -5,8 +5,8 @@ import Story from '../Story/Story';
 import fullStories from '../../utils/stories';
 
 const StoryPage = () => {
+  // stotyRefs свяжет id кнопок с именами, с article соответствующих историй
   const storyRefs = useRef([]);
-
   function handleScrollToStory(event) {
     storyRefs.current[event.target.id].scrollIntoView();
   }
@@ -33,14 +33,12 @@ const StoryPage = () => {
         ))}
       </div>
       {fullStories.map((fullStory) => (
-        <div>
-          <Story
-            storyRef={(el) => (storyRefs.current[fullStory.id] = el)}
-            key={fullStory.id}
-            fullStory={fullStory}
-            isStoryPage
-          />
-        </div>
+        <Story
+          storyRef={(el) => (storyRefs.current[fullStory.id] = el)}
+          key={fullStory.id}
+          fullStory={fullStory}
+          isStoryPage
+        />
       ))}
     </section>
   );
