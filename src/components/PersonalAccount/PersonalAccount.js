@@ -44,7 +44,9 @@ const PersonalAccount = ({ onLogout }) => {
       {isPopupOpen ? (
         <PopupStoryFriendship closePopup={closePopup} />
       ) : (
-        profileStory.map((story) => <PersonalAccountCardStory cardStory={story} key={story.id} />)
+        profileStory.map((story) => (
+          <PersonalAccountCardStory cardStory={story} key={story.id} openPopup={openPopup} />
+        ))
       )}
     </section>
   );

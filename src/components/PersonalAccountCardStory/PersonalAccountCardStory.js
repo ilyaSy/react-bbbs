@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const PersonalAccountCardStory = ({ cardStory }) => {
+const PersonalAccountCardStory = ({ cardStory, openPopup }) => {
   const { place, image, date, description, feedback } = cardStory;
   const feedbackText = () => {
-    if (feedback === 'bad') return 'Было плохо';
-    if (feedback === 'good') return 'Было классно';
-    return 'Было нормально';
+    if (feedback === 'bad') return 'Плохо';
+    if (feedback === 'good') return 'Было классно!';
+    return 'Нормально';
   };
 
   return (
-    <form className="personal-account__form">
+    <dic className="personal-account__form">
       <div className="personal-account__photo">
         <Button
           className="personal-account__button personal-account__button_closed"
@@ -48,7 +48,7 @@ const PersonalAccountCardStory = ({ cardStory }) => {
           <Button className="personal-account__feedback-btn personal-account__share">
             Поделиться с куратором
           </Button>
-          <Button className="personal-account__feedback-btn" type="button">
+          <Button className="personal-account__feedback-btn" type="button" onClick={openPopup}>
             Редактировать
           </Button>
           <Button className="personal-account__feedback-btn" type="button">
@@ -56,11 +56,14 @@ const PersonalAccountCardStory = ({ cardStory }) => {
           </Button>
         </div>
       </div>
-    </form>
+    </dic>
   );
 };
 PersonalAccountCardStory.propTypes = {
   cardStory: PropTypes.objectOf(PropTypes.any).isRequired,
+  openPopup: PropTypes.func,
 };
-PersonalAccountCardStory.defaultProps = {};
+PersonalAccountCardStory.defaultProps = {
+  openPopup: () => {},
+};
 export default PersonalAccountCardStory;

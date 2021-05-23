@@ -1,11 +1,27 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDropzone } from 'react-dropzone';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import Button from '../Button/Button';
 
 const PopupStoryFriendship = ({ closePopup }) => {
   const [feedback, setFeedback] = useState('');
+  //  Добавляем картинку ( пока вручную , нужно доделывать)
+  const [image, setImage] = useState([]);
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFiles) => {
+      setImage(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+  // форма
   const {
     register,
     handleSubmit,
@@ -16,8 +32,12 @@ const PopupStoryFriendship = ({ closePopup }) => {
     setFeedback(event.target.value);
   };
   const onSubmit = (data) => {
-    profileStory.unshift({ ...data, id: profileStory[profileStory.length - 1].id + 1 });
-    // Добавляем вначало массива новую карточку  (пока без картинки)
+    profileStory.unshift({
+      ...data,
+      id: profileStory[profileStory.length - 1].id + 1,
+      image: image[0].preview,
+    });
+    // Добавляем вначало массива новую карточку  (Картинка грузится только если перенести ее вручную)
   };
 
   return (
@@ -31,15 +51,21 @@ const PopupStoryFriendship = ({ closePopup }) => {
         name="addFreanshipHistory"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="personal-account__photo">
+        <div {...getRootProps({ className: 'personal-account__photo' })}>
+          <input
+            {...getInputProps()}
+            id="personal-account__photo-add2"
+            className="personal-account__button"
+            {...register('image')}
+          />
           <label htmlFor="personal-account__photo-add2" className="personal-account__photo-text">
-            <input
-              id="personal-account__photo-add2"
-              className="personal-account__button"
-              type="file"
-              {...register('image')}
-            />
-            <span className="personal-account__photo-title">Загрузить фото</span>
+            {image[0] && (
+              <img
+                className="personal-account__photo-opened"
+                src={image[0].preview}
+                alt="картинка"
+              />
+            )}
           </label>
         </div>
         <div className="personal-account__inputs">
@@ -90,7 +116,7 @@ const PopupStoryFriendship = ({ closePopup }) => {
 
             <label
               htmlFor="normal"
-              className={`personal-account__label personal-account__feedback-button personal-account__feedback-button_good ${
+              className={`personal-account__label personal-account__feedback-button personal-account__feedback-button_normal ${
                 feedback === 'normal' && 'personal-account__feedback-button_normal-active'
               }`}
             >
@@ -108,7 +134,7 @@ const PopupStoryFriendship = ({ closePopup }) => {
 
             <label
               htmlFor="bad"
-              className={`personal-account__label personal-account__feedback-button personal-account__feedback-button_good ${
+              className={`personal-account__label personal-account__feedback-button personal-account__feedback-button_bad ${
                 feedback === 'bad' && 'personal-account__feedback-button_bad-active'
               }`}
             >
