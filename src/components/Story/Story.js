@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Story.css';
 import Button from '../Button/Button';
 
-const Story = ({ history, fullStory, isStoryPage }) => {
+const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
   const [leftImg, setLeftImg] = React.useState(0);
   const [centerImg, setCenterImg] = React.useState(1);
   const [rightImg, setRightImg] = React.useState(2);
@@ -31,7 +31,7 @@ const Story = ({ history, fullStory, isStoryPage }) => {
   return (
     <>
       {isStoryPage ? (
-        <>
+        <article ref={storyRef} className="storypage__story">
           <img className="storypage__img" src={fullStory.imageUrl} alt="изображение отсутствует" />
           <h2 className="storypage__heading">{fullStory.heading}</h2>
           <p className="storypage__together">{fullStory.together}</p>
@@ -74,10 +74,10 @@ const Story = ({ history, fullStory, isStoryPage }) => {
           <a className="storypage__link" href={fullStory.link}>
             {fullStory.writeTo}
           </a>
-        </>
+        </article>
       ) : (
         <div className="story" style={{ backgroundImage: `url(${history.imageUrl})` }}>
-          <Link className="mainlink" to="/" target="_blank" rel="noopener noreferrer" />
+          <Link className="mainlink" to="/stories" rel="noopener noreferrer" />
           <h3 className="story__title">{history.title}</h3>
         </div>
       )}
@@ -89,6 +89,7 @@ Story.propTypes = {
   history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   isStoryPage: PropTypes.bool,
   fullStory: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.any])),
+  storyRef: PropTypes.func,
 };
 
 Story.defaultProps = {
@@ -98,6 +99,7 @@ Story.defaultProps = {
   },
   isStoryPage: false,
   fullStory: {},
+  storyRef: () => {},
 };
 
 export default Story;

@@ -1,5 +1,6 @@
 const fullStories = [
   {
+    id: 0,
     imageUrl: 'https://picsum.photos/870/520',
     heading: 'Алина и Марина',
     together: 'Вместе с февраля 2013 года',
@@ -59,8 +60,9 @@ const fullStories = [
     ],
   },
   {
+    id: 1,
     imageUrl: 'https://picsum.photos/870/520',
-    heading: 'Алина и Марина',
+    heading: 'Кирилл и Никита',
     together: 'Вместе с февраля 2013 года',
     text: `Волонтёром в программе «Старшие Братья Старшие Сёстры» я стал в 2012 году, а в
     первые месяцы 2013-го после всех тестов и тренингов у меня появился младший – Никита. Надо сказать,
@@ -116,6 +118,28 @@ const fullStories = [
       'https://pics.uvic.ca/sites/default/files/styles/w700/public/2021-02/PICS-Student-Award-700x525.png?itok=29d3Vz0_',
       'https://i1.wp.com/observapics.fiocruz.br/wp-content/uploads/2020/06/WhatsApp-Image-2020-06-03-at-00.04.04.jpeg?resize=1080%2C675',
     ],
+  },
+  {
+    id: 2,
+    heading: 'Алик и Артем',
+    images: [
+      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+      'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGxhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+      'https://pics.uvic.ca/sites/default/files/styles/w700/public/2021-02/PICS-Student-Award-700x525.png?itok=29d3Vz0_',
+      'https://i1.wp.com/observapics.fiocruz.br/wp-content/uploads/2020/06/WhatsApp-Image-2020-06-03-at-00.04.04.jpeg?resize=1080%2C675',
+    ],
+    p: [],
+  },
+  {
+    id: 3,
+    heading: 'Нина и Виталик',
+    images: [
+      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+      'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGxhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+      'https://pics.uvic.ca/sites/default/files/styles/w700/public/2021-02/PICS-Student-Award-700x525.png?itok=29d3Vz0_',
+      'https://i1.wp.com/observapics.fiocruz.br/wp-content/uploads/2020/06/WhatsApp-Image-2020-06-03-at-00.04.04.jpeg?resize=1080%2C675',
+    ],
+    p: [],
   },
 ];
 
