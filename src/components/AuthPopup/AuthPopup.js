@@ -42,38 +42,30 @@ const AuthPopup = ({
         >
           <input
             {...register('login', {
-              required: 'Поле пустое',
-              minLength: { value: 4, message: 'Должно быть минимум 4 символа' },
+              required: 'Логин*',
             })}
             type="text"
-            placeholder="Логин"
+            placeholder={errors.login ? errors.login.message : 'Логин'}
             id="login"
-            className="popup__input popup__input_type_login"
+            className={`popup__input popup__input_type_login ${
+              errors.login ? 'popup__input-error' : ''
+            }`}
           />
-          {errors.login && (
-            <span className="popup__error popup__error_type_login">{errors.login.message}</span>
-          )}
-
           <input
             {...register('password', {
-              required: 'Поле пустое',
-              minLength: { value: 4, message: 'Должно быть минимум 4 символа' },
+              required: 'Пароль*',
             })}
             type="password"
-            placeholder="Пароль"
+            placeholder={errors.password ? errors.password.message : 'Пароль'}
             id="password"
-            className="popup__input popup__input_type_password"
+            className={`popup__input popup__input_type_password ${
+              errors.password ? 'popup__input-error' : ''
+            }`}
           />
-          {errors.password && (
-            <span className="popup__error popup__error_type_password">
-              {errors.password.message}
-            </span>
-          )}
 
           <Link className="login__link" to="/">
             Забыли пароль?
           </Link>
-
           <Button
             type="submit"
             className="button popup__submit-btn popup__submit-btn_type_login"
