@@ -20,7 +20,7 @@ const PersonalAccount = ({ onLogout }) => {
     setIsPopupOpen(false);
   };
   const handlerSubmitDeletePopup = (cardId) => {
-    const newArr = storiesData.filter((story) => story.id !== cardId);
+    const newArr = storiesData.filter((story, id) => id !== cardId);
     setStoriesData(newArr);
   };
 
@@ -51,12 +51,17 @@ const PersonalAccount = ({ onLogout }) => {
         </Button>
       </div>
       {isPopupOpen ? (
-        <PopupStoryFriendship closePopup={closePopup} storiesData={storiesData} />
+        <PopupStoryFriendship
+          closePopup={closePopup}
+          storiesData={storiesData}
+          setStoriesData={setStoriesData}
+        />
       ) : (
-        storiesData.map((story) => (
+        storiesData.map((story, id) => (
           <PersonalAccountCardStory
             cardStory={story}
-            key={story.id}
+            key={`${story}`}
+            cardId={id}
             openPopup={openPopup}
             handlerSubmitDeletePopup={handlerSubmitDeletePopup}
           />

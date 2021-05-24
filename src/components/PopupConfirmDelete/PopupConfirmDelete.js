@@ -7,7 +7,6 @@ const PopupConfirmDelete = ({ place, cardId, handlerSubmitDeletePopup, isOpen, c
     handlerSubmitDeletePopup(cardId);
     closePopup();
   };
-  console.log(cardId);
 
   return (
     <section className={`popup ${isOpen ? 'popup_opened' : ''}`}>
