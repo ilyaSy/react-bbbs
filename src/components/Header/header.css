@@ -1,10 +1,11 @@
-.header {
+/*.header {
   width: 100%;
   margin: 0 auto;
   padding: 0;
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: top 2s linear .1s;
 }
 
 .header_sticky {
@@ -13,6 +14,26 @@
   left: 0;
   background: rgba(243, 242, 242, 1);
   z-index: 10;
+}*/
+
+.header {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: rgba(243, 242, 242, 1);
+  z-index: 10;
+
+  transition: top .6s ease-in-out .1s;
+}
+
+.header_sticky_hide {
+  top: -100px;
 }
 
 .header__wrapper {

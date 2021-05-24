@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
-import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
+// import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
 import './PersonalAccount.css';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
@@ -31,9 +31,9 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const openPopup = () => {
     setIsPopupOpen(true);
   };
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
+  // const closePopup = () => {
+  //   setIsPopupOpen(false);
+  // };
   const handlerSubmitDeletePopup = (cardId) => {
     const newArr = storiesData.filter((story, id) => id !== cardId);
     setStoriesData(newArr);
@@ -77,11 +77,12 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
         </Button>
       </div>
       {isPopupOpen ? (
-        <PopupStoryFriendship
-          closePopup={closePopup}
-          storiesData={storiesData}
-          setStoriesData={setStoriesData}
-        />
+        // <PopupStoryFriendship
+        //   closePopup={closePopup}
+        //   storiesData={storiesData}
+        //   setStoriesData={setStoriesData}
+        // />
+        <></>
       ) : (
         storiesData.map((story, id) => (
           <PersonalAccountCardStory
