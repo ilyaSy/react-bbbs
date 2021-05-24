@@ -34,7 +34,9 @@ const StoryPage = () => {
       </div>
       {fullStories.map((fullStory) => (
         <Story
-          storyRef={(el) => (storyRefs.current[fullStory.id] = el)}
+          storyRef={(el) => {
+            storyRefs.current[fullStory.id] = el;
+          }}
           key={fullStory.id}
           fullStory={fullStory}
           isStoryPage
