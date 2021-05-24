@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
-import { profileStory } from '../../utils/serverApiTestConfig';
 import Button from '../Button/Button';
 
-const PopupStoryFriendship = ({ closePopup, storiesData }) => {
+const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
   const [feedback, setFeedback] = useState('');
   //  Добавляем картинку
   const [image, setImage] = useState([]);
@@ -32,11 +31,12 @@ const PopupStoryFriendship = ({ closePopup, storiesData }) => {
     setFeedback(event.target.value);
   };
   const onSubmit = (data) => {
-    profileStory.unshift({
+    const newArr = [...storiesData];
+    newArr.push({
       ...data,
-      id: storiesData.length,
       image: image[0].preview,
     });
+    setStoriesData(newArr);
     closePopup();
   };
 
@@ -166,9 +166,11 @@ const PopupStoryFriendship = ({ closePopup, storiesData }) => {
 PopupStoryFriendship.propTypes = {
   closePopup: PropTypes.func,
   storiesData: PropTypes.arrayOf(PropTypes.any),
+  setStoriesData: PropTypes.func,
 };
 PopupStoryFriendship.defaultProps = {
   closePopup: () => {},
   storiesData: [],
+  setStoriesData: () => {},
 };
 export default PopupStoryFriendship;

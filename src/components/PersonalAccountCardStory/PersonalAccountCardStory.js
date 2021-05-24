@@ -4,8 +4,8 @@ import Button from '../Button/Button';
 import format from '../../utils/format';
 import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 
-const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePopup }) => {
-  const { place, image, date, description, feedback, id } = cardStory;
+const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePopup, cardId }) => {
+  const { place, image, date, description, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
   const handlerClick = () => {
@@ -76,7 +76,7 @@ const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePop
       <PopupConfirmDelete
         place={place}
         handlerSubmitDeletePopup={handlerSubmitDeletePopup}
-        cardId={id}
+        cardId={cardId}
         isOpen={isDeletePopupOpen}
         closePopup={closeDeletePopup}
       />
@@ -87,6 +87,7 @@ PersonalAccountCardStory.propTypes = {
   cardStory: PropTypes.objectOf(PropTypes.any).isRequired,
   openPopup: PropTypes.func,
   handlerSubmitDeletePopup: PropTypes.func,
+  cardId: PropTypes.number.isRequired,
 };
 PersonalAccountCardStory.defaultProps = {
   openPopup: () => {},
