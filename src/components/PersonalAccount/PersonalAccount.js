@@ -5,8 +5,23 @@ import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccoun
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
 import './PersonalAccount.css';
 import { profileStory } from '../../utils/serverApiTestConfig';
+import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
+import Api from '../../utils/api';
 
-const PersonalAccount = ({ onLogout }) => {
+const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
+  const [events, setEvents] = useState([]);
+  // const [months, setMonths] = useState([]);
+  useEffect(() => {
+    Api.getEvents()
+      .then((data) => {
+        setEvents(data);
+      })
+      .catch((err) => {
+        console.log(`Error: Calendar get events ${err}`);
+      });
+  }, []);
+  // Получаем данные календаря
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
 
@@ -39,6 +54,17 @@ const PersonalAccount = ({ onLogout }) => {
       </div>
       <div className="personal-account__events">
         <h2 className="personal-account__title">У вас нет записи на мероприятия</h2>
+        <div className="personal-account__event">
+          {events.map(
+            (event) =>
+              event.booked && (
+                <CalendarCardProfile
+                  event={event}
+                  handleCalendarCardClick={handleCalendarCardClick}
+                />
+              )
+          )}
+        </div>
       </div>
       <div className="personal-account__add-meet">
         <Button
@@ -75,6 +101,9 @@ export default PersonalAccount;
 
 PersonalAccount.propTypes = {
   onLogout: PropTypes.func.isRequired,
+  handleCalendarCardClick: PropTypes.func,
 };
 
-PersonalAccount.defaultProps = {};
+PersonalAccount.defaultProps = {
+  handleCalendarCardClick: () => {},
+};

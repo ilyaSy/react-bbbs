@@ -67,7 +67,12 @@ export default function Content({
         {/* Задать вопрос */}
       </Route>
 
-      <ProtectedRoute path="/personal-account" component={PersonalAccount} onLogout={onLogout} />
+      <ProtectedRoute
+        path="/personal-account"
+        component={PersonalAccount}
+        onLogout={onLogout}
+        handleCalendarCardClick={handleCalendarCardClick}
+      />
       {/* <Route exact path="/personal-account">
         <PersonalAccount onLogout={onLogout} />
       </Route> */}
