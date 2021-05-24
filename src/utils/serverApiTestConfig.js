@@ -5,6 +5,23 @@ export const loginPost = {
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs',
 };
 
+export const profileStory = [
+  {
+    place: 'Парк горького',
+    image: 'https://vse-sekrety.ru/uploads/posts/2015-12/1450044662_1.jpg',
+    date: '2020-05-12',
+    description: `Описание в несколько срок. Подробное описание. Опишите вашу встречу, какие чувства вы
+        испытывали, что понравилось не понравилось. Описание в несколько срок. Подробное описание.
+        Подробное описание. Опишите вашу встречу, какие чувства вы испытывали, что понравилось не
+        понравилось. Описание в несколько срок. Подробное описание. Опишите вашу встречу, какие
+        чувства вы испытывали, что понравилось не понравилось. Описание в несколько срок. Подробное
+        описание. Подробное описание. Опишите вашу встречу, какие чувства вы испытывали, что
+        понравилось не понравилось. чувства вы испытывали, что понравилось не понравилось.`,
+    feedback: 'good',
+    id: 0,
+  },
+];
+
 export const citiesGet = [
   {
     id: 1,

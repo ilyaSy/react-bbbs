@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './authPopup.css';
 import Popup from '../Popup/Popup';
 
-const AuthPopup = ({
-  isAuthModalOpened,
-  closeAuthModal,
-  register,
-  handleSubmit,
-  errors,
-  submitModal,
-}) => {
+const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
   //  Подключил библиотекук реакт-форм.     register, handleSubmit и errors - это все оттуда
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = ({ login, password }) => {
     submitModal(login, password);
   };
@@ -83,16 +83,6 @@ AuthPopup.propTypes = {
   isAuthModalOpened: PropTypes.bool.isRequired,
   closeAuthModal: PropTypes.func.isRequired,
   submitModal: PropTypes.func.isRequired,
-  register: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  errors: PropTypes.objectOf(PropTypes.string),
 };
-AuthPopup.defaultProps = {
-  register: () => {},
-  handleSubmit: () => {},
-  errors: {
-    login: '',
-    password: '',
-  },
-};
+AuthPopup.defaultProps = {};
 export default AuthPopup;
