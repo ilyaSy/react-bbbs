@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDropzone } from 'react-dropzone';
 import './PopupPlaces.css';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
@@ -12,13 +13,6 @@ const PopupPlaces = ({ isOpen, onClose }) => {
     handleSubmit,
     reset,
   } = useForm();
-
-  const onSubmit = (placeData) => {
-    console.log(placeData);
-    // placeData — то, что соберётся с формы; эти данные и пойдут на сервер
-    reset();
-    onClose();
-  };
 
   // TO DO: перенести обработку клика по esc и оверлею в компонент Popup
 
@@ -34,12 +28,37 @@ const PopupPlaces = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
+  const [image, setImage] = useState([]);
+  const { getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFiles) => {
+      setImage(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            url: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+
+  const onSubmit = (placeData) => {
+    const extendedPlaceData = { ...placeData, imageUrl: image[0].url, chosen: true };
+    console.log(extendedPlaceData);
+    // placeData — то, что соберётся с формы;
+    // extendedPlaceData — добавлен адрес картинки и атрибут,
+    // указывающий, что это "выбор наставника"; вот это и пойдёт на сервер
+    // (мб chosen само как-то бэкендом делается, там ещё id вроде будет)
+    reset();
+    onClose();
+  };
+
   return (
     <Popup popupType="popup_type_recommendation" isOpen={isOpen} onClose={onClose}>
       <div className="recommendation">
         <div className="recommendation__texts">
           <p className="recommendation__text">
-            Если вы были в интересном месте и хотите порекомендовать его другим наставникам –
+            Если вы были в интересном месте и хотите порекомендовать его другим наставникам –&nbsp;
             <a href="/" className="recommendation__text-link recommendation__text-link_opened">
               заполните форму
             </a>
@@ -126,8 +145,10 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.description ? errors.description.message : 'Комментарий*'}
             />
             <div className="popup__feedback">
-              <Button className="popup__feedback-button" type="button" />
-              <p className="popup__feedback-text">Добавить&nbsp;фото</p>
+              <label htmlFor="addImageBtn" className="popup__feedback-text">
+                <input {...getInputProps()} id="addImageBtn" className="popup__feedback-button" />
+                Добавить фото
+              </label>
             </div>
             <div className="popup__submit">
               <Button className="button button_color_darkgray popup__submit-btn" type="submit">

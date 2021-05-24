@@ -10,7 +10,8 @@ const CreatePlace = ({ onRecommendPlace }) => {
     <section className="recommendation recommendation_place_page">
       <div className="recommendation__texts">
         <p className="recommendation__text recommendation__text_place_page">
-          Если вы были в интересном месте и хотите порекомендовать его другим&nbsp;наставникам –
+          Если вы были в интересном месте и хотите порекомендовать его другим&nbsp;наставникам
+          –&nbsp;
           <a href="/" className="recommendation__text-link" onClick={handleRecommendPlace}>
             заполните&nbsp;форму
           </a>
