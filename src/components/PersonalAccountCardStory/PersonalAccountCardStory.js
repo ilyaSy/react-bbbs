@@ -1,16 +1,33 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Button from '../Button/Button';
+import format from '../../utils/format';
+import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 
-const PersonalAccountCardStory = ({ cardStory, openPopup }) => {
-  const { place, image, date, description, feedback } = cardStory;
+const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePopup }) => {
+  const { place, image, date, description, feedback, id } = cardStory;
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+
+  const handlerClick = () => {
+    setIsDeletePopupOpen(true);
+  };
+  const closeDeletePopup = () => {
+    setIsDeletePopupOpen(false);
+  };
   const feedbackText = () => {
     if (feedback === 'bad') return 'Плохо';
     if (feedback === 'good') return 'Было классно!';
     return 'Нормально';
   };
 
+  // date
+  const formatedDate = new Date(date);
+  const day = !formatedDate || format(formatedDate, 'dd');
+  const year = formatedDate.getFullYear();
+  const monthName = !formatedDate || format(formatedDate, 'LLLL');
+
   return (
-    <dic className="personal-account__form">
+    <div className="personal-account__form">
       <div className="personal-account__photo">
         <Button
           className="personal-account__button personal-account__button_closed"
@@ -25,9 +42,9 @@ const PersonalAccountCardStory = ({ cardStory, openPopup }) => {
         <h2 className="personal-account__input-heading">{place}</h2>
 
         <div className="personal-account__event-head">
-          <h3 className="personal-account__subtitle-date">{date.day}</h3>
+          <h3 className="personal-account__subtitle-date">{day}</h3>
           <p className="personal-account__subtitle-month personal-account__subtitle-month_place_form">
-            {date.month}, {date.year}
+            {monthName}, {year}
           </p>
         </div>
 
@@ -51,19 +68,28 @@ const PersonalAccountCardStory = ({ cardStory, openPopup }) => {
           <Button className="personal-account__feedback-btn" type="button" onClick={openPopup}>
             Редактировать
           </Button>
-          <Button className="personal-account__feedback-btn" type="button">
+          <Button className="personal-account__feedback-btn" type="button" onClick={handlerClick}>
             Удалить
           </Button>
         </div>
       </div>
-    </dic>
+      <PopupConfirmDelete
+        place={place}
+        handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+        cardId={id}
+        isOpen={isDeletePopupOpen}
+        closePopup={closeDeletePopup}
+      />
+    </div>
   );
 };
 PersonalAccountCardStory.propTypes = {
   cardStory: PropTypes.objectOf(PropTypes.any).isRequired,
   openPopup: PropTypes.func,
+  handlerSubmitDeletePopup: PropTypes.func,
 };
 PersonalAccountCardStory.defaultProps = {
   openPopup: () => {},
+  handlerSubmitDeletePopup: () => {},
 };
 export default PersonalAccountCardStory;

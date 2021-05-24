@@ -5,11 +5,11 @@ import { useDropzone } from 'react-dropzone';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import Button from '../Button/Button';
 
-const PopupStoryFriendship = ({ closePopup }) => {
+const PopupStoryFriendship = ({ closePopup, storiesData }) => {
   const [feedback, setFeedback] = useState('');
-  //  Добавляем картинку ( пока вручную , нужно доделывать)
+  //  Добавляем картинку
   const [image, setImage] = useState([]);
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
       setImage(
@@ -34,10 +34,10 @@ const PopupStoryFriendship = ({ closePopup }) => {
   const onSubmit = (data) => {
     profileStory.unshift({
       ...data,
-      id: profileStory[profileStory.length - 1].id + 1,
+      id: storiesData.length,
       image: image[0].preview,
     });
-    // Добавляем вначало массива новую карточку  (Картинка грузится только если перенести ее вручную)
+    closePopup();
   };
 
   return (
@@ -51,12 +51,11 @@ const PopupStoryFriendship = ({ closePopup }) => {
         name="addFreanshipHistory"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div {...getRootProps({ className: 'personal-account__photo' })}>
+        <div className="personal-account__photo">
           <input
             {...getInputProps()}
             id="personal-account__photo-add2"
             className="personal-account__button"
-            {...register('image')}
           />
           <label htmlFor="personal-account__photo-add2" className="personal-account__photo-text">
             {image[0] && (
@@ -166,8 +165,10 @@ const PopupStoryFriendship = ({ closePopup }) => {
 };
 PopupStoryFriendship.propTypes = {
   closePopup: PropTypes.func,
+  storiesData: PropTypes.arrayOf(PropTypes.any),
 };
 PopupStoryFriendship.defaultProps = {
   closePopup: () => {},
+  storiesData: [],
 };
 export default PopupStoryFriendship;
