@@ -6,7 +6,6 @@ import Button from '../Button/Button';
 import CalendarCard from '../CalendarCard/CalendarCard';
 import Api from '../../utils/api';
 import './Calendar.css';
-// import months from './calendarTest';
 
 const Calendar = ({ handleCalendarCardClick, handlerRegisterSubmit, handlerDeleteEvent }) => {
   const [events, setEvents] = useState([]);
