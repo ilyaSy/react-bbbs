@@ -12,7 +12,7 @@ const StoryPage = () => {
   }
 
   return (
-    <section className="storypage content root__section">
+    <section className="storypage content main__section">
       <h1 className="heading">Истории дружбы</h1>
       <p className="storypage__caption">
         Результат нашей работы сложно показать цифрами. Как измерить и&nbsp;взвесить дружбу? Как
@@ -24,7 +24,7 @@ const StoryPage = () => {
           <Button
             id={fullStory.id}
             key={fullStory.id}
-            className="button button_color_black"
+            className="button button_color_black button_place_scroll"
             type="button"
             onClick={handleScrollToStory}
           >

@@ -36,7 +36,9 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
           <h2 className="storypage__heading">{fullStory.heading}</h2>
           <p className="storypage__together">{fullStory.together}</p>
           <p className="storypage__text">{fullStory.text}</p>
-          <p className="storypage__paragraph">{fullStory.p[0]}</p>
+          <div className="storypage__paragraph-flex">
+            <p className="storypage__paragraph">{fullStory.p[0]}</p>
+          </div>
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
@@ -66,11 +68,11 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
               alt="изображение отсутствует"
             />
           </div>
-
-          <p className="storypage__paragraph">{fullStory.p[1]}</p>
-          <p className="storypage__paragraph">{fullStory.p[2]}</p>
-          <p className="storypage__paragraph">{fullStory.p[3]}</p>
-
+          <div className="storypage__paragraph-flex">
+            <p className="storypage__paragraph">{fullStory.p[1]}</p>
+            <p className="storypage__paragraph">{fullStory.p[2]}</p>
+            <p className="storypage__paragraph">{fullStory.p[3]}</p>
+          </div>
           <a className="storypage__link" href={fullStory.link}>
             {fullStory.writeTo}
           </a>
