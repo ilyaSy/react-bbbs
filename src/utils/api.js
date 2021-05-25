@@ -32,6 +32,10 @@ export default class Api {
     return axios.get(`${apiURL}/main/`).then(Api._handleApiResult.bind(null, 'getMain'));
   }
 
+  static getPlaces() {
+    return axios.get(`${apiURL}/where-to-go/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
+  }
+
   static getEvents() {
     return axios.get(`${apiURL}/afisha/events/`).then(Api._handleApiResult.bind(null, 'getEvents'));
   }

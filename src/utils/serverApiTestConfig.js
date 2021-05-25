@@ -98,6 +98,57 @@ export const eventPost = {
   event: 4,
 };
 
+export const placesGet = [
+  {
+    chosen: false,
+    title: 'Московский зоопарк 1',
+    name: 'Адрес в одну строку',
+    info: 'Пол, возраст, категория',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 1,
+  },
+  {
+    chosen: true,
+    title: 'Московский зоопарк 2',
+    name: 'Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки',
+    info: 'Пол, возраст, категория',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 2,
+  },
+  {
+    chosen: true,
+    title: 'Московский зоопарк 3',
+    name: 'Адрес в одну строку',
+    info: 'Пол, возраст, категория',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 3,
+  },
+  {
+    chosen: false,
+    title: 'Московский зоопарк 4',
+    name: 'Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки',
+    info: 'Пол, возраст, категория',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 4,
+  },
+];
+
 export const mainGet = {
   event: {
     id: 11,

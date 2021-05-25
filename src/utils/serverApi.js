@@ -2,7 +2,14 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import MockAdapter from 'axios-mock-adapter';
 import { apiURL } from '../config/config';
-import { eventsGet, eventPost, mainGet, loginPost, citiesGet } from './serverApiTestConfig';
+import {
+  eventsGet,
+  eventPost,
+  mainGet,
+  loginPost,
+  citiesGet,
+  placesGet,
+} from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
@@ -20,6 +27,9 @@ export default function setMockAdapter() {
 
   //  get cities
   mock.onGet(`${apiURL}/cities/`).reply(200, citiesGet);
+
+  //  get places
+  mock.onGet(`${apiURL}/where-to-go/`).reply(200, placesGet);
 
   // get events
   mock.onGet(`${apiURL}/afisha/events/`).reply(200, eventsGet);
