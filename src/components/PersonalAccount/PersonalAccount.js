@@ -24,9 +24,15 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   // Получаем данные календаря
 
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
+  const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
   const [cardStory, setCardStory] = useState({});
+
+  // для проверки, что город меняется
+  useEffect(() => {
+    console.log('cityIdState: ', cityId);
+  }, [cityId]);
 
   useEffect(() => {
     setStoriesData(profileStory);

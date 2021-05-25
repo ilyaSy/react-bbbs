@@ -23,13 +23,28 @@ export const profileStory = [
 
 export const citiesGet = [
   {
-    id: 1,
+    id: 0,
     name: 'Москва',
+    isPrimary: true,
+  },
+  {
+    id: 1,
+    name: 'Санкт-Петербург',
     isPrimary: true,
   },
   {
     id: 2,
     name: 'Воронеж',
+    isPrimary: false,
+  },
+  {
+    id: 3,
+    name: 'Алексин',
+    isPrimary: false,
+  },
+  {
+    id: 4,
+    name: 'Барнаул',
     isPrimary: false,
   },
 ];
