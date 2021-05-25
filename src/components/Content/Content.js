@@ -8,6 +8,7 @@ import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import About from '../About/About';
 import StoryPage from '../StoryPage/StoryPage';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import './content.css';
 
 export default function Content({
@@ -62,13 +63,13 @@ export default function Content({
         </main>
       </Route>
 
-      <Route exact path="/questions">
-        {/* Вопросы */}
-      </Route>
+      {/* Вопросы */}
+      {/* <Route exact path="/questions">
+      </Route> */}
 
-      <Route exact path="/search">
-        {/* Задать вопрос */}
-      </Route>
+      {/* Задать вопрос */}
+      {/* <Route exact path="/search">
+      </Route> */}
 
       <ProtectedRoute
         path="/personal-account"
@@ -76,9 +77,9 @@ export default function Content({
         onLogout={onLogout}
         handleCalendarCardClick={handleCalendarCardClick}
       />
-      {/* <Route exact path="/personal-account">
-        <PersonalAccount onLogout={onLogout} />
-      </Route> */}
+      <Route exact path="*">
+        <PageNotFound />
+      </Route>
     </Switch>
   );
 }

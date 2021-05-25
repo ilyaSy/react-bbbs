@@ -28,6 +28,10 @@
   margin-bottom: 10px;
 }
 
+.button_nodecoration {
+  text-decoration: none;
+}
+
 /*-----BLUE-----*/
 .button_color_blue {
   color: #224cff;

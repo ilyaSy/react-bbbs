@@ -28,6 +28,10 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [storiesData, setStoriesData] = useState([]);
   const [cardStory, setCardStory] = useState({});
 
+  if (false) {
+    setCityId(18);
+  }
+
   // для проверки, что город меняется
   useEffect(() => {
     console.log('cityIdState: ', cityId);
