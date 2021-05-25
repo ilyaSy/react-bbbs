@@ -17,7 +17,7 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
     submitModal(login, password);
   };
   return (
-    <Popup popupType="popup_type_login" isOpen={isAuthModalOpened}>
+    <Popup popupType="popup_type_login" isOpen={isAuthModalOpened} onClose={closeAuthModal}>
       <div className="login">
         <Button
           type="button"

@@ -25,7 +25,7 @@ const PopupConfirmRegister = ({
     handlerConfirmRegisterSubmit(selectedConfirmCalendarCard);
   };
   return (
-    <Popup popupType={`popup__proof ${isOpen ? 'popup_opened' : ''}`}>
+    <Popup popupType={`popup__proof ${isOpen ? 'popup_opened' : ''}`} onClose={closeModal}>
       <form className="proof" onSubmit={handlerSubmit}>
         <Button type="button" className="button-close popup__button-close" onClick={closeModal} />
         <h2 className="proof__title">Подтвердить запись на мероприятие</h2>

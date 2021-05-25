@@ -41,7 +41,7 @@ const PopupMeet = ({
   };
 
   return (
-    <Popup popupType="popup__meet" isOpen={isOpen}>
+    <Popup popupType="popup__meet" isOpen={isOpen} onClose={closeModal}>
       <div className="calendar calendar__popup">
         <Button className="button-close popup__button-close" onClick={closeModal} />
         <div className="calendar__about_popup">

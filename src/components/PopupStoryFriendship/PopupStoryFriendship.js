@@ -58,6 +58,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
             className="personal-account__button"
           />
           <label htmlFor="personal-account__photo-add2" className="personal-account__photo-text">
+            Загрузить фото
             {image[0] && (
               <img
                 className="personal-account__photo-opened"

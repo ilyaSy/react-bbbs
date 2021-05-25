@@ -5,7 +5,7 @@ import successImage from '../../assets/img/success-popup.svg';
 import './PopupRegisterSuccess.css';
 
 const PopupRegisterSuccess = ({ isOpen, closeModal }) => (
-  <Popup popupType={`popup_type_success ${isOpen ? 'popup_opened' : ''}`}>
+  <Popup popupType={`popup_type_success ${isOpen ? 'popup_opened' : ''}`} onClose={closeModal}>
     <div className="success">
       <Button type="button" className="button-close popup__button-close" onClick={closeModal} />
       <img className="success__image" src={successImage} alt="sucess" />

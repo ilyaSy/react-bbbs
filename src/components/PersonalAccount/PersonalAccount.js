@@ -7,6 +7,7 @@ import './PersonalAccount.css';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
+import PopupCities from '../PopupCities/PopupCities';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
@@ -21,15 +22,23 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   }, []);
   // Получаем данные календаря
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
+  const [isPopupStoryOpen, setisPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
 
   useEffect(() => {
     setStoriesData(profileStory);
   }, []);
 
-  const openPopup = () => {
-    setIsPopupOpen(true);
+  const openPopupStory = () => {
+    setisPopupStoryOpen(true);
+  };
+  const openPopupCities = () => {
+    setIsPopupCitiesOpen(true);
+  };
+  const closePopup = () => {
+    setisPopupStoryOpen(false);
+    setIsPopupCitiesOpen(false);
   };
 
   const handlerSubmitDeletePopup = (cardId) => {
@@ -40,7 +49,10 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   return (
     <section className="personal-account content">
       <div className="personal-account__buttons">
-        <Button className="personal-account__feedback-btn personal-account__text">
+        <Button
+          className="personal-account__feedback-btn personal-account__text"
+          onClick={openPopupCities}
+        >
           Изменить ваш город
         </Button>
         <Button
@@ -71,13 +83,13 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
         <Button
           className="button button_color_blue button_type_round"
           type="button"
-          onClick={openPopup}
+          onClick={openPopupStory}
         />
-        <Button className="button personal-account__meet-text" onClick={openPopup}>
+        <Button className="button personal-account__meet-text" onClick={openPopupStory}>
           Добавить встречу
         </Button>
       </div>
-      {isPopupOpen ? (
+      {isPopupStoryOpen ? (
         <PopupStoryFriendship
           // closePopup={closePopup}
           storiesData={storiesData}
@@ -89,11 +101,12 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             cardStory={story}
             key={`${story}`}
             cardId={id}
-            openPopup={openPopup}
+            openPopup={openPopupStory}
             handlerSubmitDeletePopup={handlerSubmitDeletePopup}
           />
         ))
       )}
+      {isPopupCitiesOpen ? <PopupCities onClose={closePopup} isOpen /> : ''}
     </section>
   );
 };
