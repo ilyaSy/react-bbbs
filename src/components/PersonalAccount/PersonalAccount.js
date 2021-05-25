@@ -18,7 +18,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
-  const [cardStory, setCardStory] = useState({});
+  const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
     Api.getEvents()
