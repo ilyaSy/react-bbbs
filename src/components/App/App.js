@@ -130,7 +130,7 @@ function App() {
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
         handleRegisterSubmit={handleRegisterSubmit}
-        handlerDeleteEvent={handleDeleteEvent}
+        handleDeleteEvent={handleDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
       />
       <Footer />
