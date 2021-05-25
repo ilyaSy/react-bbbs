@@ -54,7 +54,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   };
 
   return (
-    <section className="personal-account content">
+    <section className="personal-account content main__section">
       <div className="personal-account__buttons">
         <Button
           className="personal-account__feedback-btn personal-account__text"
