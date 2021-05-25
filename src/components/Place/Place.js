@@ -17,9 +17,9 @@ const Place = ({ place, size }) => (
             {place.category && <Tag modifier="tag_place_event" tagText={place.category} />}
             <div className="event-soon__caption">
               <div className="event-soon__title">{place.title}</div>
-              <div className="event-soon__subtitle">{place.name}</div>
+              <div className="event-soon__subtitle">{place.address}</div>
             </div>
-            {size === 'big' && (
+            {place.chosen && size === 'big' && (
               <img src={place.imageUrl} className="event-soon__img" alt="Локация" />
             )}
             <a href={place.link} target="_blank" rel="noreferrer" className="event-soon__link">
@@ -46,7 +46,9 @@ const Place = ({ place, size }) => (
                     : 'event-article__title_size_small'
                 }`}
               >
-                {place.info}
+                {place.sex && `${place.sex}. `}
+                {place.age && `${place.age} лет. `}
+                {place.type}
               </div>
               <p
                 className={`event-article__paragraph ${
@@ -63,7 +65,9 @@ const Place = ({ place, size }) => (
   </section>
 );
 
-// TO DO: отображение карточек в правильном порядке цветов (модификатор color класса event-soon__description)
+// TO DO:
+// * отображение карточек в правильном порядке цветов (модификатор color класса event-soon__description)
+// * type и category это одно и то же (познавательное vs театры/музеи/экскурсии) ???
 
 Place.propTypes = {
   place: PropTypes.objectOf(PropTypes.any),

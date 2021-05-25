@@ -29,7 +29,6 @@ const WhereToGo = ({ onRecommendPlace }) => {
   useEffect(() => {
     Api.getPlaces()
       .then((data) => {
-        console.log(data);
         setPlaces(data);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
@@ -37,7 +36,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
 
   const handleCategoryFilter = (category) => {
     if (activeCategory && activeCategory === category) {
-      setActiveCategory('');
+      setActiveCategory('Все');
     } else {
       setActiveCategory(category);
     }
@@ -51,6 +50,21 @@ const WhereToGo = ({ onRecommendPlace }) => {
     }
   };
 
+  const filterAgeRanges = (age) => {
+    switch (activeAgeRange) {
+      case '8-10 лет':
+        return age >= 8 && age <= 10;
+      case '11-13 лет':
+        return age >= 11 && age <= 13;
+      case '14-18 лет':
+        return age >= 14 && age < 18;
+      case '18+ лет':
+        return age >= 18;
+      default:
+        return age;
+    }
+  };
+
   return (
     <>
       <section className="event-choice">
@@ -58,7 +72,9 @@ const WhereToGo = ({ onRecommendPlace }) => {
         <div className="buttons-scroll buttons-scroll_place_event">
           {categories.map((category) => (
             <Button
-              className="button button_color_black"
+              className={`button button_color_black ${
+                category === activeCategory ? 'button_color_black_active' : ''
+              }`}
               type="button"
               key={category}
               onClick={() => handleCategoryFilter(category)}
@@ -70,7 +86,9 @@ const WhereToGo = ({ onRecommendPlace }) => {
         <div className="buttons-scroll buttons-scroll_place_event">
           {ages.map((age) => (
             <Button
-              className="button button_color_black"
+              className={`button button_color_black ${
+                age === activeAgeRange ? 'button_color_black_active' : ''
+              }`}
               type="button"
               key={age}
               onClick={() => handleAgeFilter(age)}
@@ -87,6 +105,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
       <section className="events-grid">
         {places
           .filter((place) => activeCategory === 'Все' || activeCategory === place.category)
+          .filter((place) => filterAgeRanges(place.age))
           .map((place) => (
             <Place key={place.id} place={place} size="small" />
           ))}
@@ -98,8 +117,5 @@ const WhereToGo = ({ onRecommendPlace }) => {
 WhereToGo.propTypes = {
   onRecommendPlace: PropTypes.func.isRequired,
 };
-
-// TO DO:
-// фильтрация по возрасту
 
 export default WhereToGo;

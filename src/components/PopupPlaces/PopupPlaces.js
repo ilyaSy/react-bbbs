@@ -47,7 +47,6 @@ const PopupPlaces = ({ isOpen, onClose }) => {
       ...placeData,
       imageUrl: image[0].url,
       chosen: true,
-      category: 'Выбор наставника',
     };
 
     console.log(extendedPlaceData);
