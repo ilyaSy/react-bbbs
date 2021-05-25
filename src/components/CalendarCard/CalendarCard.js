@@ -36,7 +36,11 @@ const CalendarCard = ({
   };
 
   return (
-    <Button className={`calendar ${booked ? 'calendar_onclick' : ''}`} onClick={handlerCardClick}>
+    <div
+      className={`calendar ${booked ? 'calendar_onclick' : ''}`}
+      onClick={handlerCardClick}
+      role="presentation"
+    >
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
         <p className="calendar__date">
@@ -97,7 +101,7 @@ const CalendarCard = ({
           </svg>
         </Button>
       </form>
-    </Button>
+    </div>
   );
 };
 
