@@ -57,6 +57,12 @@
   margin-bottom: 0;
 }
 
+.cities__button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 640px) {
   .cities {
       padding-top: 30px;
