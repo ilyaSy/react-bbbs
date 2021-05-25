@@ -37,10 +37,15 @@ export default function setMockAdapter() {
   // set event
   const postEvent = () => [200, eventPost];
 
-  // set event
+  // unset event
   const deleteEvent = () => [200, eventPost];
+
+  // unset event
+  const updateEvent = () => [200, eventPost];
 
   mock.onPost(`${apiURL}/afisha/event-participants/`).reply(postEvent);
 
   mock.onDelete(`${apiURL}/afisha/event-participants/`).reply(deleteEvent);
+
+  mock.onPatch(`${apiURL}/afisha/event-participants/`).reply(updateEvent);
 }

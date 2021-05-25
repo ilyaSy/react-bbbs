@@ -11,10 +11,18 @@ import Api from '../../utils/api';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
+  const [cities, setCities] = useState([]);
   useEffect(() => {
     Api.getEvents()
       .then((data) => {
         setEvents(data);
+      })
+      .catch((err) => {
+        console.log(`Error: Calendar get events ${err}`);
+      });
+    Api.getCities()
+      .then((data) => {
+        setCities(data);
       })
       .catch((err) => {
         console.log(`Error: Calendar get events ${err}`);
@@ -27,10 +35,6 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
   const [cardStory, setCardStory] = useState({});
-
-  if (false) {
-    setCityId(18);
-  }
 
   // для проверки, что город меняется
   useEffect(() => {
@@ -84,6 +88,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             .filter((e) => e.booked)
             .map((event) => (
               <CalendarCardProfile
+                key={event.id}
                 event={event}
                 handleCalendarCardClick={handleCalendarCardClick}
               />
@@ -119,7 +124,9 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
           />
         ))
       )}
-      {isPopupCitiesOpen ? <PopupCities setCityId={setCityId} onClose={closePopup} isOpen /> : ''}
+      {isPopupCitiesOpen && (
+        <PopupCities onClose={closePopup} setCityId={setCityId} cities={cities} isOpen />
+      )}
     </section>
   );
 };

@@ -49,7 +49,13 @@ export default class Api {
   static deleteEvent(eventData) {
     return axios
       .delete(`${apiURL}/afisha/event-participants/`, eventData)
-      .then(Api._handleApiResult.bind(null, 'setEvent'));
+      .then(Api._handleApiResult.bind(null, 'deleteEvent'));
+  }
+
+  static updateEvent(eventData) {
+    return axios
+      .patch(`${apiURL}/afisha/event-participants/`, eventData)
+      .then(Api._handleApiResult.bind(null, 'updateEvent'));
   }
 
   static _handleApiResult(fnName, res) {
