@@ -84,6 +84,19 @@ function App() {
       });
   };
 
+  const handlerDeleteEvent = (calendarCard) => {
+    Api.deleteEvent({ id: calendarCard.id })
+      .then((data) => {
+        console.log(data);
+        //  setIsRegisterSuccessModalOpened(true);
+        alert('Удаление события успешно');
+        closeAllModal();
+      })
+      .catch((err) => {
+        console.log(`Error ошибка: ${err}`);
+      });
+  };
+
   const handleRecommentdPlace = () => {
     setIsPlacePopupOpened(true);
   };
@@ -114,6 +127,7 @@ function App() {
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
         handlerRegisterSubmit={handlerRegisterSubmit}
+        handlerDeleteEvent={handlerDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
       />
       <Footer />
@@ -127,6 +141,7 @@ function App() {
         closeModal={closeAllModal}
         selectedCalendarCard={selectedCalendarCard}
         handlerRegisterSubmit={handlerConfirmRegisterSubmit}
+        handlerDeleteEvent={handlerDeleteEvent}
       />
       <PopupConfirmRegister
         closeModal={closeAllModal}
