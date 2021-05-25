@@ -25,6 +25,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
+  const [cardStory, setCardStory] = useState({});
 
   useEffect(() => {
     setStoriesData(profileStory);
@@ -94,6 +95,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
           closePopup={closePopup}
           storiesData={storiesData}
           setStoriesData={setStoriesData}
+          currentCardStory={cardStory}
         />
       ) : (
         storiesData.map((story, id) => (
@@ -103,6 +105,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             cardId={id}
             openPopup={openPopupStory}
             handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+            setCardStory={setCardStory}
           />
         ))
       )}
