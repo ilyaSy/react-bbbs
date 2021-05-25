@@ -9,13 +9,15 @@
 
 @media (max-width: 1024px) {
   .main__section {
-    margin: 45px 0 100px;
+    margin-top: 45px;
+    margin-bottom: 100px;
   }
 }
 
 @media (max-width: 640px) {
   .main__section {
-    margin: 25px 0 50px;
+    margin-top: 25px;
+    margin-bottom: 50px;
   }
 
   .main__section_search {

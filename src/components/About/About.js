@@ -3,11 +3,11 @@ import logoSbbsBlue from '../../assets/img/logoSBSS-blue.svg';
 import AboutCard from '../AboutCard/AboutCard';
 
 const About = () => (
-  <>
-    <section className="title">
+  <section className="content main__section">
+    <div className="title">
       Наставники.про&nbsp;&mdash; цифоровая информационная платформа огрганизации &laquo;Старшие
       Братья Старшие Сестры&raquo;. Созданная для поддержки наставников программы.
-    </section>
+    </div>
     <a
       className="logo logo_place_about"
       href="https://www.nastavniki.org/o-nas/ob-organizaczii/"
@@ -83,7 +83,7 @@ const About = () => (
         linkText="подробнее"
       />
     </ul>
-  </>
+  </section>
 );
 
 export default About;

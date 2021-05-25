@@ -50,7 +50,8 @@ export default function Content({
       </Route>
 
       <Route exact path="/about">
-        <main className="content root__section">
+        {/* <main className="content root__section"> */}
+        <main className="main">
           <About />
         </main>
       </Route>
