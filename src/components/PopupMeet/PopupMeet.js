@@ -15,7 +15,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
     booked,
     description,
     isOpen,
-  } = selectedCalendarCard;
+  } = selectedCalendarCard || {};
 
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
@@ -28,7 +28,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
 
   const handlerSubmit = (evt) => {
     evt.preventDefault();
-    handlerRegisterSubmit();
+    handlerRegisterSubmit(selectedCalendarCard);
   };
 
   return (

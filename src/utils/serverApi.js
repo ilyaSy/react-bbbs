@@ -25,9 +25,12 @@ export default function setMockAdapter() {
   mock.onGet(`${apiURL}/afisha/events/`).reply(200, eventsGet);
 
   // set event
-  const postEvent = (config) => {
-    console.log(config);
-    return [200, eventPost];
-  };
+  const postEvent = () => [200, eventPost];
+
+  // set event
+  const deleteEvent = () => [200, eventPost];
+
   mock.onPost(`${apiURL}/afisha/event-participants/`).reply(postEvent);
+
+  mock.onDelete(`${apiURL}/afisha/event-participants/`).reply(deleteEvent);
 }

@@ -23,7 +23,7 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit })
   };
   const handlerSubmit = (evt) => {
     evt.preventDefault();
-    if (!booked) handlerRegisterSubmit();
+    if (!booked) handlerRegisterSubmit(event);
     else alert('нужно отменить запись');
   };
 
