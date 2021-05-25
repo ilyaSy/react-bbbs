@@ -44,13 +44,14 @@ export default function Content({
       />
 
       <Route exact path="/stories">
-        <main>
+        <main className="main">
           <StoryPage />
         </main>
       </Route>
 
       <Route exact path="/about">
-        <main className="content root__section">
+        {/* <main className="content root__section"> */}
+        <main className="main">
           <About />
         </main>
       </Route>
