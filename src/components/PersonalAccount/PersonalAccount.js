@@ -23,14 +23,14 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   // Получаем данные календаря
 
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
-  const [city, setCity] = useState('Москва');
+  const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
 
   // для проверки, что город меняется
   useEffect(() => {
-    console.log(city);
-  }, [city]);
+    console.log('cityIdState: ', cityId);
+  }, [cityId]);
 
   useEffect(() => {
     setStoriesData(profileStory);
@@ -112,7 +112,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
           />
         ))
       )}
-      {isPopupCitiesOpen ? <PopupCities setCity={setCity} onClose={closePopup} isOpen /> : ''}
+      {isPopupCitiesOpen ? <PopupCities setCityId={setCityId} onClose={closePopup} isOpen /> : ''}
     </section>
   );
 };

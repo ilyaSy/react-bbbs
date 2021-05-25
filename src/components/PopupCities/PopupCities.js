@@ -1,25 +1,12 @@
 import PropTypes from 'prop-types';
 import Popup from '../Popup/Popup';
 import Button from '../Button/Button';
+import { citiesGet as cities } from '../../utils/serverApiTestConfig';
 import './PopupCities.css';
 
-const cities = [
-  'Алексин',
-  'Барнаул',
-  'Екатеринбург',
-  'Зубцов',
-  'Калининград',
-  'Киреевск',
-  'Коломна',
-  'Новомосковск',
-  'Орехово-Зуево',
-  'Тверь',
-  'Тула',
-];
-
-const PopupCities = ({ isOpen, onClose, setCity }) => {
+const PopupCities = ({ isOpen, onClose, setCityId }) => {
   const handleCityClick = (event) => {
-    setCity(event.target.textContent);
+    setCityId(event.target.id);
     onClose();
   };
   return (
@@ -29,26 +16,31 @@ const PopupCities = ({ isOpen, onClose, setCity }) => {
         <div className="cities__cities">
           <div className="cities__capitals">
             <ul className="cities__list">
-              <li className="cities__item">
-                <Button className="cities__button" onClick={handleCityClick}>
-                  Москва
-                </Button>
-              </li>
-              <li className="cities__item">
-                <Button className="cities__button" onClick={handleCityClick}>
-                  Санкт-Петербург
-                </Button>
-              </li>
+              {cities.map((city) =>
+                city.isPrimary ? (
+                  <li key={city.id} className="cities__item">
+                    <Button id={city.id} className="cities__button" onClick={handleCityClick}>
+                      {city.name}
+                    </Button>
+                  </li>
+                ) : (
+                  ''
+                )
+              )}
             </ul>
           </div>
           <ul className="cities__list">
-            {cities.map((city) => (
-              <li key={city} className="cities__item">
-                <Button className="cities__button" onClick={handleCityClick}>
-                  {city}
-                </Button>
-              </li>
-            ))}
+            {cities.map((city) =>
+              !city.isPrimary ? (
+                <li key={city.id} className="cities__item">
+                  <Button id={city.id} className="cities__button" onClick={handleCityClick}>
+                    {city.name}
+                  </Button>
+                </li>
+              ) : (
+                ''
+              )
+            )}
           </ul>
         </div>
       </div>
@@ -59,13 +51,13 @@ const PopupCities = ({ isOpen, onClose, setCity }) => {
 PopupCities.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
-  setCity: PropTypes.func,
+  setCityId: PropTypes.func,
 };
 
 PopupCities.defaultProps = {
   isOpen: false,
   onClose: () => {},
-  setCity: () => {},
+  setCityId: () => {},
 };
 
 export default PopupCities;
