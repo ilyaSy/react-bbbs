@@ -23,7 +23,7 @@ const Header = ({ openAuthModal }) => {
 
   useScrollPosition(
     ({ previousPos, currentPos }) => {
-      const isVisible = currentPos.y > previousPos.y;
+      const isVisible = currentPos.y < previousPos.y;
       if (isVisible !== shouldBeVisible) setShouldBeVisible(isVisible);
     },
     [shouldBeVisible]
@@ -44,7 +44,7 @@ const Header = ({ openAuthModal }) => {
   };
 
   return (
-    <header className={`header ${shouldBeVisible ? 'header_sticky' : ''}`}>
+    <header className={`header ${shouldBeVisible ? 'header_sticky_hide' : ''}`}>
       <div className="header__wrapper">
         <Link to="/" className="header__logo" />
         <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>

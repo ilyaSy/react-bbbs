@@ -22,11 +22,11 @@ export default function MainPage({ mainData }) {
         <Intro />
         <Story history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
-      <MainPageSection className="mainpage__block">
-        <Article article={mainData?.articles[0]} />
-      </MainPageSection>
       <MainPageSection className="mainpage__blocks">
         <Place place={mainData?.place} />
+      </MainPageSection>
+      <MainPageSection className="mainpage__block">
+        <Article article={mainData?.articles[0]} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer movies={mainData?.movies} />

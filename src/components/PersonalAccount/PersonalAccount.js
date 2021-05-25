@@ -11,7 +11,6 @@ import PopupCities from '../PopupCities/PopupCities';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
-  // const [months, setMonths] = useState([]);
   useEffect(() => {
     Api.getEvents()
       .then((data) => {
@@ -30,6 +29,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   useEffect(() => {
     setStoriesData(profileStory);
   }, []);
+
   const openPopupStory = () => {
     setisPopupStoryOpen(true);
   };
@@ -40,6 +40,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
     setisPopupStoryOpen(false);
     setIsPopupCitiesOpen(false);
   };
+
   const handlerSubmitDeletePopup = (cardId) => {
     const newArr = storiesData.filter((story, id) => id !== cardId);
     setStoriesData(newArr);
@@ -62,17 +63,20 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
         </Button>
       </div>
       <div className="personal-account__events">
-        <h2 className="personal-account__title">У вас нет записи на мероприятия</h2>
+        <h2 className="personal-account__title">
+          {events.filter((e) => e.booked).length === 0
+            ? 'У вас нет записи на мероприятия'
+            : 'Вы записаны на следующие мероприятия'}
+        </h2>
         <div className="personal-account__event">
-          {events.map(
-            (event) =>
-              event.booked && (
-                <CalendarCardProfile
-                  event={event}
-                  handleCalendarCardClick={handleCalendarCardClick}
-                />
-              )
-          )}
+          {events
+            .filter((e) => e.booked)
+            .map((event) => (
+              <CalendarCardProfile
+                event={event}
+                handleCalendarCardClick={handleCalendarCardClick}
+              />
+            ))}
         </div>
       </div>
       <div className="personal-account__add-meet">
@@ -87,7 +91,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
       </div>
       {isPopupStoryOpen ? (
         <PopupStoryFriendship
-          closePopup={closePopup}
+          // closePopup={closePopup}
           storiesData={storiesData}
           setStoriesData={setStoriesData}
         />

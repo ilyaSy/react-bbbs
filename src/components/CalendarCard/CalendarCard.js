@@ -3,7 +3,12 @@ import Button from '../Button/Button';
 import format from '../../utils/format';
 import './CalendarCard.css';
 
-const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit }) => {
+const CalendarCard = ({
+  event,
+  handleCalendarCardClick,
+  handlerRegisterSubmit,
+  handlerDeleteEvent,
+}) => {
   const { address, contact, title, seats, startAt, endAt, booked } = event;
 
   const startAtDate = new Date(startAt);
@@ -23,8 +28,11 @@ const CalendarCard = ({ event, handleCalendarCardClick, handlerRegisterSubmit })
   };
   const handlerSubmit = (evt) => {
     evt.preventDefault();
-    if (!booked) handlerRegisterSubmit();
-    else alert('нужно отменить запись');
+    if (!booked) {
+      handlerRegisterSubmit(event);
+    } else {
+      handlerDeleteEvent(event);
+    }
   };
 
   return (
@@ -99,6 +107,7 @@ CalendarCard.propTypes = {
   ).isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
   handlerRegisterSubmit: PropTypes.func.isRequired,
+  handlerDeleteEvent: PropTypes.func.isRequired,
   // address: PropTypes.string,
   // contact: PropTypes.string,
   // title: PropTypes.string,

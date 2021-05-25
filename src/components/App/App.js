@@ -22,7 +22,8 @@ function App() {
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
-  const [selectedCalendarCard, setSelectedCalendarCard] = useState({});
+  const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
+  const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
   const history = useHistory();
 
   const openAuthModal = () => {
@@ -62,15 +63,40 @@ function App() {
         console.log(`Error ошибка: ${err}`);
       });
   };
+
   const handleCalendarCardClick = (calendarCard) => {
     setSelectedCalendarCard(calendarCard);
   };
-  const handlerRegisterSubmit = () => {
+
+  const handlerRegisterSubmit = (calendarCard) => {
+    setSelectedConfirmCalendarCard(calendarCard);
     setIsConfirmRegisterOpened(true);
   };
-  const handlerConfirmRegisterSubmit = () => {
-    setIsRegisterSuccessModalOpened(true);
+
+  const handlerConfirmRegisterSubmit = (calendarCard) => {
+    Api.setEvent({ id: calendarCard.id })
+      .then((data) => {
+        console.log(data);
+        setIsRegisterSuccessModalOpened(true);
+      })
+      .catch((err) => {
+        console.log(`Error ошибка: ${err}`);
+      });
   };
+
+  const handlerDeleteEvent = (calendarCard) => {
+    Api.deleteEvent({ id: calendarCard.id })
+      .then((data) => {
+        console.log(data);
+        //  setIsRegisterSuccessModalOpened(true);
+        alert('Удаление события успешно');
+        closeAllModal();
+      })
+      .catch((err) => {
+        console.log(`Error ошибка: ${err}`);
+      });
+  };
+
   const handleRecommentdPlace = () => {
     setIsPlacePopupOpened(true);
   };
@@ -101,6 +127,7 @@ function App() {
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
         handlerRegisterSubmit={handlerRegisterSubmit}
+        handlerDeleteEvent={handlerDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
       />
       <Footer />
@@ -114,10 +141,12 @@ function App() {
         closeModal={closeAllModal}
         selectedCalendarCard={selectedCalendarCard}
         handlerRegisterSubmit={handlerConfirmRegisterSubmit}
+        handlerDeleteEvent={handlerDeleteEvent}
       />
       <PopupConfirmRegister
         closeModal={closeAllModal}
         isOpen={isConfirmRegisterModalOpened}
+        selectedConfirmCalendarCard={selectedConfirmCalendarCard}
         handlerConfirmRegisterSubmit={handlerConfirmRegisterSubmit}
       />
       <PopupPlaces isOpen={isPlacePopupOpened} onClose={closeAllModal} />

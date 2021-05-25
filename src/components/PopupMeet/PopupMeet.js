@@ -4,7 +4,12 @@ import Popup from '../Popup/Popup';
 import format from '../../utils/format';
 import './PopupMeet.css';
 
-const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) => {
+const PopupMeet = ({
+  selectedCalendarCard,
+  closeModal,
+  handlerRegisterSubmit,
+  handlerDeleteEvent,
+}) => {
   const {
     address,
     contact,
@@ -15,7 +20,7 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
     booked,
     description,
     isOpen,
-  } = selectedCalendarCard;
+  } = selectedCalendarCard || {};
 
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
@@ -28,7 +33,11 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
 
   const handlerSubmit = (evt) => {
     evt.preventDefault();
-    handlerRegisterSubmit();
+    if (booked) {
+      handlerDeleteEvent(selectedCalendarCard);
+    } else {
+      handlerRegisterSubmit(selectedCalendarCard);
+    }
   };
 
   return (
@@ -65,8 +74,8 @@ const PopupMeet = ({ selectedCalendarCard, closeModal, handlerRegisterSubmit }) 
             {booked ? (
               <Button
                 className="button button_color_blue button_color_blue_onclick button_color_blue-open"
-                type="submit"
-                disabled={seats > 0 ? false : 'disabled'}
+                type="button"
+                onClick={handlerSubmit}
               >
                 Отменить запись
               </Button>
@@ -96,6 +105,7 @@ PopupMeet.propTypes = {
   ).isRequired,
   closeModal: PropTypes.func.isRequired,
   handlerRegisterSubmit: PropTypes.func.isRequired,
+  handlerDeleteEvent: PropTypes.func.isRequired,
 };
 
 PopupMeet.defaultProps = {};
