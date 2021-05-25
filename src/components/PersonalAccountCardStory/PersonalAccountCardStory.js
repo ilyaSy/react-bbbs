@@ -4,7 +4,13 @@ import Button from '../Button/Button';
 import format from '../../utils/format';
 import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 
-const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePopup, cardId }) => {
+const PersonalAccountCardStory = ({
+  cardStory,
+  openPopup,
+  handlerSubmitDeletePopup,
+  cardId,
+  setCardStory,
+}) => {
   const { place, image, date, description, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
@@ -20,6 +26,10 @@ const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePop
     return 'Нормально';
   };
 
+  const editStory = () => {
+    setCardStory(cardStory);
+    openPopup();
+  };
   // date
   const formatedDate = new Date(date);
   const day = !formatedDate || format(formatedDate, 'dd');
@@ -65,7 +75,7 @@ const PersonalAccountCardStory = ({ cardStory, openPopup, handlerSubmitDeletePop
           <Button className="personal-account__feedback-btn personal-account__share">
             Поделиться с куратором
           </Button>
-          <Button className="personal-account__feedback-btn" type="button" onClick={openPopup}>
+          <Button className="personal-account__feedback-btn" type="button" onClick={editStory}>
             Редактировать
           </Button>
           <Button className="personal-account__feedback-btn" type="button" onClick={handlerClick}>
@@ -88,9 +98,11 @@ PersonalAccountCardStory.propTypes = {
   openPopup: PropTypes.func,
   handlerSubmitDeletePopup: PropTypes.func,
   cardId: PropTypes.number.isRequired,
+  setCardStory: PropTypes.func,
 };
 PersonalAccountCardStory.defaultProps = {
   openPopup: () => {},
   handlerSubmitDeletePopup: () => {},
+  setCardStory: () => {},
 };
 export default PersonalAccountCardStory;

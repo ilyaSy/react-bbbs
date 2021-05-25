@@ -4,8 +4,18 @@ import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import Button from '../Button/Button';
 
-const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
-  const [feedback, setFeedback] = useState('');
+const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, currentCardStory }) => {
+  const {
+    // image: currentImage = '',    Нужно разобораться с картинкой
+    place: currentPlace = '',
+    description: currentDescription = '',
+    date: currentDate = '',
+    feedback: currentFeedback = '',
+  } = currentCardStory;
+
+  // Данные конкретной  карточки для редактирования
+
+  const [feedback, setFeedback] = useState(currentFeedback);
   //  Добавляем картинку
   const [image, setImage] = useState([]);
   const { getInputProps } = useDropzone({
@@ -39,7 +49,6 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
     setStoriesData(newArr);
     closePopup();
   };
-
   return (
     <>
       <h2 className="personal-account__title personal-account__title_type_content">
@@ -77,6 +86,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
             className={`personal-account__input personal-account__input_type_place ${
               errors.place ? 'personal-account__input-error' : ''
             }`}
+            defaultValue={currentPlace}
           />
           <input
             className="personal-account__input personal-account__input_type_date"
@@ -84,6 +94,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
             {...register('date', {
               required: 'дата*',
             })}
+            defaultValue={currentDate}
           />
           <textarea
             className="personal-account__textarea personal-account__textarea_type_description"
@@ -92,6 +103,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
               required:
                 'Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось*',
             })}
+            defaultValue={currentDescription}
           />
           <div className="personal-account__feedback">
             <label
@@ -108,6 +120,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
                   required: 'Фидбек',
                 })}
                 value="good"
+                checked={feedback === 'good'}
                 onChange={handleToggleFeedback}
               />
             </label>
@@ -126,6 +139,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
                   required: 'Фидбек',
                 })}
                 value="normal"
+                checked={feedback === 'normal'}
                 onChange={handleToggleFeedback}
               />
             </label>
@@ -144,6 +158,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData }) => {
                   required: 'Фидбек',
                 })}
                 value="bad"
+                checked={feedback === 'bad'}
                 onChange={handleToggleFeedback}
               />
             </label>
@@ -166,10 +181,12 @@ PopupStoryFriendship.propTypes = {
   closePopup: PropTypes.func,
   storiesData: PropTypes.arrayOf(PropTypes.any),
   setStoriesData: PropTypes.func,
+  currentCardStory: PropTypes.objectOf(PropTypes.any),
 };
 PopupStoryFriendship.defaultProps = {
   closePopup: () => {},
   storiesData: [],
   setStoriesData: () => {},
+  currentCardStory: {},
 };
 export default PopupStoryFriendship;
