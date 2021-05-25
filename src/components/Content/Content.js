@@ -16,8 +16,8 @@ export default function Content({
   openAuthModal,
   onLogout,
   handleCalendarCardClick,
-  handlerRegisterSubmit,
-  handlerDeleteEvent,
+  handleRegisterSubmit,
+  handleDeleteEvent,
   onRecommendPlace,
 }) {
   const location = useLocation();
@@ -40,8 +40,8 @@ export default function Content({
         path="/calendar"
         component={Calendar}
         handleCalendarCardClick={handleCalendarCardClick}
-        handlerRegisterSubmit={handlerRegisterSubmit}
-        handlerDeleteEvent={handlerDeleteEvent}
+        handleRegisterSubmit={handleRegisterSubmit}
+        handleDeleteEvent={handleDeleteEvent}
       />
 
       <Route exact path="/stories">
@@ -89,8 +89,8 @@ Content.propTypes = {
   onLogout: PropTypes.func.isRequired,
   openAuthModal: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerRegisterSubmit: PropTypes.func.isRequired,
-  handlerDeleteEvent: PropTypes.func.isRequired,
+  handleRegisterSubmit: PropTypes.func.isRequired,
+  handleDeleteEvent: PropTypes.func.isRequired,
   onRecommendPlace: PropTypes.func.isRequired,
 };
 

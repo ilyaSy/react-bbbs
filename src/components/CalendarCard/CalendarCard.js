@@ -6,8 +6,8 @@ import './CalendarCard.css';
 const CalendarCard = ({
   event,
   handleCalendarCardClick,
-  handlerRegisterSubmit,
-  handlerDeleteEvent,
+  handleRegisterSubmit,
+  handleDeleteEvent,
 }) => {
   const { address, contact, title, seats, startAt, endAt, booked } = event;
 
@@ -20,25 +20,25 @@ const CalendarCard = ({
   const monthName = format(startAtDate, 'LLLL');
   const dayName = format(startAtDate, 'EEEE');
 
-  const handlerCardClick = () => {
+  const handleCardClick = () => {
     handleCalendarCardClick({
       ...event,
       isOpen: true,
     });
   };
-  const handlerSubmit = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!booked) {
-      handlerRegisterSubmit(event);
+      handleRegisterSubmit(event);
     } else {
-      handlerDeleteEvent(event);
+      handleDeleteEvent(event);
     }
   };
 
   return (
     <div
       className={`calendar ${booked ? 'calendar_onclick' : ''}`}
-      onClick={handlerCardClick}
+      onClick={handleCardClick}
       role="presentation"
     >
       <div className="calendar__about">
@@ -62,7 +62,7 @@ const CalendarCard = ({
           <p className="calendar__phone">{contact}</p>
         </li>
       </ul>
-      <form className="calendar__sign-up" onSubmit={handlerSubmit}>
+      <form className="calendar__sign-up" onSubmit={handleSubmit}>
         <div className="calendar__sign-up_flex">
           {booked ? (
             <Button
@@ -110,8 +110,8 @@ CalendarCard.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerRegisterSubmit: PropTypes.func.isRequired,
-  handlerDeleteEvent: PropTypes.func.isRequired,
+  handleRegisterSubmit: PropTypes.func.isRequired,
+  handleDeleteEvent: PropTypes.func.isRequired,
   // address: PropTypes.string,
   // contact: PropTypes.string,
   // title: PropTypes.string,

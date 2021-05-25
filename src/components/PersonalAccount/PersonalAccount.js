@@ -51,7 +51,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
     setIsPopupCitiesOpen(false);
   };
 
-  const handlerSubmitDeletePopup = (cardId) => {
+  const handleSubmitDeletePopup = (cardId) => {
     const newArr = storiesData.filter((story, id) => id !== cardId);
     setStoriesData(newArr);
   };
@@ -125,7 +125,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             key={`${story}`}
             cardId={id}
             openPopup={openPopupStory}
-            handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+            handleSubmitDeletePopup={handleSubmitDeletePopup}
             setCardStory={setCardStory}
           />
         ))

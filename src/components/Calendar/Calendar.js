@@ -7,7 +7,7 @@ import CalendarCard from '../CalendarCard/CalendarCard';
 import Api from '../../utils/api';
 import './Calendar.css';
 
-const Calendar = ({ handleCalendarCardClick, handlerRegisterSubmit, handlerDeleteEvent }) => {
+const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent }) => {
   const [events, setEvents] = useState([]);
   const [months, setMonths] = useState([]);
   const [activeMonth, setActiveMonth] = useState('');
@@ -73,8 +73,8 @@ const Calendar = ({ handleCalendarCardClick, handlerRegisterSubmit, handlerDelet
               event={event}
               key={event.id}
               handleCalendarCardClick={handleCalendarCardClick}
-              handlerRegisterSubmit={handlerRegisterSubmit}
-              handlerDeleteEvent={handlerDeleteEvent}
+              handleRegisterSubmit={handleRegisterSubmit}
+              handleDeleteEvent={handleDeleteEvent}
             />
           ))}
       </div>
@@ -83,8 +83,8 @@ const Calendar = ({ handleCalendarCardClick, handlerRegisterSubmit, handlerDelet
 };
 Calendar.propTypes = {
   handleCalendarCardClick: PropTypes.func.isRequired,
-  handlerRegisterSubmit: PropTypes.func.isRequired,
-  handlerDeleteEvent: PropTypes.func.isRequired,
+  handleRegisterSubmit: PropTypes.func.isRequired,
+  handleDeleteEvent: PropTypes.func.isRequired,
 };
 Calendar.defaultProps = {};
 export default Calendar;

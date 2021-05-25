@@ -7,14 +7,14 @@ import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 const PersonalAccountCardStory = ({
   cardStory,
   openPopup,
-  handlerSubmitDeletePopup,
+  handleSubmitDeletePopup,
   cardId,
   setCardStory,
 }) => {
   const { place, image, date, description, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
-  const handlerClick = () => {
+  const handleClick = () => {
     setIsDeletePopupOpen(true);
   };
   const closeDeletePopup = () => {
@@ -78,14 +78,14 @@ const PersonalAccountCardStory = ({
           <Button className="personal-account__feedback-btn" type="button" onClick={editStory}>
             Редактировать
           </Button>
-          <Button className="personal-account__feedback-btn" type="button" onClick={handlerClick}>
+          <Button className="personal-account__feedback-btn" type="button" onClick={handleClick}>
             Удалить
           </Button>
         </div>
       </div>
       <PopupConfirmDelete
         place={place}
-        handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+        handleSubmitDeletePopup={handleSubmitDeletePopup}
         cardId={cardId}
         isOpen={isDeletePopupOpen}
         closePopup={closeDeletePopup}
@@ -96,13 +96,13 @@ const PersonalAccountCardStory = ({
 PersonalAccountCardStory.propTypes = {
   cardStory: PropTypes.objectOf(PropTypes.any).isRequired,
   openPopup: PropTypes.func,
-  handlerSubmitDeletePopup: PropTypes.func,
+  handleSubmitDeletePopup: PropTypes.func,
   cardId: PropTypes.number.isRequired,
   setCardStory: PropTypes.func,
 };
 PersonalAccountCardStory.defaultProps = {
   openPopup: () => {},
-  handlerSubmitDeletePopup: () => {},
+  handleSubmitDeletePopup: () => {},
   setCardStory: () => {},
 };
 export default PersonalAccountCardStory;
