@@ -17,7 +17,7 @@ export default function MainPage({ mainData }) {
     return false;
   }
   return (
-    <MainPageSection className="mainpage">
+    <MainPageSection className="mainpage content main__section">
       <MainPageSection className="mainpage__intro">
         <Intro />
         <Story history={mainData?.history} isStoryPage={false} />

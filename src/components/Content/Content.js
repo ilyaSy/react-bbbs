@@ -30,7 +30,7 @@ export default function Content({
   return (
     <Switch>
       <Route exact path="/">
-        <main className="content root__section">
+        <main className="main">
           <MainPage mainData={mainData} />
         </main>
       </Route>
@@ -57,7 +57,7 @@ export default function Content({
       </Route>
 
       <Route exact path="/where-to-go">
-        <main className="content root__section">
+        <main className="main">
           <WhereToGo onRecommendPlace={onRecommendPlace} />
         </main>
       </Route>
