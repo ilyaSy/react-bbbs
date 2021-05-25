@@ -24,6 +24,18 @@ export default class Api {
     return axios.post(`${apiURL}/token/`, userData).then(Api._handleApiResult.bind(null, 'login'));
   }
 
+  static getUserInfo(userData) {
+    return axios
+      .get(`${apiURL}/profile/`, userData)
+      .then(Api._handleApiResult.bind(null, 'getUserInfo'));
+  }
+
+  static updateUserInfo(userData) {
+    return axios
+      .patch(`${apiURL}/profile/`, userData)
+      .then(Api._handleApiResult.bind(null, 'updateUserInfo'));
+  }
+
   static getCities() {
     return axios.get(`${apiURL}/cities/`).then(Api._handleApiResult.bind(null, 'getCities'));
   }

@@ -1,49 +1,44 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
 import PopupCities from '../PopupCities/PopupCities';
-import './PersonalAccount.css';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import './PersonalAccount.css';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [events, setEvents] = useState([]);
   const [cities, setCities] = useState([]);
-  useEffect(() => {
-    Api.getEvents()
-      .then((data) => {
-        setEvents(data);
-      })
-      .catch((err) => {
-        console.log(`Error: Calendar get events ${err}`);
-      });
-    Api.getCities()
-      .then((data) => {
-        setCities(data);
-      })
-      .catch((err) => {
-        console.log(`Error: Calendar get events ${err}`);
-      });
-  }, []);
-  // Получаем данные календаря
-
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
   const [cardStory, setCardStory] = useState({});
 
-  // для проверки, что город меняется
   useEffect(() => {
-    console.log('cityIdState: ', cityId);
-  }, [cityId]);
+    Api.getEvents()
+      .then((data) => {
+        setEvents(data);
+      })
+      .catch((err) => {
+        console.log(`Error: personal account get events ${err}`);
+      });
+    Api.getCities()
+      .then((data) => {
+        setCities(data);
+      })
+      .catch((err) => {
+        console.log(`Error: personal account get cities ${err}`);
+      });
 
-  useEffect(() => {
     setStoriesData(profileStory);
   }, []);
+  // Получаем данные календаря
 
   const openPopupStory = () => {
     setIsPopupStoryOpen(true);
@@ -59,6 +54,17 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const handlerSubmitDeletePopup = (cardId) => {
     const newArr = storiesData.filter((story, id) => id !== cardId);
     setStoriesData(newArr);
+  };
+
+  const handleUpdateCity = (city) => {
+    Api.updateUserInfo({
+      city,
+      id: currentUser.id,
+      user: currentUser.user,
+    }).then(() => {
+      setCityId(city);
+      console.log(cityId);
+    });
   };
 
   return (
@@ -125,7 +131,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
         ))
       )}
       {isPopupCitiesOpen && (
-        <PopupCities onClose={closePopup} setCityId={setCityId} cities={cities} isOpen />
+        <PopupCities onClose={closePopup} setCityId={handleUpdateCity} cities={cities} isOpen />
       )}
     </section>
   );

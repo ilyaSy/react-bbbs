@@ -55,8 +55,11 @@ function App() {
           Api.setAuthHeader(data.access);
           localStorage.setItem('jwt', data.access);
           // localStorage.setItem('jwtRefresh', data.refresh);
-          setCurrentUser(userName);
-          closeAllModal();
+
+          Api.getUserInfo().then((userData) => {
+            setCurrentUser({ userName, ...userData });
+            closeAllModal();
+          });
         }
       })
       .catch((err) => {

@@ -9,6 +9,7 @@ import {
   loginPost,
   citiesGet,
   placesGet,
+  userGet,
 } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
@@ -21,6 +22,10 @@ export default function setMockAdapter() {
     return [200, loginPost];
   };
   mock.onPost(`${apiURL}/token/`).reply(postLogin);
+
+  mock.onGet(`${apiURL}/profile/`).reply(200, userGet);
+
+  mock.onPatch(`${apiURL}/profile/`).reply(200, userGet);
 
   //  get main page
   mock.onGet(`${apiURL}/main/`).reply(200, mainGet);

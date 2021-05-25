@@ -5,6 +5,12 @@ export const loginPost = {
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs',
 };
 
+export const userGet = {
+  id: 1,
+  user: 1,
+  city: 2,
+};
+
 export const profileStory = [
   {
     place: 'Парк горького',
