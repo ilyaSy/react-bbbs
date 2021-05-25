@@ -9,7 +9,7 @@ import Api from '../../utils/api';
 
 const categories = [
   'Все',
-  'Выбор наставников',
+  'Выбор наставника',
   'Музеи',
   'Парки',
   'Театры',
@@ -22,7 +22,7 @@ const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
 const WhereToGo = ({ onRecommendPlace }) => {
   const [places, setPlaces] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('');
+  const [activeCategory, setActiveCategory] = useState('Все');
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const currentUser = useContext(CurrentUserContext);
 
@@ -61,7 +61,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
               className="button button_color_black"
               type="button"
               key={category}
-              onClick={handleCategoryFilter}
+              onClick={() => handleCategoryFilter(category)}
             >
               {category}
             </Button>
@@ -73,7 +73,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
               className="button button_color_black"
               type="button"
               key={age}
-              onClick={handleAgeFilter}
+              onClick={() => handleAgeFilter(age)}
             >
               {age}
             </Button>
@@ -81,11 +81,16 @@ const WhereToGo = ({ onRecommendPlace }) => {
         </div>
       </section>
       {currentUser && <CreatePlace onRecommendPlace={onRecommendPlace} />}
-      {}
-      {places.map((place) => {
-        console.log(place);
-        return <Place key={place.id} place={place} />;
-      })}
+      {activeCategory === 'Все' && (
+        <Place place={places.filter((place) => place.chosen)[0]} size="big" />
+      )}
+      <section className="events-grid">
+        {places
+          .filter((place) => activeCategory === 'Все' || activeCategory === place.category)
+          .map((place) => (
+            <Place key={place.id} place={place} size="small" />
+          ))}
+      </section>
     </>
   );
 };
@@ -95,7 +100,6 @@ WhereToGo.propTypes = {
 };
 
 // TO DO:
-// Выводить карточки по условию: первая карточка "выбор наставника" (chosen) выводится в развёрнутом полном виде (как на главной),
-// остальные — в мини версии.
+// фильтрация по возрасту
 
 export default WhereToGo;

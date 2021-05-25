@@ -43,7 +43,13 @@ const PopupPlaces = ({ isOpen, onClose }) => {
   });
 
   const onSubmit = (placeData) => {
-    const extendedPlaceData = { ...placeData, imageUrl: image[0].url, chosen: true };
+    const extendedPlaceData = {
+      ...placeData,
+      imageUrl: image[0].url,
+      chosen: true,
+      category: 'Выбор наставника',
+    };
+
     console.log(extendedPlaceData);
     // placeData — то, что соберётся с формы;
     // extendedPlaceData — добавлен адрес картинки и атрибут,

@@ -23,7 +23,7 @@ export default function MainPage({ mainData }) {
         <Story history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <Place place={mainData?.place} />
+        <Place place={mainData?.place} size="big" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <Article article={mainData?.articles[0]} />
