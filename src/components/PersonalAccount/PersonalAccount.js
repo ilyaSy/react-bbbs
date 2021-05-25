@@ -3,12 +3,11 @@ import { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
+import PopupCities from '../PopupCities/PopupCities';
 import './PersonalAccount.css';
 import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
-import PopupCities from '../PopupCities/PopupCities';
-import PageNotFound from '../PageNotFound/PageNotFound';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
@@ -116,8 +115,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
           />
         ))
       )}
-      {isPopupCitiesOpen ? <PopupCities onClose={closePopup} isOpen /> : ''}
-      <PageNotFound />
+      {isPopupCitiesOpen ? <PopupCities setCityId={setCityId} onClose={closePopup} isOpen /> : ''}
     </section>
   );
 };

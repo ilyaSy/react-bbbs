@@ -44,7 +44,7 @@ export default function Content({
       />
 
       <Route exact path="/stories">
-        <main>
+        <main className="main">
           <StoryPage />
         </main>
       </Route>
