@@ -23,7 +23,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   // Получаем данные календаря
 
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
-  const [isPopupStoryOpen, setisPopupStoryOpen] = useState(false);
+  const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
 
   useEffect(() => {
@@ -31,13 +31,13 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   }, []);
 
   const openPopupStory = () => {
-    setisPopupStoryOpen(true);
+    setIsPopupStoryOpen(true);
   };
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
   };
   const closePopup = () => {
-    setisPopupStoryOpen(false);
+    setIsPopupStoryOpen(false);
     setIsPopupCitiesOpen(false);
   };
 
@@ -91,7 +91,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
       </div>
       {isPopupStoryOpen ? (
         <PopupStoryFriendship
-          // closePopup={closePopup}
+          closePopup={closePopup}
           storiesData={storiesData}
           setStoriesData={setStoriesData}
         />
