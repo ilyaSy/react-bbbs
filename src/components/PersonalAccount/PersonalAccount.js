@@ -8,6 +8,7 @@ import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
 import PopupCities from '../PopupCities/PopupCities';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [events, setEvents] = useState([]);
@@ -26,6 +27,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [storiesData, setStoriesData] = useState([]);
+  const [cardStory, setCardStory] = useState({});
 
   // для проверки, что город меняется
   useEffect(() => {
@@ -100,6 +102,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
           closePopup={closePopup}
           storiesData={storiesData}
           setStoriesData={setStoriesData}
+          currentCardStory={cardStory}
         />
       ) : (
         storiesData.map((story, id) => (
@@ -109,10 +112,12 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             cardId={id}
             openPopup={openPopupStory}
             handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+            setCardStory={setCardStory}
           />
         ))
       )}
-      {isPopupCitiesOpen ? <PopupCities setCityId={setCityId} onClose={closePopup} isOpen /> : ''}
+      {isPopupCitiesOpen ? <PopupCities onClose={closePopup} isOpen /> : ''}
+      <PageNotFound />
     </section>
   );
 };
