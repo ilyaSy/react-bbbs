@@ -1,0 +1,243 @@
+.button {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid #224cff;
+  color: #224cff;
+  border-radius: 100px;
+  font-family: 'Proto', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+}
+.button:disabled {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+  cursor: pointer;
+}
+
+.button_disabled {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.button_nodecoration {
+  text-decoration: none;
+}
+
+/*-----BLUE-----*/
+.button_color_blue {
+  color: #224cff;
+  border: 1px #224cff solid;
+  cursor: pointer;
+}
+
+.button_color_blue:hover {
+  background-color: rgba(200, 209, 255, 1);
+}
+
+.button_color_blue:active {
+  background-color: rgba(34, 76, 255, 1);
+  color: white;
+}
+
+.button_color_blue-round {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-radius: 100px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
+/* .button_color_blue-round:hover {
+  background-color: transparent;
+} */
+.button_color_blue_onclick.button_color_blue-round {
+  background-color: rgba(200, 209, 255, 1);
+}
+
+.button_color_blue_onclick.button_color_blue-round:hover {
+  background-color: #fff;
+}
+
+.button_color_blue-round:active {
+  background-color: transparent;
+}
+
+.button_color_blue_onclick {
+  background-color: #224cff;
+  color: white;
+}
+
+/*-----trans round-----*/
+.button_type_round {
+  background-image: url(../../assets/img/trans-blue-plus.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/*-----BLACK-----*/
+.button_color_black {
+  border: 1px black solid;
+  color: black;
+}
+
+.button_color_black_active {
+  background-color: black;
+  color: rgba(243, 242, 242, 1);
+}
+
+.button_color_black:hover {
+  background-color: #e0e0e0;
+}
+
+.button_color_black_active:hover {
+  background-color: #2e2468;
+}
+
+.button_color_black:active {
+  background-color: black;
+  color: rgba(243, 242, 242, 1);
+}
+
+.button_color_black-nonactive {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+}
+
+/*-----CALENDAR-----*/
+.button_place_calendar-round {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+}
+
+/*-----POPUP-----*/
+.button-close {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+}
+
+/*-----SCROLL-----*/
+.buttons-scroll {
+  width: 100%;
+  max-width: 1135px;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  flex-wrap: wrap;
+}
+
+.buttons-scroll:last-of-type {
+  margin-bottom: 0;
+}
+
+.buttons-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+.buttons-scroll::-webkit-scrollbar {
+  width: 0px;
+}
+
+.buttons-scroll_place_event {
+  margin: 0 auto;
+}
+
+.button_place_scroll {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1250px) {
+  .button_color_blue_onclick {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .button {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_color_blue {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_place_calendar-round {
+    width: 40px;
+    height: 40px;
+  }
+
+  .button_color_blue-round {
+    width: 40px;
+    height: 40px;
+  }
+
+  .buttons-scroll {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+
+  /*
+  класс buttons-scroll_overflow добаваляется тогда, когда количество кнопок слишком велико для показа на экране
+  и появляется прокуртка. Когда кнопок мало, согласно макету, они встают по центру.
+  */
+
+  /* .buttons-scroll_overflow {
+    margin-left: 127px;
+    width: calc(100% + 127px);
+    justify-content: flex-start;
+  } */
+}
+
+@media (max-width: 640px) {
+  .buttons-scroll {
+    margin-left: 15px;
+    width: calc(100% + 15px);
+    justify-content: flex-start;
+  }
+
+  .buttons-scroll_place_event {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 320px) {
+  .button-close {
+    top: 15px;
+    right: 15px;
+  }
+}

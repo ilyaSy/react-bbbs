@@ -1,0 +1,44 @@
+.storypage {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.storypage__caption {
+  font-family: 'Proto', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+  margin: 0 auto 40px;
+  max-width: 970px;
+}
+
+@media (max-width: 1220px) {
+  .storypage {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .storypage__caption {
+    font-size: 19px;
+    line-height: 23px;
+    max-width: 290px;
+    margin-bottom: 30px;
+    max-width: 770px;
+  }
+}
+
+@media (max-width: 640px) {
+  .storypage__caption {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .storypage {
+    margin-top: 10px;
+  }
+}
