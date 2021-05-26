@@ -7,7 +7,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './WhereToGo.css';
 import Api from '../../utils/api';
 
-const categories = [
+/* const categories = [
   'Все',
   'Выбор наставника',
   'Музеи',
@@ -16,12 +16,13 @@ const categories = [
   'Спорт',
   'Экскурсии',
   'Секции',
-];
+]; */
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
 const WhereToGo = ({ onRecommendPlace }) => {
   const [places, setPlaces] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState('Все');
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const currentUser = useContext(CurrentUserContext);
@@ -30,6 +31,10 @@ const WhereToGo = ({ onRecommendPlace }) => {
     Api.getPlaces()
       .then((data) => {
         setPlaces(data);
+        const categoriesData = data
+          .map((place) => place.category)
+          .filter((item, i, arr) => arr.indexOf(item) === i);
+        setCategories(['Все', ...categoriesData]);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   }, []);
