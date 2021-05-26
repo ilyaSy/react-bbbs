@@ -41,6 +41,7 @@ const PopupStoryFriendship = ({
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log(errors);
 
   const handleToggleFeedback = (event) => {
     setFeedback(event.target.value);
@@ -101,7 +102,9 @@ const PopupStoryFriendship = ({
             defaultValue={currentDate}
           />
           <textarea
-            className="personal-account__textarea personal-account__textarea_type_description"
+            className={`personal-account__textarea personal-account__textarea_type_description ${
+              errors.description ? 'personal-account__input-error' : ''
+            }`}
             placeholder="Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось"
             {...register('description', {
               required:
@@ -172,7 +175,11 @@ const PopupStoryFriendship = ({
             <Button className="personal-account__feedback-btn" onClick={closePopup}>
               {mode === 'add' ? 'Удалить' : 'Отмена'}
             </Button>
-            <Button className="button button_color_black-nonactive" type="submit">
+            <Button
+              className="button"
+              type="submit"
+              disabled={errors.place || errors.description || errors.date ? 'disabled' : null}
+            >
               {mode === 'add' ? 'Добавить' : 'Сохранить'}
             </Button>
           </div>
