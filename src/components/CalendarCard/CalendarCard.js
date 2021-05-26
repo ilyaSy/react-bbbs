@@ -26,6 +26,7 @@ const CalendarCard = ({
       isOpen: true,
     });
   };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!booked) {

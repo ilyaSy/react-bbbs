@@ -41,6 +41,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const closePopup = () => {
     setIsPopupStoryOpen(false);
     setIsPopupCitiesOpen(false);
+    setCardStory(null);
   };
 
   const handlePostProfileStory = (card) => {
@@ -59,7 +60,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
       .then((data) => {
         setStories(stories.map((e) => (e.id === data.id ? data : e)));
         closePopup();
-        setCardStory();
+        setCardStory(null);
       })
       .catch((err) => {
         console.log(`Error: update profile data ${err}`);

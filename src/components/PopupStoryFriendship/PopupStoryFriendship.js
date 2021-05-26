@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import Button from '../Button/Button';
@@ -17,8 +17,6 @@ const PopupStoryFriendship = ({
   const currentDate = currentCardStory?.date || '';
   const currentFeedback = currentCardStory?.feedback || '';
   const currentImage = currentCardStory?.image || '';
-
-  const formRef = useRef(null);
 
   // Данные конкретной  карточки для редактирования
 
@@ -50,11 +48,10 @@ const PopupStoryFriendship = ({
   const onSubmit = (data) => {
     if (mode === 'add') {
       postStoriesData(data);
+      // Пока нет бека картинка отправляется дефолтная
     } else if (mode === 'edit') {
       updateStoriesData({ ...data, id: currentCardStory.id, image: currentCardStory.image });
     }
-
-    formRef.current.reset();
   };
   return (
     <>
@@ -63,7 +60,6 @@ const PopupStoryFriendship = ({
       </h2>
 
       <form
-        ref={formRef}
         className="personal-account__form"
         name="addFreanshipHistory"
         onSubmit={handleSubmit(onSubmit)}

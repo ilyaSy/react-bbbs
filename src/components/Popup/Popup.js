@@ -1,19 +1,19 @@
-import { useEffect } from 'react';
+import { createRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './popup.css';
 
 const Popup = ({ popupType, isOpen, onClose, children }) => {
+  const popupRef = createRef(null);
   const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget && isOpen) onClose();
+    if (popupRef.current === event.target) {
+      onClose();
+    }
   };
-
+  const handleEscClick = (event) => {
+    if (event.key === 'Escape') onClose();
+  };
   useEffect(() => {
-    const handleEscClick = (event) => {
-      if (event.key === 'Escape') onClose();
-    };
-
     document.addEventListener('keydown', handleEscClick);
-
     return () => {
       document.removeEventListener('keydown', handleEscClick);
     };
@@ -22,8 +22,9 @@ const Popup = ({ popupType, isOpen, onClose, children }) => {
   return (
     <div
       className={`popup ${popupType} ${isOpen ? 'popup_opened' : ''}`}
-      onMouseDown={handleOverlayClick}
       role="presentation"
+      ref={popupRef}
+      onMouseDown={handleOverlayClick}
     >
       {children}
     </div>
