@@ -102,12 +102,14 @@ const PopupMeet = ({
 PopupMeet.propTypes = {
   selectedCalendarCard: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-  ).isRequired,
+  ),
   closeModal: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleDeleteEvent: PropTypes.func.isRequired,
 };
 
-PopupMeet.defaultProps = {};
+PopupMeet.defaultProps = {
+  selectedCalendarCard: {},
+};
 
 export default PopupMeet;

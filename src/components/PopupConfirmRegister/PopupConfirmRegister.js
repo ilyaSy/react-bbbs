@@ -52,9 +52,12 @@ const PopupConfirmRegister = ({
 PopupConfirmRegister.propTypes = {
   selectedConfirmCalendarCard: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-  ).isRequired,
+  ),
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   handleConfirmRegisterSubmit: PropTypes.func.isRequired,
+};
+PopupConfirmRegister.defaultProps = {
+  selectedConfirmCalendarCard: {},
 };
 export default PopupConfirmRegister;
