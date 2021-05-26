@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Question.css';
@@ -7,6 +8,12 @@ import Button from '../Button/Button';
 
 const Question = ({ path, title, tags, place }) => {
   const tagsText = tags.map((tag) => tag.name);
+  const [isAnswerVisible, setIsAnswerVisible] = useState(false);
+
+  const handleToggleAnswer = () => {
+    setIsAnswerVisible(!isAnswerVisible);
+  };
+
   return (
     <>
       {place === 'main' && (
@@ -23,15 +30,17 @@ const Question = ({ path, title, tags, place }) => {
       {place === 'questions' && (
         <li className="question__flex">
           <div className="question">
-            <Link to={`/questions${path}`} className="mainlink" />
-            <h3 className="question__title">{title}</h3>
+            <h3 className="question__title" onClick={handleToggleAnswer} aria-hidden="true">
+              {title}
+            </h3>
             <div className="question__tags">
-              {tags.map((tagText) => (
+              {tagsText.map((tagText) => (
                 <Tag key={tagText} modifier="tag_theme_white" tagText={tagText} />
               ))}
             </div>
+            {isAnswerVisible && <p>Здесь будет появляться ответ на вопрос</p>}
           </div>
-          <Button className="question__btn" />
+          <Button className="question__btn" onClick={handleToggleAnswer} />
         </li>
       )}
     </>
@@ -39,8 +48,8 @@ const Question = ({ path, title, tags, place }) => {
 };
 
 // TO DO:
-// * логика на кнопке добавления статьи / вопроса авторизованным юзером
-// * пути к статьям / вопросам
+// * вставить разметку ответа (не готова)
+// * добавить ответ в данные
 
 Question.propTypes = {
   path: PropTypes.string,

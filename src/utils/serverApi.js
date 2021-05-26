@@ -11,6 +11,7 @@ import {
   placesGet,
   userGet,
   profileStory,
+  questionsGet,
 } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
@@ -57,6 +58,9 @@ export default function setMockAdapter() {
 
   //  get places
   mock.onGet(`${apiURL}/where-to-go/`).reply(200, placesGet);
+
+  //  get questions
+  mock.onGet(`${apiURL}/questions/`).reply(200, questionsGet);
 
   // get events
   mock.onGet(`${apiURL}/afisha/events/`).reply(200, eventsGet);
