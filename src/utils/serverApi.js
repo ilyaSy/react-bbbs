@@ -9,6 +9,8 @@ import {
   loginPost,
   citiesGet,
   placesGet,
+  userGet,
+  profileStory,
 } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
@@ -21,6 +23,31 @@ export default function setMockAdapter() {
     return [200, loginPost];
   };
   mock.onPost(`${apiURL}/token/`).reply(postLogin);
+
+  mock.onGet(`${apiURL}/profile/`).reply(200, userGet);
+
+  mock.onPatch(`${apiURL}/profile/`).reply(200, userGet);
+
+  //  profile stories
+  mock.onGet(`${apiURL}/profile-stories/`).reply(200, profileStory);
+
+  const updateProfileStory = (config) => {
+    const storyData = JSON.parse(config.data);
+    return [200, storyData];
+  };
+
+  mock.onPatch(`${apiURL}/profile-stories/`).reply(updateProfileStory);
+
+  const postProfileStory = (config) => {
+    const storyData = JSON.parse(config.data);
+    storyData.id = Math.floor(Math.random() * 100 + 1);
+    storyData.image = 'https://vse-sekrety.ru/uploads/posts/2015-12/1450044662_1.jpg';
+    return [200, storyData];
+  };
+
+  mock.onPost(`${apiURL}/profile-stories/`).reply(postProfileStory);
+
+  mock.onDelete(`${apiURL}/profile-stories/`).reply(200, profileStory);
 
   //  get main page
   mock.onGet(`${apiURL}/main/`).reply(200, mainGet);
@@ -37,10 +64,15 @@ export default function setMockAdapter() {
   // set event
   const postEvent = () => [200, eventPost];
 
-  // set event
+  // unset event
   const deleteEvent = () => [200, eventPost];
+
+  // unset event
+  const updateEvent = () => [200, eventPost];
 
   mock.onPost(`${apiURL}/afisha/event-participants/`).reply(postEvent);
 
   mock.onDelete(`${apiURL}/afisha/event-participants/`).reply(deleteEvent);
+
+  mock.onPatch(`${apiURL}/afisha/event-participants/`).reply(updateEvent);
 }

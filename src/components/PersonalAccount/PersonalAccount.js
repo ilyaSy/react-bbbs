@@ -1,41 +1,36 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
 import PopupCities from '../PopupCities/PopupCities';
-import './PersonalAccount.css';
-import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import './PersonalAccount.css';
 
 const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [events, setEvents] = useState([]);
-  useEffect(() => {
-    Api.getEvents()
-      .then((data) => {
-        setEvents(data);
-      })
-      .catch((err) => {
-        console.log(`Error: Calendar get events ${err}`);
-      });
-  }, []);
-  // Получаем данные календаря
-
+  const [cities, setCities] = useState([]);
+  const [stories, setStories] = useState([]);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
-  const [storiesData, setStoriesData] = useState([]);
-  const [cardStory, setCardStory] = useState({});
-
-  // для проверки, что город меняется
-  useEffect(() => {
-    console.log('cityIdState: ', cityId);
-  }, [cityId]);
+  const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    setStoriesData(profileStory);
+    Promise.all([Api.getEvents(), Api.getCities(), Api.getProfileStory()])
+      .then(([eventsData, citiesData, storiesData]) => {
+        setEvents(eventsData);
+        setCities(citiesData);
+        setStories(storiesData);
+      })
+      .catch((err) => {
+        console.log(`Error: personal account ${err}`);
+      });
   }, []);
+  // Получаем данные календаря
 
   const openPopupStory = () => {
     setIsPopupStoryOpen(true);
@@ -48,9 +43,49 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
     setIsPopupCitiesOpen(false);
   };
 
-  const handlerSubmitDeletePopup = (cardId) => {
-    const newArr = storiesData.filter((story, id) => id !== cardId);
-    setStoriesData(newArr);
+  const handlePostProfileStory = (card) => {
+    Api.postProfileStory({ ...card })
+      .then((data) => {
+        setStories([...stories, data]);
+        closePopup();
+      })
+      .catch((err) => {
+        console.log(`Error: post profile data ${err}`);
+      });
+  };
+
+  const handleUpdaProfileStory = (card) => {
+    Api.updateProfileStory(card)
+      .then((data) => {
+        setStories(stories.map((e) => (e.id === data.id ? data : e)));
+        closePopup();
+        setCardStory();
+      })
+      .catch((err) => {
+        console.log(`Error: update profile data ${err}`);
+      });
+  };
+
+  const handleSubmitDeletePopup = (cardId) => {
+    Api.deleteProfileStory({ id: cardId })
+      .then(() => {
+        const newArr = stories.filter((story, id) => id !== cardId);
+        setStories(newArr);
+      })
+      .catch((err) => {
+        console.log(`Error: delete profile story ${err}`);
+      });
+  };
+
+  const handleUpdateCity = (city) => {
+    Api.updateUserInfo({
+      city,
+      id: currentUser.id,
+      user: currentUser.user,
+    }).then(() => {
+      setCityId(city);
+      console.log(cityId);
+    });
   };
 
   return (
@@ -80,6 +115,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
             .filter((e) => e.booked)
             .map((event) => (
               <CalendarCardProfile
+                key={event.id}
                 event={event}
                 handleCalendarCardClick={handleCalendarCardClick}
               />
@@ -99,23 +135,25 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
       {isPopupStoryOpen ? (
         <PopupStoryFriendship
           closePopup={closePopup}
-          storiesData={storiesData}
-          setStoriesData={setStoriesData}
+          postStoriesData={handlePostProfileStory}
+          updateStoriesData={handleUpdaProfileStory}
           currentCardStory={cardStory}
         />
       ) : (
-        storiesData.map((story, id) => (
+        stories.map((story, id) => (
           <PersonalAccountCardStory
             cardStory={story}
-            key={`${story}`}
+            key={`${story.id}`}
             cardId={id}
             openPopup={openPopupStory}
-            handlerSubmitDeletePopup={handlerSubmitDeletePopup}
+            handleSubmitDeletePopup={handleSubmitDeletePopup}
             setCardStory={setCardStory}
           />
         ))
       )}
-      {isPopupCitiesOpen ? <PopupCities setCityId={setCityId} onClose={closePopup} isOpen /> : ''}
+      {isPopupCitiesOpen && (
+        <PopupCities onClose={closePopup} setCityId={handleUpdateCity} cities={cities} isOpen />
+      )}
     </section>
   );
 };

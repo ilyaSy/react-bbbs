@@ -7,8 +7,8 @@ import './PopupMeet.css';
 const PopupMeet = ({
   selectedCalendarCard,
   closeModal,
-  handlerRegisterSubmit,
-  handlerDeleteEvent,
+  handleRegisterSubmit,
+  handleDeleteEvent,
 }) => {
   const {
     address,
@@ -31,12 +31,12 @@ const PopupMeet = ({
   const monthName = !startAt || format(startAtDate, 'LLLL');
   const dayName = !startAt || format(startAtDate, 'EEEE');
 
-  const handlerSubmit = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     if (booked) {
-      handlerDeleteEvent(selectedCalendarCard);
+      handleDeleteEvent(selectedCalendarCard);
     } else {
-      handlerRegisterSubmit(selectedCalendarCard);
+      handleRegisterSubmit(selectedCalendarCard);
     }
   };
 
@@ -75,7 +75,7 @@ const PopupMeet = ({
               <Button
                 className="button button_color_blue button_color_blue_onclick button_color_blue-open"
                 type="button"
-                onClick={handlerSubmit}
+                onClick={handleSubmit}
               >
                 Отменить запись
               </Button>
@@ -83,7 +83,7 @@ const PopupMeet = ({
               <Button
                 className="button button_color_blue button_color_blue-nonactive"
                 type="button"
-                onClick={handlerSubmit}
+                onClick={handleSubmit}
                 disabled={seats > 0 ? false : 'disable'}
               >
                 Записаться
@@ -104,8 +104,8 @@ PopupMeet.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ).isRequired,
   closeModal: PropTypes.func.isRequired,
-  handlerRegisterSubmit: PropTypes.func.isRequired,
-  handlerDeleteEvent: PropTypes.func.isRequired,
+  handleRegisterSubmit: PropTypes.func.isRequired,
+  handleDeleteEvent: PropTypes.func.isRequired,
 };
 
 PopupMeet.defaultProps = {};

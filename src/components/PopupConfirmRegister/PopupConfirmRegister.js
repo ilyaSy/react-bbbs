@@ -8,7 +8,7 @@ const PopupConfirmRegister = ({
   selectedConfirmCalendarCard,
   isOpen,
   closeModal,
-  handlerConfirmRegisterSubmit,
+  handleConfirmRegisterSubmit,
 }) => {
   const { title, startAt = '', endAt = '' } = selectedConfirmCalendarCard || {};
 
@@ -20,13 +20,13 @@ const PopupConfirmRegister = ({
   const endTime = !endAt || format(endAtDate, 'KK:mm');
   const monthName = !startAt || format(startAtDate, 'MMMM');
 
-  const handlerSubmit = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    handlerConfirmRegisterSubmit(selectedConfirmCalendarCard);
+    handleConfirmRegisterSubmit(selectedConfirmCalendarCard);
   };
   return (
     <Popup popupType={`popup__proof ${isOpen ? 'popup_opened' : ''}`} onClose={closeModal}>
-      <form className="proof" onSubmit={handlerSubmit}>
+      <form className="proof" onSubmit={handleSubmit}>
         <Button type="button" className="button-close popup__button-close" onClick={closeModal} />
         <h2 className="proof__title">Подтвердить запись на мероприятие</h2>
         <p className="proof__subtitle">
@@ -55,6 +55,6 @@ PopupConfirmRegister.propTypes = {
   ).isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  handlerConfirmRegisterSubmit: PropTypes.func.isRequired,
+  handleConfirmRegisterSubmit: PropTypes.func.isRequired,
 };
 export default PopupConfirmRegister;

@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import Popup from '../Popup/Popup';
 import Button from '../Button/Button';
-import { citiesGet as cities } from '../../utils/serverApiTestConfig';
 import './PopupCities.css';
 
-const PopupCities = ({ isOpen, onClose, setCityId }) => {
+const PopupCities = ({ isOpen, onClose, setCityId, cities }) => {
   const handleCityClick = (event) => {
     setCityId(event.target.id);
     onClose();
@@ -49,6 +48,7 @@ const PopupCities = ({ isOpen, onClose, setCityId }) => {
 };
 
 PopupCities.propTypes = {
+  cities: PropTypes.arrayOf(PropTypes.any).isRequired,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   setCityId: PropTypes.func,

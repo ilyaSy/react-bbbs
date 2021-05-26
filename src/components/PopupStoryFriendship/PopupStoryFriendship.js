@@ -1,23 +1,30 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import Button from '../Button/Button';
 
-const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, currentCardStory }) => {
-  const {
-    // image: currentImage = '',    Нужно разобораться с картинкой
-    place: currentPlace = '',
-    description: currentDescription = '',
-    date: currentDate = '',
-    feedback: currentFeedback = '',
-  } = currentCardStory;
+const PopupStoryFriendship = ({
+  closePopup,
+  currentCardStory,
+  postStoriesData,
+  updateStoriesData,
+}) => {
+  const mode = currentCardStory ? 'edit' : 'add';
+
+  const currentPlace = currentCardStory?.place || '';
+  const currentDescription = currentCardStory?.description || '';
+  const currentDate = currentCardStory?.date || '';
+  const currentFeedback = currentCardStory?.feedback || '';
+  const currentImage = currentCardStory?.image || '';
+
+  const formRef = useRef(null);
 
   // Данные конкретной  карточки для редактирования
 
   const [feedback, setFeedback] = useState(currentFeedback);
-  //  Добавляем картинку
-  const [image, setImage] = useState([]);
+  //  Добавляем картинку currentCardStory.image
+  const [image, setImage] = useState(currentImage ? [{ preview: currentImage }] : []);
   const { getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
@@ -41,13 +48,13 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
     setFeedback(event.target.value);
   };
   const onSubmit = (data) => {
-    const newArr = [...storiesData];
-    newArr.push({
-      ...data,
-      image: image[0].preview,
-    });
-    setStoriesData(newArr);
-    closePopup();
+    if (mode === 'add') {
+      postStoriesData(data);
+    } else if (mode === 'edit') {
+      updateStoriesData({ ...data, id: currentCardStory.id, image: currentCardStory.image });
+    }
+
+    formRef.current.reset();
   };
   return (
     <>
@@ -56,6 +63,7 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
       </h2>
 
       <form
+        ref={formRef}
         className="personal-account__form"
         name="addFreanshipHistory"
         onSubmit={handleSubmit(onSubmit)}
@@ -166,10 +174,10 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
           </div>
           <div className="personal-account__submit">
             <Button className="personal-account__feedback-btn" onClick={closePopup}>
-              Удалить
+              {mode === 'add' ? 'Удалить' : 'Отмена'}
             </Button>
             <Button className="button button_color_black-nonactive" type="submit">
-              Добавить
+              {mode === 'add' ? 'Добавить' : 'Сохранить'}
             </Button>
           </div>
         </div>
@@ -178,15 +186,12 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
   );
 };
 PopupStoryFriendship.propTypes = {
-  closePopup: PropTypes.func,
-  storiesData: PropTypes.arrayOf(PropTypes.any),
-  setStoriesData: PropTypes.func,
+  closePopup: PropTypes.func.isRequired,
+  postStoriesData: PropTypes.func.isRequired,
+  updateStoriesData: PropTypes.func.isRequired,
   currentCardStory: PropTypes.objectOf(PropTypes.any),
 };
 PopupStoryFriendship.defaultProps = {
-  closePopup: () => {},
-  storiesData: [],
-  setStoriesData: () => {},
-  currentCardStory: {},
+  currentCardStory: null,
 };
 export default PopupStoryFriendship;

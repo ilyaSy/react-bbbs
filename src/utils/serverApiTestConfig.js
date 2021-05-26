@@ -5,6 +5,12 @@ export const loginPost = {
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs',
 };
 
+export const userGet = {
+  id: 1,
+  user: 1,
+  city: 2,
+};
+
 export const profileStory = [
   {
     place: 'Парк горького',
@@ -61,7 +67,7 @@ export const eventsGet = [
     startAt: '2020-12-10T06:00:00Z',
     endAt: '2020-12-10T08:00:00Z',
     seats: 100,
-    takenSeats: 0,
+    takenSeats: 69,
     city: 1,
   },
   {
@@ -75,7 +81,7 @@ export const eventsGet = [
     startAt: '2021-01-06T06:00:00Z',
     endAt: '2021-01-06T08:00:00Z',
     seats: 100,
-    takenSeats: 0,
+    takenSeats: 3,
     city: 1,
   },
   {
@@ -89,7 +95,7 @@ export const eventsGet = [
     startAt: '2021-05-09T06:00:00Z',
     endAt: '2021-05-09T08:00:00Z',
     seats: 100,
-    takenSeats: 0,
+    takenSeats: 30,
     city: 1,
   },
   {
@@ -102,8 +108,8 @@ export const eventsGet = [
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
     startAt: '2021-05-12T06:00:00Z',
     endAt: '2021-05-12T08:00:00Z',
-    seats: 0,
-    takenSeats: 0,
+    seats: 100,
+    takenSeats: 100,
     city: 1,
   },
 ];

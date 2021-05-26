@@ -24,6 +24,40 @@ export default class Api {
     return axios.post(`${apiURL}/token/`, userData).then(Api._handleApiResult.bind(null, 'login'));
   }
 
+  static getUserInfo() {
+    return axios.get(`${apiURL}/profile/`).then(Api._handleApiResult.bind(null, 'getUserInfo'));
+  }
+
+  static updateUserInfo(userData) {
+    return axios
+      .patch(`${apiURL}/profile/`, userData)
+      .then(Api._handleApiResult.bind(null, 'updateUserInfo'));
+  }
+
+  static getProfileStory() {
+    return axios
+      .get(`${apiURL}/profile-stories/`)
+      .then(Api._handleApiResult.bind(null, 'getProfileStory'));
+  }
+
+  static postProfileStory(storyData) {
+    return axios
+      .post(`${apiURL}/profile-stories/`, storyData)
+      .then(Api._handleApiResult.bind(null, 'postProfileStory'));
+  }
+
+  static deleteProfileStory(storyData) {
+    return axios
+      .delete(`${apiURL}/profile-stories/`, storyData)
+      .then(Api._handleApiResult.bind(null, 'deleteProfileStory'));
+  }
+
+  static updateProfileStory(storyData) {
+    return axios
+      .patch(`${apiURL}/profile-stories/`, storyData)
+      .then(Api._handleApiResult.bind(null, 'updateProfileStory'));
+  }
+
   static getCities() {
     return axios.get(`${apiURL}/cities/`).then(Api._handleApiResult.bind(null, 'getCities'));
   }
@@ -49,7 +83,13 @@ export default class Api {
   static deleteEvent(eventData) {
     return axios
       .delete(`${apiURL}/afisha/event-participants/`, eventData)
-      .then(Api._handleApiResult.bind(null, 'setEvent'));
+      .then(Api._handleApiResult.bind(null, 'deleteEvent'));
+  }
+
+  static updateEvent(eventData) {
+    return axios
+      .patch(`${apiURL}/afisha/event-participants/`, eventData)
+      .then(Api._handleApiResult.bind(null, 'updateEvent'));
   }
 
   static _handleApiResult(fnName, res) {

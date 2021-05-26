@@ -10,7 +10,7 @@ const CalendarCardProfile = ({ event, handleCalendarCardClick }) => {
   const day = format(startAtDate, 'dd');
   const monthName = format(startAtDate, 'LLLL');
 
-  const handlerCardClick = () => {
+  const handleCardClick = () => {
     handleCalendarCardClick({
       ...event,
       isOpen: true,
@@ -20,7 +20,7 @@ const CalendarCardProfile = ({ event, handleCalendarCardClick }) => {
   return (
     <Button
       className="personal-account__event-wrapper calendarCardProfile__button"
-      onClick={handlerCardClick}
+      onClick={handleCardClick}
     >
       <div className="personal-account__event-text">
         <h3 className="personal-account__subtitle-date">{day}</h3>
