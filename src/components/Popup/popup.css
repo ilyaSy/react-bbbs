@@ -145,6 +145,10 @@
   color: #ff4e4e;
 }
 
+.popup__radio-error {
+  color: #ff4e4e;
+}
+
 .popup__submit-btn {
   align-self: flex-start;
 }
@@ -194,6 +198,10 @@
   color: #a7a6a6;
 }
 
+.popup__select-error {
+  color: darkcyan;
+}
+
 .popup__textarea {
   display: block;
   margin: 0;
@@ -215,6 +223,10 @@
   font-weight: 300;
   font-size: 15px;
   line-height: 19px;
+}
+
+.popup__textarea-error::placeholder {
+  color: #ff4e4e;
 }
 
 .popup__feedback {

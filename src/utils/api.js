@@ -70,6 +70,10 @@ export default class Api {
     return axios.get(`${apiURL}/where-to-go/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
   }
 
+  static getQuestions() {
+    return axios.get(`${apiURL}/questions/`).then(Api._handleApiResult.bind(null, 'getQuestions'));
+  }
+
   static getEvents() {
     return axios.get(`${apiURL}/afisha/events/`).then(Api._handleApiResult.bind(null, 'getEvents'));
   }

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MainPage from '../MainPage/MainPage';
 import Calendar from '../Calendar/Calendar';
 import WhereToGo from '../WhereToGo/WhereToGo';
+import QuestionsPage from '../QuestionsPage/QuestionsPage';
 import PersonalAccount from '../PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import About from '../About/About';
@@ -69,9 +70,11 @@ export default function Content({
         </main>
       </Route>
 
-      {/* Вопросы */}
-      {/* <Route exact path="/questions">
-      </Route> */}
+      <Route exact path="/questions">
+        <main className="main">
+          <QuestionsPage />
+        </main>
+      </Route>
 
       {/* Задать вопрос */}
       {/* <Route exact path="/search">

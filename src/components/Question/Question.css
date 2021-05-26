@@ -32,6 +32,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .question__tags {
@@ -48,6 +49,7 @@
   background-image: url(../../assets/img/questions-button.svg);
   background-size: contain;
   z-index: 4;
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
