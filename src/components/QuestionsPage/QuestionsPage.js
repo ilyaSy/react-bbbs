@@ -100,7 +100,7 @@ const QuestionsPage = () => {
                   }`}
                   type="text"
                   {...register('questionText', {
-                    required: 'Это поле обязательно для заполнения',
+                    required: 'Задайте свой вопрос',
                     minLength: {
                       value: 2,
                       message: 'Текст вопроса должен быть не менее 2 символов',

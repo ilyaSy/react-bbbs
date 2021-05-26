@@ -41,6 +41,7 @@ const PopupPlaces = ({ isOpen, onClose }) => {
     // указывающий, что это "выбор наставника"; вот это и пойдёт на сервер
     // (мб chosen само как-то бэкендом делается, там ещё id вроде будет)
     reset();
+    setImage([]);
     onClose();
   };
 
@@ -90,9 +91,9 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.address ? errors.address.message : 'Адрес*'}
             />
             <div className="popup__input popup__input_type_boy">
-              <label htmlFor="boy" className={errors.sex ? 'popup__radio-error' : ''}>
+              <label htmlFor="boy" className={errors.sex ? 'popup__radio-error' : 'popup__radio'}>
                 <input
-                  className="custom-radio"
+                  className={`custom-radio ${errors.sex ? 'custom-radio-error' : ''}`}
                   type="radio"
                   value="Мальчик"
                   {...register('sex', { required: 'Мальчик' })}
@@ -102,9 +103,9 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               </label>
             </div>
             <div className="popup__input popup__input_type_girl">
-              <label htmlFor="girl" className={errors.sex ? 'popup__radio-error' : ''}>
+              <label htmlFor="girl" className={errors.sex ? 'popup__radio-error' : 'popup__radio'}>
                 <input
-                  className="custom-radio"
+                  className={`custom-radio ${errors.sex ? 'custom-radio-error' : ''}`}
                   type="radio"
                   value="Девочка"
                   {...register('sex', { required: 'Девочка' })}
@@ -122,14 +123,15 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.age ? errors.age.message : 'Возраст*'}
             />
             <select
-              {...register('type', { requiered: 'Тип отдыха*' })}
+              {...register('type', { required: 'Тип отдыха*' })}
               className={`popup__select ${
                 errors.type ? 'popup__select-error' : ''
               } popup__select_type_relax`}
             >
-              <option>Активный</option>
-              <option>Развлекательный</option>
-              <option>Познавательный</option>
+              <option value="">Тип отдыха*</option>
+              <option value="Активный">Активный</option>
+              <option value="Развлекательный">Развлекательный</option>
+              <option value="Познавательный">Познавательный</option>
             </select>
             <textarea
               {...register('description', {
@@ -141,13 +143,29 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.description ? errors.description.message : 'Комментарий*'}
             />
             <div className="popup__feedback">
-              <label htmlFor="addImageBtn" className="popup__feedback-text">
+              <label
+                htmlFor="addImageBtn"
+                className={image ? 'popup__feedback-text' : 'popup__feedback-text-error '}
+              >
                 <input {...getInputProps()} id="addImageBtn" className="popup__feedback-button" />
                 Добавить фото
               </label>
             </div>
             <div className="popup__submit">
-              <Button className="button button_color_darkgray popup__submit-btn" type="submit">
+              <Button
+                className="button button_color_darkgray popup__submit-btn"
+                type="submit"
+                disabled={
+                  errors.title ||
+                  errors.description ||
+                  errors.address ||
+                  errors.sex ||
+                  errors.age ||
+                  errors.type
+                    ? 'disabled'
+                    : null
+                }
+              >
                 Отправить
               </Button>
             </div>
