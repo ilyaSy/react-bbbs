@@ -64,7 +64,7 @@ export default function Content({
       </Route>
 
       <Route exact path="/where-to-go">
-        <main className="content root__section">
+        <main className="main">
           <WhereToGo onRecommendPlace={onRecommendPlace} />
         </main>
       </Route>

@@ -13,15 +13,10 @@ export default function ProtectedRoute({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  let className = 'content root__section';
-  if (path !== '/calendar' || path !== '/personal-account') {
-    className = '';
-  }
-
   return (
     <Route>
       {currentUser ? (
-        <main className={className}>
+        <main className="main">
           <Component
             exact
             path={path}

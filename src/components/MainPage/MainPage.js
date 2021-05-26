@@ -35,7 +35,7 @@ export default function MainPage({
   }, [mainData]);
 
   return (
-    <MainPageSection className="mainpage">
+    <MainPageSection className="mainpage content main__section">
       <MainPageSection className="mainpage__intro">
         {currentUser && userEvent ? (
           <CalendarCard

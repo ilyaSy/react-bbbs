@@ -66,13 +66,13 @@ const WhereToGo = ({ onRecommendPlace }) => {
   };
 
   return (
-    <>
+    <section className="content main__section">
       <section className="event-choice">
         <h1 className="heading">Куда пойти</h1>
         <div className="buttons-scroll buttons-scroll_place_event">
           {categories.map((category) => (
             <Button
-              className={`button button_color_black ${
+              className={`button button_color_black button_place_scroll ${
                 category === activeCategory ? 'button_color_black_active' : ''
               }`}
               type="button"
@@ -86,7 +86,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
         <div className="buttons-scroll buttons-scroll_place_event">
           {ages.map((age) => (
             <Button
-              className={`button button_color_black ${
+              className={`button button_color_black button_place_scroll ${
                 age === activeAgeRange ? 'button_color_black_active' : ''
               }`}
               type="button"
@@ -110,7 +110,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
             <Place key={place.id} place={place} size="small" />
           ))}
       </section>
-    </>
+    </section>
   );
 };
 

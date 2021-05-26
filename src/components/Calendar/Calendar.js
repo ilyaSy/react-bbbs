@@ -44,12 +44,12 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
   };
 
   return (
-    <section className="grid-calendar content">
+    <section className="grid-calendar content main__section">
       <h1 className="heading">Календарь</h1>
       <div className="grid-calendar__buttons">
         {months.map((month) => (
           <Button
-            className={`button button_color_black ${
+            className={`button button_color_black button_place_scroll ${
               month === activeMonth && 'button_color_black_active'
             }`}
             type="button"
