@@ -72,7 +72,11 @@ export default function setMockAdapter() {
   const deleteEvent = () => [200, eventPost];
 
   // unset event
-  const updateEvent = () => [200, eventPost];
+  const updateEvent = (config) => {
+    const eventData = JSON.parse(config.data);
+    eventData.booked = !eventData.booked;
+    return [200, eventData];
+  };
 
   mock.onPost(`${apiURL}/afisha/event-participants/`).reply(postEvent);
 

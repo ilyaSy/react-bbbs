@@ -4,35 +4,26 @@ import format from '../../utils/format';
 
 import Button from '../Button/Button';
 import CalendarCard from '../CalendarCard/CalendarCard';
-import Api from '../../utils/api';
 import './Calendar.css';
 
-const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent }) => {
-  const [events, setEvents] = useState([]);
+const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent, events }) => {
   const [months, setMonths] = useState([]);
   const [activeMonth, setActiveMonth] = useState('');
 
   useEffect(() => {
-    Api.getEvents()
-      .then((data) => {
-        const resetMonths = (dates) => {
-          const dmonths = dates
-            .map((date) => {
-              const monthName = format(new Date(date.startAt), 'LLLL');
-              return monthName[0].toUpperCase() + monthName.slice(1);
-            })
-            .filter((el, i, array) => array.indexOf(el) === i);
+    const resetMonths = (dates) => {
+      const dmonths = dates
+        .map((date) => {
+          const monthName = format(new Date(date.startAt), 'LLLL');
+          return monthName[0].toUpperCase() + monthName.slice(1);
+        })
+        .filter((el, i, array) => array.indexOf(el) === i);
+      return dmonths;
+    };
 
-          return dmonths;
-        };
-
-        setActiveMonth('');
-        setEvents(data);
-        setMonths(resetMonths(data));
-      })
-      .catch((err) => {
-        console.log(`Error: Calendar get events ${err}`);
-      });
+    setActiveMonth('');
+    // setEvents(events);
+    setMonths(resetMonths(events));
   }, []);
 
   const handleFilterMonth = (month) => {
@@ -85,6 +76,9 @@ Calendar.propTypes = {
   handleCalendarCardClick: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleDeleteEvent: PropTypes.func.isRequired,
+  events: PropTypes.arrayOf(PropTypes.any),
 };
-Calendar.defaultProps = {};
+Calendar.defaultProps = {
+  events: [],
+};
 export default Calendar;
