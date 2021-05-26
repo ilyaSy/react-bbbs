@@ -20,6 +20,7 @@ export default function Content({
   handleRegisterSubmit,
   handleDeleteEvent,
   onRecommendPlace,
+  events,
 }) {
   const location = useLocation();
 
@@ -38,6 +39,7 @@ export default function Content({
             handleCalendarCardClick={handleCalendarCardClick}
             handleRegisterSubmit={handleRegisterSubmit}
             handleDeleteEvent={handleDeleteEvent}
+            events={events}
           />
         </main>
       </Route>
@@ -48,6 +50,7 @@ export default function Content({
         handleCalendarCardClick={handleCalendarCardClick}
         handleRegisterSubmit={handleRegisterSubmit}
         handleDeleteEvent={handleDeleteEvent}
+        events={events}
       />
 
       <Route exact path="/stories">
@@ -99,8 +102,10 @@ Content.propTypes = {
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleDeleteEvent: PropTypes.func.isRequired,
   onRecommendPlace: PropTypes.func.isRequired,
+  events: PropTypes.arrayOf(PropTypes.any),
 };
 
 Content.defaultProps = {
   mainData: {},
+  events: [],
 };

@@ -10,6 +10,7 @@ export default function ProtectedRoute({
   handleCalendarCardClick,
   handleRegisterSubmit,
   handleDeleteEvent,
+  events,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -24,6 +25,7 @@ export default function ProtectedRoute({
             handleCalendarCardClick={handleCalendarCardClick}
             handleRegisterSubmit={handleRegisterSubmit}
             handleDeleteEvent={handleDeleteEvent}
+            events={events}
           />
         </main>
       ) : (
@@ -41,6 +43,7 @@ ProtectedRoute.propTypes = {
   handleCalendarCardClick: PropTypes.func,
   handleRegisterSubmit: PropTypes.func,
   handleDeleteEvent: PropTypes.func,
+  events: PropTypes.arrayOf(PropTypes.any),
 };
 
 ProtectedRoute.defaultProps = {
@@ -48,4 +51,5 @@ ProtectedRoute.defaultProps = {
   handleRegisterSubmit: () => {},
   handleDeleteEvent: () => {},
   onLogout: () => {},
+  events: [],
 };

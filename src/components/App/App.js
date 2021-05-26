@@ -47,7 +47,7 @@ function App() {
     // localStorage.removeItem('jwtRefresh');
     history.push('/');
   };
-
+  const [events, setEvents] = useState();
   const handleSubmitAuth = (userName, password) => {
     Api.login({ userName, password })
       .then((data) => {
@@ -55,9 +55,9 @@ function App() {
           Api.setAuthHeader(data.access);
           localStorage.setItem('jwt', data.access);
           // localStorage.setItem('jwtRefresh', data.refresh);
-
-          Api.getUserInfo().then((userData) => {
+          Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
             setCurrentUser({ userName, ...userData });
+            setEvents(eventsData);
             closeAllModal();
           });
         }
@@ -77,10 +77,11 @@ function App() {
   };
 
   const handleConfirmRegisterSubmit = (calendarCard) => {
-    Api.setEvent({ id: calendarCard.id })
+    Api.updateEvent(calendarCard)
       .then((data) => {
-        console.log(data);
-        setIsRegisterSuccessModalOpened(true);
+        setEvents(events.map((e) => (e.id === data.id ? data : e)));
+        //  setIsRegisterSuccessModalOpened(true);
+        closeAllModal();
       })
       .catch((err) => {
         console.log(`Error ошибка: ${err}`);
@@ -88,11 +89,10 @@ function App() {
   };
 
   const handleDeleteEvent = (calendarCard) => {
-    Api.deleteEvent({ id: calendarCard.id })
+    Api.updateEvent(calendarCard)
       .then((data) => {
-        console.log(data);
+        setEvents(events.map((e) => (e.id === data.id ? data : e)));
         //  setIsRegisterSuccessModalOpened(true);
-        alert('Удаление события успешно');
         closeAllModal();
       })
       .catch((err) => {
@@ -132,6 +132,7 @@ function App() {
         handleRegisterSubmit={handleRegisterSubmit}
         handleDeleteEvent={handleDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
+        events={events}
       />
       <Footer />
 

@@ -11,28 +11,22 @@ import Story from '../Story/Story';
 import MainVideo from '../MainVideo/MainVideo';
 import Article from '../Article/Article';
 import Place from '../Place/Place';
-import Api from '../../utils/api';
 
 export default function MainPage({
   mainData,
   handleCalendarCardClick,
   handleDeleteEvent,
   handleRegisterSubmit,
+  events,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [userEvent, setUserEvent] = useState(null);
 
   useEffect(() => {
-    if (mainData) {
-      Api.getEvents()
-        .then((data) => {
-          setUserEvent(data.sort((a, b) => new Date(b.startAt) - new Date(a.startAt))[0]);
-        })
-        .catch((err) => {
-          console.log(`Error: MainPage get events ${err}`);
-        });
+    if (mainData && events) {
+      setUserEvent(events.sort((a, b) => new Date(b.startAt) - new Date(a.startAt))[0]);
     }
-  }, [mainData]);
+  }, [mainData, events]);
 
   return (
     <MainPageSection className="mainpage content main__section">
@@ -77,8 +71,10 @@ MainPage.propTypes = {
   handleCalendarCardClick: PropTypes.func.isRequired,
   handleDeleteEvent: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
+  events: PropTypes.arrayOf(PropTypes.any),
 };
 
 MainPage.defaultProps = {
   mainData: {},
+  events: [],
 };
