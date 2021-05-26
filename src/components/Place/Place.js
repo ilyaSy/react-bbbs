@@ -14,7 +14,12 @@ const Place = ({ place, size }) => (
                 : 'profile-grid__column_size_thin event-soon__description_size_small'
             }`}
           >
-            {place.category && <Tag modifier="tag_place_event" tagText={place.category} />}
+            {(place.category || place.chosen) && (
+              <Tag
+                modifier="tag_place_event"
+                tagText={place.category ? place.category : 'Выбор наставника'}
+              />
+            )}
             <div className="event-soon__caption">
               <div className="event-soon__title">{place.title}</div>
               <div className="event-soon__subtitle">{place.address}</div>
