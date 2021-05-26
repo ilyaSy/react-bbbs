@@ -32,8 +32,7 @@ export default function Content({
   return (
     <Switch>
       <Route exact path="/">
-        <main className="content root__section">
-          {/* <MainPage mainData={mainData} /> */}
+        <main className="main">
           <MainPage
             mainData={mainData}
             handleCalendarCardClick={handleCalendarCardClick}
@@ -58,7 +57,6 @@ export default function Content({
       </Route>
 
       <Route exact path="/about">
-        {/* <main className="content root__section"> */}
         <main className="main">
           <About />
         </main>
