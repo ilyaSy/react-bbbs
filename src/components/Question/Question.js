@@ -6,7 +6,7 @@ import '../App/App.css';
 import Tag from '../Tag/Tag';
 import Button from '../Button/Button';
 
-const Question = ({ path, title, tags, place }) => {
+const Question = ({ anchor, title, tags, answerText, place }) => {
   const tagsText = tags.map((tag) => tag.name);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
 
@@ -18,7 +18,7 @@ const Question = ({ path, title, tags, place }) => {
     <>
       {place === 'main' && (
         <li className="question">
-          <Link to={`/questions${path}`} className="mainlink" />
+          <Link to={`/questions/#${anchor}`} className="mainlink" />
           <h3 className="question__title">{title}</h3>
           <div className="question__tags">
             {tagsText.map((tagText) => (
@@ -28,7 +28,7 @@ const Question = ({ path, title, tags, place }) => {
         </li>
       )}
       {place === 'questions' && (
-        <li className="question__flex">
+        <li className="question__flex" name={anchor}>
           <div className="question">
             <h3 className="question__title" onClick={handleToggleAnswer} aria-hidden="true">
               {title}
@@ -38,28 +38,28 @@ const Question = ({ path, title, tags, place }) => {
                 <Tag key={tagText} modifier="tag_theme_white" tagText={tagText} />
               ))}
             </div>
-            {isAnswerVisible && <p>Здесь будет появляться ответ на вопрос</p>}
+            {isAnswerVisible && <p className="question__answer">{answerText}</p>}
           </div>
-          <Button className="question__btn" onClick={handleToggleAnswer} />
+          <Button
+            className={`question__btn ${isAnswerVisible ? 'question__btn_rotated' : ''}`}
+            onClick={handleToggleAnswer}
+          />
         </li>
       )}
     </>
   );
 };
 
-// TO DO:
-// * вставить разметку ответа (не готова)
-// * добавить ответ в данные
-
 Question.propTypes = {
-  path: PropTypes.string,
+  anchor: PropTypes.string,
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.any).isRequired,
+  answerText: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
 };
 
 Question.defaultProps = {
-  path: '',
+  anchor: '',
 };
 
 export default Question;

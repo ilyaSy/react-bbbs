@@ -71,8 +71,15 @@ const QuestionsPage = () => {
               const tagTexts = q.tags.map((tag) => tag.name);
               return activeTag === 'Все' || tagTexts.includes(activeTag);
             })
-            .map(({ title, tags, id }) => (
-              <Question path="/" title={title} tags={tags} place="questions" key={id} />
+            .map(({ title, answerText, tags, id }) => (
+              <Question
+                path={id}
+                title={title}
+                tags={tags}
+                answerText={answerText}
+                place="questions"
+                key={id}
+              />
             ))}
         </ul>
         {currentUser && (
