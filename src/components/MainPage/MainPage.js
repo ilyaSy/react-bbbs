@@ -47,7 +47,6 @@ export default function MainPage({
         ) : (
           <Intro />
         )}
-        {/* <Intro /> */}
         <Story history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">

@@ -7,7 +7,7 @@ const Movie = ({ tags, title, info, imageUrl, link }) => {
   const tagsText = tags.map((tag) => tag.name);
   return (
     <li className="movie">
-      <Link to="/" className="mainlink" />
+      <Link to="/*" className="mainlink" />
       <div className="movie__img">
         <img className="movie__poster" src={imageUrl} alt="" />
         <div className="movie__tags">
