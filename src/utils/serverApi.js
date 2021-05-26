@@ -10,6 +10,7 @@ import {
   citiesGet,
   placesGet,
   userGet,
+  profileStory,
 } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
@@ -26,6 +27,27 @@ export default function setMockAdapter() {
   mock.onGet(`${apiURL}/profile/`).reply(200, userGet);
 
   mock.onPatch(`${apiURL}/profile/`).reply(200, userGet);
+
+  //  profile stories
+  mock.onGet(`${apiURL}/profile-stories/`).reply(200, profileStory);
+
+  const updateProfileStory = (config) => {
+    const storyData = JSON.parse(config.data);
+    return [200, storyData];
+  };
+
+  mock.onPatch(`${apiURL}/profile-stories/`).reply(updateProfileStory);
+
+  const postProfileStory = (config) => {
+    const storyData = JSON.parse(config.data);
+    storyData.id = Math.floor(Math.random() * 100 + 1);
+    storyData.image = 'https://vse-sekrety.ru/uploads/posts/2015-12/1450044662_1.jpg';
+    return [200, storyData];
+  };
+
+  mock.onPost(`${apiURL}/profile-stories/`).reply(postProfileStory);
+
+  mock.onDelete(`${apiURL}/profile-stories/`).reply(200, profileStory);
 
   //  get main page
   mock.onGet(`${apiURL}/main/`).reply(200, mainGet);

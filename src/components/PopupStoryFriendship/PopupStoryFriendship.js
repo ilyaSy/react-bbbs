@@ -4,7 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import Button from '../Button/Button';
 
-const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, currentCardStory }) => {
+const PopupStoryFriendship = ({
+  closePopup,
+  currentCardStory,
+  postStoriesData,
+  updateStoriesData,
+}) => {
   const mode = currentCardStory ? 'edit' : 'add';
 
   const currentPlace = currentCardStory?.place || '';
@@ -43,13 +48,12 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
     setFeedback(event.target.value);
   };
   const onSubmit = (data) => {
-    const newArr = [...storiesData];
-    newArr.push({
-      ...data,
-      image: image[0].preview,
-    });
-    setStoriesData(newArr);
-    closePopup();
+    if (mode === 'add') {
+      postStoriesData(data);
+    } else if (mode === 'edit') {
+      updateStoriesData({ ...data, id: currentCardStory.id, image: currentCardStory.image });
+    }
+
     formRef.current.reset();
   };
   return (
@@ -182,15 +186,12 @@ const PopupStoryFriendship = ({ closePopup, storiesData, setStoriesData, current
   );
 };
 PopupStoryFriendship.propTypes = {
-  closePopup: PropTypes.func,
-  storiesData: PropTypes.arrayOf(PropTypes.any),
-  setStoriesData: PropTypes.func,
+  closePopup: PropTypes.func.isRequired,
+  postStoriesData: PropTypes.func.isRequired,
+  updateStoriesData: PropTypes.func.isRequired,
   currentCardStory: PropTypes.objectOf(PropTypes.any),
 };
 PopupStoryFriendship.defaultProps = {
-  closePopup: () => {},
-  storiesData: [],
-  setStoriesData: () => {},
   currentCardStory: null,
 };
 export default PopupStoryFriendship;

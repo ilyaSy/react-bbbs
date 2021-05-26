@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
 import PopupCities from '../PopupCities/PopupCities';
-import { profileStory } from '../../utils/serverApiTestConfig';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -14,29 +13,22 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const currentUser = useContext(CurrentUserContext);
   const [events, setEvents] = useState([]);
   const [cities, setCities] = useState([]);
+  const [stories, setStories] = useState([]);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
-  const [storiesData, setStoriesData] = useState([]);
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    Api.getEvents()
-      .then((data) => {
-        setEvents(data);
+    Promise.all([Api.getEvents(), Api.getCities(), Api.getProfileStory()])
+      .then(([eventsData, citiesData, storiesData]) => {
+        setEvents(eventsData);
+        setCities(citiesData);
+        setStories(storiesData);
       })
       .catch((err) => {
-        console.log(`Error: personal account get events ${err}`);
+        console.log(`Error: personal account ${err}`);
       });
-    Api.getCities()
-      .then((data) => {
-        setCities(data);
-      })
-      .catch((err) => {
-        console.log(`Error: personal account get cities ${err}`);
-      });
-
-    setStoriesData(profileStory);
   }, []);
   // Получаем данные календаря
 
@@ -51,9 +43,38 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
     setIsPopupCitiesOpen(false);
   };
 
+  const handlePostProfileStory = (card) => {
+    Api.postProfileStory({ ...card })
+      .then((data) => {
+        setStories([...stories, data]);
+        closePopup();
+      })
+      .catch((err) => {
+        console.log(`Error: post profile data ${err}`);
+      });
+  };
+
+  const handleUpdaProfileStory = (card) => {
+    Api.updateProfileStory(card)
+      .then((data) => {
+        setStories(stories.map((e) => (e.id === data.id ? data : e)));
+        closePopup();
+        setCardStory();
+      })
+      .catch((err) => {
+        console.log(`Error: update profile data ${err}`);
+      });
+  };
+
   const handleSubmitDeletePopup = (cardId) => {
-    const newArr = storiesData.filter((story, id) => id !== cardId);
-    setStoriesData(newArr);
+    Api.deleteProfileStory({ id: cardId })
+      .then(() => {
+        const newArr = stories.filter((story, id) => id !== cardId);
+        setStories(newArr);
+      })
+      .catch((err) => {
+        console.log(`Error: delete profile story ${err}`);
+      });
   };
 
   const handleUpdateCity = (city) => {
@@ -114,15 +135,15 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
       {isPopupStoryOpen ? (
         <PopupStoryFriendship
           closePopup={closePopup}
-          storiesData={storiesData}
-          setStoriesData={setStoriesData}
+          postStoriesData={handlePostProfileStory}
+          updateStoriesData={handleUpdaProfileStory}
           currentCardStory={cardStory}
         />
       ) : (
-        storiesData.map((story, id) => (
+        stories.map((story, id) => (
           <PersonalAccountCardStory
             cardStory={story}
-            key={`${story}`}
+            key={`${story.id}`}
             cardId={id}
             openPopup={openPopupStory}
             handleSubmitDeletePopup={handleSubmitDeletePopup}
