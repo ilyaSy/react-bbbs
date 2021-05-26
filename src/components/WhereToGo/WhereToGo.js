@@ -77,7 +77,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
         <div className="buttons-scroll buttons-scroll_place_event">
           {categories.map((category) => (
             <Button
-              className={`button button_color_black button_place_scroll ${
+              className={`button button_color_black button_place_scroll buttons-scroll_place_go ${
                 category === activeCategory ? 'button_color_black_active' : ''
               }`}
               type="button"
@@ -91,7 +91,7 @@ const WhereToGo = ({ onRecommendPlace }) => {
         <div className="buttons-scroll buttons-scroll_place_event">
           {ages.map((age) => (
             <Button
-              className={`button button_color_black button_place_scroll ${
+              className={`button button_color_black button_place_scroll buttons-scroll_place_go ${
                 age === activeAgeRange ? 'button_color_black_active' : ''
               }`}
               type="button"

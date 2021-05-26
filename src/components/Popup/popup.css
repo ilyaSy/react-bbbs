@@ -171,6 +171,10 @@
   margin: 0;
 }
 
+.popup__radio {
+  color: #a7a6a6;
+}
+
 .popup__radio-error {
   color: #ff4e4e;
 }
