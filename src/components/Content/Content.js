@@ -32,7 +32,12 @@ export default function Content({
     <Switch>
       <Route exact path="/">
         <main className="main">
-          <MainPage mainData={mainData} />
+          <MainPage
+            mainData={mainData}
+            handleCalendarCardClick={handleCalendarCardClick}
+            handleRegisterSubmit={handleRegisterSubmit}
+            handleDeleteEvent={handleDeleteEvent}
+          />
         </main>
       </Route>
 
