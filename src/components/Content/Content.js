@@ -31,7 +31,7 @@ export default function Content({
   return (
     <Switch>
       <Route exact path="/">
-        <main className="content root__section">
+        <main className="main">
           <MainPage
             mainData={mainData}
             handleCalendarCardClick={handleCalendarCardClick}
