@@ -10,10 +10,9 @@ const CalendarCard = ({
   handleDeleteEvent,
 }) => {
   const { address, contact, title, seats, takenSeats, startAt, endAt, booked } = event;
-
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
-
+  console.log(seats);
   const day = format(startAtDate, 'dd');
   const startTime = format(startAtDate, 'KK:mm');
   const endTime = format(endAtDate, 'KK:mm');
@@ -76,7 +75,7 @@ const CalendarCard = ({
             <Button
               className="button button_color_blue button_color_blue-nonactive"
               type="submit"
-              disabled={seats > 0 ? false : 'disabled'}
+              disabled={seats - takenSeats > 0 ? false : 'disabled'}
             >
               Записаться
             </Button>

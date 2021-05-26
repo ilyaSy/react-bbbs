@@ -75,6 +75,7 @@ export default function setMockAdapter() {
   const updateEvent = (config) => {
     const eventData = JSON.parse(config.data);
     eventData.booked = !eventData.booked;
+    eventData.seats = eventData.booked ? eventData.seats - 1 : eventData.seats + 1;
     return [200, eventData];
   };
 
