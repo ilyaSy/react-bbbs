@@ -9,7 +9,7 @@ const CalendarCard = ({
   handleRegisterSubmit,
   handleDeleteEvent,
 }) => {
-  const { address, contact, title, seats, startAt, endAt, booked } = event;
+  const { address, contact, title, seats, takenSeats, startAt, endAt, booked } = event;
 
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
@@ -38,8 +38,8 @@ const CalendarCard = ({
   return (
     <div
       className={`calendar ${booked ? 'calendar_onclick' : ''}`}
-      onClick={handleCardClick}
-      role="presentation"
+
+      // role="presentation"
     >
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
@@ -81,12 +81,15 @@ const CalendarCard = ({
             </Button>
           )}
           <p className="calendar__sign-up__type_text">
-            {seats > 0 ? `Осталось ${seats} мест` : 'Запись закрыта'}
+            {seats - takenSeats > 0 ? `Осталось ${seats - takenSeats} мест` : 'Запись закрыта'}
           </p>
         </div>
         <Button
-          className="button_color_blue button_color_blue-round button_color_blue-open"
+          className={`button_color_blue button_color_blue-round button_color_blue-open ${
+            booked && 'button_color_blue_onclick'
+          }`}
           type="button"
+          onClick={handleCardClick}
         >
           <svg
             className="calendar__btn"

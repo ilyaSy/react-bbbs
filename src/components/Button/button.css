@@ -59,8 +59,15 @@
   cursor: pointer;
 }
 
-.button_color_blue-round:hover {
+/* .button_color_blue-round:hover {
   background-color: transparent;
+} */
+.button_color_blue_onclick.button_color_blue-round {
+  background-color: rgba(200, 209, 255, 1);
+}
+
+.button_color_blue_onclick.button_color_blue-round:hover {
+  background-color: #fff;
 }
 
 .button_color_blue-round:active {
