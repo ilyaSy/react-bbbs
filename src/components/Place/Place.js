@@ -20,7 +20,11 @@ const Place = ({ place, size }) => (
                 tagText={place.category ? place.category : 'Выбор наставника'}
               />
             )}
-            <div className="event-soon__caption">
+            <div
+              className={`event-soon__caption ${
+                size === 'big' ? 'event-soon__caption_size_big' : 'event-soon__caption_with_tag'
+              }`}
+            >
               <div className="event-soon__title">{place.title}</div>
               <div className="event-soon__subtitle">{place.address}</div>
             </div>
