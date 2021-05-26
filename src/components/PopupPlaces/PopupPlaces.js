@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import './PopupPlaces.css';
@@ -13,20 +13,6 @@ const PopupPlaces = ({ isOpen, onClose }) => {
     handleSubmit,
     reset,
   } = useForm();
-
-  // TO DO: перенести обработку клика по esc и оверлею в компонент Popup
-
-  useEffect(() => {
-    const handleEscClick = (event) => {
-      if (event.key === 'Escape') onClose();
-    };
-
-    document.addEventListener('keydown', handleEscClick);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscClick);
-    };
-  }, [isOpen, onClose]);
 
   const [image, setImage] = useState([]);
   const { getInputProps } = useDropzone({
@@ -78,11 +64,11 @@ const PopupPlaces = ({ isOpen, onClose }) => {
           <div className="popup__inputs">
             <input
               {...register('title', {
-                required: 'Введите название места',
+                required: 'Название*',
                 minLength: { value: 2, message: 'Название места должно быть не менее 2 символов' },
               })}
               type="text"
-              placeholder={errors.title ? errors.title.message : 'Название места*'}
+              placeholder={errors.title ? errors.title.message : 'Название*'}
               className={`popup__input popup__input_type_name ${
                 errors.title ? 'popup__input-error' : ''
               }`}
@@ -96,7 +82,7 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.link ? errors.link.message : 'Сайт'}
             />
             <input
-              {...register('address', { required: 'Введите адрес' })}
+              {...register('address', { required: 'Адрес*' })}
               type="text"
               className={`popup__input popup__input_type_address ${
                 errors.address ? 'popup__input-error' : ''
@@ -104,45 +90,50 @@ const PopupPlaces = ({ isOpen, onClose }) => {
               placeholder={errors.address ? errors.address.message : 'Адрес*'}
             />
             <div className="popup__input popup__input_type_boy">
-              <label htmlFor="boy">
+              <label htmlFor="boy" className={errors.sex ? 'popup__radio-error' : ''}>
                 <input
                   className="custom-radio"
                   type="radio"
                   value="Мальчик"
-                  {...register('sex')}
+                  {...register('sex', { required: 'Мальчик' })}
                   id="boy"
                 />
                 Мальчик
               </label>
             </div>
             <div className="popup__input popup__input_type_girl">
-              <label htmlFor="girl">
+              <label htmlFor="girl" className={errors.sex ? 'popup__radio-error' : ''}>
                 <input
                   className="custom-radio"
                   type="radio"
                   value="Девочка"
-                  {...register('sex')}
+                  {...register('sex', { required: 'Девочка' })}
                   id="girl"
                 />
                 Девочка
               </label>
             </div>
             <input
-              {...register('age', { required: 'Введите возраст младшего' })}
+              {...register('age', { required: 'Возраст*' })}
               type="number"
               className={`popup__input popup__input_type_age ${
                 errors.age ? 'popup__input-error' : ''
               }`}
               placeholder={errors.age ? errors.age.message : 'Возраст*'}
             />
-            <select className="popup__select popup__select_type_relax" {...register('type')}>
+            <select
+              {...register('type', { requiered: 'Тип отдыха*' })}
+              className={`popup__select ${
+                errors.type ? 'popup__select-error' : ''
+              } popup__select_type_relax`}
+            >
               <option>Активный</option>
               <option>Развлекательный</option>
               <option>Познавательный</option>
             </select>
             <textarea
               {...register('description', {
-                required: 'Расскажите о ваших с младшим впечатлениях',
+                required: 'Комментарий* Поделитесь впечатлениями о проведённом времени',
               })}
               className={`popup__textarea popup__textarea_type_description ${
                 errors.description ? 'popup__textarea-error' : ''
