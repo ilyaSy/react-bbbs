@@ -6,10 +6,16 @@ import Button from '../Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './header.css';
 import useScrollPosition from '../../utils/hooks/useScrollPosition';
+import Search from '../Search/Search';
 
 const Header = ({ openAuthModal }) => {
+  const [search, setSearch] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
+
+  const toggleSearch = () => {
+    setSearch(!search);
+  };
 
   const handleButtonLoginClick = () => {
     if (currentUser) {
@@ -45,35 +51,39 @@ const Header = ({ openAuthModal }) => {
 
   return (
     <header className={`header ${shouldBeVisible ? 'header_sticky_hide' : ''}`}>
-      <div className="header__wrapper">
-        <Link to="/" className="header__logo" />
-        <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>
-          &nbsp;
-        </Button>
-        <nav className="header__menu">
-          <ul className="header__list">
-            {pages.map((page) => (
-              <li className="header__list-item calender-open" key={page.url}>
-                <Link to={page.url} className="header__list-link">
-                  {page.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <nav className="header__action">
-          <Link className="header__button-search" to="/search" />
-          <Button
-            type="button"
-            className={`header__button-login header__button-login_${
-              currentUser ? '' : 'un'
-            }authorized`}
-            onClick={handleButtonLoginClick}
-          >
+      {!search ? (
+        <div className="header__wrapper">
+          <Link to="/" className="header__logo" />
+          <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>
             &nbsp;
           </Button>
-        </nav>
-      </div>
+          <nav className="header__menu">
+            <ul className="header__list">
+              {pages.map((page) => (
+                <li className="header__list-item calender-open" key={page.url}>
+                  <Link to={page.url} className="header__list-link">
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav className="header__action">
+            <Button className="header__button-search" onClick={toggleSearch} />
+            <Button
+              type="button"
+              className={`header__button-login header__button-login_${
+                currentUser ? '' : 'un'
+              }authorized`}
+              onClick={handleButtonLoginClick}
+            >
+              &nbsp;
+            </Button>
+          </nav>
+        </div>
+      ) : (
+        <Search handleClickLogin={handleButtonLoginClick} toggleSearch={toggleSearch} />
+      )}
       <div className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
         <div className="header__burger-wrapper">
           <nav className="header__menu-burger">

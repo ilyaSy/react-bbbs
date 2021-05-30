@@ -9,9 +9,8 @@ import Api from '../../utils/api';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './PersonalAccount.css';
 
-const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
+const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [events, setEvents] = useState([]);
   const [cities, setCities] = useState([]);
   const [stories, setStories] = useState([]);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
@@ -20,9 +19,8 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick }) => {
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    Promise.all([Api.getEvents(), Api.getCities(), Api.getProfileStory()])
-      .then(([eventsData, citiesData, storiesData]) => {
-        setEvents(eventsData);
+    Promise.all([Api.getCities(), Api.getProfileStory()])
+      .then(([citiesData, storiesData]) => {
         setCities(citiesData);
         setStories(storiesData);
       })
@@ -164,8 +162,10 @@ export default PersonalAccount;
 PersonalAccount.propTypes = {
   onLogout: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func,
+  events: PropTypes.arrayOf(PropTypes.any),
 };
 
 PersonalAccount.defaultProps = {
   handleCalendarCardClick: () => {},
+  events: [],
 };

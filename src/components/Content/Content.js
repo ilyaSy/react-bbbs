@@ -86,6 +86,7 @@ export default function Content({
         component={PersonalAccount}
         onLogout={onLogout}
         handleCalendarCardClick={handleCalendarCardClick}
+        events={events}
       />
       <Route exact path="*">
         <PageNotFound />

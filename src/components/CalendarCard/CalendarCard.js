@@ -12,7 +12,6 @@ const CalendarCard = ({
   const { address, contact, title, seats, takenSeats, startAt, endAt, booked } = event;
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
-  console.log(seats);
   const day = format(startAtDate, 'dd');
   const startTime = format(startAtDate, 'KK:mm');
   const endTime = format(endAtDate, 'KK:mm');
