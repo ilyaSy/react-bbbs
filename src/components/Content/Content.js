@@ -21,6 +21,10 @@ export default function Content({
   handleDeleteEvent,
   onRecommendPlace,
   events,
+  cities,
+  updateCity,
+  openPopupCities,
+  unauthСity,
 }) {
   const location = useLocation();
 
@@ -67,7 +71,11 @@ export default function Content({
 
       <Route exact path="/where-to-go">
         <main className="main">
-          <WhereToGo onRecommendPlace={onRecommendPlace} />
+          <WhereToGo
+            onRecommendPlace={onRecommendPlace}
+            openPopupCities={openPopupCities}
+            unauthСity={unauthСity}
+          />
         </main>
       </Route>
 
@@ -87,6 +95,9 @@ export default function Content({
         onLogout={onLogout}
         handleCalendarCardClick={handleCalendarCardClick}
         events={events}
+        cities={cities}
+        updateCity={updateCity}
+        openPopupCities={openPopupCities}
       />
       <Route exact path="*">
         <PageNotFound />
@@ -104,9 +115,17 @@ Content.propTypes = {
   handleDeleteEvent: PropTypes.func.isRequired,
   onRecommendPlace: PropTypes.func.isRequired,
   events: PropTypes.arrayOf(PropTypes.any),
+  cities: PropTypes.arrayOf(PropTypes.any),
+  updateCity: PropTypes.func,
+  openPopupCities: PropTypes.func,
+  unauthСity: PropTypes.string,
 };
 
 Content.defaultProps = {
   mainData: {},
   events: [],
+  cities: [],
+  updateCity: () => {},
+  openPopupCities: () => {},
+  unauthСity: '',
 };

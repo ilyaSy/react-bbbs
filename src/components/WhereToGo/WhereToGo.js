@@ -20,12 +20,16 @@ import Api from '../../utils/api';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
-const WhereToGo = ({ onRecommendPlace }) => {
+const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState('Все');
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const currentUser = useContext(CurrentUserContext);
+
+  if (!currentUser && !unauthСity) {
+    openPopupCities();
+  }
 
   useEffect(() => {
     Api.getPlaces()
@@ -120,7 +124,14 @@ const WhereToGo = ({ onRecommendPlace }) => {
 };
 
 WhereToGo.propTypes = {
-  onRecommendPlace: PropTypes.func.isRequired,
+  onRecommendPlace: PropTypes.func,
+  openPopupCities: PropTypes.func,
+  unauthСity: PropTypes.string,
+};
+WhereToGo.defaultProps = {
+  onRecommendPlace: () => {},
+  openPopupCities: () => {},
+  unauthСity: () => {},
 };
 
 export default WhereToGo;
