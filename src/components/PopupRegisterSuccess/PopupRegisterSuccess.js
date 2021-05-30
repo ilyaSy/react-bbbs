@@ -4,8 +4,8 @@ import Popup from '../Popup/Popup';
 import successImage from '../../assets/img/success-popup.svg';
 import './PopupRegisterSuccess.css';
 
-const PopupRegisterSuccess = ({ isOpen, closeModal }) => (
-  <Popup popupType={`popup_type_success ${isOpen ? 'popup_opened' : ''}`} onClose={closeModal}>
+const PopupRegisterSuccess = ({ closeModal }) => (
+  <Popup popupType="popup_type_success" onClose={closeModal}>
     <div className="success">
       <Button type="button" className="button-close popup__button-close" onClick={closeModal} />
       <img className="success__image" src={successImage} alt="sucess" />
@@ -29,7 +29,6 @@ const PopupRegisterSuccess = ({ isOpen, closeModal }) => (
 );
 
 PopupRegisterSuccess.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 export default PopupRegisterSuccess;

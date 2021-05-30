@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import './authPopup.css';
 import Popup from '../Popup/Popup';
 
-const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
+const AuthPopup = ({ closeAuthModal, submitModal }) => {
   //  Подключил библиотекук реакт-форм.     register, handleSubmit и errors - это все оттуда
   const {
     register,
@@ -17,7 +17,7 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
     submitModal(login, password);
   };
   return (
-    <Popup popupType="popup_type_login" isOpen={isAuthModalOpened} onClose={closeAuthModal}>
+    <Popup popupType="popup_type_login" onClose={closeAuthModal}>
       <div className="login">
         <Button
           type="button"
@@ -80,7 +80,6 @@ const AuthPopup = ({ isAuthModalOpened, closeAuthModal, submitModal }) => {
 };
 
 AuthPopup.propTypes = {
-  isAuthModalOpened: PropTypes.bool.isRequired,
   closeAuthModal: PropTypes.func.isRequired,
   submitModal: PropTypes.func.isRequired,
 };

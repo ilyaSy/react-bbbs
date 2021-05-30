@@ -6,7 +6,6 @@ import './PopupConfirmRegister.css';
 
 const PopupConfirmRegister = ({
   selectedConfirmCalendarCard,
-  isOpen,
   closeModal,
   handleConfirmRegisterSubmit,
 }) => {
@@ -25,7 +24,7 @@ const PopupConfirmRegister = ({
     handleConfirmRegisterSubmit(selectedConfirmCalendarCard);
   };
   return (
-    <Popup popupType={`popup__proof ${isOpen ? 'popup_opened' : ''}`} onClose={closeModal}>
+    <Popup popupType="popup__proof" onClose={closeModal}>
       <form className="proof" onSubmit={handleSubmit}>
         <Button type="button" className="button-close popup__button-close" onClick={closeModal} />
         <h2 className="proof__title">Подтвердить запись на мероприятие</h2>
@@ -53,7 +52,6 @@ PopupConfirmRegister.propTypes = {
   selectedConfirmCalendarCard: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   ),
-  isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   handleConfirmRegisterSubmit: PropTypes.func.isRequired,
 };
