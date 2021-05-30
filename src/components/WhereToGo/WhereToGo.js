@@ -20,7 +20,7 @@ import Api from '../../utils/api';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
-const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
+const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState('Все');
@@ -125,7 +125,9 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
           ))}
         </div>
       </section>
-      {currentUser && <CreatePlace onRecommendPlace={onRecommendPlace} />}
+      {currentUser && (
+        <CreatePlace onRecommendPlace={onRecommendPlace} isPlacePopupOpened={isPlacePopupOpened} />
+      )}
       {activeCategory === 'Все' && (
         <Place place={places.filter((place) => place.chosen)[0]} size="big" />
       )}
@@ -145,6 +147,7 @@ WhereToGo.propTypes = {
   onRecommendPlace: PropTypes.func,
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
+  isPlacePopupOpened: PropTypes.bool.isRequired,
 };
 WhereToGo.defaultProps = {
   onRecommendPlace: () => {},

@@ -1,12 +1,13 @@
 .recommendation {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding: 50px 100px;
+  padding: 50px 0;
   background-color: #fff;
   border-radius: 30px;
-  max-width: 570px;
+  max-width: 770px;
 }
 
 .recommendation_place_page {
@@ -17,16 +18,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 547px;
+  max-width: 710px;
 }
 
 .recommendation__text {
-  font-family: 'PT Proto', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 20px;
+  font-style: normal;
+  font-family: 'Proto', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
   color: #000;
-  margin: 0 0 27px 0;
+  margin: 0 0 16px 0;
   text-align: center;
 }
 
@@ -43,8 +45,8 @@
   color: #2e2468;
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .recommendation {
     padding: 30px 15px;
   }
-}
+} */
