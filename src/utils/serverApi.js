@@ -27,9 +27,13 @@ export default function setMockAdapter() {
 
   mock.onGet(`${apiURL}/profile/`).reply(200, userGet);
 
-  mock.onPatch(`${apiURL}/profile/`).reply(200, userGet);
-
+  const updateUserInfo = (config) => {
+    const userData = JSON.parse(config.data);
+    return [200, userData];
+  };
+  mock.onPatch(`${apiURL}/profile/`).reply(updateUserInfo);
   //  profile stories
+
   mock.onGet(`${apiURL}/profile-stories/`).reply(200, profileStory);
 
   const updateProfileStory = (config) => {

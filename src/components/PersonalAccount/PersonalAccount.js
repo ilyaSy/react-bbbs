@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Button from '../Button/Button';
 import PersonalAccountCardStory from '../PersonalAccountCardStory/PersonalAccountCardStory';
 import PopupStoryFriendship from '../PopupStoryFriendship/PopupStoryFriendship';
-import PopupCities from '../PopupCities/PopupCities';
 import CalendarCardProfile from '../CalendarCardProfile/CalendarCardProfile';
 import Api from '../../utils/api';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './PersonalAccount.css';
 
-const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
+const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, events }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [cities, setCities] = useState([]);
+
   const [stories, setStories] = useState([]);
-  const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
-  const [cityId, setCityId] = useState(0);
   const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    Promise.all([Api.getCities(), Api.getProfileStory()])
-      .then(([citiesData, storiesData]) => {
-        setCities(citiesData);
+    Api.getProfileStory()
+      .then((storiesData) => {
         setStories(storiesData);
       })
       .catch((err) => {
@@ -33,12 +29,9 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
   const openPopupStory = () => {
     setIsPopupStoryOpen(true);
   };
-  const openPopupCities = () => {
-    setIsPopupCitiesOpen(true);
-  };
+
   const closePopup = () => {
     setIsPopupStoryOpen(false);
-    setIsPopupCitiesOpen(false);
     setCardStory(null);
   };
 
@@ -76,17 +69,6 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
       });
   };
 
-  const handleUpdateCity = (city) => {
-    Api.updateUserInfo({
-      city,
-      id: currentUser.id,
-      user: currentUser.user,
-    }).then(() => {
-      setCityId(city);
-      console.log(cityId);
-    });
-  };
-
   return (
     <section className="personal-account content main__section">
       <div className="personal-account__buttons">
@@ -94,7 +76,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
           className="personal-account__feedback-btn personal-account__text"
           onClick={openPopupCities}
         >
-          Изменить ваш город
+          {currentUser.city ? `${currentUser.city}. Изменить город` : 'Изменить ваш город'}
         </Button>
         <Button
           className="personal-account__feedback-btn personal-account__text"
@@ -150,9 +132,6 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, events }) => {
           />
         ))
       )}
-      {isPopupCitiesOpen && (
-        <PopupCities onClose={closePopup} setCityId={handleUpdateCity} cities={cities} isOpen />
-      )}
     </section>
   );
 };
@@ -163,9 +142,11 @@ PersonalAccount.propTypes = {
   onLogout: PropTypes.func.isRequired,
   handleCalendarCardClick: PropTypes.func,
   events: PropTypes.arrayOf(PropTypes.any),
+  openPopupCities: PropTypes.func,
 };
 
 PersonalAccount.defaultProps = {
   handleCalendarCardClick: () => {},
   events: [],
+  openPopupCities: () => {},
 };

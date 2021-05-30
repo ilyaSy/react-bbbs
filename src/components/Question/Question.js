@@ -54,12 +54,13 @@ Question.propTypes = {
   anchor: PropTypes.string,
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.any).isRequired,
-  answerText: PropTypes.string.isRequired,
+  answerText: PropTypes.string,
   place: PropTypes.string.isRequired,
 };
 
 Question.defaultProps = {
   anchor: '',
+  answerText: '',
 };
 
 export default Question;

@@ -14,18 +14,49 @@ import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupPlaces from '../PopupPlaces/PopupPlaces';
+import PopupCities from '../PopupCities/PopupCities';
 
 function App() {
   const [events, setEvents] = useState();
   const [currentUser, setCurrentUser] = useState(null);
+  const [unauthСity, setUnauthСity] = useState('');
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
+  const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
+  const [cities, setCities] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    Api.getCities()
+      .then((cittiesData) => {
+        setCities(cittiesData);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }, []);
+
+  const updateCity = (city) => {
+    if (currentUser) {
+      Api.updateUserInfo({
+        city,
+        id: currentUser.id,
+        user: currentUser.user,
+      })
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setUnauthСity(city);
+    }
+  };
+  // Выбираем город пользователя !
 
   const openAuthModal = () => {
     setIsAuthModalOpened(true);
@@ -37,6 +68,7 @@ function App() {
     setIsRegisterSuccessModalOpened(false);
     setIsPlacePopupOpened(false);
     setSelectedCalendarCard(null);
+    setIsPopupCitiesOpen(false);
   };
 
   const logout = () => {
@@ -63,6 +95,10 @@ function App() {
       .catch((err) => {
         console.log(`Error ошибка: ${err}`);
       });
+  };
+
+  const openPopupCities = () => {
+    setIsPopupCitiesOpen(true);
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -131,6 +167,10 @@ function App() {
         handleDeleteEvent={handleDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
         events={events}
+        cities={cities}
+        updateCity={updateCity}
+        openPopupCities={openPopupCities}
+        unauthСity={unauthСity}
       />
       <Footer />
 
@@ -154,6 +194,14 @@ function App() {
       )}
       {isPlacePopupOpened && <PopupPlaces onClose={closeAllModal} />}
       {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
+      {isPopupCitiesOpen && (
+        <PopupCities
+          onClose={closeAllModal}
+          updateCity={updateCity}
+          cities={cities}
+          currentUser={currentUser}
+        />
+      )}
     </CurrentUserContext.Provider>
   );
 }
