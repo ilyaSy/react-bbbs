@@ -1,3 +1,12 @@
+.where-to-go {
+  margin: 30px auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: visible;
+}
 .event-choice {
   max-width: 100%;
   padding-bottom: 80px;

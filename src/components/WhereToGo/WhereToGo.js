@@ -74,8 +74,26 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
     }
   };
 
+  const changeCity = () => {
+    if (currentUser?.city) {
+      return `${currentUser.city}. Изменить город` || 'Изменить ваш город';
+    }
+    if (unauthСity) {
+      return `${unauthСity}. Изменить город`;
+    }
+    return 'Изменить ваш город';
+  };
+
   return (
-    <section className="content main__section">
+    <section className="where-to-go content main__section">
+      <div className="personal-account__buttons">
+        <Button
+          className="personal-account__feedback-btn personal-account__text"
+          onClick={openPopupCities}
+        >
+          {changeCity()}
+        </Button>
+      </div>
       <section className="event-choice">
         <h1 className="heading">Куда пойти</h1>
         <div className="buttons-scroll buttons-scroll_place_event">
