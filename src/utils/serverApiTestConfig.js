@@ -8,7 +8,7 @@ export const loginPost = {
 export const userGet = {
   id: 1,
   user: 1,
-  city: 2,
+  city: null,
 };
 
 export const profileStory = [

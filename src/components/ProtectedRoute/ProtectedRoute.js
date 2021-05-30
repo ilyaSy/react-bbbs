@@ -11,6 +11,9 @@ export default function ProtectedRoute({
   handleRegisterSubmit,
   handleDeleteEvent,
   events,
+  cities,
+  updateCity,
+  openPopupCities,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -26,6 +29,9 @@ export default function ProtectedRoute({
             handleRegisterSubmit={handleRegisterSubmit}
             handleDeleteEvent={handleDeleteEvent}
             events={events}
+            cities={cities}
+            updateCity={updateCity}
+            openPopupCities={openPopupCities}
           />
         </main>
       ) : (
@@ -44,6 +50,9 @@ ProtectedRoute.propTypes = {
   handleRegisterSubmit: PropTypes.func,
   handleDeleteEvent: PropTypes.func,
   events: PropTypes.arrayOf(PropTypes.any),
+  cities: PropTypes.arrayOf(PropTypes.any),
+  updateCity: PropTypes.func,
+  openPopupCities: PropTypes.func,
 };
 
 ProtectedRoute.defaultProps = {
@@ -52,4 +61,7 @@ ProtectedRoute.defaultProps = {
   handleDeleteEvent: () => {},
   onLogout: () => {},
   events: [],
+  cities: [],
+  updateCity: () => {},
+  openPopupCities: () => {},
 };
