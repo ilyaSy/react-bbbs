@@ -19,7 +19,7 @@ const PopupMeet = ({
     endAt = '',
     booked,
     description,
-    isOpen,
+    takenSeats,
   } = selectedCalendarCard || {};
 
   const startAtDate = new Date(startAt);
@@ -41,7 +41,7 @@ const PopupMeet = ({
   };
 
   return (
-    <Popup popupType="popup__meet" isOpen={isOpen} onClose={closeModal}>
+    <Popup popupType="popup__meet" onClose={closeModal}>
       <div className="calendar calendar__popup">
         <Button className="button-close popup__button-close" onClick={closeModal} />
         <div className="calendar__about_popup">
@@ -84,14 +84,14 @@ const PopupMeet = ({
                 className="button button_color_blue button_color_blue-nonactive"
                 type="button"
                 onClick={handleSubmit}
-                disabled={seats > 0 ? false : 'disable'}
+                disabled={seats - takenSeats > 0 ? false : 'disable'}
               >
                 Записаться
               </Button>
             )}
             <p className="calendar__sign-up__type_text">
               {' '}
-              {seats > 0 ? `Осталось ${seats} мест` : 'Запись закрыта'}
+              {seats - takenSeats > 0 ? `Осталось ${seats - takenSeats} мест` : 'Запись закрыта'}
             </p>
           </div>
         </div>

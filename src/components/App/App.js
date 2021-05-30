@@ -16,6 +16,7 @@ import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupPlaces from '../PopupPlaces/PopupPlaces';
 
 function App() {
+  const [events, setEvents] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
@@ -35,9 +36,7 @@ function App() {
     setIsConfirmRegisterOpened(false);
     setIsRegisterSuccessModalOpened(false);
     setIsPlacePopupOpened(false);
-    setSelectedCalendarCard({
-      isOpen: false,
-    });
+    setSelectedCalendarCard(null);
   };
 
   const logout = () => {
@@ -47,7 +46,6 @@ function App() {
     // localStorage.removeItem('jwtRefresh');
     history.push('/');
   };
-  const [events, setEvents] = useState();
   const handleSubmitAuth = (userName, password) => {
     Api.login({ userName, password })
       .then((data) => {
@@ -136,25 +134,26 @@ function App() {
       />
       <Footer />
 
-      <AuthPopup
-        isAuthModalOpened={isAuthModalOpened}
-        closeAuthModal={closeAllModal}
-        submitModal={handleSubmitAuth}
-      />
-      <PopupMeet
-        closeModal={closeAllModal}
-        selectedCalendarCard={selectedCalendarCard}
-        handleRegisterSubmit={handleConfirmRegisterSubmit}
-        handleDeleteEvent={handleDeleteEvent}
-      />
-      <PopupConfirmRegister
-        closeModal={closeAllModal}
-        isOpen={isConfirmRegisterModalOpened}
-        selectedConfirmCalendarCard={selectedConfirmCalendarCard}
-        handleConfirmRegisterSubmit={handleConfirmRegisterSubmit}
-      />
-      <PopupPlaces isOpen={isPlacePopupOpened} onClose={closeAllModal} />
-      <PopupRegisterSuccess closeModal={closeAllModal} isOpen={isRegisterSuccessModalOpened} />
+      {isAuthModalOpened && (
+        <AuthPopup closeAuthModal={closeAllModal} submitModal={handleSubmitAuth} />
+      )}
+      {selectedCalendarCard && (
+        <PopupMeet
+          closeModal={closeAllModal}
+          selectedCalendarCard={selectedCalendarCard}
+          handleRegisterSubmit={handleConfirmRegisterSubmit}
+          handleDeleteEvent={handleDeleteEvent}
+        />
+      )}
+      {isConfirmRegisterModalOpened && (
+        <PopupConfirmRegister
+          closeModal={closeAllModal}
+          selectedConfirmCalendarCard={selectedConfirmCalendarCard}
+          handleConfirmRegisterSubmit={handleConfirmRegisterSubmit}
+        />
+      )}
+      {isPlacePopupOpened && <PopupPlaces onClose={closeAllModal} />}
+      {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
     </CurrentUserContext.Provider>
   );
 }

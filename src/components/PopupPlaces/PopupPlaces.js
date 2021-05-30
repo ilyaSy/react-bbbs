@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import Popup from '../Popup/Popup';
 
-const PopupPlaces = ({ isOpen, onClose }) => {
+const PopupPlaces = ({ onClose }) => {
   const {
     register,
     formState: { errors },
@@ -46,7 +46,7 @@ const PopupPlaces = ({ isOpen, onClose }) => {
   };
 
   return (
-    <Popup popupType="popup_type_recommendation" isOpen={isOpen} onClose={onClose}>
+    <Popup popupType="popup_type_recommendation" onClose={onClose}>
       <div className="recommendation">
         <div className="recommendation__texts">
           <p className="recommendation__text">
@@ -177,7 +177,6 @@ const PopupPlaces = ({ isOpen, onClose }) => {
 };
 
 PopupPlaces.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 

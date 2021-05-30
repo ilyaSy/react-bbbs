@@ -83,13 +83,14 @@ const PersonalAccountCardStory = ({
           </Button>
         </div>
       </div>
-      <PopupConfirmDelete
-        place={place}
-        handleSubmitDeletePopup={handleSubmitDeletePopup}
-        cardId={cardId}
-        isOpen={isDeletePopupOpen}
-        closePopup={closeDeletePopup}
-      />
+      {isDeletePopupOpen && (
+        <PopupConfirmDelete
+          place={place}
+          handleSubmitDeletePopup={handleSubmitDeletePopup}
+          cardId={cardId}
+          closePopup={closeDeletePopup}
+        />
+      )}
     </div>
   );
 };

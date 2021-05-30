@@ -2,7 +2,7 @@ import { createRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './popup.css';
 
-const Popup = ({ popupType, isOpen, onClose, children }) => {
+const Popup = ({ popupType, onClose, children }) => {
   const popupRef = createRef(null);
   const handleOverlayClick = (event) => {
     if (popupRef.current === event.target) {
@@ -17,11 +17,11 @@ const Popup = ({ popupType, isOpen, onClose, children }) => {
     return () => {
       document.removeEventListener('keydown', handleEscClick);
     };
-  }, [isOpen, onClose]);
+  }, [onClose]);
 
   return (
     <div
-      className={`popup ${popupType} ${isOpen ? 'popup_opened' : ''}`}
+      className={`popup ${popupType}`}
       role="presentation"
       ref={popupRef}
       onMouseDown={handleOverlayClick}
@@ -33,14 +33,12 @@ const Popup = ({ popupType, isOpen, onClose, children }) => {
 
 Popup.propTypes = {
   popupType: PropTypes.string,
-  isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 
 Popup.defaultProps = {
   popupType: '',
-  isOpen: false,
   onClose: () => {},
 };
 
