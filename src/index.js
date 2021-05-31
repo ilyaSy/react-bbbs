@@ -6,7 +6,7 @@ import App from './components/App/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-bbbs">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
