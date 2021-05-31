@@ -25,6 +25,7 @@ export default function Content({
   updateCity,
   openPopupCities,
   unauthСity,
+  isPlacePopupOpened,
 }) {
   const location = useLocation();
 
@@ -75,6 +76,7 @@ export default function Content({
             onRecommendPlace={onRecommendPlace}
             openPopupCities={openPopupCities}
             unauthСity={unauthСity}
+            isPlacePopupOpened={isPlacePopupOpened}
           />
         </main>
       </Route>
@@ -119,6 +121,7 @@ Content.propTypes = {
   updateCity: PropTypes.func,
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
+  isPlacePopupOpened: PropTypes.bool.isRequired,
 };
 
 Content.defaultProps = {

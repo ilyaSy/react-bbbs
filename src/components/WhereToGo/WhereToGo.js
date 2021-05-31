@@ -20,7 +20,7 @@ import Api from '../../utils/api';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
-const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
+const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState('Все');
@@ -74,8 +74,26 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
     }
   };
 
+  const changeCity = () => {
+    if (currentUser?.city) {
+      return `${currentUser.city}. Изменить город` || 'Изменить ваш город';
+    }
+    if (unauthСity) {
+      return `${unauthСity}. Изменить город`;
+    }
+    return 'Изменить ваш город';
+  };
+
   return (
-    <section className="content main__section">
+    <section className="where-to-go content main__section">
+      <div className="personal-account__buttons">
+        <Button
+          className="personal-account__feedback-btn personal-account__text"
+          onClick={openPopupCities}
+        >
+          {changeCity()}
+        </Button>
+      </div>
       <section className="event-choice">
         <h1 className="heading">Куда пойти</h1>
         <div className="buttons-scroll buttons-scroll_place_event">
@@ -107,7 +125,9 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity }) => {
           ))}
         </div>
       </section>
-      {currentUser && <CreatePlace onRecommendPlace={onRecommendPlace} />}
+      {currentUser && (
+        <CreatePlace onRecommendPlace={onRecommendPlace} isPlacePopupOpened={isPlacePopupOpened} />
+      )}
       {activeCategory === 'Все' && (
         <Place place={places.filter((place) => place.chosen)[0]} size="big" />
       )}
@@ -127,6 +147,7 @@ WhereToGo.propTypes = {
   onRecommendPlace: PropTypes.func,
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
+  isPlacePopupOpened: PropTypes.bool.isRequired,
 };
 WhereToGo.defaultProps = {
   onRecommendPlace: () => {},

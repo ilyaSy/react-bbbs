@@ -76,9 +76,7 @@ const Header = ({ openAuthModal }) => {
                 currentUser ? '' : 'un'
               }authorized`}
               onClick={handleButtonLoginClick}
-            >
-              &nbsp;
-            </Button>
+            />
           </nav>
         </div>
       ) : (

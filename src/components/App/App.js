@@ -13,7 +13,6 @@ import PopupMeet from '../PopupMeet/PopupMeet';
 import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
-import PopupPlaces from '../PopupPlaces/PopupPlaces';
 import PopupCities from '../PopupCities/PopupCities';
 
 function App() {
@@ -114,8 +113,7 @@ function App() {
     Api.updateEvent(calendarCard)
       .then((data) => {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
-        //  setIsRegisterSuccessModalOpened(true);
-        closeAllModal();
+        setIsRegisterSuccessModalOpened(true);
       })
       .catch((err) => {
         console.log(`Error ошибка: ${err}`);
@@ -135,7 +133,7 @@ function App() {
   };
 
   const handleRecommentdPlace = () => {
-    setIsPlacePopupOpened(true);
+    setIsPlacePopupOpened(!isPlacePopupOpened);
   };
 
   useEffect(() => {
@@ -171,6 +169,7 @@ function App() {
         updateCity={updateCity}
         openPopupCities={openPopupCities}
         unauthСity={unauthСity}
+        isPlacePopupOpened={isPlacePopupOpened}
       />
       <Footer />
 
@@ -192,7 +191,6 @@ function App() {
           handleConfirmRegisterSubmit={handleConfirmRegisterSubmit}
         />
       )}
-      {isPlacePopupOpened && <PopupPlaces onClose={closeAllModal} />}
       {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
       {isPopupCitiesOpen && (
         <PopupCities
