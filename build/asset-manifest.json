@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.68d4aede.chunk.css",
+    "main.js": "/static/js/main.6f8e5daf.chunk.js",
+    "main.js.map": "/static/js/main.6f8e5daf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.92f4973d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.92f4973d.js.map",
+    "static/js/2.521d25f4.chunk.js": "/static/js/2.521d25f4.chunk.js",
+    "static/js/2.521d25f4.chunk.js.map": "/static/js/2.521d25f4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.68d4aede.chunk.css.map": "/static/css/main.68d4aede.chunk.css.map",
+    "static/js/2.521d25f4.chunk.js.LICENSE.txt": "/static/js/2.521d25f4.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/Proto Grotesk-Light-Web.c43cb6b7.woff",
+    "static/media/PersonalAccount.css": "/static/media/personal-account-btn-add-photo.aa8bde5f.svg",
+    "static/media/Story.css": "/static/media/forward-black.b2be3924.svg",
+    "static/media/header.css": "/static/media/search.50844f6c.svg",
+    "static/media/popup.css": "/static/media/popup-feedback-button.20133810.svg",
+    "static/media/logoSBSS-blue.2968d95e.svg": "/static/media/logoSBSS-blue.2968d95e.svg",
+    "static/media/logoSBSS.347eb317.svg": "/static/media/logoSBSS.347eb317.svg",
+    "static/media/page-not-found.5f54d91f.svg": "/static/media/page-not-found.5f54d91f.svg",
+    "static/media/Question.css": "/static/media/questions-button.fe2758e3.svg",
+    "static/media/success-popup.0982a167.svg": "/static/media/success-popup.0982a167.svg",
+    "static/media/button.css": "/static/media/trans-blue-plus.3c5325f4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.92f4973d.js",
+    "static/js/2.521d25f4.chunk.js",
+    "static/css/main.68d4aede.chunk.css",
+    "static/js/main.6f8e5daf.chunk.js"
+  ]
+}
