@@ -2,13 +2,13 @@ import './Place.css';
 import PropTypes from 'prop-types';
 import Tag from '../Tag/Tag';
 
-const Place = ({ place, size }) => (
+const Place = ({ place, size, color }) => (
   <section className="event-soon-card">
     <div className="event-soon">
       <div className="event-soon__content-wrapper">
         <section className={size === 'big' ? 'profile-grid' : 'events-grid__container'}>
           <div
-            className={`profile-grid__column event-soon__description ${
+            className={`profile-grid__column event-soon__description event-soon__description_color_${color} ${
               size === 'big'
                 ? 'profile-grid__column_size_wide event-soon__description_size_big'
                 : 'profile-grid__column_size_thin event-soon__description_size_small'
@@ -81,6 +81,7 @@ const Place = ({ place, size }) => (
 Place.propTypes = {
   place: PropTypes.objectOf(PropTypes.any),
   size: PropTypes.string.isRequired,
+  color: PropTypes.string,
 };
 
 Place.defaultProps = {
@@ -93,6 +94,7 @@ Place.defaultProps = {
     link: '',
     chosen: false,
   },
+  color: '',
 };
 
 export default Place;

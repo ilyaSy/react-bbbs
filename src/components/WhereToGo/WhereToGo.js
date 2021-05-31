@@ -6,17 +6,7 @@ import Place from '../Place/Place';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './WhereToGo.css';
 import Api from '../../utils/api';
-
-/* const categories = [
-  'Все',
-  'Выбор наставника',
-  'Музеи',
-  'Парки',
-  'Театры',
-  'Спорт',
-  'Экскурсии',
-  'Секции',
-]; */
+import defineCardColor from '../../utils/colorRender';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
@@ -129,14 +119,14 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
         <CreatePlace onRecommendPlace={onRecommendPlace} isPlacePopupOpened={isPlacePopupOpened} />
       )}
       {activeCategory === 'Все' && (
-        <Place place={places.filter((place) => place.chosen)[0]} size="big" />
+        <Place place={places.filter((place) => place.chosen)[0]} color="yellow" size="big" />
       )}
       <section className="events-grid">
         {places
           .filter((place) => activeCategory === 'Все' || activeCategory === place.category)
           .filter((place) => filterAgeRanges(place.age))
-          .map((place) => (
-            <Place key={place.id} place={place} size="small" />
+          .map((place, i) => (
+            <Place key={place.id} place={place} color={defineCardColor(i)} size="small" />
           ))}
       </section>
     </section>
