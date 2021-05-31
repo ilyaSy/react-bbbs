@@ -9,7 +9,7 @@ const PageNotFound = () => (
     <p className="page-not-found__subtitle">К сожалению, запрашиваемая страница не найдена.</p>
     <p className="page-not-found__subtitle">Попробуйте перейти на главную страницу</p>
     <Link to="/" className="button button_nodecoration button_color_blue">
-      Вернутся на главную
+      Вернуться на главную
     </Link>
   </div>
 );
