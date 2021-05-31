@@ -20,9 +20,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
       .then((storiesData) => {
         setStories(storiesData);
       })
-      .catch((err) => {
-        console.log(`Error: personal account ${err}`);
-      });
+      .catch((err) => console.log(`Error: personal account ${err}`));
   }, []);
   // Получаем данные календаря
 

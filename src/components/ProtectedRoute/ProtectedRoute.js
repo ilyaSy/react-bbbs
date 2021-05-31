@@ -20,20 +20,18 @@ export default function ProtectedRoute({
   return (
     <Route>
       {currentUser ? (
-        <main className="main">
-          <Component
-            exact
-            path={path}
-            onLogout={onLogout}
-            handleCalendarCardClick={handleCalendarCardClick}
-            handleRegisterSubmit={handleRegisterSubmit}
-            handleDeleteEvent={handleDeleteEvent}
-            events={events}
-            cities={cities}
-            updateCity={updateCity}
-            openPopupCities={openPopupCities}
-          />
-        </main>
+        <Component
+          exact
+          path={path}
+          onLogout={onLogout}
+          handleCalendarCardClick={handleCalendarCardClick}
+          handleRegisterSubmit={handleRegisterSubmit}
+          handleDeleteEvent={handleDeleteEvent}
+          events={events}
+          cities={cities}
+          updateCity={updateCity}
+          openPopupCities={openPopupCities}
+        />
       ) : (
         <Redirect to={{ pathname: '/', state: { isAuthModalOpened: true } }} />
       )}

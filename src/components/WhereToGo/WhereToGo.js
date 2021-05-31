@@ -17,10 +17,6 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const currentUser = useContext(CurrentUserContext);
 
-  if (!currentUser && !unauthСity) {
-    openPopupCities();
-  }
-
   useEffect(() => {
     Api.getPlaces()
       .then((data) => {
@@ -31,6 +27,10 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
         setCategories(['Все', ...categoriesData]);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
+
+    if (!currentUser && !unauthСity) {
+      openPopupCities();
+    }
   }, []);
 
   const handleCategoryFilter = (category) => {

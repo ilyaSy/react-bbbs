@@ -40,9 +40,9 @@ export default function Content({
   }, [location]);
 
   return (
-    <Switch>
-      <Route exact path="/">
-        <main className="main">
+    <main className="main">
+      <Switch>
+        <Route exact path="/">
           <MainPage
             mainData={mainData}
             handleCalendarCardClick={handleCalendarCardClick}
@@ -50,89 +50,69 @@ export default function Content({
             handleDeleteEvent={handleDeleteEvent}
             events={events}
           />
-        </main>
-      </Route>
+        </Route>
 
-      <ProtectedRoute
-        path="/calendar"
-        component={Calendar}
-        handleCalendarCardClick={handleCalendarCardClick}
-        handleRegisterSubmit={handleRegisterSubmit}
-        handleDeleteEvent={handleDeleteEvent}
-        events={events}
-      />
+        <ProtectedRoute
+          path="/calendar"
+          component={Calendar}
+          handleCalendarCardClick={handleCalendarCardClick}
+          handleRegisterSubmit={handleRegisterSubmit}
+          handleDeleteEvent={handleDeleteEvent}
+          events={events}
+        />
 
-      <Route exact path="/stories">
-        <main className="main">
+        <Route exact path="/stories">
           <StoryPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/about">
-        <main className="main">
+        <Route exact path="/about">
           <About />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/where-to-go">
-        <main className="main">
+        <Route exact path="/where-to-go">
           <WhereToGo
             onRecommendPlace={onRecommendPlace}
             openPopupCities={openPopupCities}
             unauthСity={unauthСity}
             isPlacePopupOpened={isPlacePopupOpened}
           />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/questions">
-        <main className="main">
+        <Route exact path="/questions">
           <QuestionsPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/read-watch">
-        <main className="main">
+        <Route exact path="/read-watch">
           <ReadAndWatch />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/read-watch/videos">
-        <main className="main">
+        <Route exact path="/read-watch/videos">
           <VideosPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/read-watch/movies">
-        <main className="main">
+        <Route exact path="/read-watch/movies">
           <MoviesPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/read-watch/books">
-        <main className="main">
+        <Route exact path="/read-watch/books">
           <BooksPage />
-        </main>
-      </Route>
+        </Route>
 
-      {/* Задать вопрос */}
-      {/* <Route exact path="/search">
-      </Route> */}
-
-      <ProtectedRoute
-        path="/personal-account"
-        component={PersonalAccount}
-        onLogout={onLogout}
-        handleCalendarCardClick={handleCalendarCardClick}
-        events={events}
-        cities={cities}
-        updateCity={updateCity}
-        openPopupCities={openPopupCities}
-      />
-      <Route exact path="*">
-        <PageNotFound />
-      </Route>
-    </Switch>
+        <ProtectedRoute
+          path="/personal-account"
+          component={PersonalAccount}
+          onLogout={onLogout}
+          handleCalendarCardClick={handleCalendarCardClick}
+          events={events}
+          cities={cities}
+          updateCity={updateCity}
+          openPopupCities={openPopupCities}
+        />
+        <Route exact path="*">
+          <PageNotFound />
+        </Route>
+      </Switch>
+    </main>
   );
 }
 

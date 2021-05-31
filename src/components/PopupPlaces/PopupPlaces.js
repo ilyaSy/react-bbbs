@@ -108,6 +108,7 @@ const PopupPlaces = ({ onClose, isPlacePopupOpened, showInputs }) => {
         <input
           {...register('age', { required: 'Возраст*' })}
           type="number"
+          min="8"
           className={`popup__input popup__input_type_age ${errors.age ? 'popup__input-error' : ''}`}
           placeholder={errors.age ? errors.age.message : 'Возраст*'}
         />
