@@ -16,6 +16,9 @@
   box-sizing: border-box;
   padding: 15px 30px;
   border-radius: 30px;
+}
+
+.event-soon__description_color_yellow {
   background-color: #f8d162;
 }
 

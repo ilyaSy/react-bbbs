@@ -180,6 +180,66 @@ export const placesGet = [
       'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
     id: 4,
   },
+  {
+    chosen: false,
+    category: 'Парки',
+    title: 'Московский зоопарк 1',
+    address: 'Адрес в одну строку',
+    info: 'Пол, возраст, категория',
+    sex: 'Девочка',
+    age: 8,
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 5,
+  },
+  {
+    chosen: true,
+    category: 'Выбор наставника',
+    title: 'Московский зоопарк 2',
+    address: 'Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки',
+    info: 'Пол, возраст, категория',
+    age: 12,
+    type: 'Познавательное',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 6,
+  },
+  {
+    chosen: true,
+    category: 'Выбор наставника',
+    title: 'Московский зоопарк 3',
+    address: 'Адрес в одну строку',
+    info: 'Пол, возраст, категория',
+    sex: 'Мальчик',
+    age: 16,
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 7,
+  },
+  {
+    chosen: false,
+    category: 'Экскурсии',
+    title: 'Московский зоопарк 4',
+    address: 'Длинный адрес в две строки Длинный адрес в две строки Длинный адрес в две строки',
+    info: 'Пол, возраст, категория',
+    age: 26,
+    type: 'Развлекательное',
+    link: 'https://www.moscowzoo.ru/',
+    description:
+      'Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения. Развёрнутое описание опыта посещения.',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Common_zebra_at_masai_mara_kenya_02.jpg',
+    id: 8,
+  },
 ];
 
 export const mainGet = {
