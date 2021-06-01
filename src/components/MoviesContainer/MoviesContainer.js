@@ -7,6 +7,7 @@ function MoviesContainer({ movies }) {
     <ul className="movies">
       {movies.map(({ tags, title, info, imageUrl, link }) => (
         <Movie
+          type="movie"
           tags={tags}
           title={title}
           info={info}
