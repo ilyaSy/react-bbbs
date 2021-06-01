@@ -87,7 +87,7 @@ const Header = ({ openAuthModal }) => {
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
-                <Link to="/about" className="header__burger-link">
+                <Link to="/about" className="header__burger-link" onClick={handleToggleBurger}>
                   О проекте
                 </Link>
               </li>
@@ -98,6 +98,7 @@ const Header = ({ openAuthModal }) => {
                     className={`header__burger-link ${
                       page.url === '/calendar' ? 'calender-open' : ''
                     }`}
+                    onClick={handleToggleBurger}
                   >
                     {page.title}
                   </Link>
@@ -114,6 +115,7 @@ const Header = ({ openAuthModal }) => {
                     className="header__burger-link"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleToggleBurger}
                   >
                     {social.title}
                   </a>
