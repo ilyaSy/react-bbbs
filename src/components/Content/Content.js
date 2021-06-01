@@ -108,6 +108,7 @@ export default function Content({
           updateCity={updateCity}
           openPopupCities={openPopupCities}
         />
+
         <Route exact path="*">
           <PageNotFound />
         </Route>

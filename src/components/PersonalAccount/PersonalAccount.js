@@ -17,16 +17,12 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
 
   useEffect(() => {
     Api.getProfileStory()
-      .then((storiesData) => {
-        setStories(storiesData);
-      })
+      .then((storiesData) => setStories(storiesData))
       .catch((err) => console.log(`Error: personal account ${err}`));
   }, []);
   // Получаем данные календаря
 
-  const openPopupStory = () => {
-    setIsPopupStoryOpen(true);
-  };
+  const openPopupStory = () => setIsPopupStoryOpen(true);
 
   const closePopup = () => {
     setIsPopupStoryOpen(false);

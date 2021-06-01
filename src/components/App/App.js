@@ -32,12 +32,8 @@ function App() {
 
   useEffect(() => {
     Api.getCities()
-      .then((cittiesData) => {
-        setCities(cittiesData);
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+      .then((cittiesData) => setCities(cittiesData))
+      .catch((err) => console.log(err));
   }, []);
 
   const updateCity = (city) => {
@@ -47,9 +43,7 @@ function App() {
         id: currentUser.id,
         user: currentUser.user,
       })
-        .then((data) => {
-          setCurrentUser(data);
-        })
+        .then((data) => setCurrentUser(data))
         .catch((err) => console.log(err));
     } else {
       setUnauthСity(city);
@@ -57,9 +51,7 @@ function App() {
   };
   // Выбираем город пользователя !
 
-  const openAuthModal = () => {
-    setIsAuthModalOpened(true);
-  };
+  const openAuthModal = () => setIsAuthModalOpened(true);
 
   const closeAllModal = () => {
     setIsAuthModalOpened(false);
@@ -91,9 +83,7 @@ function App() {
           });
         }
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch((err) => console.log(err));
   };
 
   const openPopupCities = () => {
@@ -115,9 +105,7 @@ function App() {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
         setIsRegisterSuccessModalOpened(true);
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleDeleteEvent = (calendarCard) => {
@@ -127,9 +115,7 @@ function App() {
         //  setIsRegisterSuccessModalOpened(true);
         closeAllModal();
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleRecommentdPlace = () => {
@@ -144,12 +130,8 @@ function App() {
     // }
 
     Api.getMain()
-      .then((data) => {
-        setMainData(data);
-      })
-      .catch((err) => {
-        console.log(`Error: ошибка ${err}`);
-      });
+      .then((data) => setMainData(data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

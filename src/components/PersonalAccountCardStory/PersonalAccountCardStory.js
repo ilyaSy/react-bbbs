@@ -14,12 +14,9 @@ const PersonalAccountCardStory = ({
   const { place, image, date, description, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsDeletePopupOpen(true);
-  };
-  const closeDeletePopup = () => {
-    setIsDeletePopupOpen(false);
-  };
+  const handleClick = () => setIsDeletePopupOpen(true);
+  const closeDeletePopup = () => setIsDeletePopupOpen(false);
+
   const feedbackText = () => {
     if (feedback === 'bad') return 'Плохо';
     if (feedback === 'good') return 'Было классно!';
