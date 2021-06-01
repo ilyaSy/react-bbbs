@@ -211,6 +211,10 @@
     justify-content: flex-start;
   }
 
+  .buttons-scroll_books {
+    justify-content: center;
+  }
+
   /*
   класс buttons-scroll_overflow добаваляется тогда, когда количество кнопок слишком велико для показа на экране
   и появляется прокуртка. Когда кнопок мало, согласно макету, они встают по центру.

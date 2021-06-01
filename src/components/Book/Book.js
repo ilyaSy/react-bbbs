@@ -5,7 +5,7 @@ const Book = ({ title, author, year, description, genre }) => (
   <li className="book">
     <div className="book__item">
       <div
-        className={`book__cover book__cover_genre_${genre === 'sсience' ? 'sсience' : 'fiction'}`}
+        className={`book__cover book__cover_genre_${genre === 'Научные' ? 'science' : 'fiction'}`}
       >
         <h3 className="book__heading">{title}</h3>
         <div className="book__caption">
