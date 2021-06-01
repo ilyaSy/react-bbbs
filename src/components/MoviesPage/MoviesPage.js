@@ -18,14 +18,14 @@ const MoviesPage = () => {
     Api.getMovies()
       .then((data) => {
         setMoviesData(data);
-        // список уникальных жанров для кнопок фильтра-рубрикатора
+        // Список уникальных жанров для кнопок фильтра-рубрикатора
         const genresData = data
           .map((movie) => movie.tags)
           .flat()
           .map((tag) => tag.name)
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setGenres(['Все', ...genresData]);
-        // подсчёт кол-ва страниц: округляем частное общего кол-ва книг на кол-во книг на одной странице
+        // Подсчёт кол-ва страниц: округление частного общего кол-ва на кол-во на одной странице
         pageCount = Math.ceil(data.length / perPage);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
@@ -33,8 +33,8 @@ const MoviesPage = () => {
 
   const currentPageData = moviesData
     .slice(offset, offset + perPage)
-    .filter((book) => {
-      const tagTexts = book.tags.map((tag) => tag.name);
+    .filter((movie) => {
+      const tagTexts = movie.tags.map((tag) => tag.name);
       return activeGenre === 'Все' || tagTexts.includes(activeGenre);
     })
     .map(({ tags, title, info, imageUrl, link, id }) => (
@@ -64,7 +64,7 @@ const MoviesPage = () => {
   return (
     <section className="filmpage content main__section">
       <h1 className="heading">Фильмы</h1>
-      <div className="buttons-scroll">
+      <div className="buttons-scroll buttons-scroll_centered">
         {genres.map((genre) => (
           <Button
             className={`button button_color_black button_place_scroll ${

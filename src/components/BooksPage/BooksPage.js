@@ -65,7 +65,7 @@ const BooksPage = () => {
   return (
     <section className="bookpage content main__section">
       <h1 className="heading">Книги</h1>
-      <div className="buttons-scroll buttons-scroll_books">
+      <div className="buttons-scroll buttons-scroll_centered">
         {genres.map((genre) => (
           <Button
             className={`button button_color_black button_place_scroll ${
