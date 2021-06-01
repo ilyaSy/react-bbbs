@@ -6,7 +6,7 @@ import Place from '../Place/Place';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './WhereToGo.css';
 import Api from '../../utils/api';
-import defineCardColor from '../../utils/colorRender';
+import defineCardColor from '../../utils/renderColors';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 

@@ -116,6 +116,7 @@
   color: #224cff;
   text-decoration: none;
   margin-top: auto;
+  cursor: pointer;
 }
 
 .event-soon__link:hover {

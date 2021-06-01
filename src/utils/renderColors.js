@@ -14,7 +14,3 @@ export default (idx) => {
   if (idx % 12 < 12 && idx % 12 >= 9) groupIndex = 3;
   return colors[groupIndex][idx % 2];
 };
-
-// TO DO:
-// * формы - квадрат круг арка круг арка квадрат арка квадрат круг - повтор
-// последний на первое

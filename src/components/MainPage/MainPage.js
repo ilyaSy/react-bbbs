@@ -44,7 +44,7 @@ export default function MainPage({
         <Story history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <Place place={mainData?.place} size="big" />
+        <Place place={mainData?.place} size="big" color="yellow" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <Article article={mainData?.articles[0]} />
