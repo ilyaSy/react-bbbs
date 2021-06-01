@@ -12,6 +12,7 @@ import StoryPage from '../StoryPage/StoryPage';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ReadAndWatch from '../ReadAndWatch/ReadAndWatch';
 import BooksPage from '../BooksPage/BooksPage';
+import MoviesPage from '../MoviesPage/MoviesPage';
 import './content.css';
 
 export default function Content({
@@ -92,6 +93,12 @@ export default function Content({
       <Route exact path="/read-watch">
         <main className="main">
           <ReadAndWatch />
+        </main>
+      </Route>
+
+      <Route exact path="/read-watch/movies">
+        <main className="main">
+          <MoviesPage />
         </main>
       </Route>
 
