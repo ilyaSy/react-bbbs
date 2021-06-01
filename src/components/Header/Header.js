@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
@@ -36,7 +36,6 @@ const Header = ({ openAuthModal }) => {
   );
 
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
-  const burgerRef = useRef();
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
@@ -88,7 +87,7 @@ const Header = ({ openAuthModal }) => {
           <nav className="header__menu-burger">
             <ul className="header__burger-list">
               <li className="header__burger-item">
-                <Link to="/about" className="header__burger-link">
+                <Link to="/about" className="header__burger-link" onClick={handleToggleBurger}>
                   О проекте
                 </Link>
               </li>
@@ -99,6 +98,7 @@ const Header = ({ openAuthModal }) => {
                     className={`header__burger-link ${
                       page.url === '/calendar' ? 'calender-open' : ''
                     }`}
+                    onClick={handleToggleBurger}
                   >
                     {page.title}
                   </Link>
@@ -106,7 +106,7 @@ const Header = ({ openAuthModal }) => {
               ))}
             </ul>
           </nav>
-          <nav ref={burgerRef} className="header__menu-burger">
+          <nav className="header__menu-burger">
             <ul className="header__burger-list">
               {socialLinks.map((social) => (
                 <li className="header__burger-item" key={social.title}>
@@ -115,6 +115,7 @@ const Header = ({ openAuthModal }) => {
                     className="header__burger-link"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleToggleBurger}
                   >
                     {social.title}
                   </a>
