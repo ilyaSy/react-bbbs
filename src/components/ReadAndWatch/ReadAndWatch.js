@@ -34,7 +34,7 @@ const ReadAndWatch = () => {
       <ReadAndWatchSection sectionTitle="Видео" path="/videos" data={videosData} />
       <ReadAndWatchSection sectionTitle="Статьи" path="/articles" data={articlesData} />
       <ReadAndWatchSection sectionTitle="Фильмы" path="/movies" data={moviesData} />
-      <ReadAndWatchSection sectionTitle="Книги" path="/books" data={booksData} />
+      <ReadAndWatchSection sectionTitle="Книги" path="/read-watch/books" data={booksData} />
     </section>
   );
 };
