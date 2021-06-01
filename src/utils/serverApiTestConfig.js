@@ -616,6 +616,10 @@ export const videosGet = [
     title: 'Творчество, наставничество, дети',
     info: 'Виктория Ямина, волонтер',
     link: 'https://youtu.be/8VzzlhOyOSI',
+    tag: {
+      name: 'Ресурсная группа',
+      id: 110,
+    },
   },
   {
     id: 542,
@@ -623,6 +627,11 @@ export const videosGet = [
     title: 'Что в силах волонтера-наставника?',
     info: 'Иван Рустаев, волонтер-наставник',
     link: 'https://youtu.be/8VzzlhOyOSI',
+    tag: {
+      name: 'Эксперт',
+      id: 110,
+    },
+    chosen: true,
   },
   {
     id: 543,
@@ -630,6 +639,10 @@ export const videosGet = [
     title: 'Меняется смысл — меняется жизнь',
     info: 'Прямой эфир с актрисой театра и кино Эмилией Спивак',
     link: 'https://youtu.be/8VzzlhOyOSI',
+    tag: {
+      name: 'Пары',
+      id: 110,
+    },
   },
   {
     id: 544,
@@ -637,6 +650,10 @@ export const videosGet = [
     title: 'Творчество, наставничество, дети',
     info: 'Виктория Ямина, волонтер',
     link: 'https://youtu.be/8VzzlhOyOSI',
+    tag: {
+      name: 'События',
+      id: 110,
+    },
   },
   {
     id: 545,
@@ -644,6 +661,10 @@ export const videosGet = [
     title: 'Что в силах волонтера-наставника?',
     info: 'Иван Рустаев, волонтер-наставник',
     link: 'https://youtu.be/8VzzlhOyOSI',
+    tag: {
+      name: 'Медиа о нас',
+      id: 110,
+    },
   },
 ];
 
