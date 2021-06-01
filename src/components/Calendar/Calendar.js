@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
 
 import Button from '../Button/Button';
 import CalendarCard from '../CalendarCard/CalendarCard';
@@ -14,7 +14,7 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
     const resetMonths = (dates) => {
       const dmonths = dates
         .map((date) => {
-          const monthName = format(new Date(date.startAt), 'LLLL');
+          const monthName = formatDate(new Date(date.startAt), 'LLLL');
           return monthName[0].toUpperCase() + monthName.slice(1);
         })
         .filter((el, i, array) => array.indexOf(el) === i);
@@ -57,7 +57,8 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
         {events
           .filter(
             (event) =>
-              !activeMonth || format(new Date(event.startAt), 'LLLL') === activeMonth.toLowerCase()
+              !activeMonth ||
+              formatDate(new Date(event.startAt), 'LLLL') === activeMonth.toLowerCase()
           )
           .map((event) => (
             <CalendarCard

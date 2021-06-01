@@ -31,13 +31,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    Api.getCities()
-      .then((cittiesData) => {
-        setCities(cittiesData);
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    Api.getCities().then(setCities).catch(console.log);
   }, []);
 
   const updateCity = (city) => {
@@ -47,19 +41,15 @@ function App() {
         id: currentUser.id,
         user: currentUser.user,
       })
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .catch((err) => console.log(err));
+        .then(setCurrentUser)
+        .catch(console.log);
     } else {
       setUnauthСity(city);
     }
   };
   // Выбираем город пользователя !
 
-  const openAuthModal = () => {
-    setIsAuthModalOpened(true);
-  };
+  const openAuthModal = () => setIsAuthModalOpened(true);
 
   const closeAllModal = () => {
     setIsAuthModalOpened(false);
@@ -91,9 +81,7 @@ function App() {
           });
         }
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch(console.log);
   };
 
   const openPopupCities = () => {
@@ -115,9 +103,7 @@ function App() {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
         setIsRegisterSuccessModalOpened(true);
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch(console.log);
   };
 
   const handleDeleteEvent = (calendarCard) => {
@@ -127,9 +113,7 @@ function App() {
         //  setIsRegisterSuccessModalOpened(true);
         closeAllModal();
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch(console.log);
   };
 
   const handleRecommentdPlace = () => {
@@ -143,13 +127,7 @@ function App() {
     //   setCurrentUser(userName);
     // }
 
-    Api.getMain()
-      .then((data) => {
-        setMainData(data);
-      })
-      .catch((err) => {
-        console.log(`Error: ошибка ${err}`);
-      });
+    Api.getMain().then(setMainData).catch(console.log);
   }, []);
 
   return (

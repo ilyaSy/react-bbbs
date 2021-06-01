@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
 import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 
 const PersonalAccountCardStory = ({
@@ -14,12 +14,9 @@ const PersonalAccountCardStory = ({
   const { place, image, date, description, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsDeletePopupOpen(true);
-  };
-  const closeDeletePopup = () => {
-    setIsDeletePopupOpen(false);
-  };
+  const handleClick = () => setIsDeletePopupOpen(true);
+  const closeDeletePopup = () => setIsDeletePopupOpen(false);
+
   const feedbackText = () => {
     if (feedback === 'bad') return 'Плохо';
     if (feedback === 'good') return 'Было классно!';
@@ -32,9 +29,9 @@ const PersonalAccountCardStory = ({
   };
   // date
   const formatedDate = new Date(date);
-  const day = !formatedDate || format(formatedDate, 'dd');
+  const day = !formatedDate || formatDate(formatedDate, 'dd');
   const year = formatedDate.getFullYear();
-  const monthName = !formatedDate || format(formatedDate, 'LLLL');
+  const monthName = !formatedDate || formatDate(formatedDate, 'LLLL');
 
   return (
     <div className="personal-account__form">

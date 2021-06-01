@@ -36,7 +36,7 @@ const QuestionsPage = () => {
         setQuestions(data);
         setTagList([{ id: 'tag1', name: 'Все' }, ...tagsData]);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch(console.log);
   }, []);
 
   const handleTagFilter = (tag) => {

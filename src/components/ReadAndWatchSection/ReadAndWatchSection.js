@@ -20,64 +20,31 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
     case 'Справочник':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ title, text, imageUrl }, i) => (
-          <ArticleGuide
-            title={title}
-            text={text}
-            imageUrl={imageUrl}
-            figure={defineFigure(i)}
-            size="small"
-          />
+        .map(({ id: key, ...args }, i) => (
+          <ArticleGuide figure={defineFigure(i)} size="small" key={key} {...args} />
         ));
       break;
     case 'Видео':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ title, info, imageUrl, link, id }) => (
-          <Movie type="video" title={title} info={info} imageUrl={imageUrl} link={link} key={id} />
-        ));
+        .map(({ id: key, ...args }) => <Movie type="video" key={key} {...args} />);
       break;
     case 'Статьи':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ title, author, description, id }, i) => (
-          <ArticleRaW
-            title={title}
-            author={author}
-            description={description}
-            key={id}
-            color={defineColor(i)}
-          />
+        .map(({ id: key, ...args }, i) => (
+          <ArticleRaW color={defineColor(i)} key={key} {...args} />
         ));
       break;
     case 'Фильмы':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ tags, title, info, imageUrl, link, id }) => (
-          <Movie
-            type="movie"
-            title={title}
-            info={info}
-            imageUrl={imageUrl}
-            link={link}
-            tags={tags}
-            key={id}
-          />
-        ));
+        .map(({ id: key, ...args }) => <Movie type="movie" key={key} {...args} />);
       break;
     case 'Книги':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ title, author, year, description, genre, id }) => (
-          <Book
-            title={title}
-            author={author}
-            year={year}
-            description={description}
-            genre={genre}
-            key={id}
-          />
-        ));
+        .map(({ id: key, ...args }) => <Book key={key} {...args} />);
       break;
     default:
       currentPageData = [];

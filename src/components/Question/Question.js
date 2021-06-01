@@ -10,9 +10,7 @@ const Question = ({ anchor, title, tags, answerText, place }) => {
   const tagsText = tags.map((tag) => tag.name);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
 
-  const handleToggleAnswer = () => {
-    setIsAnswerVisible(!isAnswerVisible);
-  };
+  const handleToggleAnswer = () => setIsAnswerVisible(!isAnswerVisible);
 
   return (
     <>

@@ -16,19 +16,11 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    Api.getProfileStory()
-      .then((storiesData) => {
-        setStories(storiesData);
-      })
-      .catch((err) => {
-        console.log(`Error: personal account ${err}`);
-      });
+    Api.getProfileStory().then(setStories).catch(console.log);
   }, []);
   // Получаем данные календаря
 
-  const openPopupStory = () => {
-    setIsPopupStoryOpen(true);
-  };
+  const openPopupStory = () => setIsPopupStoryOpen(true);
 
   const closePopup = () => {
     setIsPopupStoryOpen(false);
@@ -41,9 +33,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
         setStories([...stories, data]);
         closePopup();
       })
-      .catch((err) => {
-        console.log(`Error: post profile data ${err}`);
-      });
+      .catch(console.log);
   };
 
   const handleUpdaProfileStory = (card) => {
@@ -53,9 +43,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
         closePopup();
         setCardStory(null);
       })
-      .catch((err) => {
-        console.log(`Error: update profile data ${err}`);
-      });
+      .catch(console.log);
   };
 
   const handleSubmitDeletePopup = (cardId) => {
@@ -64,9 +52,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
         const newArr = stories.filter((story, id) => id !== cardId);
         setStories(newArr);
       })
-      .catch((err) => {
-        console.log(`Error: delete profile story ${err}`);
-      });
+      .catch(console.log);
   };
 
   return (
