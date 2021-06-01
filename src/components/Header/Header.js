@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { pages, socialLinks } from '../../config/config';
 import Button from '../Button/Button';
@@ -36,6 +36,7 @@ const Header = ({ openAuthModal }) => {
   );
 
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
+  const burgerRef = useRef();
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
@@ -105,7 +106,7 @@ const Header = ({ openAuthModal }) => {
               ))}
             </ul>
           </nav>
-          <nav className="header__menu-burger">
+          <nav ref={burgerRef} className="header__menu-burger">
             <ul className="header__burger-list">
               {socialLinks.map((social) => (
                 <li className="header__burger-item" key={social.title}>
