@@ -30,10 +30,10 @@ const ReadAndWatch = () => {
 
   return (
     <section className="raw content main__section">
-      <ReadAndWatchSection sectionTitle="Справочник" path="/guide" data={guideData} />
-      <ReadAndWatchSection sectionTitle="Видео" path="/videos" data={videosData} />
-      <ReadAndWatchSection sectionTitle="Статьи" path="/articles" data={articlesData} />
-      <ReadAndWatchSection sectionTitle="Фильмы" path="/movies" data={moviesData} />
+      <ReadAndWatchSection sectionTitle="Справочник" path="/read-watch/guide" data={guideData} />
+      <ReadAndWatchSection sectionTitle="Видео" path="/read-watch/videos" data={videosData} />
+      <ReadAndWatchSection sectionTitle="Статьи" path="/read-watch/articles" data={articlesData} />
+      <ReadAndWatchSection sectionTitle="Фильмы" path="/read-watch/movies" data={moviesData} />
       <ReadAndWatchSection sectionTitle="Книги" path="/read-watch/books" data={booksData} />
     </section>
   );

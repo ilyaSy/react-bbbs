@@ -531,12 +531,12 @@ export const moviesGet = [
     tags: [
       {
         id: 551,
-        name: 'драма',
+        name: 'Драма',
         slug: 'rubric',
       },
       {
         id: 552,
-        name: 'комедия',
+        name: 'Комедия',
         slug: 'rubric',
       },
     ],
@@ -550,7 +550,7 @@ export const moviesGet = [
     tags: [
       {
         id: 551,
-        name: 'документальный',
+        name: 'Документальный',
         slug: 'rubric',
       },
     ],
@@ -564,7 +564,7 @@ export const moviesGet = [
     tags: [
       {
         id: 551,
-        name: 'комедия',
+        name: 'Комедия',
         slug: 'rubric',
       },
     ],
@@ -578,12 +578,12 @@ export const moviesGet = [
     tags: [
       {
         id: 551,
-        name: 'драма',
+        name: 'Драма',
         slug: 'rubric',
       },
       {
         id: 552,
-        name: 'исторический',
+        name: 'Исторический',
         slug: 'rubric',
       },
     ],
@@ -597,12 +597,12 @@ export const moviesGet = [
     tags: [
       {
         id: 556,
-        name: 'документальный',
+        name: 'Документальный',
         slug: 'rubric',
       },
       {
         id: 557,
-        name: 'комедия',
+        name: 'Комедия',
         slug: 'rubric',
       },
     ],
