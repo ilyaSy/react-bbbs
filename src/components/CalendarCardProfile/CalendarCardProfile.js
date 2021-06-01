@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import './calendarCardProfile.css';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
 
 const CalendarCardProfile = ({ event, handleCalendarCardClick }) => {
   const { title, startAt } = event;
   const startAtDate = new Date(startAt);
 
-  const day = format(startAtDate, 'dd');
-  const monthName = format(startAtDate, 'LLLL');
+  const day = formatDate(startAtDate, 'dd');
+  const monthName = formatDate(startAtDate, 'LLLL');
 
   const handleCardClick = () => {
     handleCalendarCardClick({

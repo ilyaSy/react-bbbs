@@ -25,7 +25,7 @@ const ReadAndWatch = () => {
         setMoviesData(movies);
         setBooksData(books);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch(console.log);
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import Popup from '../Popup/Popup';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
 import './PopupConfirmRegister.css';
 
 const PopupConfirmRegister = ({
@@ -14,10 +14,10 @@ const PopupConfirmRegister = ({
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
 
-  const day = !startAt || format(startAtDate, 'dd');
-  const startTime = !startAt || format(startAtDate, 'KK:mm');
-  const endTime = !endAt || format(endAtDate, 'KK:mm');
-  const monthName = !startAt || format(startAtDate, 'MMMM');
+  const day = !startAt || formatDate(startAtDate, 'dd');
+  const startTime = !startAt || formatDate(startAtDate, 'KK:mm');
+  const endTime = !endAt || formatDate(endAtDate, 'KK:mm');
+  const monthName = !startAt || formatDate(startAtDate, 'MMMM');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
 import PopupConfirmDelete from '../PopupConfirmDelete/PopupConfirmDelete';
 
 const PersonalAccountCardStory = ({
@@ -29,9 +29,9 @@ const PersonalAccountCardStory = ({
   };
   // date
   const formatedDate = new Date(date);
-  const day = !formatedDate || format(formatedDate, 'dd');
+  const day = !formatedDate || formatDate(formatedDate, 'dd');
   const year = formatedDate.getFullYear();
-  const monthName = !formatedDate || format(formatedDate, 'LLLL');
+  const monthName = !formatedDate || formatDate(formatedDate, 'LLLL');
 
   return (
     <div className="personal-account__form">

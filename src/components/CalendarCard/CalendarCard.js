@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import format from '../../utils/format';
+import formatDate from '../../utils/formatDate';
+import calendarBtn from '../../assets/img/calendar-btn.svg';
 import './CalendarCard.css';
 
 const CalendarCard = ({
@@ -12,11 +13,11 @@ const CalendarCard = ({
   const { address, contact, title, seats, takenSeats, startAt, endAt, booked } = event;
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
-  const day = format(startAtDate, 'dd');
-  const startTime = format(startAtDate, 'KK:mm');
-  const endTime = format(endAtDate, 'KK:mm');
-  const monthName = format(startAtDate, 'LLLL');
-  const dayName = format(startAtDate, 'EEEE');
+  const day = formatDate(startAtDate, 'dd');
+  const startTime = formatDate(startAtDate, 'KK:mm');
+  const endTime = formatDate(endAtDate, 'KK:mm');
+  const monthName = formatDate(startAtDate, 'LLLL');
+  const dayName = formatDate(startAtDate, 'EEEE');
 
   const handleCardClick = () => {
     handleCalendarCardClick({
@@ -90,17 +91,7 @@ const CalendarCard = ({
           type="button"
           onClick={handleCardClick}
         >
-          <svg
-            className="calendar__btn"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="20" cy="20" r="19.5" stroke="#224CFF" />
-            <circle cx="13.3346" cy="20.0002" r="1.66667" fill="#224CFF" />
-            <circle cx="20.0026" cy="19.9999" r="1.66667" fill="#224CFF" />
-            <circle cx="26.6667" cy="19.9999" r="1.66667" fill="#224CFF" />
-          </svg>
+          <img className="calendar__btn" src={calendarBtn} alt="calendar" />
         </Button>
       </form>
     </div>

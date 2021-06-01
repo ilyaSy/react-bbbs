@@ -13,9 +13,7 @@ const Header = ({ openAuthModal }) => {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
 
-  const toggleSearch = () => {
-    setSearch(!search);
-  };
+  const toggleSearch = () => setSearch(!search);
 
   const handleButtonLoginClick = () => {
     if (currentUser) {

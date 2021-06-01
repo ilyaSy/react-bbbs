@@ -26,7 +26,7 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setCategories(['Все', ...categoriesData]);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch(console.log);
 
     if (!currentUser && !unauthСity) {
       openPopupCities();
