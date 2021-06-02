@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Api from '../../utils/api';
@@ -7,7 +8,7 @@ import MainVideo from '../MainVideo/MainVideo';
 import Movie from '../Movie/Movie';
 import './VideosPage.css';
 
-const VideosPage = () => {
+const VideosPage = ({ handlerVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
   const [videosData, setVideosData] = useState([]);
   const [chosenVideo, setChosenVideo] = useState({});
@@ -41,7 +42,7 @@ const VideosPage = () => {
     .filter((video) => activeTag === 'Все' || activeTag === video.tag.name)
     // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
     .filter(({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа'))
-    .map(({ tag, id: key, ...args }) => <Movie type="video" key={key} tag={[tag]} {...args} />);
+    .map(({ tag, id: key, ...args }) => <Movie type="video" key={key} handlerVideoClick={handlerVideoClick} tag={[tag]} {...args} />);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -99,4 +100,7 @@ const VideosPage = () => {
   );
 };
 
+VideosPage.propTypes = {
+  handlerVideoClick: PropTypes.func.isRequired,
+};
 export default VideosPage;

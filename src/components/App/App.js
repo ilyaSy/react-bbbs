@@ -14,6 +14,7 @@ import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupCities from '../PopupCities/PopupCities';
+import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
 
 function App() {
   const [events, setEvents] = useState();
@@ -25,6 +26,7 @@ function App() {
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
+  const [isPopupVideoOpen, setIsPopupVideoOpen] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
   const [cities, setCities] = useState([]);
@@ -58,6 +60,7 @@ function App() {
     setIsPlacePopupOpened(false);
     setSelectedCalendarCard(null);
     setIsPopupCitiesOpen(false);
+    setIsPopupVideoOpen(false);
   };
 
   const logout = () => {
@@ -85,6 +88,10 @@ function App() {
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
+  };
+
+  const handlerVideoClick = () => {
+    setIsPopupVideoOpen(true);
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -140,6 +147,7 @@ function App() {
         openPopupCities={openPopupCities}
         unauthСity={unauthСity}
         isPlacePopupOpened={isPlacePopupOpened}
+        handlerVideoClick={handlerVideoClick}
       />
       <Footer />
 
@@ -170,6 +178,7 @@ function App() {
           currentUser={currentUser}
         />
       )}
+      {isPopupVideoOpen && <YoutubeEmbed onClose={closeAllModal} />}
     </CurrentUserContext.Provider>
   );
 }
