@@ -19,18 +19,20 @@ const StoryPage = () => {
         оценить успехи абсолютно разных детей? У&nbsp;каждой пары&nbsp;&mdash; свой результат
         и&nbsp;свои достижения. Именно об&nbsp;этом мы&nbsp;рассказываем в&nbsp;историях.
       </p>
-      <div className="buttons-scroll">
-        {fullStories.map((fullStory) => (
-          <Button
-            id={fullStory.id}
-            key={fullStory.id}
-            className="button button_color_black button_place_scroll"
-            type="button"
-            onClick={handleScrollToStory}
-          >
-            {fullStory.heading}
-          </Button>
-        ))}
+      <div className="scroll-container">
+        <div className="buttons-scroll">
+          {fullStories.map((fullStory) => (
+            <Button
+              id={fullStory.id}
+              key={fullStory.id}
+              className="button button_color_black button_place_scroll"
+              type="button"
+              onClick={handleScrollToStory}
+            >
+              {fullStory.heading}
+            </Button>
+          ))}
+        </div>
       </div>
       {fullStories.map((fullStory) => (
         <Story

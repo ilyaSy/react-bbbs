@@ -65,19 +65,21 @@ const BooksPage = () => {
   return (
     <section className="bookpage content main__section">
       <h1 className="heading">Книги</h1>
-      <div className="buttons-scroll buttons-scroll_centered">
-        {genres.map((genre) => (
-          <Button
-            className={`button button_color_black button_place_scroll ${
-              genre === activeGenre ? 'button_color_black_active' : ''
-            }`}
-            type="button"
-            key={genre}
-            onClick={() => handleGenreFilter(genre)}
-          >
-            {genre}
-          </Button>
-        ))}
+      <div className="scroll-container">
+        <div className="buttons-scroll">
+          {genres.map((genre) => (
+            <Button
+              className={`button button_color_black button_place_scroll ${
+                genre === activeGenre ? 'button_color_black_active' : ''
+              }`}
+              type="button"
+              key={genre}
+              onClick={() => handleGenreFilter(genre)}
+            >
+              {genre}
+            </Button>
+          ))}
+        </div>
       </div>
       <ul className="bookpage__list">{currentPageData}</ul>
       <ReactPaginate

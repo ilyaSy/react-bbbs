@@ -51,19 +51,21 @@ const QuestionsPage = () => {
     <>
       <section className="content main__section">
         <h1 className="heading">Ответы на вопросы</h1>
-        <div className="buttons-scroll buttons-scroll_overflow">
-          {tagList.map((tag) => (
-            <Button
-              className={`button button_color_black button_place_scroll ${
-                tag.name === activeTag ? 'button_color_black_active' : ''
-              }`}
-              onClick={() => handleTagFilter(tag.name)}
-              type="button"
-              key={tag.id}
-            >
-              {tag.name}
-            </Button>
-          ))}
+        <div className="scroll-container">
+          <div className="buttons-scroll">
+            {tagList.map((tag) => (
+              <Button
+                className={`button button_color_black button_place_scroll ${
+                  tag.name === activeTag ? 'button_color_black_active' : ''
+                }`}
+                onClick={() => handleTagFilter(tag.name)}
+                type="button"
+                key={tag.id}
+              >
+                {tag.name}
+              </Button>
+            ))}
+          </div>
         </div>
         <ul className="questions questions__page-list">
           {questions
