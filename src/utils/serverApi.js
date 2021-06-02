@@ -17,6 +17,7 @@ import {
   videosGet,
   articlesGet,
   materialsGet,
+  rightsGet,
 } from './serverApiTestConfig';
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
@@ -85,6 +86,9 @@ export default function setMockAdapter() {
 
   //  get books
   mock.onGet(`${apiURL}/books/`).reply(200, booksGet);
+
+  //  get books
+  mock.onGet(`${apiURL}/rights/`).reply(200, rightsGet);
 
   // get events
   mock.onGet(`${apiURL}/afisha/events/`).reply(200, eventsGet);
