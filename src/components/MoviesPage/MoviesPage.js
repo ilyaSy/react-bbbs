@@ -37,17 +37,7 @@ const MoviesPage = () => {
       const tagTexts = movie.tags.map((tag) => tag.name);
       return activeGenre === 'Все' || tagTexts.includes(activeGenre);
     })
-    .map(({ tags, title, info, imageUrl, link, id }) => (
-      <Movie
-        type="movie"
-        tags={tags}
-        title={title}
-        info={info}
-        imageUrl={imageUrl}
-        link={link}
-        key={id}
-      />
-    ));
+    .map(({ id: key, ...args }) => <Movie key={key} type="movie" {...args} />);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -68,7 +58,7 @@ const MoviesPage = () => {
         {genres.map((genre) => (
           <Button
             className={`button button_color_black button_place_scroll ${
-              genre === activeGenre ? 'button_color_black_active' : ''
+              genre === activeGenre && 'button_color_black_active'
             }`}
             type="button"
             key={genre}

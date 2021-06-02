@@ -33,26 +33,15 @@ const VideosPage = () => {
         // Подсчёт кол-ва страниц: округление частного общего кол-ва на кол-во на одной странице
         pageCount = Math.ceil(data.length / perPage);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch(console.log);
   }, []);
 
   const currentPageData = videosData
     .slice(offset, offset + perPage)
     .filter((video) => activeTag === 'Все' || activeTag === video.tag.name)
-    .map(({ tag, title, info, imageUrl, link, id }) =>
-      // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
-      !currentUser && tag.name === 'Ресурсная группа' ? null : (
-        <Movie
-          type="video"
-          tags={[tag]}
-          title={title}
-          info={info}
-          imageUrl={imageUrl}
-          link={link}
-          key={id}
-        />
-      )
-    );
+    // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
+    .filter(({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа'))
+    .map(({ tag, id: key, ...args }) => <Movie type="video" key={key} tag={[tag]} {...args} />);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);

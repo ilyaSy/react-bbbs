@@ -5,16 +5,8 @@ import './MoviesContainer.css';
 function MoviesContainer({ movies }) {
   return (
     <ul className="movies">
-      {movies.map(({ tags, title, info, imageUrl, link }) => (
-        <Movie
-          type="movie"
-          tags={tags}
-          title={title}
-          info={info}
-          imageUrl={imageUrl}
-          link={link}
-          key={`${Math.random()}_${title}`}
-        />
+      {movies.map(({ title, ...args }) => (
+        <Movie type="movie" key={`${Math.random()}_${title}`} {...args} />
       ))}
     </ul>
   );
