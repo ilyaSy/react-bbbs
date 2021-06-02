@@ -166,9 +166,13 @@ const PopupPlaces = ({ onClose, isPlacePopupOpened, showInputs }) => {
 };
 
 PopupPlaces.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   isPlacePopupOpened: PropTypes.bool.isRequired,
   showInputs: PropTypes.bool.isRequired,
+};
+
+PopupPlaces.defaultProps = {
+  onClose: () => {},
 };
 
 export default PopupPlaces;

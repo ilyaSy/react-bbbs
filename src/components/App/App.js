@@ -67,16 +67,15 @@ function App() {
     setCurrentUser(null);
     localStorage.removeItem('jwt');
     Api.removeAuthHeader();
-    // localStorage.removeItem('jwtRefresh');
     history.push('/');
   };
+
   const handleSubmitAuth = (userName, password) => {
     Api.login({ userName, password })
       .then((data) => {
         if (data.refresh && data.access) {
           Api.setAuthHeader(data.access);
           localStorage.setItem('jwt', data.access);
-          // localStorage.setItem('jwtRefresh', data.refresh);
           Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
             setCurrentUser({ userName, ...userData });
             setEvents(eventsData);
@@ -117,7 +116,6 @@ function App() {
     Api.updateEvent(calendarCard)
       .then((data) => {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
-        //  setIsRegisterSuccessModalOpened(true);
         closeAllModal();
       })
       .catch(console.log);
@@ -128,12 +126,6 @@ function App() {
   };
 
   useEffect(() => {
-    // const jwt = localStorage.getItem('jwt');
-    // if (jwt) {
-    //   Api.setAuthHeader(jwt);
-    //   setCurrentUser(userName);
-    // }
-
     Api.getMain().then(setMainData).catch(console.log);
   }, []);
 
