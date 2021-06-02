@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import CreatePlace from '../CreatePlace/CreatePlace';
-import Place from '../Place/Place';
+import Card from '../Card/Card';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './WhereToGo.css';
 import Api from '../../utils/api';
@@ -121,14 +121,25 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
         <CreatePlace onRecommendPlace={onRecommendPlace} isPlacePopupOpened={isPlacePopupOpened} />
       )}
       {activeCategory === 'Все' && (
-        <Place place={places.filter((place) => place.chosen)[0]} color="yellow" size="big" />
+        <Card
+          type="place"
+          data={places.filter((place) => place.chosen)[0]}
+          color="yellow"
+          size="big"
+        />
       )}
       <section className="events-grid">
         {places
           .filter((place) => activeCategory === 'Все' || activeCategory === place.category)
           .filter((place) => filterAgeRanges(place.age))
           .map((place, i) => (
-            <Place key={place.id} place={place} color={defineCardColor(i)} size="small" />
+            <Card
+              type="place"
+              key={place.id}
+              data={place}
+              color={defineCardColor(i)}
+              size="small"
+            />
           ))}
       </section>
     </section>

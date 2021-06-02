@@ -10,7 +10,7 @@ import Intro from '../Intro/Intro';
 import Story from '../Story/Story';
 import MainVideo from '../MainVideo/MainVideo';
 import Article from '../Article/Article';
-import Place from '../Place/Place';
+import Card from '../Card/Card';
 
 export default function MainPage({
   mainData,
@@ -44,7 +44,7 @@ export default function MainPage({
         <Story history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <Place place={mainData?.place} size="big" color="yellow" />
+        <Card type="place" data={mainData?.place} size="big" color="yellow" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <Article article={mainData?.articles[0]} />
