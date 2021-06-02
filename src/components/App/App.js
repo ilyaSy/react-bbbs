@@ -33,7 +33,12 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    Api.getCities().then(setCities).catch(console.log);
+    Promise.all([Api.getCities(), Api.getMain()])
+      .then(([dataCities, dataMain]) => {
+        setCities(dataCities);
+        setMainData(dataMain);
+      })
+      .catch(console.log);
   }, []);
 
   const updateCity = (city) => {
@@ -124,10 +129,6 @@ function App() {
   const handleRecommentdPlace = () => {
     setIsPlacePopupOpened(!isPlacePopupOpened);
   };
-
-  useEffect(() => {
-    Api.getMain().then(setMainData).catch(console.log);
-  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
