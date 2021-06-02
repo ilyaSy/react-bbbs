@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Api from '../../utils/api';
@@ -7,7 +8,7 @@ import MainVideo from '../MainVideo/MainVideo';
 import Movie from '../Movie/Movie';
 import './VideosPage.css';
 
-const VideosPage = () => {
+const VideosPage = ({ handlerVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
   const [videosData, setVideosData] = useState([]);
   const [chosenVideo, setChosenVideo] = useState({});
@@ -49,6 +50,7 @@ const VideosPage = () => {
           info={info}
           imageUrl={imageUrl}
           link={link}
+          handlerVideoClick={handlerVideoClick}
           key={id}
         />
       )
@@ -110,4 +112,7 @@ const VideosPage = () => {
   );
 };
 
+VideosPage.propTypes = {
+  handlerVideoClick: PropTypes.func.isRequired,
+};
 export default VideosPage;

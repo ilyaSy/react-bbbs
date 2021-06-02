@@ -1,0 +1,9 @@
+.video {
+  position: relative;
+  max-width: 1110px;
+  box-sizing: border-box;
+}
+.video__button {
+  right: -40px;
+  top: -40px;
+}
