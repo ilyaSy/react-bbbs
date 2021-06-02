@@ -18,7 +18,6 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   useEffect(() => {
     Api.getProfileStory().then(setStories).catch(console.log);
   }, []);
-  // Получаем данные календаря
 
   const openPopupStory = () => setIsPopupStoryOpen(true);
 

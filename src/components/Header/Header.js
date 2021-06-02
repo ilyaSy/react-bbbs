@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { pages, socialLinks } from '../../config/config';
+// import { pages } from '../../config/config';
 import Button from '../Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import './header.css';
 import useScrollPosition from '../../utils/hooks/useScrollPosition';
 import Search from '../Search/Search';
+import Navigation from '../Navigation/Navigation';
 
 const Header = ({ openAuthModal }) => {
   const [search, setSearch] = useState(false);
+  const [shouldBeVisible, setShouldBeVisible] = useState(false);
+  const [isBurgerOpened, setIsBurgerOpened] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
 
@@ -23,8 +26,6 @@ const Header = ({ openAuthModal }) => {
     }
   };
 
-  const [shouldBeVisible, setShouldBeVisible] = useState(false);
-
   useScrollPosition(
     ({ previousPos, currentPos }) => {
       const isVisible = currentPos.y < previousPos.y;
@@ -33,19 +34,13 @@ const Header = ({ openAuthModal }) => {
     [shouldBeVisible]
   );
 
-  const [isBurgerOpened, setIsBurgerOpened] = useState(false);
-
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        setIsBurgerOpened(false);
-      }
+      if (e.key === 'Escape') setIsBurgerOpened(false);
     });
   }, []);
 
-  const handleToggleBurger = () => {
-    setIsBurgerOpened(!isBurgerOpened);
-  };
+  const handleToggleBurger = () => setIsBurgerOpened(!isBurgerOpened);
 
   return (
     <header className={`header ${shouldBeVisible ? 'header_sticky_hide' : ''}`}>
@@ -55,17 +50,9 @@ const Header = ({ openAuthModal }) => {
           <Button type="button" className="header__burger-btn" onClick={handleToggleBurger}>
             &nbsp;
           </Button>
-          <nav className="header__menu">
-            <ul className="header__list">
-              {pages.map((page) => (
-                <li className="header__list-item calender-open" key={page.url}>
-                  <Link to={page.url} className="header__list-link">
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+
+          <Navigation type="header" />
+
           <nav className="header__action">
             <Button className="header__button-search" onClick={toggleSearch} />
             <Button
@@ -81,47 +68,7 @@ const Header = ({ openAuthModal }) => {
         <Search handleClickLogin={handleButtonLoginClick} toggleSearch={toggleSearch} />
       )}
       <div className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
-        <div className="header__burger-wrapper">
-          <nav className="header__menu-burger">
-            <ul className="header__burger-list">
-              <li className="header__burger-item">
-                <Link to="/about" className="header__burger-link" onClick={handleToggleBurger}>
-                  О проекте
-                </Link>
-              </li>
-              {pages.map((page) => (
-                <li className="header__burger-item" key={page.url}>
-                  <Link
-                    to={page.url}
-                    className={`header__burger-link ${
-                      page.url === '/calendar' ? 'calender-open' : ''
-                    }`}
-                    onClick={handleToggleBurger}
-                  >
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <nav className="header__menu-burger">
-            <ul className="header__burger-list">
-              {socialLinks.map((social) => (
-                <li className="header__burger-item" key={social.title}>
-                  <a
-                    href={social.url}
-                    className="header__burger-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleToggleBurger}
-                  >
-                    {social.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        <Navigation type="header-burger" onClick={handleToggleBurger} />
       </div>
     </header>
   );

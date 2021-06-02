@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Popup from '../Popup/Popup';
-import Button from '../Button/Button';
+import PopupCitiesList from './PopupCitiesList';
 import './PopupCities.css';
 
 const PopupCities = ({ onClose, updateCity, cities }) => {
@@ -14,31 +14,9 @@ const PopupCities = ({ onClose, updateCity, cities }) => {
         <h3 className="cities__heading">Выберите ваш город</h3>
         <div className="cities__cities">
           <div className="cities__capitals">
-            <ul className="cities__list">
-              {cities.map(
-                (city) =>
-                  city.isPrimary && (
-                    <li key={city.id} className="cities__item">
-                      <Button className="cities__button" onClick={handleCityClick}>
-                        {city.name}
-                      </Button>
-                    </li>
-                  )
-              )}
-            </ul>
+            <PopupCitiesList cities={cities} isPrimary handleCityClick={handleCityClick} />
           </div>
-          <ul className="cities__list">
-            {cities.map(
-              (city) =>
-                !city.isPrimary && (
-                  <li key={city.id} className="cities__item">
-                    <Button className="cities__button" onClick={handleCityClick}>
-                      {city.name}
-                    </Button>
-                  </li>
-                )
-            )}
-          </ul>
+          <PopupCitiesList cities={cities} isPrimary={false} handleCityClick={handleCityClick} />
         </div>
       </div>
     </Popup>

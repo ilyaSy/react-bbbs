@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Story.css';
 import Button from '../Button/Button';
+import StoryImg from './StoryImg';
 
 const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
   const [leftImg, setLeftImg] = React.useState(0);
@@ -44,29 +45,17 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
           </blockquote>
 
           <div className="storypage__slider">
-            <img
-              className="storypage__img storypage__img_place_slider"
-              src={fullStory.images[leftImg]}
-              alt="изображение отсутствует"
-            />
+            <StoryImg src={fullStory.images[leftImg]} />
             <Button
               className="storypage__button storypage__button_back"
               onClick={handleBackClick}
             />
-            <img
-              className="storypage__img storypage__img_place_slider"
-              src={fullStory.images[centerImg]}
-              alt="изображение отсутствует"
-            />
+            <StoryImg src={fullStory.images[centerImg]} />
             <Button
               className="storypage__button storypage__button_forward"
               onClick={handleForwardClick}
             />
-            <img
-              className="storypage__img storypage__img_place_slider"
-              src={fullStory.images[rightImg]}
-              alt="изображение отсутствует"
-            />
+            <StoryImg src={fullStory.images[rightImg]} />
           </div>
           <div className="storypage__paragraph-flex">
             <p className="storypage__paragraph">{fullStory.p[1]}</p>

@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
-
 import logoSbss from '../../assets/img/logoSBSS.svg';
 
-import { pages, socialLinks } from '../../config/config';
+import Navigation from '../Navigation/Navigation';
 import './footer.css';
 
 const Footer = () => (
@@ -19,43 +17,9 @@ const Footer = () => (
       >
         Помочь деньгами
       </a>
-      <div className="footer__navigation">
-        <nav className="footer__menu">
-          <ul className="footer__list footer__list_type_nav">
-            <li className="footer__list-item">
-              <Link to="/about" className="footer__list-link">
-                О проекте
-              </Link>
-            </li>
-            {pages.map((page) => (
-              <li className="footer__list-item" key={page.url}>
-                <Link
-                  to={page.url}
-                  className={`footer__list-link ${page.url === '/calendar' ? 'calender-open' : ''}`}
-                >
-                  {page.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <nav className="footer__menu">
-          <ul className="footer__list footer__list_type_social">
-            {socialLinks.map((social) => (
-              <li className="footer__list-item" key={social.title}>
-                <a
-                  href={social.url}
-                  className="footer__list-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {social.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+
+      <Navigation type="footer" />
+
       <div className="footer__about">
         <p className="footer__copyright">&#169; Старшие Братья Старшие Сестры</p>
         <div className="footer__develop">

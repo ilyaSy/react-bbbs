@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import formatDate from '../../utils/formatDate';
 import calendarBtn from '../../assets/img/calendar-btn.svg';
+import CalendarCardLi from './CalendarCardLi';
 import './CalendarCard.css';
 
 const CalendarCard = ({
@@ -36,11 +37,7 @@ const CalendarCard = ({
   };
 
   return (
-    <div
-      className={`calendar ${booked ? 'calendar_onclick' : ''}`}
-
-      // role="presentation"
-    >
+    <div className={`calendar ${booked && 'calendar_onclick'}`}>
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
         <p className="calendar__date">
@@ -50,17 +47,9 @@ const CalendarCard = ({
         <p className="calendar__day">{day}</p>
       </div>
       <ul className="calendar__contacts">
-        <li className="calendar__contacts-item">
-          <p className="calendar__time">
-            {startTime}-{endTime}
-          </p>
-        </li>
-        <li className="calendar__contacts-item">
-          <p className="calendar__adress">{address}</p>
-        </li>
-        <li className="calendar__contacts-item">
-          <p className="calendar__phone">{contact}</p>
-        </li>
+        <CalendarCardLi value={`${startTime}-${endTime}`} classTag="time" />
+        <CalendarCardLi value={address} classTag="address" />
+        <CalendarCardLi value={contact} classTag="phone" />
       </ul>
       <form className="calendar__sign-up" onSubmit={handleSubmit}>
         <div className="calendar__sign-up_flex">
@@ -105,20 +94,6 @@ CalendarCard.propTypes = {
   handleCalendarCardClick: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleDeleteEvent: PropTypes.func.isRequired,
-  // address: PropTypes.string,
-  // contact: PropTypes.string,
-  // title: PropTypes.string,
-  // seats: PropTypes.number,
-  // startAt: PropTypes.string,
-  // endAt: PropTypes.string,
 };
 
-CalendarCard.defaultProps = {
-  // address: '',
-  // contact: '',
-  // title: '',
-  // startAt: '',
-  // endAt: '',
-  // seats: 0,
-};
 export default CalendarCard;

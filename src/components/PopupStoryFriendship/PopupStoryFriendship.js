@@ -41,7 +41,6 @@ const PopupStoryFriendship = ({
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(errors);
 
   const handleToggleFeedback = (event) => {
     setFeedback(event.target.value);
