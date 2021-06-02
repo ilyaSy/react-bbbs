@@ -15,6 +15,7 @@ import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import PopupCities from '../PopupCities/PopupCities';
 import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
+import useAuth from '../../utils/hooks/useAuth';
 
 function App() {
   const [events, setEvents] = useState();
@@ -33,7 +34,12 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    Api.getCities().then(setCities).catch(console.log);
+    Promise.all([Api.getCities(), Api.getMain()])
+      .then(([dataCities, dataMain]) => {
+        setCities(dataCities);
+        setMainData(dataMain);
+      })
+      .catch(console.log);
   }, []);
 
   const updateCity = (city) => {
@@ -62,29 +68,15 @@ function App() {
     setIsPopupCitiesOpen(false);
     setIsPopupVideoOpen(false);
   };
-
-  const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('jwt');
-    Api.removeAuthHeader();
-    history.push('/');
-  };
-
-  const handleSubmitAuth = (userName, password) => {
-    Api.login({ userName, password })
-      .then((data) => {
-        if (data.refresh && data.access) {
-          Api.setAuthHeader(data.access);
-          localStorage.setItem('jwt', data.access);
-          Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-            setCurrentUser({ userName, ...userData });
-            setEvents(eventsData);
-            closeAllModal();
-          });
-        }
-      })
-      .catch(console.log);
-  };
+  // кастомный Хук авторизации
+  const { logout, handleSubmitAuth } = useAuth({
+    setCurrentUser,
+    setEvents,
+    localStorage,
+    Api,
+    history,
+    closeAllModal,
+  });
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
@@ -124,10 +116,6 @@ function App() {
   const handleRecommentdPlace = () => {
     setIsPlacePopupOpened(!isPlacePopupOpened);
   };
-
-  useEffect(() => {
-    Api.getMain().then(setMainData).catch(console.log);
-  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
