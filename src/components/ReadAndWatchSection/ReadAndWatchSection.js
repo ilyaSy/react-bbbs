@@ -6,7 +6,7 @@ import defineColor from '../../utils/renderColors';
 import defineFigure from '../../utils/renderFigures';
 import Book from '../Book/Book';
 import Movie from '../Movie/Movie';
-import ArticleRaW from '../ArticleRaW/ArticleRaW';
+import Card from '../Card/Card';
 import ArticleGuide from '../ArticleGuide/ArticleGuide';
 
 const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
@@ -33,7 +33,7 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
       currentPageData = data
         .slice(offset, offset + perPage)
         .map(({ id: key, ...args }, i) => (
-          <ArticleRaW color={defineColor(i)} key={key} {...args} />
+          <Card type="article" size="small" color={defineColor(i)} data={args} />
         ));
       break;
     case 'Фильмы':

@@ -1,8 +1,8 @@
-import './Place.css';
+import './Card.css';
 import PropTypes from 'prop-types';
 import Tag from '../Tag/Tag';
 
-const Place = ({ place, size, color }) => (
+const Card = ({ type, size, color, data }) => (
   <section className="event-soon-card">
     <div className="event-soon">
       <div className="event-soon__content-wrapper">
@@ -14,24 +14,24 @@ const Place = ({ place, size, color }) => (
                 : 'profile-grid__column_size_thin event-soon__description_size_small'
             }`}
           >
-            {(place.category || place.chosen) && (
-              <Tag
-                modifier="tag_place_event"
-                tagText={place.category ? place.category : 'Выбор наставника'}
-              />
+            {type === 'place' && data.category && (
+              <Tag modifier="tag_place_event" tagText={data.category} />
             )}
             <div
               className={`event-soon__caption ${
                 size === 'big' ? 'event-soon__caption_size_big' : 'event-soon__caption_with_tag'
               }`}
             >
-              <div className="event-soon__title">{place.title}</div>
-              <div className="event-soon__subtitle">{place.address}</div>
+              <div className="event-soon__title">{data.title}</div>
+              <div className="event-soon__subtitle">
+                {type === 'place' && data.address}
+                {type === 'article' && data.author}
+              </div>
             </div>
-            {place.chosen && size === 'big' && (
-              <img src={place.imageUrl} className="event-soon__img" alt="Локация" />
+            {data.chosen && size === 'big' && (
+              <img src={data.imageUrl} className="event-soon__img" alt="Локация" />
             )}
-            <a href={place.link} target="_blank" rel="noreferrer" className="event-soon__link">
+            <a href={data.link} target="_blank" rel="noreferrer" className="event-soon__link">
               перейти на сайт
             </a>
           </div>
@@ -55,16 +55,16 @@ const Place = ({ place, size, color }) => (
                     : 'event-article__title_size_small'
                 }`}
               >
-                {place.sex && `${place.sex}. `}
-                {place.age && `${place.age} лет. `}
-                {place.type}
+                {data.sex && `${data.sex}. `}
+                {data.age && `${data.age} лет. `}
+                {data.type}
               </div>
               <p
                 className={`event-article__paragraph ${
                   size === 'big' ? 'event-article__paragraph_size_big' : ''
                 }`}
               >
-                {place.description}
+                {data.text}
               </p>
             </article>
           </div>
@@ -75,26 +75,27 @@ const Place = ({ place, size, color }) => (
 );
 
 // TO DO:
-// * отображение карточек в правильном порядке цветов (модификатор color класса event-soon__description)
 // * type и category это одно и то же (познавательное vs театры/музеи/экскурсии) ???
 
-Place.propTypes = {
-  place: PropTypes.objectOf(PropTypes.any),
+Card.propTypes = {
+  type: PropTypes.string.isRequired,
+  data: PropTypes.objectOf(PropTypes.any),
   size: PropTypes.string.isRequired,
   color: PropTypes.string,
 };
 
-Place.defaultProps = {
-  place: {
-    description: 'Описание не найдено',
-    imageUrl: '',
+Card.defaultProps = {
+  data: {
+    text: 'Текст не найден',
+    imageUrl: 'Изображение не найдено',
     info: '',
-    title: 'Место',
-    name: '',
+    title: 'Название',
+    address: '',
+    author: '',
     link: '',
     chosen: false,
   },
   color: '',
 };
 
-export default Place;
+export default Card;

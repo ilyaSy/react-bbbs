@@ -25,12 +25,10 @@ const BooksPage = () => {
           .flat()
           .filter((book) => book);
         setBooksData(orderedBookList);
-        // список уникальных жанров для кнопок фильтра-рубрикатора
         const genresData = data
           .map((item) => item.genre)
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setGenres(['Все', ...genresData]);
-        // подсчёт кол-ва страниц: округляем частное общего кол-ва книг на кол-во книг на одной странице
         pageCount = Math.ceil(data.length / perPage);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));

@@ -14,6 +14,7 @@ import ReadAndWatch from '../ReadAndWatch/ReadAndWatch';
 import BooksPage from '../BooksPage/BooksPage';
 import MoviesPage from '../MoviesPage/MoviesPage';
 import VideosPage from '../VideosPage/VideosPage';
+import ArticlesPage from '../ArticlesPage/ArticlesPage';
 import './content.css';
 
 export default function Content({
@@ -89,6 +90,10 @@ export default function Content({
 
         <Route exact path="/read-watch/videos">
           <VideosPage handlerVideoClick={handlerVideoClick} />
+        </Route>
+
+        <Route exact path="/read-watch/articles">
+          <ArticlesPage />
         </Route>
 
         <Route exact path="/read-watch/movies">

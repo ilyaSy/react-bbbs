@@ -31,7 +31,6 @@ const VideosPage = ({ handlerVideoClick }) => {
           .map((video) => video.tag.name)
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setVideoTags(['Все', ...tagsData]);
-        // Подсчёт кол-ва страниц: округление частного общего кол-ва на кол-во на одной странице
         pageCount = Math.ceil(data.length / perPage);
       })
       .catch(console.log);
@@ -42,7 +41,9 @@ const VideosPage = ({ handlerVideoClick }) => {
     .filter((video) => activeTag === 'Все' || activeTag === video.tag.name)
     // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
     .filter(({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа'))
-    .map(({ tag, id: key, ...args }) => <Movie type="video" key={key} handlerVideoClick={handlerVideoClick} tag={[tag]} {...args} />);
+    .map(({ tag, id: key, ...args }) => (
+      <Movie type="video" key={key} handlerVideoClick={handlerVideoClick} tag={[tag]} {...args} />
+    ));
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
