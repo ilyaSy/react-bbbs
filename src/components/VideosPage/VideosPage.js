@@ -59,22 +59,24 @@ const VideosPage = ({ handlerVideoClick }) => {
   return (
     <section className="videopage content main__section">
       <h1 className="heading">Видео</h1>
-      <div className="buttons-scroll buttons-scroll_centered">
-        {videoTags.map((tag) =>
-          // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
-          !currentUser && tag === 'Ресурсная группа' ? null : (
-            <Button
-              className={`button button_color_black button_place_scroll ${
-                tag === activeTag ? 'button_color_black_active' : ''
-              }`}
-              type="button"
-              key={tag}
-              onClick={() => handleTagFilter(tag)}
-            >
-              {tag}
-            </Button>
-          )
-        )}
+      <div className="scroll-container">
+        <div className="buttons-scroll">
+          {videoTags.map((tag) =>
+            // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
+            !currentUser && tag === 'Ресурсная группа' ? null : (
+              <Button
+                className={`button button_color_black button_place_scroll ${
+                  tag === activeTag ? 'button_color_black_active' : ''
+                }`}
+                type="button"
+                key={tag}
+                onClick={() => handleTagFilter(tag)}
+              >
+                {tag}
+              </Button>
+            )
+          )}
+        </div>
       </div>
       {activeTag === 'Все' && (
         <section className="mainvideo videopage__bigvideo">

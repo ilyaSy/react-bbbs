@@ -86,33 +86,35 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
       </div>
       <section className="event-choice">
         <h1 className="heading">Куда пойти</h1>
-        <div className="buttons-scroll buttons-scroll_place_event">
-          {categories.map((category) => (
-            <Button
-              className={`button button_color_black button_place_scroll buttons-scroll_place_go ${
-                category === activeCategory ? 'button_color_black_active' : ''
-              }`}
-              type="button"
-              key={category}
-              onClick={() => handleCategoryFilter(category)}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-        <div className="buttons-scroll buttons-scroll_place_event">
-          {ages.map((age) => (
-            <Button
-              className={`button button_color_black button_place_scroll buttons-scroll_place_go ${
-                age === activeAgeRange ? 'button_color_black_active' : ''
-              }`}
-              type="button"
-              key={age}
-              onClick={() => handleAgeFilter(age)}
-            >
-              {age}
-            </Button>
-          ))}
+        <div className="scroll-container">
+          <div className="buttons-scroll buttons-scroll_place_event">
+            {categories.map((category) => (
+              <Button
+                className={`button button_color_black button_place_scroll ${
+                  category === activeCategory ? 'button_color_black_active' : ''
+                }`}
+                type="button"
+                key={category}
+                onClick={() => handleCategoryFilter(category)}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+          <div className="buttons-scroll buttons-scroll_place_event">
+            {ages.map((age) => (
+              <Button
+                className={`button button_color_black button_place_scroll ${
+                  age === activeAgeRange ? 'button_color_black_active' : ''
+                }`}
+                type="button"
+                key={age}
+                onClick={() => handleAgeFilter(age)}
+              >
+                {age}
+              </Button>
+            ))}
+          </div>
         </div>
       </section>
       {currentUser && (
