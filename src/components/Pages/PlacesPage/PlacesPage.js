@@ -6,11 +6,11 @@ import Card from '../../Cards/Card/Card';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
 import defineCardColor from '../../../utils/renderColors';
-import './WhereToGo.css';
+import './PlacesPage.css';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
-const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
+const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState('Все');
@@ -149,16 +149,16 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
   );
 };
 
-WhereToGo.propTypes = {
+PlacesPage.propTypes = {
   onRecommendPlace: PropTypes.func,
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
   isPlacePopupOpened: PropTypes.bool.isRequired,
 };
-WhereToGo.defaultProps = {
+PlacesPage.defaultProps = {
   onRecommendPlace: () => {},
   openPopupCities: () => {},
   unauthСity: () => {},
 };
 
-export default WhereToGo;
+export default PlacesPage;

@@ -3,7 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MainPage from '../Pages/MainPage/MainPage';
 import Calendar from '../Pages/Calendar/Calendar';
-import WhereToGo from '../Pages/WhereToGo/WhereToGo';
+import PlacesPage from '../Pages/PlacesPage/PlacesPage';
 import QuestionsPage from '../Pages/QuestionsPage/QuestionsPage';
 import PersonalAccount from '../Pages/PersonalAccount/PersonalAccount';
 import ProtectedRoute from '../UI/ProtectedRoute/ProtectedRoute';
@@ -74,7 +74,7 @@ export default function Content({
         </Route>
 
         <Route exact path="/where-to-go">
-          <WhereToGo
+          <PlacesPage
             onRecommendPlace={onRecommendPlace}
             openPopupCities={openPopupCities}
             unauthСity={unauthСity}
