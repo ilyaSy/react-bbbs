@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Popup from '../Popup/Popup';
-import PopupCitiesList from './PopupCitiesList';
+import PopupCitiesList from '../../UI/PopupCitiesList/PopupCitiesList';
 import './PopupCities.css';
 
 const PopupCities = ({ onClose, updateCity, cities }) => {

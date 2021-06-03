@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Button from '../../UI/Button/Button';
+import Button from '../Button/Button';
 
 const PopupCitiesList = ({ cities, handleCityClick, isPrimary }) => (
   <ul className="cities__list">

@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../UI/Button/Button';
 import PlacesFormPreview from '../../Cards/PlacesFormPreview/PlacesFormPreview';
 import Card from '../../Cards/Card/Card';
-import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
 import defineCardColor from '../../../utils/renderColors';
-import './PlacesPage.css';
 import Heading from '../../UI/Heading/Heading';
+import Button from '../../UI/Button/Button';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import CurrentUserContext from '../../../contexts/CurrentUserContext';
+import './PlacesPage.css';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
@@ -88,34 +89,18 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
       <section className="event-choice">
         <Heading>Куда пойти</Heading>
         <div className="scroll-container">
-          <div className="buttons-scroll buttons-scroll_place_event">
-            {categories.map((category) => (
-              <Button
-                className={`button button_color_black button_place_scroll ${
-                  category === activeCategory ? 'button_color_black_active' : ''
-                }`}
-                type="button"
-                key={category}
-                onClick={() => handleCategoryFilter(category)}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-          <div className="buttons-scroll buttons-scroll_place_event">
-            {ages.map((age) => (
-              <Button
-                className={`button button_color_black button_place_scroll ${
-                  age === activeAgeRange ? 'button_color_black_active' : ''
-                }`}
-                type="button"
-                key={age}
-                onClick={() => handleAgeFilter(age)}
-              >
-                {age}
-              </Button>
-            ))}
-          </div>
+          <ScrollContainer
+            list={categories}
+            activeItem={activeCategory}
+            onClick={handleCategoryFilter}
+            sectionSubClass="buttons-scroll_place_event"
+          />
+          <ScrollContainer
+            list={ages}
+            activeItem={activeAgeRange}
+            onClick={handleAgeFilter}
+            sectionSubClass="buttons-scroll_place_event"
+          />
         </div>
       </section>
       {currentUser && (
