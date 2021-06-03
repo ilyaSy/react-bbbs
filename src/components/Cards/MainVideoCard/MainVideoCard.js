@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './MainVideo.css';
+import './MainVideoCard.css';
 
-const MainVideo = ({ video }) => (
+const MainVideoCard = ({ video }) => (
   <div className="mainvideo">
     <div className="mainvideo__description">
       <Link className="mainlink" to="/*" />
@@ -18,11 +18,18 @@ const MainVideo = ({ video }) => (
   </div>
 );
 
-MainVideo.propTypes = {
-  video: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+MainVideoCard.propTypes = {
+  video: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.objectOf(PropTypes.any),
+      PropTypes.bool,
+    ])
+  ),
 };
 
-MainVideo.defaultProps = {
+MainVideoCard.defaultProps = {
   video: {
     link: '/',
     title: '',
@@ -31,4 +38,4 @@ MainVideo.defaultProps = {
   },
 };
 
-export default MainVideo;
+export default MainVideoCard;

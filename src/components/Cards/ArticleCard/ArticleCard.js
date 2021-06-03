@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './Article.css';
+import './ArticleCard.css';
 
-const Article = ({ article }) => (
+const ArticleCard = ({ article }) => (
   <article className="preview-article" style={{ backgroundColor: `${article.color}` }}>
     <Link className="mainlink" to="/*" />
     <h2 className="preview-article__title">{article.title}</h2>
@@ -12,15 +12,15 @@ const Article = ({ article }) => (
   </article>
 );
 
-Article.propTypes = {
+ArticleCard.propTypes = {
   article: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
 };
 
-Article.defaultProps = {
+ArticleCard.defaultProps = {
   article: {
     color: '#C8CAD1',
     title: 'Статья отсутствует',
   },
 };
 
-export default Article;
+export default ArticleCard;

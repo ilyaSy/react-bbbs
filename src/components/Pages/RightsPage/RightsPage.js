@@ -4,7 +4,7 @@ import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
 import Api from '../../../utils/api';
 import Button from '../../UI/Button/Button';
-import ArticleRights from '../../Cards/ArticleRights/ArticleRights';
+import RightsCard from '../../Cards/RightsCard/RightsCard';
 import './RightsPage.css';
 
 const RightsPage = () => {
@@ -33,7 +33,7 @@ const RightsPage = () => {
     .slice(offset, offset + perPage)
     .filter((item) => activeTag === 'Все' || activeTag === item.tag.name)
     .map(({ id: key, ...args }, i) => (
-      <ArticleRights key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
+      <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
     ));
 
   const handlePageClick = ({ selected }) => {

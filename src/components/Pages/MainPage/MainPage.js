@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import MainPageSection from '../../Containers/MainPageSection/MainPageSection';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
 import MoviesContainer from '../../Containers/MoviesContainer/MoviesContainer';
-import MainVideo from '../../Containers/MainVideo/MainVideo';
+import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import CalendarCard from '../../Cards/CalendarCard/CalendarCard';
-import Intro from '../../Cards/Intro/Intro';
-import Story from '../../Cards/Story/Story';
-import Article from '../../Cards/Article/Article';
+import IntroCard from '../../Cards/IntroCard/IntroCard';
+import StoryCard from '../../Cards/StoryCard/StoryCard';
+import ArticleCard from '../../Cards/ArticleCard/ArticleCard';
 import Card from '../../Cards/Card/Card';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import FacebookPlugin from '../../UI/FacebookPlugin/FacebookPlugin';
+import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 
 export default function MainPage({
   mainData,
@@ -39,28 +40,32 @@ export default function MainPage({
             handleDeleteEvent={handleDeleteEvent}
           />
         ) : (
-          <Intro />
+          <IntroCard />
         )}
-        <Story history={mainData?.history} isStoryPage={false} />
+        <StoryCard history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
         <Card type="place" data={mainData?.place} size="big" color="yellow" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
-        <Article article={mainData?.articles[0]} />
+        <ArticleCard article={mainData?.articles[0]} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer movies={mainData?.movies} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <MainVideo video={mainData?.video} />
+        <MainVideoCard video={mainData?.video} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
-        <QuestionsContainer questions={mainData?.questions} place="main" />
+        <QuestionsContainer place="main">
+          {mainData?.questions.map(({ id: key, ...props }) => (
+            <QuestionCard place="main" key={key} {...props} />
+          ))}
+        </QuestionsContainer>
       </MainPageSection>
       <MainPageSection className="mainpage__block">
-        <Article article={mainData?.articles[1]} />
+        <ArticleCard article={mainData?.articles[1]} />
       </MainPageSection>
     </MainPageSection>
   );

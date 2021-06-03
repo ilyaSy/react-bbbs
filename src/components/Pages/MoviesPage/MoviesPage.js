@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Api from '../../../utils/api';
 import Button from '../../UI/Button/Button';
-import Movie from '../../Cards/Movie/Movie';
+import VideoCard from '../../Cards/VideoCard/VideoCard';
 import './MoviesPage.css';
 
 const MoviesPage = () => {
@@ -37,7 +37,7 @@ const MoviesPage = () => {
       const tagTexts = movie.tags.map((tag) => tag.name);
       return activeGenre === 'Все' || tagTexts.includes(activeGenre);
     })
-    .map(({ id: key, ...args }) => <Movie key={key} type="movie" {...args} />);
+    .map(({ id: key, ...args }) => <VideoCard key={key} type="movie" {...args} />);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);

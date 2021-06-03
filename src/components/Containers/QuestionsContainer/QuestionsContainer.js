@@ -1,26 +1,23 @@
 import PropTypes from 'prop-types';
 import './QuestionsContainer.css';
-import Question from '../../Cards/Question/Question';
 
-const QuestionsContainer = ({ questions, place }) => (
+const QuestionsContainer = ({ place, children }) => (
   <ul
     className={`questions ${
       place === 'main' ? 'questions_place_mainpage' : 'questions__page-list'
     }`}
   >
-    {questions.map(({ title, tags }) => (
-      <Question title={title} tags={tags} place={place} key={`${Math.random()}_${title}`} />
-    ))}
+    {children}
   </ul>
 );
 
 QuestionsContainer.propTypes = {
   place: PropTypes.string.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.any),
+  children: PropTypes.arrayOf(PropTypes.node),
 };
 
 QuestionsContainer.defaultProps = {
-  questions: [],
+  children: [],
 };
 
 export default QuestionsContainer;

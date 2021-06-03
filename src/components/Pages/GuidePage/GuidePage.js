@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import defineFigure from '../../../utils/renderFigures';
 import Api from '../../../utils/api';
-import ArticleGuide from '../../Cards/ArticleGuide/ArticleGuide';
+import GuideCard from '../../Cards/GuideCard/GuideCard';
 import './GuidePage.css';
 
 const GuidePage = () => {
@@ -23,9 +23,7 @@ const GuidePage = () => {
 
   const currentPageData = materialsData
     .slice(offset, offset + perPage)
-    .map(({ id: key, ...args }, i) => (
-      <ArticleGuide key={key} figure={defineFigure(i)} {...args} />
-    ));
+    .map(({ id: key, ...args }, i) => <GuideCard key={key} figure={defineFigure(i)} {...args} />);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);

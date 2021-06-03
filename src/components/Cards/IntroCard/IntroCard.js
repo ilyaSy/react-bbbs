@@ -1,7 +1,7 @@
-import './Intro.css';
+import './IntroCard.css';
 import logoSbbsBlue from '../../../assets/img/logoSBSS-blue.svg';
 
-const Intro = () => (
+const IntroCard = () => (
   <div className="bbbs">
     <div className="bbbs__logo">
       <a
@@ -22,4 +22,4 @@ const Intro = () => (
   </div>
 );
 
-export default Intro;
+export default IntroCard;

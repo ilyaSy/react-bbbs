@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './Story.css';
+import './StoryCard.css';
 import Button from '../../UI/Button/Button';
 import StoryImg from '../../UI/StoryImg/StoryImg';
 
-const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
+const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
   const [leftImg, setLeftImg] = React.useState(0);
   const [centerImg, setCenterImg] = React.useState(1);
   const [rightImg, setRightImg] = React.useState(2);
@@ -76,14 +76,14 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
   );
 };
 
-Story.propTypes = {
+StoryCard.propTypes = {
   history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   isStoryPage: PropTypes.bool,
   fullStory: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.any])),
   storyRef: PropTypes.func,
 };
 
-Story.defaultProps = {
+StoryCard.defaultProps = {
   history: {
     imageUrl: '../../assets/img/story-back.png',
     title: 'История',
@@ -93,4 +93,4 @@ Story.defaultProps = {
   storyRef: () => {},
 };
 
-export default Story;
+export default StoryCard;

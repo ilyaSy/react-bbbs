@@ -1,28 +1,25 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './ArticleGuide.css';
+import './GuideCard.css';
 
-const ArticleGuide = ({ title, text, imageUrl, figure, size }) => (
+const GuideCard = ({ title, imageUrl, figure }) => (
   <li className="guide__item">
     <Link className="mainlink" to="/" />
     <div className="guide__img-wrapper">
       <img className={`guide__img ${`guide__img_${figure}`}`} src={imageUrl} alt={title} />
     </div>
     <h3 className="guide__caption">{title}</h3>
-    {size === 'big' && <p>{text}</p>}
   </li>
 );
 
-ArticleGuide.propTypes = {
+GuideCard.propTypes = {
   title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   figure: PropTypes.string,
-  size: PropTypes.string.isRequired,
 };
 
-ArticleGuide.defaultProps = {
-  figure: 'round',
+GuideCard.defaultProps = {
+  figure: '',
 };
 
-export default ArticleGuide;
+export default GuideCard;

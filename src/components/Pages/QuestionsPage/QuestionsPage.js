@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Button from '../../UI/Button/Button';
-import Question from '../../Cards/Question/Question';
+import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
+import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
 import './QuestionsPage.css';
 
 const QuestionsPage = () => {
@@ -67,14 +68,14 @@ const QuestionsPage = () => {
             ))}
           </div>
         </div>
-        <ul className="questions questions__page-list">
+        <QuestionsContainer place="questions">
           {questions
             .filter((q) => {
               const tagTexts = q.tags.map((tag) => tag.name);
               return activeTag === 'Все' || tagTexts.includes(activeTag);
             })
             .map(({ title, answerText, tags, id }) => (
-              <Question
+              <QuestionCard
                 path={id}
                 title={title}
                 tags={tags}
@@ -83,7 +84,7 @@ const QuestionsPage = () => {
                 key={id}
               />
             ))}
-        </ul>
+        </QuestionsContainer>
         {currentUser && (
           <>
             <form

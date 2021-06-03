@@ -4,11 +4,11 @@ import ReactPaginate from 'react-paginate';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
 import Button from '../../UI/Button/Button';
-import MainVideo from '../../Containers/MainVideo/MainVideo';
-import Movie from '../../Cards/Movie/Movie';
+import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
+import VideoCard from '../../Cards/VideoCard/VideoCard';
 import './VideosPage.css';
 
-const VideosPage = ({ handlerVideoClick }) => {
+const VideosPage = ({ handleVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
   const [videosData, setVideosData] = useState([]);
   const [chosenVideo, setChosenVideo] = useState({});
@@ -42,7 +42,7 @@ const VideosPage = ({ handlerVideoClick }) => {
     // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
     .filter(({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа'))
     .map(({ tag, id: key, ...args }) => (
-      <Movie type="video" key={key} handlerVideoClick={handlerVideoClick} tag={[tag]} {...args} />
+      <VideoCard type="video" key={key} handleVideoClick={handleVideoClick} tag={[tag]} {...args} />
     ));
 
   const handlePageClick = ({ selected }) => {
@@ -81,7 +81,7 @@ const VideosPage = ({ handlerVideoClick }) => {
       </div>
       {activeTag === 'Все' && (
         <section className="mainvideo videopage__bigvideo">
-          <MainVideo video={chosenVideo} />
+          <MainVideoCard video={chosenVideo} />
         </section>
       )}
       <ul className="videopage__list">{currentPageData}</ul>
@@ -104,6 +104,11 @@ const VideosPage = ({ handlerVideoClick }) => {
 };
 
 VideosPage.propTypes = {
-  handlerVideoClick: PropTypes.func.isRequired,
+  handleVideoClick: PropTypes.func,
 };
+
+VideosPage.defaultProps = {
+  handleVideoClick: () => {},
+};
+
 export default VideosPage;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import './Book.css';
+import './BookCard.css';
 
-const Book = ({ title, author, year, description, genre }) => (
+const BookCard = ({ title, author, year, description, genre }) => (
   <li className="book">
     <div className="book__item">
       <div
@@ -22,7 +22,7 @@ const Book = ({ title, author, year, description, genre }) => (
   </li>
 );
 
-Book.propTypes = {
+BookCard.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
@@ -30,4 +30,4 @@ Book.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export default Book;
+export default BookCard;
