@@ -1,6 +1,6 @@
 import logoSbss from '../../assets/img/logoSBSS.svg';
 
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../Containers/Navigation/Navigation';
 import './footer.css';
 
 const Footer = () => (
