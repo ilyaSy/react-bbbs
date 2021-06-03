@@ -16,6 +16,7 @@ import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
 import PopupCities from '../Modals/PopupCities/PopupCities';
 import YoutubeEmbed from '../Modals/YoutubeEmbed/YoutubeEmbed';
 import useAuth from '../../hooks/useAuth';
+import PopupError from '../Modals/PopupError/PopupError';
 
 function App() {
   const [events, setEvents] = useState();
@@ -28,6 +29,7 @@ function App() {
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
   const [isPopupVideoOpen, setIsPopupVideoOpen] = useState(false);
+  const [isRegisterErrorModalOpened, setRegisterErrorModalOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
   const [cities, setCities] = useState([]);
@@ -67,6 +69,7 @@ function App() {
     setSelectedCalendarCard(null);
     setIsPopupCitiesOpen(false);
     setIsPopupVideoOpen(false);
+    setRegisterErrorModalOpened(false);
   };
   // кастомный Хук авторизации
   const { logout, handleSubmitAuth } = useAuth({
@@ -102,7 +105,7 @@ function App() {
         closeAllModal();
         setIsRegisterSuccessModalOpened(true);
       })
-      .catch(console.log);
+      .catch(() => setRegisterErrorModalOpened(true));
   };
 
   const handleDeleteEvent = (calendarCard) => {
@@ -159,6 +162,7 @@ function App() {
         />
       )}
       {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
+      {isRegisterErrorModalOpened && <PopupError closeModal={closeAllModal} />}
       {isPopupCitiesOpen && (
         <PopupCities
           onClose={closeAllModal}
