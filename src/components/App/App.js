@@ -8,14 +8,14 @@ import Api from '../../utils/api';
 import './App.css';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import AuthPopup from '../AuthPopup/AuthPopup';
-import PopupMeet from '../PopupMeet/PopupMeet';
-import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
-import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
-import ScrollToTop from '../ScrollToTop/ScrollToTop';
-import PopupCities from '../PopupCities/PopupCities';
-import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
-import useAuth from '../../utils/hooks/useAuth';
+import AuthPopup from '../Modals/AuthPopup/AuthPopup';
+import PopupMeet from '../Modals/PopupMeet/PopupMeet';
+import PopupConfirmRegister from '../Modals/PopupConfirmRegister/PopupConfirmRegister';
+import PopupRegisterSuccess from '../Modals/PopupRegisterSuccess/PopupRegisterSuccess';
+import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
+import PopupCities from '../Modals/PopupCities/PopupCities';
+import YoutubeEmbed from '../Modals/YoutubeEmbed/YoutubeEmbed';
+import useAuth from '../../hooks/useAuth';
 
 function App() {
   const [events, setEvents] = useState();

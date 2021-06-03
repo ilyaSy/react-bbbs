@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MainPage from '../MainPage/MainPage';
-import Calendar from '../Calendar/Calendar';
-import WhereToGo from '../WhereToGo/WhereToGo';
-import QuestionsPage from '../QuestionsPage/QuestionsPage';
-import PersonalAccount from '../PersonalAccount/PersonalAccount';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import About from '../About/About';
-import StoryPage from '../StoryPage/StoryPage';
-import PageNotFound from '../PageNotFound/PageNotFound';
-import ReadAndWatch from '../ReadAndWatch/ReadAndWatch';
-import BooksPage from '../BooksPage/BooksPage';
-import MoviesPage from '../MoviesPage/MoviesPage';
-import VideosPage from '../VideosPage/VideosPage';
-import ArticlesPage from '../ArticlesPage/ArticlesPage';
-import GuidePage from '../GuidePage/GuidePage';
-import RightsPage from '../RightsPage/RightsPage';
+import MainPage from '../Pages/MainPage/MainPage';
+import Calendar from '../Pages/Calendar/Calendar';
+import WhereToGo from '../Pages/WhereToGo/WhereToGo';
+import QuestionsPage from '../Pages/QuestionsPage/QuestionsPage';
+import PersonalAccount from '../Pages/PersonalAccount/PersonalAccount';
+import ProtectedRoute from '../UI/ProtectedRoute/ProtectedRoute';
+import About from '../Pages/About/About';
+import StoryPage from '../Pages/StoryPage/StoryPage';
+import PageNotFound from '../Pages/PageNotFound/PageNotFound';
+import ReadAndWatch from '../Pages/ReadAndWatch/ReadAndWatch';
+import BooksPage from '../Pages/BooksPage/BooksPage';
+import MoviesPage from '../Pages/MoviesPage/MoviesPage';
+import VideosPage from '../Pages/VideosPage/VideosPage';
+import ArticlesPage from '../Pages/ArticlesPage/ArticlesPage';
+import GuidePage from '../Pages/GuidePage/GuidePage';
+import RightsPage from '../Pages/RightsPage/RightsPage';
 import './content.css';
 
 export default function Content({
