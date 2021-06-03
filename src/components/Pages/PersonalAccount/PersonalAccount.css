@@ -1,3 +1,26 @@
+.personal-account {
+  margin: 30px auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: visible;
+}
+
+.personal-account__buttons {
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+.personal-account__button_closed {
+  display: none;
+}
+
 .personal-account__text {
   margin: 0;
   margin-right: 30px;
@@ -11,12 +34,15 @@
   cursor: pointer;
 }
 
+.personal-account__photo-text_closed {
+  display: none;
+}
+
 .personal-account__text:hover {
   color: #224cff;
 }
 
 .personal-account__text:last-of-type {
-  margin-right: 0;
 }
 
 .personal-account__events {
@@ -39,6 +65,11 @@
   line-height: 30px;
   text-align: center;
   color: #1a1a1a;
+}
+
+.personal-account__title_type_content {
+  width: 100%;
+  margin-bottom: 50px;
 }
 
 /*---------------------------*/
@@ -522,7 +553,7 @@
 
   .personal-account__feedback-btn:nth-of-type(1) {
     grid-column: 1/2;
-    margin-right: 0;
+    margin-right: 20px;
     justify-self: start;
     position: relative;
   }
@@ -605,6 +636,7 @@
   .personal-account__feedback-btn {
     font-size: 12px;
     line-height: 17px;
+    text-align: left;
   }
 
   .personal-account__subtitle-month_place_form {
