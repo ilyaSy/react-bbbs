@@ -7,6 +7,7 @@ import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
 import defineCardColor from '../../../utils/renderColors';
 import './PlacesPage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
@@ -85,7 +86,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
         </Button>
       </div>
       <section className="event-choice">
-        <h1 className="heading">Куда пойти</h1>
+        <Heading>Куда пойти</Heading>
         <div className="scroll-container">
           <div className="buttons-scroll buttons-scroll_place_event">
             {categories.map((category) => (

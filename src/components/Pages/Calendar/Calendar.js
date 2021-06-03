@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
+import './Calendar.css';
 import formatDate from '../../../utils/formatDate';
-
 import Button from '../../UI/Button/Button';
 import CalendarCard from '../../Cards/CalendarCard/CalendarCard';
-import './Calendar.css';
+import Heading from '../../UI/Heading/Heading';
 
 const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent, events }) => {
   const [months, setMonths] = useState([]);
@@ -22,7 +22,6 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
     };
 
     setActiveMonth('');
-    // setEvents(events);
     setMonths(resetMonths(events));
   }, []);
 
@@ -36,7 +35,7 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
 
   return (
     <section className="grid-calendar content main__section">
-      <h1 className="heading">Календарь</h1>
+      <Heading>Календарь</Heading>
       <div className="grid-calendar__buttons">
         {months.map((month) => (
           <Button

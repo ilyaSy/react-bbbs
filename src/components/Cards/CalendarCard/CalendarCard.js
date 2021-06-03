@@ -36,7 +36,7 @@ const CalendarCard = ({
   };
 
   return (
-    <div className={`calendar ${booked && 'calendar_onclick'}`}>
+    <div className={`calendar ${booked ? 'calendar_onclick' : ''}`}>
       <div className="calendar__about">
         <p className="calendar__participants">Волонтёры + дети</p>
         <p className="calendar__date">

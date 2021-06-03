@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Api from '../../../utils/api';
 import BookCard from '../../Cards/BookCard/BookCard';
 import Button from '../../UI/Button/Button';
+import Heading from '../../UI/Heading/Heading';
 import './BooksPage.css';
 
 const BooksPage = () => {
@@ -62,7 +63,7 @@ const BooksPage = () => {
 
   return (
     <section className="bookpage content main__section">
-      <h1 className="heading">Книги</h1>
+      <Heading>Книги</Heading>
       <div className="scroll-container">
         <div className="buttons-scroll">
           {genres.map((genre) => (

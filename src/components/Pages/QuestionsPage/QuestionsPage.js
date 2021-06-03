@@ -6,6 +6,7 @@ import Button from '../../UI/Button/Button';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
 import './QuestionsPage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
@@ -51,7 +52,7 @@ const QuestionsPage = () => {
   return (
     <>
       <section className="content main__section">
-        <h1 className="heading">Ответы на вопросы</h1>
+        <Heading>Ответы на вопросы</Heading>
         <div className="scroll-container">
           <div className="buttons-scroll">
             {tagList.map((tag) => (

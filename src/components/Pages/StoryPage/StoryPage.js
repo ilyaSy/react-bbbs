@@ -3,6 +3,7 @@ import './StoryPage.css';
 import Button from '../../UI/Button/Button';
 import StoryCard from '../../Cards/StoryCard/StoryCard';
 import fullStories from '../../../utils/stories';
+import Heading from '../../UI/Heading/Heading';
 
 const StoryPage = () => {
   // stotyRefs свяжет id кнопок с именами, с article соответствующих историй
@@ -13,7 +14,7 @@ const StoryPage = () => {
 
   return (
     <section className="storypage content main__section">
-      <h1 className="heading">Истории дружбы</h1>
+      <Heading>Истории дружбы</Heading>
       <p className="storypage__caption">
         Результат нашей работы сложно показать цифрами. Как измерить и&nbsp;взвесить дружбу? Как
         оценить успехи абсолютно разных детей? У&nbsp;каждой пары&nbsp;&mdash; свой результат

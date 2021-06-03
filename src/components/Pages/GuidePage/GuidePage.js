@@ -4,6 +4,7 @@ import defineFigure from '../../../utils/renderFigures';
 import Api from '../../../utils/api';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
 import './GuidePage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const GuidePage = () => {
   const [materialsData, setMaterialsData] = useState([]);
@@ -31,7 +32,7 @@ const GuidePage = () => {
 
   return (
     <section className="guides content main__section">
-      <h1 className="heading">Справочник</h1>
+      <Heading>Справочник</Heading>
       <p className="guides__caption">
         Памятка новичка&nbsp;&mdash; наши метариалы, где сможете найти всю базовую информацию,
         рассказанную на&nbsp;вводном тренинге. Если вы&nbsp;захотите освежить свои знания,

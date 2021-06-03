@@ -11,7 +11,7 @@ const PersonalAccountCardStory = ({
   cardId,
   setCardStory,
 }) => {
-  const { place, image, date, description, feedback } = cardStory;
+  const { place, image, date, text, feedback } = cardStory;
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
   const handleClick = () => setIsDeletePopupOpen(true);
@@ -55,7 +55,7 @@ const PersonalAccountCardStory = ({
           </p>
         </div>
 
-        <p className="personal-account__textarea-text">{description} </p>
+        <p className="personal-account__textarea-text">{text}</p>
 
         <div className="personal-account__feedback personal-account__feedback_added">
           <div
