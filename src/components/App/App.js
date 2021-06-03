@@ -99,6 +99,7 @@ function App() {
     Api.updateEvent(calendarCard)
       .then((data) => {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
+        closeAllModal();
         setIsRegisterSuccessModalOpened(true);
       })
       .catch(console.log);

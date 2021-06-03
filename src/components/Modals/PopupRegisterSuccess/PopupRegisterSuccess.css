@@ -44,11 +44,9 @@
   margin-bottom: 0;
 }
 
-.success__image {
-  margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: 30px;
-  padding: 0;
+.success__animation {
+  padding-top: 80px;
+  padding-bottom: 30px;
   width: 413px;
   height: 169px;
 }
@@ -124,6 +122,12 @@
     max-width: 313px;
     height: 69px;
     margin-top: 60px;
+  }
+  .success__animation {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    width: 213px;
+    height: 109px;
   }
 }
 
