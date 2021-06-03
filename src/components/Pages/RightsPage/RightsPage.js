@@ -8,6 +8,31 @@ import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import './RightsPage.css';
 
+// function setActiveFilters(newTag, filters) {
+//   if (filters.length === 1 && filters[0] && newTag === 'Все') {
+//     return filters;
+//   }
+
+//   let newFilters = filters;
+//   const index = newFilters.indexOf(newTag);
+//   if (index !== -1) {
+//     newFilters.splice(index, 1);
+//   } else {
+//     newFilters.unshift(newTag);
+//   }
+
+//   if (!newFilters.length) newFilters = ['Все'];
+
+//   return newFilters;
+// }
+
+// function filterByFiltersList(item, filters) {
+//   if (filters.length === 1 && filters[0] === 'Все') {
+//     return true;
+//   }
+//   return filters.indexOf(item) !== -1;
+// }
+
 const RightsPage = () => {
   const [rightsData, setRightsData] = useState([]);
   const [tags, setTags] = useState([]);
