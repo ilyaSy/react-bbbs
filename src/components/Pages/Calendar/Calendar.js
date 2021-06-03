@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import './Calendar.css';
+
 import formatDate from '../../../utils/formatDate';
-import Button from '../../UI/Button/Button';
 import CalendarCard from '../../Cards/CalendarCard/CalendarCard';
 import Heading from '../../UI/Heading/Heading';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import './Calendar.css';
 
 const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent, events }) => {
   const [months, setMonths] = useState([]);
@@ -36,22 +37,14 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
   return (
     <section className="grid-calendar content main__section">
       <Heading>Календарь</Heading>
-      <div className="grid-calendar__buttons">
-        {months.map((month) => (
-          <Button
-            className={`button button_color_black button_place_scroll ${
-              month === activeMonth && 'button_color_black_active'
-            }`}
-            type="button"
-            key={`${month}`}
-            onClick={() => {
-              handleFilterMonth(month);
-            }}
-          >
-            {month}
-          </Button>
-        ))}
-      </div>
+
+      <ScrollContainer
+        list={months}
+        activeItem={activeMonth}
+        onClick={handleFilterMonth}
+        sectionClass="grid-calendar__buttons"
+      />
+
       <div className="grid-calendar__grid">
         {events
           .filter(

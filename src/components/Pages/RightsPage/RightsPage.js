@@ -3,10 +3,10 @@ import ReactPaginate from 'react-paginate';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
 import Api from '../../../utils/api';
-import Button from '../../UI/Button/Button';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
-import './RightsPage.css';
 import Heading from '../../UI/Heading/Heading';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import './RightsPage.css';
 
 const RightsPage = () => {
   const [rightsData, setRightsData] = useState([]);
@@ -53,20 +53,7 @@ const RightsPage = () => {
     <section className="law content main__section">
       <Heading>Права детей</Heading>
       <div className="scroll-container">
-        <div className="buttons-scroll">
-          {tags.map((tag) => (
-            <Button
-              className={`button button_color_black button_place_scroll ${
-                tag === activeTag ? 'button_color_black_active' : ''
-              }`}
-              type="button"
-              key={tag}
-              onClick={() => handleTagFilter(tag)}
-            >
-              {tag}
-            </Button>
-          ))}
-        </div>
+        <ScrollContainer list={tags} activeItem={activeTag} onClick={handleTagFilter} />
       </div>
       <ul className="law__list">{currentPageData}</ul>
       <ReactPaginate

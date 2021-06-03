@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Api from '../../../utils/api';
 import BookCard from '../../Cards/BookCard/BookCard';
-import Button from '../../UI/Button/Button';
 import Heading from '../../UI/Heading/Heading';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import './BooksPage.css';
 
 const BooksPage = () => {
@@ -65,20 +65,7 @@ const BooksPage = () => {
     <section className="bookpage content main__section">
       <Heading>Книги</Heading>
       <div className="scroll-container">
-        <div className="buttons-scroll">
-          {genres.map((genre) => (
-            <Button
-              className={`button button_color_black button_place_scroll ${
-                genre === activeGenre ? 'button_color_black_active' : ''
-              }`}
-              type="button"
-              key={genre}
-              onClick={() => handleGenreFilter(genre)}
-            >
-              {genre}
-            </Button>
-          ))}
-        </div>
+        <ScrollContainer list={genres} activeItem={activeGenre} onClick={handleGenreFilter} />
       </div>
       <ul className="bookpage__list">{currentPageData}</ul>
       <ReactPaginate

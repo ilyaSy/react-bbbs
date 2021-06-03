@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
-import Button from '../../UI/Button/Button';
 import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
-import './VideosPage.css';
 import Heading from '../../UI/Heading/Heading';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -62,23 +62,14 @@ const VideosPage = ({ handleVideoClick }) => {
     <section className="videopage content main__section">
       <Heading>Видео</Heading>
       <div className="scroll-container">
-        <div className="buttons-scroll">
-          {videoTags.map((tag) =>
-            // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
-            !currentUser && tag === 'Ресурсная группа' ? null : (
-              <Button
-                className={`button button_color_black button_place_scroll ${
-                  tag === activeTag ? 'button_color_black_active' : ''
-                }`}
-                type="button"
-                key={tag}
-                onClick={() => handleTagFilter(tag)}
-              >
-                {tag}
-              </Button>
-            )
+        <ScrollContainer
+          list={videoTags.filter(
+            (tag) => currentUser || !currentUser === (tag !== 'Ресурсная группа')
           )}
-        </div>
+          activeItem={activeTag}
+          onClick={handleTagFilter}
+          sectionClass="grid-calendar__buttons"
+        />
       </div>
       {activeTag === 'Все' && (
         <section className="mainvideo videopage__bigvideo">

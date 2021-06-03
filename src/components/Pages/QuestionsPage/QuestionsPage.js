@@ -2,11 +2,12 @@ import { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
-import Button from '../../UI/Button/Button';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
-import './QuestionsPage.css';
 import Heading from '../../UI/Heading/Heading';
+// import Button from '../../UI/Button/Button';
+import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import './QuestionsPage.css';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
@@ -54,20 +55,11 @@ const QuestionsPage = () => {
       <section className="content main__section">
         <Heading>Ответы на вопросы</Heading>
         <div className="scroll-container">
-          <div className="buttons-scroll">
-            {tagList.map((tag) => (
-              <Button
-                className={`button button_color_black button_place_scroll ${
-                  tag.name === activeTag ? 'button_color_black_active' : ''
-                }`}
-                onClick={() => handleTagFilter(tag.name)}
-                type="button"
-                key={tag.id}
-              >
-                {tag.name}
-              </Button>
-            ))}
-          </div>
+          <ScrollContainer
+            list={tagList.map((tag) => tag.name)}
+            activeItem={activeTag}
+            onClick={handleTagFilter}
+          />
         </div>
         <QuestionsContainer place="questions">
           {questions
