@@ -62,11 +62,9 @@
   cursor: pointer;
   outline: none;
   background-image: url('../../../assets/img/calendar-btn.svg');
+  background-size: cover;
 }
 
-/* .button_color_blue-round:hover {
-  background-color: transparent;
-} */
 .button_color_blue_onclick.button_color_blue-round {
   background-color: rgba(200, 209, 255, 1);
 }
