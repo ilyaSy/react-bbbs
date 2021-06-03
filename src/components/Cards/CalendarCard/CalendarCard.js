@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
 import formatDate from '../../../utils/formatDate';
-import calendarBtn from '../../../assets/img/calendar-btn.svg';
 import CalendarCardLi from './CalendarCardLi';
 import './CalendarCard.css';
 
@@ -79,9 +78,7 @@ const CalendarCard = ({
           }`}
           type="button"
           onClick={handleCardClick}
-        >
-          <img className="calendar__btn" src={calendarBtn} alt="calendar" />
-        </Button>
+        />
       </form>
     </div>
   );
