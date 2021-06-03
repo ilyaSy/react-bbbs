@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import Movie from '../../Cards/Movie/Movie';
+import VideoCard from '../../Cards/VideoCard/VideoCard';
 import './MoviesContainer.css';
 
 function MoviesContainer({ movies }) {
   return (
     <ul className="movies">
-      {movies.map(({ title, ...args }) => (
-        <Movie type="movie" key={`${Math.random()}_${title}`} {...args} />
+      {movies.map(({ id: key, ...props }) => (
+        <VideoCard type="movie" key={key} {...props} />
       ))}
     </ul>
   );

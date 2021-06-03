@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
-import './PopupPlaces.css';
+import './PlacesForm.css';
 
-const PopupPlaces = ({ onClose, isPlacePopupOpened, showInputs }) => {
+const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs }) => {
   const {
     register,
     formState: { errors },
@@ -165,14 +165,14 @@ const PopupPlaces = ({ onClose, isPlacePopupOpened, showInputs }) => {
   );
 };
 
-PopupPlaces.propTypes = {
+PlacesForm.propTypes = {
   onClose: PropTypes.func,
   isPlacePopupOpened: PropTypes.bool.isRequired,
   showInputs: PropTypes.bool.isRequired,
 };
 
-PopupPlaces.defaultProps = {
+PlacesForm.defaultProps = {
   onClose: () => {},
 };
 
-export default PopupPlaces;
+export default PlacesForm;

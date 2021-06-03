@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import './StoryPage.css';
 import Button from '../../UI/Button/Button';
-import Story from '../../Cards/Story/Story';
+import StoryCard from '../../Cards/StoryCard/StoryCard';
 import fullStories from '../../../utils/stories';
 
 const StoryPage = () => {
@@ -35,7 +35,7 @@ const StoryPage = () => {
         </div>
       </div>
       {fullStories.map((fullStory) => (
-        <Story
+        <StoryCard
           storyRef={(el) => {
             storyRefs.current[fullStory.id] = el;
           }}

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import PopupPlaces from '../PopupPlaces/PopupPlaces';
-import './CreatePlace.css';
+import PlacesForm from '../PlacesForm/PlacesForm';
+import './PlacesFormPreview.css';
 
-const CreatePlace = ({ onRecommendPlace, isPlacePopupOpened }) => {
+const PlacesFormPreview = ({ onRecommendPlace, isPlacePopupOpened }) => {
   const [showInputs, setShowInputs] = useState(false);
   const handleRecommendPlace = (e) => {
     e.preventDefault();
@@ -23,14 +23,14 @@ const CreatePlace = ({ onRecommendPlace, isPlacePopupOpened }) => {
           , и мы добавим вашу&nbsp;рекомендацию.
         </p>
       </div>
-      <PopupPlaces isPlacePopupOpened={isPlacePopupOpened} showInputs={showInputs} />
+      <PlacesForm isPlacePopupOpened={isPlacePopupOpened} showInputs={showInputs} />
     </section>
   );
 };
 
-CreatePlace.propTypes = {
+PlacesFormPreview.propTypes = {
   onRecommendPlace: PropTypes.func.isRequired,
   isPlacePopupOpened: PropTypes.bool.isRequired,
 };
 
-export default CreatePlace;
+export default PlacesFormPreview;

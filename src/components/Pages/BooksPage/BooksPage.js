@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Api from '../../../utils/api';
-import Book from '../../Cards/Book/Book';
+import BookCard from '../../Cards/BookCard/BookCard';
 import Button from '../../UI/Button/Button';
 import './BooksPage.css';
 
@@ -38,7 +38,7 @@ const BooksPage = () => {
     .slice(offset, offset + perPage)
     .filter((book) => activeGenre === 'Все' || activeGenre === book.genre)
     .map(({ title, author, year, description, genre, id }) => (
-      <Book
+      <BookCard
         title={title}
         author={author}
         year={year}

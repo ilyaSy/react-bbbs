@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import '../../App/App.css';
 import Tag from '../../UI/Tag/Tag';
 import Button from '../../UI/Button/Button';
-import './Question.css';
+import './QuestionCard.css';
 
-const Question = ({ anchor, title, tags, answerText, place }) => {
+const QuestionCard = ({ anchor, title, tags, answerText, place }) => {
   const tagsText = tags.map((tag) => tag.name);
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
 
@@ -48,7 +48,7 @@ const Question = ({ anchor, title, tags, answerText, place }) => {
   );
 };
 
-Question.propTypes = {
+QuestionCard.propTypes = {
   anchor: PropTypes.string,
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.any).isRequired,
@@ -56,9 +56,9 @@ Question.propTypes = {
   place: PropTypes.string.isRequired,
 };
 
-Question.defaultProps = {
+QuestionCard.defaultProps = {
   anchor: '',
   answerText: '',
 };
 
-export default Question;
+export default QuestionCard;

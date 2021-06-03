@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
-import CreatePlace from '../../Cards/CreatePlace/CreatePlace';
+import PlacesFormPreview from '../../Cards/PlacesFormPreview/PlacesFormPreview';
 import Card from '../../Cards/Card/Card';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Api from '../../../utils/api';
@@ -118,7 +118,10 @@ const WhereToGo = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopu
         </div>
       </section>
       {currentUser && (
-        <CreatePlace onRecommendPlace={onRecommendPlace} isPlacePopupOpened={isPlacePopupOpened} />
+        <PlacesFormPreview
+          onRecommendPlace={onRecommendPlace}
+          isPlacePopupOpened={isPlacePopupOpened}
+        />
       )}
       {activeCategory === 'Все' && (
         <Card

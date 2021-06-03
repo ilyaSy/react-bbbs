@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
-import './Movie.css';
+import './VideoCard.css';
 
-const Movie = ({ type, tags, title, info, imageUrl, link }) => {
+const VideoCard = ({ type, tags, title, info, imageUrl, link }) => {
   let tagsText;
   if (tags) tagsText = tags.map((tag) => tag.name);
   return (
@@ -36,7 +36,7 @@ const Movie = ({ type, tags, title, info, imageUrl, link }) => {
 //   с полноформатной версией видео, также видео можно посмотреть, кликнув на его превью"
 //   ПРЕВЬЮ
 
-Movie.propTypes = {
+VideoCard.propTypes = {
   type: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.any),
   title: PropTypes.string.isRequired,
@@ -45,8 +45,8 @@ Movie.propTypes = {
   link: PropTypes.string.isRequired,
 };
 
-Movie.defaultProps = {
+VideoCard.defaultProps = {
   tags: [],
 };
 
-export default Movie;
+export default VideoCard;

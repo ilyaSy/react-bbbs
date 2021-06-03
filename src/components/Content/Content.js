@@ -33,7 +33,7 @@ export default function Content({
   openPopupCities,
   unauthСity,
   isPlacePopupOpened,
-  handlerVideoClick,
+  handleVideoClick,
 }) {
   const location = useLocation();
 
@@ -99,7 +99,7 @@ export default function Content({
         </Route>
 
         <Route exact path="/read-watch/videos">
-          <VideosPage handlerVideoClick={handlerVideoClick} />
+          <VideosPage handleVideoClick={handleVideoClick} />
         </Route>
 
         <Route exact path="/read-watch/articles">
@@ -107,7 +107,7 @@ export default function Content({
         </Route>
 
         <Route exact path="/read-watch/movies">
-          <MoviesPage handlerVideoClick={handlerVideoClick} />
+          <MoviesPage handleVideoClick={handleVideoClick} />
         </Route>
 
         <Route exact path="/read-watch/books">
@@ -147,7 +147,7 @@ Content.propTypes = {
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
   isPlacePopupOpened: PropTypes.bool.isRequired,
-  handlerVideoClick: PropTypes.bool.isRequired,
+  handleVideoClick: PropTypes.func.isRequired,
 };
 
 Content.defaultProps = {
