@@ -121,7 +121,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <ScrollToTop />
-      <Header openAuthModal={openAuthModal} />
+      <Header openAuthModal={openAuthModal} onLogout={logout} openPopupCities={openPopupCities} />
       <Content
         mainData={mainData}
         openAuthModal={openAuthModal}
