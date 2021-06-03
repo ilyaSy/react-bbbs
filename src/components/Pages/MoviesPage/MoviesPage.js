@@ -4,6 +4,7 @@ import Api from '../../../utils/api';
 import Button from '../../UI/Button/Button';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import './MoviesPage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const MoviesPage = () => {
   const [moviesData, setMoviesData] = useState([]);
@@ -53,7 +54,7 @@ const MoviesPage = () => {
 
   return (
     <section className="filmpage content main__section">
-      <h1 className="heading">Фильмы</h1>
+      <Heading>Фильмы</Heading>
       <div className="scroll-container">
         <div className="buttons-scroll">
           {genres.map((genre) => (

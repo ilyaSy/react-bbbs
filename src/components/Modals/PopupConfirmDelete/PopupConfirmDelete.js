@@ -28,11 +28,12 @@ PopupConfirmDelete.propTypes = {
   place: PropTypes.string.isRequired,
   handleSubmitDeletePopup: PropTypes.func,
   cardId: PropTypes.number.isRequired,
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
   closePopup: PropTypes.func,
 };
 PopupConfirmDelete.defaultProps = {
   handleSubmitDeletePopup: () => {},
   closePopup: () => {},
+  isOpen: false,
 };
 export default PopupConfirmDelete;

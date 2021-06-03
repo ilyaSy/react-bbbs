@@ -6,6 +6,7 @@ import Api from '../../../utils/api';
 import Button from '../../UI/Button/Button';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import './RightsPage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const RightsPage = () => {
   const [rightsData, setRightsData] = useState([]);
@@ -50,7 +51,7 @@ const RightsPage = () => {
 
   return (
     <section className="law content main__section">
-      <h1 className="heading">Права детей</h1>
+      <Heading>Права детей</Heading>
       <div className="scroll-container">
         <div className="buttons-scroll">
           {tags.map((tag) => (

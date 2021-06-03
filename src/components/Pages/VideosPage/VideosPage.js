@@ -7,6 +7,7 @@ import Button from '../../UI/Button/Button';
 import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import './VideosPage.css';
+import Heading from '../../UI/Heading/Heading';
 
 const VideosPage = ({ handleVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -59,7 +60,7 @@ const VideosPage = ({ handleVideoClick }) => {
 
   return (
     <section className="videopage content main__section">
-      <h1 className="heading">Видео</h1>
+      <Heading>Видео</Heading>
       <div className="scroll-container">
         <div className="buttons-scroll">
           {videoTags.map((tag) =>

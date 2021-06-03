@@ -12,17 +12,17 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const currentUser = useContext(CurrentUserContext);
 
   const [stories, setStories] = useState([]);
-  const [isPopupStoryOpen, setIsPopupStoryOpen] = useState(false);
+  const [isPopupAddStoryOpen, setPopupAddStoryOpen] = useState(false);
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
     Api.getProfileStory().then(setStories).catch(console.log);
   }, []);
 
-  const openPopupStory = () => setIsPopupStoryOpen(true);
+  const openPopupStory = () => setPopupAddStoryOpen(true);
 
   const closePopup = () => {
-    setIsPopupStoryOpen(false);
+    setPopupAddStoryOpen(false);
     setCardStory(null);
   };
 
@@ -48,7 +48,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const handleSubmitDeletePopup = (cardId) => {
     Api.deleteProfileStory({ id: cardId })
       .then(() => {
-        const newArr = stories.filter((story, id) => id !== cardId);
+        const newArr = stories.filter((_, id) => id !== cardId);
         setStories(newArr);
       })
       .catch(console.log);
@@ -76,7 +76,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
             ? 'У вас нет записи на мероприятия'
             : 'Вы записаны на следующие мероприятия'}
         </h2>
-        <div className="personal-account__event">
+        <div className="buttons-scroll personal-account__event">
           {events
             .filter((e) => e.booked)
             .map((event) => (
@@ -88,17 +88,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
             ))}
         </div>
       </div>
-      <div className="personal-account__add-meet">
-        <Button
-          className="button button_color_blue button_type_round"
-          type="button"
-          onClick={openPopupStory}
-        />
-        <Button className="button personal-account__meet-text" onClick={openPopupStory}>
-          Добавить встречу
-        </Button>
-      </div>
-      {isPopupStoryOpen ? (
+      {isPopupAddStoryOpen ? (
         <PopupStoryFriendship
           closePopup={closePopup}
           postStoriesData={handlePostProfileStory}
@@ -106,16 +96,28 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
           currentCardStory={cardStory}
         />
       ) : (
-        stories.map((story, id) => (
-          <PersonalAccountCardStory
-            cardStory={story}
-            key={`${story.id}`}
-            cardId={id}
-            openPopup={openPopupStory}
-            handleSubmitDeletePopup={handleSubmitDeletePopup}
-            setCardStory={setCardStory}
-          />
-        ))
+        <>
+          <div className="personal-account__add-meet">
+            <Button
+              className="button button_color_blue button_type_round"
+              type="button"
+              onClick={openPopupStory}
+            />
+            <Button className="button personal-account__meet-text" onClick={openPopupStory}>
+              Добавить встречу
+            </Button>
+          </div>
+          {stories.map((story, id) => (
+            <PersonalAccountCardStory
+              cardStory={story}
+              key={`${story.id}`}
+              cardId={id}
+              openPopup={openPopupStory}
+              handleSubmitDeletePopup={handleSubmitDeletePopup}
+              setCardStory={setCardStory}
+            />
+          ))}
+        </>
       )}
     </section>
   );
