@@ -68,8 +68,10 @@ const Story = ({ storyRef, history, fullStory, isStoryPage }) => {
         </article>
       ) : (
         <div className="story" style={{ backgroundImage: `url(${history.imageUrl})` }}>
-          <Link className="mainlink" to="/stories" rel="noopener noreferrer" />
-          <h3 className="story__title">{history.title}</h3>
+          <div className="story__overlay">
+            <Link className="mainlink" to="/stories" rel="noopener noreferrer" />
+            <h3 className="story__title">{history.title}</h3>
+          </div>
         </div>
       )}
     </>
