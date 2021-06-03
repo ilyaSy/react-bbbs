@@ -3,10 +3,12 @@ import Tag from '../../UI/Tag/Tag';
 
 const ArticleRights = ({ title, tag, figure, color }) => (
   <li className="law__item">
-    <a href="/" className={`law__link law__link_form_${figure} law__link_color_${color}`}>
-      <h3 className="law__heading">{title}</h3>
-      <Tag tagText={tag.name} />
-    </a>
+    <div className="law__wrapper">
+      <a href="/" className={`law__link law__link_form_${figure} law__link_color_${color}`}>
+        <h3 className="law__heading">{title}</h3>
+        <Tag tagText={tag.name} />
+      </a>
+    </div>
   </li>
 );
 
