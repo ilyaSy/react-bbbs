@@ -159,6 +159,7 @@
   white-space: nowrap;
   overflow-x: scroll;
   padding: 0 5%;
+  scrollbar-width: none;
 }
 
 .buttons-scroll::after {
@@ -187,10 +188,6 @@
 
 .buttons-scroll::-webkit-scrollbar {
   width: 0;
-}
-
-.buttons-scroll::-webkit-scrollbar {
-  width: 0px;
 }
 
 .buttons-scroll_place_event {
