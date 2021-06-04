@@ -67,6 +67,10 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
           containerClassName="readwatch__pagination"
           previousClassName="readwatch__back"
           nextClassName="readwatch__forward"
+          previousLinkClassName="readwatch__back-link"
+          nextLinkClassName="readwatch__forward-link"
+          nextLabel=""
+          previousLabel=""
           onPageChange={handlePageClick}
         />
       </div>

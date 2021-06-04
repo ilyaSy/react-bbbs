@@ -16,6 +16,7 @@
   box-sizing: border-box;
   padding: 15px 30px;
   border-radius: 30px;
+  height: 100%;
 }
 
 .event-soon__description_color_yellow {
@@ -368,7 +369,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding: 80px 0 0;
+  padding: 80px 0 90px;
 }
 
 .events-grid_place_raw {

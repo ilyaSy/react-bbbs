@@ -39,6 +39,7 @@
   position: absolute;
   right: 0;
   bottom: 15px;
+  font-size: 0;
   color: transparent;
 }
 
@@ -77,6 +78,15 @@
 .readwatch__forward .disabled {
   background-image: url('../../../assets/img/back.svg');
   rotate: 180deg;
+}
+
+.readwatch__back-link {
+  display: block;
+  height: 100%;
+}
+.readwatch__forward-link {
+  display: block;
+  height: 100%;
 }
 
 @media (max-width: 1024px) {
