@@ -86,7 +86,9 @@ const Navigation = ({ type, onClick, currentUser, openPopupCities, onLogout }) =
       {currentUser && type === 'header-burger' ? (
         <div className="burger__wrapper">
           <Button className="burger__city-btn" onClick={openPopupCities}>
-            {currentUser.city ? `${currentUser.city}. Изменить город` : 'Изменить ваш город'}
+            {currentUser.city
+              ? `${currentUser.city}. Изменить${'\u00A0'}город`
+              : 'Изменить ваш город'}
           </Button>
           <Button className="burger__city-btn" onClick={onLogout}>
             Выйти
@@ -101,8 +103,8 @@ const Navigation = ({ type, onClick, currentUser, openPopupCities, onLogout }) =
 
 Navigation.propTypes = {
   type: PropTypes.string.isRequired,
-  onLogout: PropTypes.func.isRequired,
-  openPopupCities: PropTypes.func.isRequired,
+  onLogout: PropTypes.func,
+  openPopupCities: PropTypes.func,
   onClick: PropTypes.func,
   currentUser: PropTypes.objectOf(PropTypes.any),
 };
@@ -110,6 +112,8 @@ Navigation.propTypes = {
 Navigation.defaultProps = {
   onClick: () => {},
   currentUser: {},
+  onLogout: () => {},
+  openPopupCities: () => {},
 };
 
 export default Navigation;
