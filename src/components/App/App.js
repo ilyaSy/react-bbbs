@@ -28,7 +28,7 @@ function App() {
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
-  const [isPopupVideoOpen, setIsPopupVideoOpen] = useState(false);
+  const [isPopupVideoOpen, setIsPopupVideoOpen] = useState({ isOpened: false });
   const [isRegisterErrorModalOpened, setRegisterErrorModalOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
@@ -68,7 +68,7 @@ function App() {
     setIsPlacePopupOpened(false);
     setSelectedCalendarCard(null);
     setIsPopupCitiesOpen(false);
-    setIsPopupVideoOpen(false);
+    setIsPopupVideoOpen({ isOpened: false });
     setRegisterErrorModalOpened(false);
   };
   // кастомный Хук авторизации
@@ -85,8 +85,11 @@ function App() {
     setIsPopupCitiesOpen(true);
   };
 
-  const handlerVideoClick = () => {
-    setIsPopupVideoOpen(true);
+  const handleVideoClick = (url) => {
+    setIsPopupVideoOpen({
+      url,
+      isOpened: true,
+    });
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -139,7 +142,7 @@ function App() {
         openPopupCities={openPopupCities}
         unauthСity={unauthСity}
         isPlacePopupOpened={isPlacePopupOpened}
-        handlerVideoClick={handlerVideoClick}
+        handleVideoClick={handleVideoClick}
       />
       <Footer />
 
@@ -171,7 +174,9 @@ function App() {
           currentUser={currentUser}
         />
       )}
-      {isPopupVideoOpen && <YoutubeEmbed onClose={closeAllModal} />}
+      {isPopupVideoOpen.isOpened && (
+        <YoutubeEmbed onClose={closeAllModal} link={isPopupVideoOpen.url || ''} />
+      )}
     </CurrentUserContext.Provider>
   );
 }

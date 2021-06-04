@@ -1,16 +1,30 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
 import './VideoCard.css';
+import Button from '../../UI/Button/Button';
 
-const VideoCard = ({ type, tags, title, info, imageUrl, link }) => {
+const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
   let tagsText;
   if (tags) tagsText = tags.map((tag) => tag.name);
+  const clickHandler = () => {
+    handleVideoClick(link);
+  };
+
+  const youtubeParser = (url) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : false;
+  };
+  const embedId = youtubeParser(link);
+
   return (
-    <li className="movie">
-      <Link to="/*" className="mainlink" />
+    <Button className="movie movie__card" onClick={clickHandler}>
       <div className="movie__img">
-        <img className="movie__poster" src={imageUrl} alt="" />
+        <img
+          className="movie__poster"
+          src={`http://img.youtube.com/vi/${embedId}/0.jpg`}
+          alt={title}
+        />
         <div className="movie__tags">
           {type === 'movie' &&
             tagsText.map((tagText) => (
@@ -27,7 +41,7 @@ const VideoCard = ({ type, tags, title, info, imageUrl, link }) => {
           {`смотреть ${type === 'movie' ? 'трейлер' : 'видео'}`}
         </a>
       </div>
-    </li>
+    </Button>
   );
 };
 
@@ -41,12 +55,13 @@ VideoCard.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.any),
   title: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  handleVideoClick: PropTypes.func,
 };
 
 VideoCard.defaultProps = {
   tags: [],
+  handleVideoClick: () => {},
 };
 
 export default VideoCard;

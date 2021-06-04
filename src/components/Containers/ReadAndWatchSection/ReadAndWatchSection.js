@@ -9,7 +9,7 @@ import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Card from '../../Cards/Card/Card';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
 
-const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
+const ReadAndWatchSection = ({ sectionTitle, path, data, handleVideoClick }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 4;
   const offset = currentPage * perPage;
@@ -27,7 +27,9 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
     case 'Видео':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ id: key, ...args }) => <VideoCard type="video" key={key} {...args} />);
+        .map(({ id: key, ...args }) => (
+          <VideoCard type="video" key={key} {...args} handleVideoClick={handleVideoClick} />
+        ));
       break;
     case 'Статьи':
       currentPageData = data
@@ -39,7 +41,9 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
     case 'Фильмы':
       currentPageData = data
         .slice(offset, offset + perPage)
-        .map(({ id: key, ...args }) => <VideoCard type="movie" key={key} {...args} />);
+        .map(({ id: key, ...args }) => (
+          <VideoCard type="movie" key={key} {...args} handleVideoClick={handleVideoClick} />
+        ));
       break;
     case 'Книги':
       currentPageData = data
@@ -67,6 +71,10 @@ const ReadAndWatchSection = ({ sectionTitle, path, data }) => {
           containerClassName="readwatch__pagination"
           previousClassName="readwatch__back"
           nextClassName="readwatch__forward"
+          previousLinkClassName="readwatch__back-link"
+          nextLinkClassName="readwatch__forward-link"
+          nextLabel=""
+          previousLabel=""
           onPageChange={handlePageClick}
         />
       </div>
@@ -85,10 +93,12 @@ ReadAndWatchSection.propTypes = {
   sectionTitle: PropTypes.string.isRequired,
   path: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
+  handleVideoClick: PropTypes.func,
 };
 
 ReadAndWatchSection.defaultProps = {
   path: '',
+  handleVideoClick: () => {},
 };
 
 export default ReadAndWatchSection;

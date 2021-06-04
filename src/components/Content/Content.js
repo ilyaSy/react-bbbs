@@ -87,7 +87,7 @@ export default function Content({
         </Route>
 
         <Route exact path="/read-watch">
-          <ReadAndWatch />
+          <ReadAndWatch handleVideoClick={handleVideoClick} />
         </Route>
 
         <Route exact path="/rights">
@@ -147,7 +147,7 @@ Content.propTypes = {
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
   isPlacePopupOpened: PropTypes.bool.isRequired,
-  handleVideoClick: PropTypes.func.isRequired,
+  handleVideoClick: PropTypes.func,
 };
 
 Content.defaultProps = {
@@ -157,4 +157,5 @@ Content.defaultProps = {
   updateCity: () => {},
   openPopupCities: () => {},
   unauthСity: '',
+  handleVideoClick: () => {},
 };

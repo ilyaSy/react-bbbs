@@ -114,6 +114,10 @@
   text-decoration: none;
   z-index: 4;
 }
+.movie__card {
+  border: none;
+  cursor: pointer;
+}
 
 .movie__link:hover {
   color: #2e2468;
