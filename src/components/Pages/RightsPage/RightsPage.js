@@ -3,40 +3,16 @@ import ReactPaginate from 'react-paginate';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
 import Api from '../../../utils/api';
+import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import './RightsPage.css';
 
-// function setActiveFilters(newTag, filters) {
-//   if (filters.length === 1 && filters[0] && newTag === 'Все') {
-//     return filters;
-//   }
-
-//   let newFilters = filters;
-//   const index = newFilters.indexOf(newTag);
-//   if (index !== -1) {
-//     newFilters.splice(index, 1);
-//   } else {
-//     newFilters.unshift(newTag);
-//   }
-
-//   if (!newFilters.length) newFilters = ['Все'];
-
-//   return newFilters;
-// }
-
-// function filterByFiltersList(item, filters) {
-//   if (filters.length === 1 && filters[0] === 'Все') {
-//     return true;
-//   }
-//   return filters.indexOf(item) !== -1;
-// }
-
 const RightsPage = () => {
   const [rightsData, setRightsData] = useState([]);
   const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState('Все');
+  const [activeTags, setActiveTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
@@ -57,7 +33,8 @@ const RightsPage = () => {
 
   const currentPageData = rightsData
     .slice(offset, offset + perPage)
-    .filter((item) => activeTag === 'Все' || activeTag === item.tag.name)
+    .filter((item) => filterItemByFiltersList(activeTags, item.tag.name))
+    .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
     .map(({ id: key, ...args }, i) => (
       <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
     ));
@@ -67,18 +44,14 @@ const RightsPage = () => {
   };
 
   const handleTagFilter = (tag) => {
-    if (activeTag && activeTag === tag) {
-      setActiveTag('Все');
-    } else {
-      setActiveTag(tag);
-    }
+    setActiveTags(setActiveFilters(activeTags, tag));
   };
 
   return (
     <section className="law content main__section">
       <Heading>Права детей</Heading>
       <div className="scroll-container">
-        <ScrollContainer list={tags} activeItem={activeTag} onClick={handleTagFilter} />
+        <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} />
       </div>
       <ul className="law__list">{currentPageData}</ul>
       <ReactPaginate

@@ -5,13 +5,17 @@ import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
 import Heading from '../../UI/Heading/Heading';
-// import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import {
+  setActiveFilters,
+  filterItemByFiltersList,
+  getMultipleTagsIndex,
+} from '../../../utils/filters';
 import './QuestionsPage.css';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
-  const [activeTag, setActiveTag] = useState('Все');
+  const [activeTags, setActiveTags] = useState(['Все']);
   const [questions, setQuestions] = useState([]);
   const [tagList, setTagList] = useState([]);
   const [didAsk, setDidAsk] = useState(false);
@@ -32,22 +36,24 @@ const QuestionsPage = () => {
   useEffect(() => {
     Api.getQuestions()
       .then((data) => {
-        const tagsData = data
-          .map((q) => q.tags)
+        const qs = data.map((q) => ({
+          tagNames: q.tags.map((tag) => tag.name),
+          ...q,
+        }));
+        setQuestions(qs);
+
+        const tagsData = qs
+          .map((q) => q.tagNames)
           .flat()
           .filter((item, i, arr) => arr.indexOf(item) === i);
-        setQuestions(data);
-        setTagList([{ id: 'tag1', name: 'Все' }, ...tagsData]);
+
+        setTagList(['Все', ...tagsData]);
       })
       .catch(console.log);
   }, []);
 
   const handleTagFilter = (tag) => {
-    if (activeTag === tag) {
-      setActiveTag('Все');
-    } else {
-      setActiveTag(tag);
-    }
+    setActiveTags(setActiveFilters(activeTags, tag));
   };
 
   return (
@@ -55,18 +61,16 @@ const QuestionsPage = () => {
       <section className="content main__section">
         <Heading>Ответы на вопросы</Heading>
         <div className="scroll-container">
-          <ScrollContainer
-            list={tagList.map((tag) => tag.name)}
-            activeItem={activeTag}
-            onClick={handleTagFilter}
-          />
+          <ScrollContainer list={tagList} activeItems={activeTags} onClick={handleTagFilter} />
         </div>
         <QuestionsContainer place="questions">
           {questions
-            .filter((q) => {
-              const tagTexts = q.tags.map((tag) => tag.name);
-              return activeTag === 'Все' || tagTexts.includes(activeTag);
-            })
+            .filter((q) => filterItemByFiltersList(activeTags, q.tagNames))
+            .sort(
+              (a, b) =>
+                getMultipleTagsIndex(activeTags, a.tagNames) >
+                getMultipleTagsIndex(activeTags, b.tagNames)
+            )
             .map(({ title, answerText, tags, id }) => (
               <QuestionCard
                 path={id}

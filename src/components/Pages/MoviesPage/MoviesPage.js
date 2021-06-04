@@ -4,12 +4,17 @@ import Api from '../../../utils/api';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import {
+  setActiveFilters,
+  filterItemByFiltersList,
+  getMultipleTagsIndex,
+} from '../../../utils/filters';
 import './MoviesPage.css';
 
 const MoviesPage = () => {
   const [moviesData, setMoviesData] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [activeGenre, setActiveGenre] = useState('Все');
+  const [activeGenres, setActiveGenres] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
@@ -18,26 +23,33 @@ const MoviesPage = () => {
   useEffect(() => {
     Api.getMovies()
       .then((data) => {
-        setMoviesData(data);
+        const movies = data.map((movie) => ({
+          tagNames: movie.tags.map((tag) => tag.name),
+          ...movie,
+        }));
+        setMoviesData(movies);
         // Список уникальных жанров для кнопок фильтра-рубрикатора
-        const genresData = data
-          .map((movie) => movie.tags)
+
+        const genresData = movies
+          .map((movie) => movie.tagNames)
           .flat()
-          .map((tag) => tag.name)
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setGenres(['Все', ...genresData]);
         // Подсчёт кол-ва страниц: округление частного общего кол-ва на кол-во на одной странице
-        pageCount = Math.ceil(data.length / perPage);
+        pageCount = Math.ceil(movies.length / perPage);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   }, []);
 
   const currentPageData = moviesData
     .slice(offset, offset + perPage)
-    .filter((movie) => {
-      const tagTexts = movie.tags.map((tag) => tag.name);
-      return activeGenre === 'Все' || tagTexts.includes(activeGenre);
-    })
+    // .filter((movie) => {
+    .filter((movie) => filterItemByFiltersList(activeGenres, movie.tagNames))
+    .sort(
+      (a, b) =>
+        getMultipleTagsIndex(activeGenres, a.tagNames) >
+        getMultipleTagsIndex(activeGenres, b.tagNames)
+    )
     .map(({ id: key, ...args }) => <VideoCard key={key} type="movie" {...args} />);
 
   const handlePageClick = ({ selected }) => {
@@ -45,18 +57,14 @@ const MoviesPage = () => {
   };
 
   const handleGenreFilter = (genre) => {
-    if (activeGenre && activeGenre === genre) {
-      setActiveGenre('Все');
-    } else {
-      setActiveGenre(genre);
-    }
+    setActiveGenres(setActiveFilters(activeGenres, genre));
   };
 
   return (
     <section className="filmpage content main__section">
       <Heading>Фильмы</Heading>
       <div className="scroll-container">
-        <ScrollContainer list={genres} activeItem={activeGenre} onClick={handleGenreFilter} />
+        <ScrollContainer list={genres} activeItems={activeGenres} onClick={handleGenreFilter} />
       </div>
       <ul className="filmpage__list">{currentPageData}</ul>
       <ReactPaginate
