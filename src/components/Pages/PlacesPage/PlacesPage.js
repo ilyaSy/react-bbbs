@@ -8,6 +8,7 @@ import Heading from '../../UI/Heading/Heading';
 import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
+import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import './PlacesPage.css';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
@@ -15,7 +16,7 @@ const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
   const [places, setPlaces] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('Все');
+  const [activeCategorys, setActiveCategorys] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const currentUser = useContext(CurrentUserContext);
 
@@ -36,11 +37,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
   }, []);
 
   const handleCategoryFilter = (category) => {
-    if (activeCategory && activeCategory === category) {
-      setActiveCategory('Все');
-    } else {
-      setActiveCategory(category);
-    }
+    setActiveCategorys(setActiveFilters(activeCategorys, category));
   };
 
   const handleAgeFilter = (age) => {
@@ -91,7 +88,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
         <div className="scroll-container">
           <ScrollContainer
             list={categories}
-            activeItem={activeCategory}
+            activeItems={activeCategorys}
             onClick={handleCategoryFilter}
             sectionSubClass="buttons-scroll_place_event"
           />
@@ -109,7 +106,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
           isPlacePopupOpened={isPlacePopupOpened}
         />
       )}
-      {activeCategory === 'Все' && (
+      {activeCategorys[0] === 'Все' && (
         <Card
           type="place"
           data={places.filter((place) => place.chosen)[0]}
@@ -119,8 +116,9 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
       )}
       <section className="events-grid">
         {places
-          .filter((place) => activeCategory === 'Все' || activeCategory === place.category)
+          .filter((place) => filterItemByFiltersList(activeCategorys, place.category))
           .filter((place) => filterAgeRanges(place.age))
+          .sort((a, b) => activeCategorys.indexOf(a.category) > activeCategorys.indexOf(b.category))
           .map((place, i) => (
             <Card
               type="place"

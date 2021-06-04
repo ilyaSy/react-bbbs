@@ -7,6 +7,7 @@ import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
@@ -14,7 +15,7 @@ const VideosPage = ({ handleVideoClick }) => {
   const [videosData, setVideosData] = useState([]);
   const [chosenVideo, setChosenVideo] = useState({});
   const [videoTags, setVideoTags] = useState([]);
-  const [activeTag, setActiveTag] = useState('Все');
+  const [activeTags, setActiveTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
@@ -39,7 +40,8 @@ const VideosPage = ({ handleVideoClick }) => {
 
   const currentPageData = videosData
     .slice(offset, offset + perPage)
-    .filter((video) => activeTag === 'Все' || activeTag === video.tag.name)
+    .filter((video) => filterItemByFiltersList(activeTags, video.tag.name))
+    .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
     // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
     .filter(({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа'))
     .map(({ tag, id: key, ...args }) => (
@@ -51,11 +53,7 @@ const VideosPage = ({ handleVideoClick }) => {
   };
 
   const handleTagFilter = (tag) => {
-    if (activeTag && activeTag === tag) {
-      setActiveTag('Все');
-    } else {
-      setActiveTag(tag);
-    }
+    setActiveTags(setActiveFilters(activeTags, tag));
   };
 
   return (
@@ -66,12 +64,12 @@ const VideosPage = ({ handleVideoClick }) => {
           list={videoTags.filter(
             (tag) => currentUser || !currentUser === (tag !== 'Ресурсная группа')
           )}
-          activeItem={activeTag}
+          activeItems={activeTags}
           onClick={handleTagFilter}
           sectionClass="grid-calendar__buttons"
         />
       </div>
-      {activeTag === 'Все' && (
+      {activeTags[0] === 'Все' && (
         <section className="mainvideo videopage__bigvideo">
           <MainVideoCard video={chosenVideo} />
         </section>
