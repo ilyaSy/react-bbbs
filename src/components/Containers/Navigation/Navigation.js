@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from '../../UI/Button/Button';
+import './Navigation.css';
 
 import { pages, socialLinks } from '../../../config/config';
 
-const Navigation = ({ type, onClick }) => {
+const Navigation = ({ type, onClick, currentUser, openPopupCities, onLogout }) => {
   let classWrapper = '';
   let classNav = '';
   let classUlPages = '';
@@ -81,17 +83,33 @@ const Navigation = ({ type, onClick }) => {
           ))}
         </ul>
       </nav>
+      {currentUser && type === 'header-burger' ? (
+        <div className="burger__wrapper">
+          <Button className="burger__city-btn" onClick={openPopupCities}>
+            {currentUser.city ? `${currentUser.city}. Изменить город` : 'Изменить ваш город'}
+          </Button>
+          <Button className="burger__city-btn" onClick={onLogout}>
+            Выйти
+          </Button>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
 
 Navigation.propTypes = {
   type: PropTypes.string.isRequired,
+  onLogout: PropTypes.func.isRequired,
+  openPopupCities: PropTypes.func.isRequired,
   onClick: PropTypes.func,
+  currentUser: PropTypes.objectOf(PropTypes.any),
 };
 
 Navigation.defaultProps = {
   onClick: () => {},
+  currentUser: {},
 };
 
 export default Navigation;
