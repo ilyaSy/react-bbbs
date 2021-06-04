@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Api from '../../../utils/api';
@@ -11,7 +12,7 @@ import {
 } from '../../../utils/filters';
 import './MoviesPage.css';
 
-const MoviesPage = () => {
+const MoviesPage = ({ handleVideoClick }) => {
   const [moviesData, setMoviesData] = useState([]);
   const [genres, setGenres] = useState([]);
   const [activeGenres, setActiveGenres] = useState(['Все']);
@@ -50,7 +51,9 @@ const MoviesPage = () => {
         getMultipleTagsIndex(activeGenres, a.tagNames) >
         getMultipleTagsIndex(activeGenres, b.tagNames)
     )
-    .map(({ id: key, ...args }) => <VideoCard key={key} type="movie" {...args} />);
+    .map(({ id: key, ...args }) => (
+      <VideoCard key={key} type="movie" {...args} handleVideoClick={handleVideoClick} />
+    ));
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -85,4 +88,10 @@ const MoviesPage = () => {
   );
 };
 
+MoviesPage.propTypes = {
+  handleVideoClick: PropTypes.func,
+};
+MoviesPage.defaultProps = {
+  handleVideoClick: () => {},
+};
 export default MoviesPage;
