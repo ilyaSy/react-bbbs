@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../../UI/Button/Button';
 import './Navigation.css';
-
+import MenuReadWatch from '../../Modals/MenuReadWatch/MenuReadWatch';
 import { pages, socialLinks } from '../../../config/config';
 
 const Navigation = ({ type, onClick, currentUser, openPopupCities, onLogout }) => {
@@ -37,9 +37,18 @@ const Navigation = ({ type, onClick, currentUser, openPopupCities, onLogout }) =
       <ul className={classUlPages}>
         {pages.map((page) => (
           <li className={classLi} key={page.url}>
-            <Link to={page.url} className={classLink}>
-              {page.title}
-            </Link>
+            {page.url === '/read-watch' ? (
+              <div className="header__menu-raw_hover">
+                <Link to={page.url} className={classLink}>
+                  {page.title}
+                </Link>
+                <MenuReadWatch />
+              </div>
+            ) : (
+              <Link to={page.url} className={classLink}>
+                {page.title}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

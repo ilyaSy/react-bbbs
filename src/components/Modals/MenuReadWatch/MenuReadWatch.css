@@ -1,0 +1,44 @@
+.header__menu-raw_hover{
+  position: relative;
+}
+
+.header__menu-raw {
+  display: none;
+  padding: 50px ;
+  border-radius: 0 0 30px 30px;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(243, 242, 242, 1);
+  z-index: 100;
+}
+
+.header__menu-raw_hover:hover .header__menu-raw {
+  display: block;
+}
+
+.header__burger-item {
+  margin: 0 0 15px 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.header__burger-item:last-child {
+  margin-bottom: 0;
+}
+
+.header__burger-link {
+  margin: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  font-family: 'Proto', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 17.5px;
+  letter-spacing: 0.2px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.header__burger-link:hover {
+  color: #224cff;
+}
