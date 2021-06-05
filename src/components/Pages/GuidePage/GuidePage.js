@@ -1,26 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import defineFigure from '../../../utils/renderFigures';
-import Api from '../../../utils/api';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
-import './GuidePage.css';
 import Heading from '../../UI/Heading/Heading';
+import useGuide from '../../../hooks/useGuide';
+import './GuidePage.css';
 
 const GuidePage = () => {
-  const [materialsData, setMaterialsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  let pageCount;
-
-  useEffect(() => {
-    Api.getMaterials()
-      .then((data) => {
-        setMaterialsData(data);
-        pageCount = Math.ceil(data.length / perPage);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  }, []);
+  const { materialsData, pageCount } = useGuide(perPage);
 
   const currentPageData = materialsData
     .slice(offset, offset + perPage)

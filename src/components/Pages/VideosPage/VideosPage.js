@@ -1,42 +1,22 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
-import Api from '../../../utils/api';
 import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
+import useVideos from '../../../hooks/useVideos';
 import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [videosData, setVideosData] = useState([]);
-  const [chosenVideo, setChosenVideo] = useState({});
-  const [videoTags, setVideoTags] = useState([]);
   const [activeTags, setActiveTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  let pageCount;
-
-  useEffect(() => {
-    Api.getVideos()
-      .then((data) => {
-        setVideosData(data);
-        // Видео, выбранное модератором
-        const chosen = data.filter((video) => video.chosen)[0];
-        setChosenVideo({ ...chosen });
-        // Список уникальных тегов для кнопок фильтра-рубрикатора
-        const tagsData = data
-          .map((video) => video.tag.name)
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-        setVideoTags(['Все', ...tagsData]);
-        pageCount = Math.ceil(data.length / perPage);
-      })
-      .catch(console.log);
-  }, []);
+  const { videosData, chosenVideo, videoTags, pageCount } = useVideos(perPage);
 
   const currentPageData = videosData
     .slice(offset, offset + perPage)

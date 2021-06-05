@@ -1,21 +1,18 @@
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
-import './VideoCard.css';
 import Button from '../../UI/Button/Button';
+import youtubeLinkParser from '../../../utils/youtubeLinkParser';
+import './VideoCard.css';
 
 const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
   let tagsText;
   if (tags) tagsText = tags.map((tag) => tag.name);
+
   const clickHandler = () => {
     handleVideoClick(link);
   };
 
-  const youtubeParser = (url) => {
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[7].length === 11 ? match[7] : false;
-  };
-  const embedId = youtubeParser(link);
+  const embedId = youtubeLinkParser(link);
 
   return (
     <Button className="movie movie__card" onClick={clickHandler}>

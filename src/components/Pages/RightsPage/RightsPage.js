@@ -1,35 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
-import Api from '../../../utils/api';
 import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import useRightsTags from '../../../hooks/useRightsTags';
 import './RightsPage.css';
 
 const RightsPage = () => {
-  const [rightsData, setRightsData] = useState([]);
-  const [tags, setTags] = useState([]);
   const [activeTags, setActiveTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  let pageCount;
-
-  useEffect(() => {
-    Api.getRights()
-      .then((data) => {
-        setRightsData(data);
-        const tagsData = data
-          .map((item) => item.tag.name)
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-        setTags(['Все', ...tagsData]);
-        pageCount = Math.ceil(data.length / perPage);
-      })
-      .catch(console.log);
-  }, []);
+  const { rightsData, tags, pageCount } = useRightsTags(perPage);
 
   const currentPageData = rightsData
     .slice(offset, offset + perPage)

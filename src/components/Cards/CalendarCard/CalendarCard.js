@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
 import formatDate from '../../../utils/formatDate';
-import CalendarCardLi from './CalendarCardLi';
+import CalendarCardLi from '../../UI/CalendarCardLi/CalendarCardLi';
 import './CalendarCard.css';
 
 const CalendarCard = ({

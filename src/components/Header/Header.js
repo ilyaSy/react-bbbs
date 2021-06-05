@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import { pages } from '../../config/config';
 import Button from '../UI/Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import './header.css';
 import useScrollPosition from '../../hooks/useScrollPosition';
 import Search from '../Cards/Search/Search';
 import Navigation from '../Containers/Navigation/Navigation';
+import './header.css';
 
 const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
   const [search, setSearch] = useState(false);
@@ -16,7 +15,15 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
 
-  const toggleSearch = () => setSearch(!search);
+  const handleToggleBurger = () => setIsBurgerOpened(!isBurgerOpened);
+
+  const toggleSearch = () => {
+    setSearch(!search);
+
+    if (isBurgerOpened) {
+      handleToggleBurger();
+    }
+  };
 
   const handleButtonLoginClick = () => {
     if (currentUser) {
@@ -24,6 +31,20 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
     } else {
       openAuthModal();
     }
+
+    if (isBurgerOpened) {
+      handleToggleBurger();
+    }
+  };
+
+  const openCities = () => {
+    openPopupCities();
+    handleToggleBurger();
+  };
+
+  const onLogoutClick = () => {
+    onLogout();
+    handleToggleBurger();
   };
 
   useScrollPosition(
@@ -39,8 +60,6 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
       if (e.key === 'Escape') setIsBurgerOpened(false);
     });
   }, []);
-
-  const handleToggleBurger = () => setIsBurgerOpened(!isBurgerOpened);
 
   return (
     <header className={`header ${shouldBeVisible ? 'header_sticky_hide' : ''}`}>
@@ -74,22 +93,13 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
       )}
       {isBurgerOpened ? (
         <div className="header__wrapper">
-          <Button
-            className="header__button-search"
-            onClick={() => {
-              toggleSearch();
-              handleToggleBurger();
-            }}
-          />
+          <Button className="header__button-search" onClick={toggleSearch} />
           <Button
             type="button"
             className={`header__button-login_burger header__button-login_${
               currentUser ? '' : 'un'
             }authorized`}
-            onClick={() => {
-              handleButtonLoginClick();
-              handleToggleBurger();
-            }}
+            onClick={handleButtonLoginClick}
             style={{ display: 'block' }}
           />
           <Link to="/" className="header__logo" />
@@ -101,14 +111,8 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
               type="header-burger"
               onClick={handleToggleBurger}
               currentUser={currentUser}
-              openPopupCities={() => {
-                openPopupCities();
-                handleToggleBurger();
-              }}
-              onLogout={() => {
-                onLogout();
-                handleToggleBurger();
-              }}
+              openPopupCities={openCities}
+              onLogout={onLogoutClick}
             />
           </div>
         </div>

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -12,17 +11,17 @@ import AuthPopup from '../Modals/AuthPopup/AuthPopup';
 import PopupMeet from '../Modals/PopupMeet/PopupMeet';
 import PopupConfirmRegister from '../Modals/PopupConfirmRegister/PopupConfirmRegister';
 import PopupRegisterSuccess from '../Modals/PopupRegisterSuccess/PopupRegisterSuccess';
-import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
+import PopupError from '../Modals/PopupError/PopupError';
 import PopupCities from '../Modals/PopupCities/PopupCities';
 import YoutubeEmbed from '../Modals/YoutubeEmbed/YoutubeEmbed';
+import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
 import useAuth from '../../hooks/useAuth';
-import PopupError from '../Modals/PopupError/PopupError';
+import useMainDataCities from '../../hooks/useMainDataCities';
 
 function App() {
   const [events, setEvents] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [unauthСity, setUnauthСity] = useState('');
-  const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
@@ -32,17 +31,8 @@ function App() {
   const [isRegisterErrorModalOpened, setRegisterErrorModalOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
-  const [cities, setCities] = useState([]);
-  const history = useHistory();
 
-  useEffect(() => {
-    Promise.all([Api.getCities(), Api.getMain()])
-      .then(([dataCities, dataMain]) => {
-        setCities(dataCities);
-        setMainData(dataMain);
-      })
-      .catch(console.log);
-  }, []);
+  const mainDataCities = useMainDataCities();
 
   const updateCity = (city) => {
     if (currentUser) {
@@ -72,24 +62,14 @@ function App() {
     setRegisterErrorModalOpened(false);
   };
   // кастомный Хук авторизации
-  const { logout, handleSubmitAuth } = useAuth({
-    setCurrentUser,
-    setEvents,
-    localStorage,
-    Api,
-    history,
-    closeAllModal,
-  });
+  const { logout, handleSubmitAuth } = useAuth({ setCurrentUser, setEvents, closeAllModal });
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
   };
 
   const handleVideoClick = (url) => {
-    setIsPopupVideoOpen({
-      url,
-      isOpened: true,
-    });
+    setIsPopupVideoOpen({ url, isOpened: true });
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -129,7 +109,7 @@ function App() {
       <ScrollToTop />
       <Header openAuthModal={openAuthModal} onLogout={logout} openPopupCities={openPopupCities} />
       <Content
-        mainData={mainData}
+        {...mainDataCities}
         openAuthModal={openAuthModal}
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
@@ -137,7 +117,6 @@ function App() {
         handleDeleteEvent={handleDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
         events={events}
-        cities={cities}
         updateCity={updateCity}
         openPopupCities={openPopupCities}
         unauthСity={unauthСity}
@@ -170,7 +149,7 @@ function App() {
         <PopupCities
           onClose={closeAllModal}
           updateCity={updateCity}
-          cities={cities}
+          cities={mainDataCities.cities}
           currentUser={currentUser}
         />
       )}

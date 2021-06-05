@@ -1,39 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import Api from '../../../utils/api';
 import BookCard from '../../Cards/BookCard/BookCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import useBooksGenres from '../../../hooks/useBooksGenres';
 import './BooksPage.css';
 
 const BooksPage = () => {
-  const [booksData, setBooksData] = useState([]);
-  const [genres, setGenres] = useState([]);
   const [activeGenre, setActiveGenre] = useState('Все');
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  let pageCount;
-
-  useEffect(() => {
-    Api.getBooks()
-      .then((data) => {
-        const scienceBooks = data.filter((book) => book.genre === 'Научные');
-        const fictionBooks = data.filter((book) => book.genre === 'Художественные');
-        // по фильтру "Все" книги выходят в порядке научная - художественная - науч - худ и т.д.
-        const orderedBookList = scienceBooks
-          .map((sb, i) => [sb, fictionBooks[i]])
-          .flat()
-          .filter((book) => book);
-        setBooksData(orderedBookList);
-        const genresData = data
-          .map((item) => item.genre)
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-        setGenres(['Все', ...genresData]);
-        pageCount = Math.ceil(data.length / perPage);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  }, []);
+  const { booksData, genres, pageCount } = useBooksGenres(perPage);
 
   const currentPageData = booksData
     .slice(offset, offset + perPage)

@@ -5,25 +5,27 @@ import formatDate from '../../../utils/formatDate';
 import CalendarCard from '../../Cards/CalendarCard/CalendarCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import useCalendar from '../../../hooks/useCalendar';
 import './Calendar.css';
 
 const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteEvent, events }) => {
-  const [months, setMonths] = useState([]);
+  // const [months, setMonths] = useState([]);
   const [activeMonth, setActiveMonth] = useState('');
+  const { months } = useCalendar(events);
 
   useEffect(() => {
-    const resetMonths = (dates) => {
-      const dmonths = dates
-        .map((date) => {
-          const monthName = formatDate(new Date(date.startAt), 'LLLL');
-          return monthName[0].toUpperCase() + monthName.slice(1);
-        })
-        .filter((el, i, array) => array.indexOf(el) === i);
-      return dmonths;
-    };
+    // const resetMonths = (dates) => {
+    //   const dmonths = dates
+    //     .map((date) => {
+    //       const monthName = formatDate(new Date(date.startAt), 'LLLL');
+    //       return monthName[0].toUpperCase() + monthName.slice(1);
+    //     })
+    //     .filter((el, i, array) => array.indexOf(el) === i);
+    //   return dmonths;
+    // };
 
     setActiveMonth('');
-    setMonths(resetMonths(events));
+    // setMonths(resetMonths(events));
   }, []);
 
   const handleFilterMonth = (month) => {
