@@ -10,13 +10,10 @@ export default function ScrollContainer({
   sectionSubClass,
 }) {
   const setActiveClass = (item) => {
-    if (!activeItem) return '';
-    if (!activeItems) return '';
-
-    if (Array.isArray(activeItems) && activeItems.includes(item)) {
+    if (Array.isArray(activeItems) && activeItems.length && activeItems.includes(item)) {
       return 'button_color_black_active';
     }
-    if (item === activeItem) {
+    if (activeItem && item === activeItem) {
       return 'button_color_black_active';
     }
 
@@ -27,8 +24,7 @@ export default function ScrollContainer({
     <div className={`${sectionClass} ${sectionSubClass}`}>
       {list.map((item) => (
         <Button
-          className={`button button_color_black button_place_scroll 
-          ${setActiveClass(item)} ${setActiveClass(item)}`}
+          className={`button button_color_black button_place_scroll ${setActiveClass(item)}`}
           type="button"
           key={item}
           onClick={() => onClick(item)}

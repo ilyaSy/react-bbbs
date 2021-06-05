@@ -1,39 +1,26 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PlacesFormPreview from '../../Cards/PlacesFormPreview/PlacesFormPreview';
 import Card from '../../Cards/Card/Card';
-import Api from '../../../utils/api';
 import defineCardColor from '../../../utils/renderColors';
 import Heading from '../../UI/Heading/Heading';
 import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
+import usePlacesCategories from '../../../hooks/usePlacesCategories';
 import './PlacesPage.css';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
 const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
-  const [places, setPlaces] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
   const [activeCategorys, setActiveCategorys] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
-  const currentUser = useContext(CurrentUserContext);
+  const { places, categories } = usePlacesCategories();
 
   useEffect(() => {
-    Api.getPlaces()
-      .then((data) => {
-        setPlaces(data);
-        const categoriesData = data
-          .map((place) => place.category)
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-        setCategories(['Все', ...categoriesData]);
-      })
-      .catch(console.log);
-
-    if (!currentUser && !unauthСity) {
-      openPopupCities();
-    }
+    if (!currentUser && !unauthСity) openPopupCities();
   }, []);
 
   const handleCategoryFilter = (category) => {

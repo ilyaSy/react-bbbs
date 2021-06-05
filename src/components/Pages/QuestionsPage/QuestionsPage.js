@@ -1,6 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
@@ -12,14 +11,14 @@ import {
   filterItemByFiltersList,
   getMultipleTagsIndex,
 } from '../../../utils/filters';
+import useQuestionsTags from '../../../hooks/useQuestionsTags';
 import './QuestionsPage.css';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
   const [activeTags, setActiveTags] = useState(['Все']);
-  const [questions, setQuestions] = useState([]);
-  const [tagList, setTagList] = useState([]);
   const [didAsk, setDidAsk] = useState(false);
+  const { questions, tagList } = useQuestionsTags();
 
   const { reset } = useForm();
 
@@ -28,25 +27,6 @@ const QuestionsPage = () => {
     setDidAsk(true);
     reset();
   };
-
-  useEffect(() => {
-    Api.getQuestions()
-      .then((data) => {
-        const qs = data.map((q) => ({
-          tagNames: q.tags.map((tag) => tag.name),
-          ...q,
-        }));
-        setQuestions(qs);
-
-        const tagsData = qs
-          .map((q) => q.tagNames)
-          .flat()
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-
-        setTagList(['Все', ...tagsData]);
-      })
-      .catch(console.log);
-  }, []);
 
   const handleTagFilter = (tag) => {
     setActiveTags(setActiveFilters(activeTags, tag));

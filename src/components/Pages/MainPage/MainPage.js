@@ -12,6 +12,7 @@ import Card from '../../Cards/Card/Card';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import FacebookPlugin from '../../UI/FacebookPlugin/FacebookPlugin';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
+import './main.css';
 
 export default function MainPage({
   mainData,

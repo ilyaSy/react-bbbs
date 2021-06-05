@@ -1,27 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import defineColor from '../../../utils/renderColors';
-import Api from '../../../utils/api';
 import Card from '../../Cards/Card/Card';
+import useArticles from '../../../hooks/useArticles';
 
 const ArticlesPage = () => {
-  const [articlesData, setArticlesData] = useState([]);
-  const [chosenArticle, setChosenArticle] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  let pageCount;
-
-  useEffect(() => {
-    Api.getArticles()
-      .then((data) => {
-        const chosen = data.filter((article) => article.chosen)[0];
-        setChosenArticle({ ...chosen });
-        setArticlesData(data);
-        pageCount = Math.ceil(data.length / perPage);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  }, []);
+  const { articlesData, chosenArticle, pageCount } = useArticles(perPage);
 
   const currentPageData = articlesData
     .slice(offset, offset + perPage)

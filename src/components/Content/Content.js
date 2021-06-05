@@ -6,7 +6,6 @@ import Calendar from '../Pages/Calendar/Calendar';
 import PlacesPage from '../Pages/PlacesPage/PlacesPage';
 import QuestionsPage from '../Pages/QuestionsPage/QuestionsPage';
 import PersonalAccount from '../Pages/PersonalAccount/PersonalAccount';
-import ProtectedRoute from '../UI/ProtectedRoute/ProtectedRoute';
 import About from '../Pages/About/About';
 import StoryPage from '../Pages/StoryPage/StoryPage';
 import PageNotFound from '../Pages/PageNotFound/PageNotFound';
@@ -17,6 +16,7 @@ import VideosPage from '../Pages/VideosPage/VideosPage';
 import ArticlesPage from '../Pages/ArticlesPage/ArticlesPage';
 import GuidePage from '../Pages/GuidePage/GuidePage';
 import RightsPage from '../Pages/RightsPage/RightsPage';
+import ProtectedRoute from '../UI/ProtectedRoute/ProtectedRoute';
 import './content.css';
 
 export default function Content({
