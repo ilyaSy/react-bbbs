@@ -4,7 +4,7 @@ import './ArticleCard.css';
 
 const ArticleCard = ({ article }) => (
   <article className="preview-article" style={{ backgroundColor: `${article.color}` }}>
-    <Link className="mainlink" to="/*" />
+    <Link className="mainlink" to="/read-watch/articles" />
     <h2 className="preview-article__title">{article.title}</h2>
     <a className="preview-article__link" href="/*">
       читать статью
