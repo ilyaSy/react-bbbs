@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Button from '../UI/Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useScrollPosition from '../../hooks/useScrollPosition';
 import Search from '../Cards/Search/Search';
 import Navigation from '../Containers/Navigation/Navigation';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import './header.css';
 
 const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
@@ -14,12 +15,14 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
+  const burgerRef = useRef(null);
+
+  useOnClickOutside(burgerRef, () => setIsBurgerOpened(false));
 
   const handleToggleBurger = () => setIsBurgerOpened(!isBurgerOpened);
 
   const toggleSearch = () => {
     setSearch(!search);
-
     if (isBurgerOpened) {
       handleToggleBurger();
     }
@@ -106,7 +109,10 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
           <Button type="button" className="header__burger-btn_close" onClick={handleToggleBurger}>
             &nbsp;
           </Button>
-          <div className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
+          <div
+            ref={burgerRef}
+            className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}
+          >
             <Navigation
               type="header-burger"
               onClick={handleToggleBurger}

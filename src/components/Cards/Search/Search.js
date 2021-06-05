@@ -1,23 +1,14 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 
 import Button from '../../UI/Button/Button';
 import './search.css';
 
 const Search = ({ handleClickLogin, toggleSearch }) => {
   const searchRef = useRef(null);
-  const handleOverlayClick = (event) => {
-    if (!searchRef.current.contains(event.target)) {
-      toggleSearch();
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('click', handleOverlayClick);
-    return () => {
-      document.removeEventListener('click', handleOverlayClick);
-    };
-  }, []);
+  useOnClickOutside(searchRef, toggleSearch);
 
   return (
     <div className="header__wrapper header__wrapper_search">
