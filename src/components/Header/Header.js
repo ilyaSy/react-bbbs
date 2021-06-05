@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import { pages } from '../../config/config';
 import Button from '../UI/Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import './header.css';
 import useScrollPosition from '../../hooks/useScrollPosition';
 import Search from '../Cards/Search/Search';
 import Navigation from '../Containers/Navigation/Navigation';
+import './header.css';
 
 const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
   const [search, setSearch] = useState(false);

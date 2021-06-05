@@ -16,7 +16,7 @@ const useAuth = ({ setCurrentUser, setEvents, localStorage, Api, history, closeA
         .then((data) => {
           if (data.refresh && data.access) {
             Api.setAuthHeader(data.access);
-            localStorage.setItem('jwt', data.access);
+            localStorage.setItem(JWT_KEY, data.access);
             Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
               setCurrentUser({ userName, ...userData });
               setEvents(eventsData);
