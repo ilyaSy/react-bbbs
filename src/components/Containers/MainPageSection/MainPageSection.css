@@ -17,6 +17,7 @@
 
 .mainpage__blocks-col {
   display: flex;
+  width: 100%;
 }
 
 @media (max-width: 860px) {
