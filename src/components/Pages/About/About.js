@@ -5,7 +5,7 @@ import AboutCard from '../../Cards/AboutCard/AboutCard';
 const About = () => (
   <section className="content main__section">
     <div className="title">
-      Наставники.про&nbsp;&mdash; цифоровая информационная платформа огрганизации &laquo;Старшие
+      Наставники.про&nbsp;&mdash; цифровая информационная платформа организации &laquo;Старшие
       Братья Старшие Сестры&raquo;. Созданная для поддержки наставников программы.
     </div>
     <a
