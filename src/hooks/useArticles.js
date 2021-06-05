@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Api from '../utils/api';
 
-export default function useArticles({ perPage }) {
+export default function useArticles(perPage) {
   const [articlesData, setArticlesData] = useState([]);
   const [chosenArticle, setChosenArticle] = useState({});
-  let pageCount;
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     Api.getArticles()
@@ -12,7 +12,7 @@ export default function useArticles({ perPage }) {
         const chosen = data.filter((article) => article.chosen)[0];
         setChosenArticle({ ...chosen });
         setArticlesData(data);
-        pageCount = Math.ceil(data.length / perPage);
+        setPageCount(Math.ceil(data.length / perPage));
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   }, []);

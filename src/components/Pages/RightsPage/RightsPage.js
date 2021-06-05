@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
 import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import Pagination from '../../UI/Pagination/Pagination';
 import useRightsTags from '../../../hooks/useRightsTags';
 import './RightsPage.css';
 
@@ -24,10 +24,6 @@ const RightsPage = () => {
       <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
     ));
 
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
-
   const handleTagFilter = (tag) => {
     setActiveTags(setActiveFilters(activeTags, tag));
   };
@@ -39,20 +35,7 @@ const RightsPage = () => {
         <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} />
       </div>
       <ul className="law__list">{currentPageData}</ul>
-      <ReactPaginate
-        previousLabel=""
-        nextLabel=""
-        pageCount={pageCount}
-        marginPagesDisplayed={1}
-        pageRangeDisplayed={5}
-        containerClassName="pagination"
-        breakClassName="pagination__link"
-        breakLabel="..."
-        activeClassName="pagination__link_active"
-        nextClassName="pagination__forward"
-        pageLinkClassName="pagination__link"
-        onPageChange={handlePageClick}
-      />
+      <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
     </section>
   );
 };

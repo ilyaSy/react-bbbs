@@ -98,7 +98,7 @@ export default function Content({
           <GuidePage />
         </Route>
 
-        <Route exact path="/read-watch/videos">
+        <Route exact path="/read-watch/video">
           <VideosPage handleVideoClick={handleVideoClick} />
         </Route>
 

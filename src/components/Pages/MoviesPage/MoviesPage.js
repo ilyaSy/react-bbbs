@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+import Pagination from '../../UI/Pagination/Pagination';
 import useMoviesGenres from '../../../hooks/useMoviesGenres';
 import {
   setActiveFilters,
@@ -32,10 +32,6 @@ const MoviesPage = ({ handleVideoClick }) => {
       <VideoCard key={key} type="movie" {...args} handleVideoClick={handleVideoClick} />
     ));
 
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
-
   const handleGenreFilter = (genre) => {
     setActiveGenres(setActiveFilters(activeGenres, genre));
   };
@@ -47,20 +43,7 @@ const MoviesPage = ({ handleVideoClick }) => {
         <ScrollContainer list={genres} activeItems={activeGenres} onClick={handleGenreFilter} />
       </div>
       <ul className="filmpage__list">{currentPageData}</ul>
-      <ReactPaginate
-        previousLabel=""
-        nextLabel=""
-        pageCount={pageCount}
-        marginPagesDisplayed={1}
-        pageRangeDisplayed={5}
-        containerClassName="pagination"
-        breakClassName="pagination__link"
-        breakLabel="..."
-        activeClassName="pagination__link_active"
-        nextClassName="pagination__forward"
-        pageLinkClassName="pagination__link"
-        onPageChange={handlePageClick}
-      />
+      <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
     </section>
   );
 };

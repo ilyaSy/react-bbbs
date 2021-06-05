@@ -8,6 +8,7 @@ import BookCard from '../../Cards/BookCard/BookCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Card from '../../Cards/Card/Card';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
+import './ReadAndWatchSection.css';
 
 const ReadAndWatchSection = ({ sectionTitle, path, data, handleVideoClick }) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -19,10 +20,9 @@ const ReadAndWatchSection = ({ sectionTitle, path, data, handleVideoClick }) => 
   switch (sectionTitle) {
     case 'Справочник':
       currentPageData = data
+        .map((article, i) => ({ figure: defineFigure(i), ...article }))
         .slice(offset, offset + perPage)
-        .map(({ id: key, ...args }, i) => (
-          <GuideCard figure={defineFigure(i)} size="small" key={key} {...args} />
-        ));
+        .map(({ id: key, ...args }) => <GuideCard size="small" key={key} {...args} />);
       break;
     case 'Видео':
       currentPageData = data
@@ -33,9 +33,10 @@ const ReadAndWatchSection = ({ sectionTitle, path, data, handleVideoClick }) => 
       break;
     case 'Статьи':
       currentPageData = data
+        .map((article, i) => ({ color: defineColor(i), ...article }))
         .slice(offset, offset + perPage)
-        .map(({ id: key, ...args }, i) => (
-          <Card type="article" key={key} size="small" color={defineColor(i)} data={args} />
+        .map(({ id: key, color, ...args }) => (
+          <Card type="article" key={key} color={color} size="small" data={args} />
         ));
       break;
     case 'Фильмы':
