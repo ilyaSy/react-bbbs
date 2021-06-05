@@ -1,14 +1,17 @@
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+import Api from '../utils/api';
 
-const useAuth = ({ setCurrentUser, setEvents, localStorage, Api, history, closeAllModal }) => {
+const useAuth = ({ setCurrentUser, setEvents, closeAllModal }) => {
   const JWT_KEY = 'jwt';
+  const history = useHistory();
 
   const logout = useCallback(() => {
     setCurrentUser(null);
     localStorage.removeItem(JWT_KEY);
     Api.removeAuthHeader();
     history.push('/');
-  }, [setCurrentUser, localStorage, Api, history]);
+  }, [setCurrentUser, Api, history]);
 
   const handleSubmitAuth = useCallback(
     (userName, password) => {
@@ -26,7 +29,7 @@ const useAuth = ({ setCurrentUser, setEvents, localStorage, Api, history, closeA
         })
         .catch(console.log);
     },
-    [Api, localStorage, setCurrentUser, setEvents, closeAllModal]
+    [Api, setCurrentUser, setEvents, closeAllModal]
   );
   return {
     logout,

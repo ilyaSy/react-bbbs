@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -33,7 +32,6 @@ function App() {
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
   const [cities, setCities] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
     Promise.all([Api.getCities(), Api.getMain()])
@@ -72,24 +70,14 @@ function App() {
     setRegisterErrorModalOpened(false);
   };
   // кастомный Хук авторизации
-  const { logout, handleSubmitAuth } = useAuth({
-    setCurrentUser,
-    setEvents,
-    localStorage,
-    Api,
-    history,
-    closeAllModal,
-  });
+  const { logout, handleSubmitAuth } = useAuth({ setCurrentUser, setEvents, closeAllModal });
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
   };
 
   const handleVideoClick = (url) => {
-    setIsPopupVideoOpen({
-      url,
-      isOpened: true,
-    });
+    setIsPopupVideoOpen({ url, isOpened: true });
   };
 
   const handleCalendarCardClick = (calendarCard) => {
