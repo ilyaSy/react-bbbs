@@ -4,6 +4,7 @@ import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
+import QuestionsForm from '../../Cards/QuestionsForm/QuestionsForm';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import {
@@ -20,12 +21,7 @@ const QuestionsPage = () => {
   const [tagList, setTagList] = useState([]);
   const [didAsk, setDidAsk] = useState(false);
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { reset } = useForm();
 
   const onSubmit = (questionData) => {
     console.log(questionData);
@@ -82,43 +78,8 @@ const QuestionsPage = () => {
               />
             ))}
         </QuestionsContainer>
-        {currentUser && (
-          <>
-            <form
-              className={`questions__form ${didAsk ? 'questions__form_hidden' : ''}`}
-              name="ask"
-              action="/"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <h3 className="questions__form-heading">
-                Если вы не нашли ответ на свой вопрос — напишите нам, и мы включим его в&nbsp;список
-              </h3>
-              <div className="questions__ask">
-                <input
-                  className={`questions__input ${
-                    errors.questionText ? 'questions__input_error' : ''
-                  }`}
-                  type="text"
-                  {...register('questionText', {
-                    required: 'Задайте свой вопрос',
-                    minLength: {
-                      value: 2,
-                      message: 'Текст вопроса должен быть не менее 2 символов',
-                    },
-                  })}
-                  id="askme"
-                  placeholder={errors.questionText ? errors.questionText.message : 'Введите вопрос'}
-                />
-                <button type="submit" className="button">
-                  Отправить
-                </button>
-              </div>
-            </form>
-
-            <p className={`questions__result ${!didAsk ? 'questions__form_hidden' : ''}`}>
-              Спасибо! Мы приняли ваш вопрос.
-            </p>
-          </>
+        {currentUser && activeTags.includes('Все') && (
+          <QuestionsForm didAsk={didAsk} onSubmit={onSubmit} />
         )}
       </section>
     </>
