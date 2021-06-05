@@ -9,7 +9,7 @@ const MenuReadWatch = () => (
       </Link>
     </li>
     <li className="header__burger-item">
-      <Link to="/read-watch/video" className="header__burger-link">
+      <Link to="/read-watch/videos" className="header__burger-link">
         Видео
       </Link>
     </li>
