@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
-import Button from '../../UI/Button/Button';
 import youtubeLinkParser from '../../../utils/youtubeLinkParser';
 import './VideoCard.css';
 
@@ -8,19 +7,22 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
   let tagsText;
   if (tags) tagsText = tags.map((tag) => tag.name);
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    e.preventDefault();
     handleVideoClick(link);
   };
 
   const embedId = youtubeLinkParser(link);
 
   return (
-    <Button className="movie movie__card" onClick={clickHandler}>
+    <li className="movie movie__card">
       <div className="movie__img">
         <img
           className="movie__poster"
           src={`http://img.youtube.com/vi/${embedId}/0.jpg`}
           alt={title}
+          onClick={clickHandler}
+          aria-hidden="true"
         />
         <div className="movie__tags">
           {type === 'movie' &&
@@ -34,18 +36,19 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
           <h3 className="movie__title">{title}</h3>
           <p className="movie__caption">{info}</p>
         </div>
-        <a className="movie__link" href={link} target="_blank" rel="noopener noreferrer">
+        <a
+          className="movie__link"
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={clickHandler}
+        >
           {`смотреть ${type === 'movie' ? 'трейлер' : 'видео'}`}
         </a>
       </div>
-    </Button>
+    </li>
   );
 };
-
-// TO DO:
-// * тз: "кликнуть на нужном блоке "Смотреть трейлер" и после нажатия откроется поп-ап
-//   с полноформатной версией видео, также видео можно посмотреть, кликнув на его превью"
-//   ПРЕВЬЮ
 
 VideoCard.propTypes = {
   type: PropTypes.string.isRequired,
