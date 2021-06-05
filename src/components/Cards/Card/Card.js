@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Card.css';
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
@@ -22,18 +23,27 @@ const Card = ({ type, size, color, data }) => (
                 size === 'big' ? 'event-soon__caption_size_big' : 'event-soon__caption_with_tag'
               }`}
             >
-              <div className="event-soon__title">{data.title}</div>
+              {type === 'place' && (
+                <Link className="event-soon__title" to="/where-to-go">
+                  <div className="event-soon__title">{data.title}</div>
+                </Link>
+              )}
+              {type === 'article' && <div className="event-soon__title">{data.title}</div>}
               <div className="event-soon__subtitle">
                 {type === 'place' && data.address}
                 {type === 'article' && data.author}
               </div>
             </div>
             {data.chosen && size === 'big' && (
-              <img src={data.imageUrl} className="event-soon__img" alt="Локация" />
+              <Link className="event-soon__img" to="/where-to-go">
+                <img src={data.imageUrl} className="event-soon__img" alt="Локация" />
+              </Link>
             )}
-            <a href={data.link} target="_blank" rel="noreferrer" className="event-soon__link">
-              перейти на сайт
-            </a>
+            {data.link && (
+              <a href={data.link} target="_blank" rel="noreferrer" className="event-soon__link">
+                перейти на сайт
+              </a>
+            )}
           </div>
 
           <div

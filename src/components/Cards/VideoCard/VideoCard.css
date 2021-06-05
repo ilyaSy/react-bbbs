@@ -51,7 +51,6 @@
 
 .movie__tags {
   display: flex;
-  flex-wrap: wrap;
   position: absolute;
   bottom: 10px;
   left: 50%;

@@ -15,6 +15,7 @@
   cursor: pointer;
   outline: none;
 }
+
 .button:disabled {
   border: 1px #a7a6a6 solid;
   color: #a7a6a6;
