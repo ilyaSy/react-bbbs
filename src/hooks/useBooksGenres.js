@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Api from '../utils/api';
 
-export default function useBooksGenres({ perPage }) {
+export default function useBooksGenres(perPage) {
   const [booksData, setBooksData] = useState([]);
   const [genres, setGenres] = useState([]);
-  let pageCount;
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     Api.getBooks()
@@ -21,7 +21,7 @@ export default function useBooksGenres({ perPage }) {
           .map((item) => item.genre)
           .filter((item, i, arr) => arr.indexOf(item) === i);
         setGenres(['Все', ...genresData]);
-        pageCount = Math.ceil(data.length / perPage);
+        setPageCount(Math.ceil(data.length / perPage));
       })
       .catch(console.log);
   }, []);

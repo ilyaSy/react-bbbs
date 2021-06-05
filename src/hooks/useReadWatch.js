@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import Api from '../utils/api';
 
 export default function useReadWatch() {
@@ -7,6 +8,7 @@ export default function useReadWatch() {
   const [articlesData, setArticlesData] = useState([]);
   const [moviesData, setMoviesData] = useState([]);
   const [booksData, setBooksData] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     Promise.all([
@@ -18,7 +20,12 @@ export default function useReadWatch() {
     ])
       .then(([materials, videos, articles, movies, books]) => {
         setGuideData(materials);
-        setVideosData(videos);
+        // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
+        setVideosData(
+          videos.filter(
+            ({ tag }) => currentUser || !currentUser === (tag.name !== 'Ресурсная группа')
+          )
+        );
         setArticlesData(articles);
         setMoviesData(movies);
         setBooksData(books);
