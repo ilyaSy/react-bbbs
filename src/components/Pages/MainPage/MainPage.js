@@ -12,6 +12,8 @@ import Card from '../../Cards/Card/Card';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import FacebookPlugin from '../../UI/FacebookPlugin/FacebookPlugin';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
+import useMoviesGenres from '../../../hooks/useMoviesGenres';
+import useVideos from '../../../hooks/useVideos';
 import './main.css';
 
 export default function MainPage({
@@ -20,16 +22,17 @@ export default function MainPage({
   handleDeleteEvent,
   handleRegisterSubmit,
   events,
+  handleVideoClick,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [userEvent, setUserEvent] = useState(null);
-
+  const { moviesData } = useMoviesGenres(4);
+  const { videosData } = useVideos(1);
   useEffect(() => {
     if (mainData && events) {
       setUserEvent(events.sort((a, b) => new Date(b.startAt) - new Date(a.startAt))[0]);
     }
   }, [mainData, events]);
-
   return (
     <MainPageSection className="mainpage content main__section">
       <MainPageSection className="mainpage__intro">
@@ -52,10 +55,18 @@ export default function MainPage({
         <ArticleCard article={mainData?.articles[0]} />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
-        <MoviesContainer movies={mainData?.movies} />
+        <MoviesContainer
+          movies={moviesData}
+          handleVideoClick={handleVideoClick}
+          isMovesPage={false}
+        />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <MainVideoCard video={mainData?.video} />
+        <MainVideoCard
+          video={videosData[0]}
+          handleVideoClick={handleVideoClick}
+          isVideosPage={false}
+        />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
@@ -78,9 +89,11 @@ MainPage.propTypes = {
   handleDeleteEvent: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   events: PropTypes.arrayOf(PropTypes.any),
+  handleVideoClick: PropTypes.func,
 };
 
 MainPage.defaultProps = {
   mainData: {},
   events: [],
+  handleVideoClick: () => {},
 };

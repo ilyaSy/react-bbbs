@@ -292,69 +292,69 @@ export const mainGet = {
         'У таких детей возникает ощущение отверженности. Оно приводит к напряженности и  недоверию к людям и, как итог, к реальному неприятию себя и окружающих.',
     },
   ],
-  movies: [
-    {
-      id: 51,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
-      tags: [
-        {
-          id: 551,
-          name: 'драма',
-          slug: 'rubric',
-        },
-        {
-          id: 552,
-          name: 'документальный',
-          slug: 'rubric',
-        },
-      ],
-    },
-    {
-      id: 52,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
-      tags: [
-        {
-          id: 551,
-          name: 'комедия',
-          slug: 'rubric',
-        },
-      ],
-    },
-    {
-      id: 53,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
-      tags: [
-        {
-          id: 552,
-          name: 'драма',
-          slug: 'rubric',
-        },
-      ],
-    },
-    {
-      id: 54,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
-      tags: [
-        {
-          id: 551,
-          name: 'документальный',
-          slug: 'rubric',
-        },
-      ],
-    },
-  ],
+  // movies: [
+  //   {
+  //     id: 51,
+  //     imageUrl: 'https://picsum.photos/420/239',
+  //     title: 'Жутко громко и запредельно близко',
+  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
+  //     link: 'https://youtu.be/8VzzlhOyOSI',
+  //     tags: [
+  //       {
+  //         id: 551,
+  //         name: 'драма',
+  //         slug: 'rubric',
+  //       },
+  //       {
+  //         id: 552,
+  //         name: 'документальный',
+  //         slug: 'rubric',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 52,
+  //     imageUrl: 'https://picsum.photos/420/239',
+  //     title: 'Жутко громко и запредельно близко',
+  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
+  //     link: 'https://youtu.be/8VzzlhOyOSI',
+  //     tags: [
+  //       {
+  //         id: 551,
+  //         name: 'комедия',
+  //         slug: 'rubric',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 53,
+  //     imageUrl: 'https://picsum.photos/420/239',
+  //     title: 'Жутко громко и запредельно близко',
+  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
+  //     link: 'https://youtu.be/8VzzlhOyOSI',
+  //     tags: [
+  //       {
+  //         id: 552,
+  //         name: 'драма',
+  //         slug: 'rubric',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 54,
+  //     imageUrl: 'https://picsum.photos/420/239',
+  //     title: 'Жутко громко и запредельно близко',
+  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
+  //     link: 'https://youtu.be/8VzzlhOyOSI',
+  //     tags: [
+  //       {
+  //         id: 551,
+  //         name: 'документальный',
+  //         slug: 'rubric',
+  //       },
+  //     ],
+  //   },
+  // ],
   video: {
     id: 61,
     title: 'Эфир с выпускником нашей программы',
@@ -517,9 +517,15 @@ export const moviesGet = [
   {
     id: 51,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Жутко громко и запредельно близко',
-    info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: '1+1 / Неприкасаемые (2011) - трейлер',
+    info: `Год выпуска: 2011
+    Страна: Франция
+    Жанр: Драма, Комедия, Биография
+    Альтернативное название: «Один плюс один», «Неприкасаемые»
+    Режиссер: Оливье Накаш, Эрик Толедано
+    В ролях: Франсуа Клюзе, Омар Си, Анн Ле Ни, Одри Флеро, Жозефин де Мо, Клотильд Молле, Альба Гайя Крагеде Беллуджи, Сирил Менди, Салимата Камате, Абса Дьяту Тур
+    1+1 / Неприкасаемые 2011 трейлер`,
+    link: 'https://www.youtube.com/watch?v=tTwFeGArcrs&ab_channel=%D0%A2%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%D1%8B%D0%BA%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%D0%B0%D0%BC%D0%A2%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%D1%8B%D0%BA%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%D0%B0%D0%BC',
     tags: [
       {
         id: 551,
@@ -536,9 +542,9 @@ export const moviesGet = [
   {
     id: 52,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Жутко громко и запредельно близко',
-    info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'HUMAN',
+    info: 'Фильм Янна Артус-Бертранда - трейлер',
+    link: 'https://www.youtube.com/watch?v=-pKLClMwysE&ab_channel=HUMANRusseHUMANRusse',
     tags: [
       {
         id: 551,
@@ -550,9 +556,10 @@ export const moviesGet = [
   {
     id: 53,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Жутко громко и запредельно близко',
-    info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'Джуманджи: новый уровень - трейлер',
+    info: `В ролях: Дуэйн Джонсон, Карен Гиллан («Мстители: Финал», «Джуманджи: Зов джунглей»), Кевин Харт («Полтора шпиона», «Джуманджи: Зов джунглей»), Джек Блэк («Ужастики», «Джуманджи: Зов джунглей»), Ник Джонас («Джуманджи: Зов джунглей») Дэнни Гловер и Дэнни ДеВито
+    Режиссёр: Джейк Кэздан («Джуманджи: Зов джунглей», «Очень плохая училка»)`,
+    link: 'https://www.youtube.com/watch?v=E_116VG-djE&ab_channel=SonyPicturesRUSonyPicturesRU',
     tags: [
       {
         id: 551,
@@ -564,9 +571,9 @@ export const moviesGet = [
   {
     id: 54,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Жутко громко и запредельно близко',
-    info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'Того Togo – 2019 - Трейлер',
+    info: 'Трейлер фильма Того / Togo В главных ролях: Уиллем Дефо , Джулианна Николсон, Кристофер Хейердал, Майкл Гэстон, Майкл МакЭлхаттон',
+    link: 'https://www.youtube.com/watch?v=JNulISUkk9s&ab_channel=SonyPicturesRUSonyPicturesRU',
     tags: [
       {
         id: 551,
@@ -605,9 +612,10 @@ export const videosGet = [
   {
     id: 541,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Творчество, наставничество, дети',
-    info: 'Виктория Ямина, волонтер',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title:
+      'Репортаж о программе "Старшие Братья Старшие Сестры" на Первом канале в передаче "Доброе утро"',
+    info: 'Репортаж о программе "Старшие Братья Старшие Сестры" на Первом канале в передаче "Доброе утро"',
+    link: 'https://www.youtube.com/watch?v=yLuQxkENBsg',
     tag: {
       name: 'Ресурсная группа',
       id: 110,
@@ -616,9 +624,9 @@ export const videosGet = [
   {
     id: 542,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Что в силах волонтера-наставника?',
-    info: 'Иван Рустаев, волонтер-наставник',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'Старшие и Младшие. Мария и Максим',
+    info: 'Ролик  - победитель в конкурсе видеороликов о наших "Старших" и "Младших" на ежегодном вечере "Наставник года 2020"',
+    link: 'https://www.youtube.com/watch?v=OBwE5wQWfMA&list=PLGXCe1KkwauZXNDNreyywAR2lZjGvSQmF&ab_channel=NastavnikiNastavniki',
     tag: {
       name: 'Эксперт',
       id: 110,
@@ -628,9 +636,9 @@ export const videosGet = [
   {
     id: 543,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Меняется смысл — меняется жизнь',
-    info: 'Прямой эфир с актрисой театра и кино Эмилией Спивак',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'Место встречи добрых дел',
+    info: 'В Деньзащиты детей мы анонсировали акцию, которую стартовали совместно с благотворительным сервисом Сбербанка  - Сбербанк Вместе и журналом Woman.ru!',
+    link: 'https://www.youtube.com/watch?v=COpr-rJgfk8&list=PLGXCe1KkwauZXNDNreyywAR2lZjGvSQmF&index=4&ab_channel=NastavnikiNastavniki',
     tag: {
       name: 'Пары',
       id: 110,
@@ -639,9 +647,9 @@ export const videosGet = [
   {
     id: 544,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Творчество, наставничество, дети',
-    info: 'Виктория Ямина, волонтер',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'История дружбы. Ульяна и Света',
+    info: 'История дружбы. Ульяна и Света',
+    link: 'https://www.youtube.com/watch?v=MqUjMATgDyI&list=PLGXCe1KkwauZXNDNreyywAR2lZjGvSQmF&index=14&ab_channel=NastavnikiNastavniki',
     tag: {
       name: 'События',
       id: 110,
@@ -650,9 +658,9 @@ export const videosGet = [
   {
     id: 545,
     imageUrl: 'https://picsum.photos/420/239',
-    title: 'Что в силах волонтера-наставника?',
-    info: 'Иван Рустаев, волонтер-наставник',
-    link: 'https://youtu.be/8VzzlhOyOSI',
+    title: 'Ануш Овсепян - гость проекта "Главные герои" на Meet for Charity',
+    info: 'Руководитель филиала программы "Старшие Братья Старшие Сестры" и директор по развитию программы в России  Ануш  Овсепян стала гостем проекта "Главные герои" на Meet for Charity!',
+    link: 'https://www.youtube.com/watch?v=STboNuUYv6E&ab_channel=NastavnikiNastavniki',
     tag: {
       name: 'Медиа о нас',
       id: 110,

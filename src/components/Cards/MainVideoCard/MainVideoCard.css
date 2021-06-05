@@ -2,10 +2,11 @@
   display: flex;
   border-radius: 30px;
   width: 100%;
+  position: relative;
 }
 
 .mainvideo__description {
-  background: #F8D162;
+  background: #f8d162;
   padding: 30px 50px;
   border-radius: 30px;
   width: 32.26%;
@@ -49,14 +50,14 @@
   font-size: 15px;
   line-height: 19px;
   letter-spacing: 0.2px;
-  color: #224CFF;
+  color: #224cff;
   margin: 0;
   text-decoration: none;
   z-index: 4;
 }
 
 .mainvideo__link:hover {
-  color: #2E2468;
+  color: #2e2468;
 }
 
 .mainvideo__video {
@@ -76,7 +77,6 @@
     padding-right: 30px;
     width: 31.624%;
   }
-
 }
 
 @media (max-width: 1024px) {
@@ -102,7 +102,6 @@
   .mainvideo__name {
     margin-bottom: 55px;
   }
-
 
   .mainvideo__title {
     font-size: 19px;

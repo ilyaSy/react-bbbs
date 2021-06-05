@@ -53,6 +53,7 @@ export default function Content({
             handleRegisterSubmit={handleRegisterSubmit}
             handleDeleteEvent={handleDeleteEvent}
             events={events}
+            handleVideoClick={handleVideoClick}
           />
         </Route>
 
@@ -98,7 +99,7 @@ export default function Content({
           <GuidePage />
         </Route>
 
-        <Route exact path="/read-watch/video">
+        <Route exact path="/read-watch/videos">
           <VideosPage handleVideoClick={handleVideoClick} />
         </Route>
 
