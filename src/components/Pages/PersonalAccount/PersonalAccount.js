@@ -76,7 +76,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
             ? 'У вас нет записи на мероприятия'
             : 'Вы записаны на следующие мероприятия'}
         </h2>
-        <div className="buttons-scroll personal-account__event">
+        <div className="personal-account__event">
           {events
             .filter((e) => e.booked)
             .map((event) => (
