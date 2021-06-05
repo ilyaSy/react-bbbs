@@ -1,16 +1,12 @@
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
 import Popup from '../Popup/Popup';
+import youtubeLinkParser from '../../../utils/youtubeLinkParser';
 import './youtubeEmbed.css';
 
 const YoutubeEmbed = ({ onClose, link }) => {
-  const youtubeParser = (url) => {
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[7].length === 11 ? match[7] : false;
-  };
-  // Реулярное выражение чтобы извлечь embedId с ютуб ссылки
-  const embedId = youtubeParser(link);
+  const embedId = youtubeLinkParser(link);
+
   return (
     <Popup popupType="popup_type_video" onClose={onClose}>
       <div className="video">
