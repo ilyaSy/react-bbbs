@@ -95,12 +95,19 @@ const PopupStoryFriendship = ({
           />
           <input
             className="personal-account__input personal-account__input_type_date"
-            type="date"
-            placeholder="Дата  __.__.____"
+            type="text"
             {...register('date', {
               required: 'дата*',
             })}
             defaultValue={currentDate}
+            placeholder={`Дата ${'\u0020'}${'\uFF3F'}.${'\uFF3F'}.${'\uFF3F'}${'\uFF3F'}`}
+            onFocus={(e) => {
+              e.currentTarget.type = 'date';
+              e.currentTarget.focus();
+            }}
+            onBlur={(e) => {
+              e.currentTarget.type = 'text';
+            }}
           />
           <textarea
             className={`personal-account__textarea personal-account__textarea_type_description ${
