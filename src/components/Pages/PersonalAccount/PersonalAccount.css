@@ -157,6 +157,7 @@
   font-size: 15px;
   line-height: 19px;
   text-align: left;
+  outline: none;
 }
 
 .personal-account__input-error::placeholder {
@@ -164,6 +165,7 @@
 }
 
 .personal-account__textarea {
+  outline: none;
   display: block;
   margin: 0;
   padding: 13px 20px 16px 20px;

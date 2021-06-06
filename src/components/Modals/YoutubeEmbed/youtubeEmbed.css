@@ -1,9 +1,15 @@
 .video {
-  position: relative;
+  /* position: relative;
   max-width: 1110px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+  width: 75%;
+  margin: 0 auto;
 }
 .video__button {
   right: -40px;
   top: -40px;
+}
+.youtube {
+  width: 100%;
+  margin: 0 auto;
 }

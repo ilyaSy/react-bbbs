@@ -53,7 +53,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
       })
       .catch(console.log);
   };
-  console.log(stories);
+
   return (
     <section className="personal-account content main__section">
       <div className="personal-account__buttons">

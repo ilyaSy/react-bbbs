@@ -12,6 +12,7 @@ const YoutubeEmbed = ({ onClose, link }) => {
       <div className="video">
         <Button className="button-close popup__button-close video__button" onClick={onClose} />
         <iframe
+          className="youtube"
           width="853"
           height="480"
           src={`https://www.youtube.com/embed/${embedId}`}
