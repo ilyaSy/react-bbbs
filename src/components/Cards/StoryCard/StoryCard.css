@@ -30,12 +30,8 @@
 }
 
 @media (max-width: 1024px) {
-  .story__overlay:hover {
-    opacity: 0;
-  }
-
   .story__title {
-    display: none;
+    font-size: 18px;
   }
 }
 

@@ -27,7 +27,14 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
 }
-
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1 0 auto;
+}
 .root__section {
   margin: 80px auto 120px;
 }
