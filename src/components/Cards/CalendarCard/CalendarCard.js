@@ -10,7 +10,7 @@ const CalendarCard = ({
   handleRegisterSubmit,
   handleDeleteEvent,
 }) => {
-  const { address, contact, title, seats, takenSeats, startAt, endAt, booked } = event;
+  const { address, contact, title, seats, takenSeats, startAt, endAt, booked, tags } = event;
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
   const day = formatDate(startAtDate, 'dd');
@@ -34,11 +34,19 @@ const CalendarCard = ({
       handleDeleteEvent(event);
     }
   };
+  // преобразует объект из массива ивентов в строку - Волонтеры или Волонтеры + дети
+  const tagsToStr = () =>
+    tags.reduce((str, tag) => {
+      if (!str) {
+        return str + tag.name;
+      }
+      return `${str} + ${tag.name}`;
+    }, '');
 
   return (
     <div className={`calendar ${booked ? 'calendar_onclick' : ''}`}>
       <div className="calendar__about">
-        <p className="calendar__participants">Волонтёры + дети</p>
+        <p className="calendar__participants">{tagsToStr()}</p>
         <p className="calendar__date">
           {monthName} / {dayName}
         </p>
@@ -86,7 +94,12 @@ const CalendarCard = ({
 
 CalendarCard.propTypes = {
   event: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool,
+      PropTypes.arrayOf(PropTypes.any),
+    ])
   ).isRequired,
   handleCalendarCardClick: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,

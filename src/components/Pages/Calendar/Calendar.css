@@ -21,6 +21,13 @@
   text-align: center;
 }
 
+.calendar__not-events {
+  font-size: 30px;
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
 .grid-calendar__grid {
   width: 100%;
   margin: 0 auto;
@@ -33,22 +40,18 @@
 }
 
 @media (max-width: 1900px) {
-
   .grid-calendar__grid {
     grid-template-columns: repeat(2, 570px);
   }
 }
 
 @media (max-width: 1439px) {
-
   .grid-calendar {
     width: 100%;
   }
 }
 
-
 @media (max-width: 1024px) {
-
   .grid-calendar {
     margin-top: 45px;
     margin-bottom: 100px;
@@ -64,7 +67,6 @@
   }
 }
 @media (max-width: 1250px) {
-
   .grid-calendar__grid {
     grid-template-columns: repeat(2, 370px);
   }
@@ -91,7 +93,6 @@
     column-gap: 0;
   }
 }
-
 
 @media (max-width: 530px) {
   .grid-calendar__grid {
