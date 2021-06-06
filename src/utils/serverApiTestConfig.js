@@ -347,9 +347,9 @@ export const placesGet = [
   {
     chosen: false,
     category: 'Парки',
-    title: 'Московский зоопарк 1',
+    title: 'Барнаульский зоопарк',
     address: 'Адрес в одну строку',
-    city: 'Москва',
+    city: 'Барнаул',
     info: 'Пол, возраст, категория',
     sex: 'Девочка',
     age: 8,
