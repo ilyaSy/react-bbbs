@@ -15,7 +15,7 @@ const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
 const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [activeCategorys, setActiveCategorys] = useState(['Все']);
+  const [activeCategories, setActiveCategories] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const { places, categories } = usePlacesCategories();
 
@@ -24,7 +24,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
   }, []);
 
   const handleCategoryFilter = (category) => {
-    setActiveCategorys(setActiveFilters(activeCategorys, category));
+    setActiveCategories(setActiveFilters(activeCategories, category));
   };
 
   const handleAgeFilter = (age) => {
@@ -75,7 +75,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
         <div className="scroll-container">
           <ScrollContainer
             list={categories}
-            activeItems={activeCategorys}
+            activeItems={activeCategories}
             onClick={handleCategoryFilter}
             sectionSubClass="buttons-scroll_place_event"
           />
@@ -93,19 +93,32 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
           isPlacePopupOpened={isPlacePopupOpened}
         />
       )}
-      {activeCategorys[0] === 'Все' && (
+      {activeCategories[0] === 'Все' && activeAgeRange === '' && (
         <Card
           type="place"
-          data={places.filter((place) => place.chosen)[0]}
+          data={
+            places
+              .filter((place) => {
+                const currentCity = currentUser?.city || unauthСity;
+                return place.city === currentCity;
+              })
+              .filter((place) => place.chosen)[0] || places.filter((place) => place.chosen)[0]
+          }
           color="yellow"
           size="big"
         />
       )}
       <section className="events-grid">
         {places
-          .filter((place) => filterItemByFiltersList(activeCategorys, place.category))
+          .filter((place) => {
+            const currentCity = currentUser?.city || unauthСity;
+            return currentCity ? place.city === currentCity : place;
+          })
+          .filter((place) => filterItemByFiltersList(activeCategories, place.category))
           .filter((place) => filterAgeRanges(place.age))
-          .sort((a, b) => activeCategorys.indexOf(a.category) > activeCategorys.indexOf(b.category))
+          .sort(
+            (a, b) => activeCategories.indexOf(a.category) > activeCategories.indexOf(b.category)
+          )
           .map((place, i) => (
             <Card
               type="place"
