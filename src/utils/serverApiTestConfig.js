@@ -516,77 +516,7 @@ export const mainGet = {
         'У таких детей возникает ощущение отверженности. Оно приводит к напряженности и  недоверию к людям и, как итог, к реальному неприятию себя и окружающих.',
     },
   ],
-  // movies: [
-  //   {
-  //     id: 51,
-  //     imageUrl: 'https://picsum.photos/420/239',
-  //     title: 'Жутко громко и запредельно близко',
-  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-  //     link: 'https://youtu.be/8VzzlhOyOSI',
-  //     tags: [
-  //       {
-  //         id: 551,
-  //         name: 'драма',
-  //         slug: 'rubric',
-  //       },
-  //       {
-  //         id: 552,
-  //         name: 'документальный',
-  //         slug: 'rubric',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 52,
-  //     imageUrl: 'https://picsum.photos/420/239',
-  //     title: 'Жутко громко и запредельно близко',
-  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-  //     link: 'https://youtu.be/8VzzlhOyOSI',
-  //     tags: [
-  //       {
-  //         id: 551,
-  //         name: 'комедия',
-  //         slug: 'rubric',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 53,
-  //     imageUrl: 'https://picsum.photos/420/239',
-  //     title: 'Жутко громко и запредельно близко',
-  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-  //     link: 'https://youtu.be/8VzzlhOyOSI',
-  //     tags: [
-  //       {
-  //         id: 552,
-  //         name: 'драма',
-  //         slug: 'rubric',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 54,
-  //     imageUrl: 'https://picsum.photos/420/239',
-  //     title: 'Жутко громко и запредельно близко',
-  //     info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-  //     link: 'https://youtu.be/8VzzlhOyOSI',
-  //     tags: [
-  //       {
-  //         id: 551,
-  //         name: 'документальный',
-  //         slug: 'rubric',
-  //       },
-  //     ],
-  //   },
-  // ],
-  // video: {
-  //   id: 61,
-  //   title: 'Эфир с выпускником нашей программы',
-  //   info: 'Иван Рустаев, выпускник программы',
-  //   link: 'https://youtu.be/H980rXfjdq4',
-  //   imageUrl: 'https://picsum.photos/1199/675',
-  //   duration: 134,
-  // },
+
   questions: [
     {
       id: 71,
@@ -836,12 +766,11 @@ export const videosGet = [
   {
     id: 541,
     imageUrl: 'https://picsum.photos/420/239',
-    title:
-      'Репортаж о программе "Старшие Братья Старшие Сестры" на Первом канале в передаче "Доброе утро"',
-    info: 'Репортаж о программе "Старшие Братья Старшие Сестры" на Первом канале в передаче "Доброе утро"',
-    link: 'https://www.youtube.com/watch?v=yLuQxkENBsg',
+    title: 'Что в силах волонтера-наставника?',
+    info: 'Иван Рустаев, волонтер-наставник',
+    link: 'https://www.youtube.com/watch?v=SBHD6nxlCJY&ab_channel=Nastavniki',
     tag: {
-      name: 'Ресурсная группа',
+      name: 'Эксперт',
       id: 110,
     },
   },
@@ -852,11 +781,12 @@ export const videosGet = [
     info: 'Ролик  - победитель в конкурсе видеороликов о наших "Старших" и "Младших" на ежегодном вечере "Наставник года 2020"',
     link: 'https://www.youtube.com/watch?v=OBwE5wQWfMA&list=PLGXCe1KkwauZXNDNreyywAR2lZjGvSQmF&ab_channel=NastavnikiNastavniki',
     tag: {
-      name: 'Эксперт',
+      name: 'Ресурсная группа',
       id: 110,
     },
     chosen: true,
   },
+
   {
     id: 543,
     imageUrl: 'https://picsum.photos/420/239',

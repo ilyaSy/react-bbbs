@@ -5,7 +5,7 @@ import './MainVideoCard.css';
 
 const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
   const handleClick = () => {
-    handleVideoClick(video.link);
+    handleVideoClick(video.link, video.title, video.info);
   };
 
   const embedId = youtubeLinkParser(video.link);

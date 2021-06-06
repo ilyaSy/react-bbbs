@@ -45,15 +45,7 @@
 /* ТИПЫ ПОПАПОВ И ИХ КОНТЕЙНЕРОВ */
 
 .popup_type_video {
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  min-width: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
+  overflow-y: hidden;
 }
 
 .popup_type_success {
