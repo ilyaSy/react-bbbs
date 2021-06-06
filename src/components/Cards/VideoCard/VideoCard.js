@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Tag from '../../UI/Tag/Tag';
 import youtubeLinkParser from '../../../utils/youtubeLinkParser';
 import './VideoCard.css';
 
-const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
+const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPage }) => {
   let tagsText;
   if (tags) tagsText = tags.map((tag) => tag.name);
 
-  const clickHandler = (e) => {
-    e.preventDefault();
+  const clickHandler = () => {
     handleVideoClick(link);
   };
 
@@ -16,6 +16,14 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick }) => {
 
   return (
     <li className="movie movie__card">
+      {!isMovesPage ? (
+        <Link
+          className="mainlink"
+          to="/read-watch/movies"
+          rel="noopener noreferrer"
+          onClick={clickHandler}
+        />
+      ) : null}
       <div className="movie__img">
         <img
           className="movie__poster"
@@ -57,11 +65,13 @@ VideoCard.propTypes = {
   info: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   handleVideoClick: PropTypes.func,
+  isMovesPage: PropTypes.bool,
 };
 
 VideoCard.defaultProps = {
   tags: [],
   handleVideoClick: () => {},
+  isMovesPage: true,
 };
 
 export default VideoCard;

@@ -35,6 +35,7 @@ const PopupStoryFriendship = ({
       );
     },
   });
+
   // форма
   const {
     register,
@@ -95,6 +96,7 @@ const PopupStoryFriendship = ({
           <input
             className="personal-account__input personal-account__input_type_date"
             type="date"
+            placeholder="Дата  __.__.____"
             {...register('date', {
               required: 'дата*',
             })}

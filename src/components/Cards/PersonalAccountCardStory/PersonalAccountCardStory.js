@@ -80,14 +80,14 @@ const PersonalAccountCardStory = ({
           </Button>
         </div>
       </div>
-      {isDeletePopupOpen && (
+      {isDeletePopupOpen ? (
         <PopupConfirmDelete
           place={place}
           handleSubmitDeletePopup={handleSubmitDeletePopup}
           cardId={cardId}
           closePopup={closeDeletePopup}
         />
-      )}
+      ) : null}
     </div>
   );
 };

@@ -41,7 +41,7 @@ const VideosPage = ({ handleVideoClick }) => {
       </div>
       {activeTags[0] === 'Все' && (
         <section className="mainvideo videopage__bigvideo">
-          <MainVideoCard video={chosenVideo} />
+          <MainVideoCard video={chosenVideo} handleVideoClick={handleVideoClick} />
         </section>
       )}
       <ul className="videopage__list">{currentPageData}</ul>

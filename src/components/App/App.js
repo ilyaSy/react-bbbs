@@ -125,37 +125,37 @@ function App() {
       />
       <Footer />
 
-      {isAuthModalOpened && (
+      {isAuthModalOpened ? (
         <AuthPopup closeAuthModal={closeAllModal} submitModal={handleSubmitAuth} />
-      )}
-      {selectedCalendarCard && (
+      ) : null}
+      {selectedCalendarCard ? (
         <PopupMeet
           closeModal={closeAllModal}
           selectedCalendarCard={selectedCalendarCard}
           handleRegisterSubmit={handleConfirmRegisterSubmit}
           handleDeleteEvent={handleDeleteEvent}
         />
-      )}
-      {isConfirmRegisterModalOpened && (
+      ) : null}
+      {isConfirmRegisterModalOpened ? (
         <PopupConfirmRegister
           closeModal={closeAllModal}
           selectedConfirmCalendarCard={selectedConfirmCalendarCard}
           handleConfirmRegisterSubmit={handleConfirmRegisterSubmit}
         />
-      )}
-      {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
-      {isRegisterErrorModalOpened && <PopupError closeModal={closeAllModal} />}
-      {isPopupCitiesOpen && (
+      ) : null}
+      {isRegisterSuccessModalOpened ? <PopupRegisterSuccess closeModal={closeAllModal} /> : null}
+      {isRegisterErrorModalOpened ? <PopupError closeModal={closeAllModal} /> : null}
+      {isPopupCitiesOpen ? (
         <PopupCities
           onClose={closeAllModal}
           updateCity={updateCity}
           cities={mainDataCities.cities}
           currentUser={currentUser}
         />
-      )}
-      {isPopupVideoOpen.isOpened && (
+      ) : null}
+      {isPopupVideoOpen.isOpened ? (
         <YoutubeEmbed onClose={closeAllModal} link={isPopupVideoOpen.url || ''} />
-      )}
+      ) : null}
     </CurrentUserContext.Provider>
   );
 }

@@ -320,6 +320,7 @@
 .personal-account__input_type_place {
   grid-column: 1/2;
 }
+
 .personal-account__input_type_date {
   grid-column: 3/4;
 }

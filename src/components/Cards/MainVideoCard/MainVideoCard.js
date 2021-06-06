@@ -1,22 +1,45 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import youtubeLinkParser from '../../../utils/youtubeLinkParser';
 import './MainVideoCard.css';
 
-const MainVideoCard = ({ video }) => (
-  <div className="mainvideo">
-    <div className="mainvideo__description">
-      <Link className="mainlink" to="/read-watch/videos" />
-      <div className="mainvideo__name">
-        <h3 className="mainvideo__title">{video.title}</h3>
-        <p className="mainvideo__caption">{video.info}</p>
+const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
+  const handleClick = () => {
+    handleVideoClick(video.link);
+  };
+
+  const embedId = youtubeLinkParser(video.link);
+
+  return (
+    <div className="mainvideo">
+      {!isVideosPage ? (
+        <Link
+          className="mainlink"
+          to="/read-watch/videos"
+          rel="noopener noreferrer"
+          onClick={handleClick}
+        />
+      ) : null}
+      <div className="mainvideo__description">
+        {/* <Link className="mainlink" to="/read-watch/videos" /> */}
+        <div className="mainvideo__name">
+          <h3 className="mainvideo__title">{video.title}</h3>
+          <p className="mainvideo__caption">{video.info}</p>
+        </div>
+        <a className="mainvideo__link" href={video.link}>
+          смотреть видео
+        </a>
       </div>
-      <a className="mainvideo__link" href={video.link}>
-        смотреть видео
-      </a>
+      <img
+        src={`http://img.youtube.com/vi/${embedId}/0.jpg`}
+        alt="видео отсутствует"
+        className="mainvideo__video"
+        onClick={handleClick}
+        aria-hidden="true"
+      />
     </div>
-    <img src={video.imageUrl} alt="видео отсутствует" className="mainvideo__video" />
-  </div>
-);
+  );
+};
 
 MainVideoCard.propTypes = {
   video: PropTypes.objectOf(
@@ -27,6 +50,8 @@ MainVideoCard.propTypes = {
       PropTypes.bool,
     ])
   ),
+  handleVideoClick: PropTypes.func,
+  isVideosPage: PropTypes.bool,
 };
 
 MainVideoCard.defaultProps = {
@@ -36,6 +61,8 @@ MainVideoCard.defaultProps = {
     info: 'Что-то пошло не так, здесь должно быть видео',
     imageUrl: '../../assets/img/mainvideo.png',
   },
+  handleVideoClick: () => {},
+  isVideosPage: true,
 };
 
 export default MainVideoCard;

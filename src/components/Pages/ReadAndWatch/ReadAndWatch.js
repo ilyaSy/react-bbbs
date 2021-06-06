@@ -11,7 +11,7 @@ const ReadAndWatch = ({ handleVideoClick }) => {
       <ReadAndWatchSection sectionTitle="Справочник" path="/read-watch/guide" data={guideData} />
       <ReadAndWatchSection
         sectionTitle="Видео"
-        path="/read-watch/video"
+        path="/read-watch/videos"
         data={videosData}
         handleVideoClick={handleVideoClick}
       />
