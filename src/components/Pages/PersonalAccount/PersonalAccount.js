@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Button from '../../UI/Button/Button';
@@ -56,6 +57,10 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
 
   return (
     <section className="personal-account content main__section">
+      <Helmet>
+        <title>Личный Кабинет</title>
+        <meta name="description" content="account" />
+      </Helmet>
       <div className="personal-account__buttons">
         <Button
           className="personal-account__feedback-btn personal-account__text"

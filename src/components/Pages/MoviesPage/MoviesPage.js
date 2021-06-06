@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
@@ -38,6 +39,10 @@ const MoviesPage = ({ handleVideoClick }) => {
 
   return (
     <section className="filmpage content main__section">
+      <Helmet>
+        <title>Фильмы</title>
+        <meta name="description" content="movies" />
+      </Helmet>
       <Heading>Фильмы</Heading>
       <div className="scroll-container">
         <ScrollContainer list={genres} activeItems={activeGenres} onClick={handleGenreFilter} />

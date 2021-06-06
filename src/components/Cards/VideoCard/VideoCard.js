@@ -9,7 +9,7 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPag
   if (tags) tagsText = tags.map((tag) => tag.name);
 
   const clickHandler = () => {
-    handleVideoClick(link);
+    handleVideoClick(link, title, info);
   };
 
   const embedId = youtubeLinkParser(link);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Helmet } from 'react-helmet';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Content from '../Content/Content';
@@ -68,8 +68,8 @@ function App() {
     setIsPopupCitiesOpen(true);
   };
 
-  const handleVideoClick = (url) => {
-    setIsPopupVideoOpen({ url, isOpened: true });
+  const handleVideoClick = (url, title, info) => {
+    setIsPopupVideoOpen({ url, isOpened: true, title, info });
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -80,7 +80,7 @@ function App() {
     setSelectedConfirmCalendarCard(calendarCard);
     setIsConfirmRegisterOpened(true);
   };
-
+  console.log(isPopupVideoOpen);
   const handleConfirmRegisterSubmit = (calendarCard) => {
     Api.updateEvent(calendarCard)
       .then((data) => {
@@ -106,6 +106,10 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <Helmet>
+        <title>Наставники.про | Старшие Братья Старшие Сёстры</title>
+        <meta name="description" content="application" />
+      </Helmet>
       <ScrollToTop />
       <Header openAuthModal={openAuthModal} onLogout={logout} openPopupCities={openPopupCities} />
       <Content
@@ -154,7 +158,12 @@ function App() {
         />
       ) : null}
       {isPopupVideoOpen.isOpened ? (
-        <YoutubeEmbed onClose={closeAllModal} link={isPopupVideoOpen.url || ''} />
+        <YoutubeEmbed
+          onClose={closeAllModal}
+          link={isPopupVideoOpen.url || ''}
+          title={isPopupVideoOpen.title}
+          info={isPopupVideoOpen.info}
+        />
       ) : null}
     </CurrentUserContext.Provider>
   );

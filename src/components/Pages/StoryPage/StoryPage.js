@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import './StoryPage.css';
 import Button from '../../UI/Button/Button';
 import StoryCard from '../../Cards/StoryCard/StoryCard';
@@ -14,6 +15,10 @@ const StoryPage = () => {
 
   return (
     <section className="storypage content main__section">
+      <Helmet>
+        <title>Истории дружбы</title>
+        <meta name="description" content="stories" />
+      </Helmet>
       <Heading>Истории дружбы</Heading>
       <p className="storypage__caption">
         Результат нашей работы сложно показать цифрами. Как измерить и&nbsp;взвесить дружбу? Как
