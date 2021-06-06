@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Helmet } from 'react-helmet';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Content from '../Content/Content';
@@ -106,6 +106,10 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <Helmet>
+        <title>Наставники.про | Старшие Братья Старшие Сёстры</title>
+        <meta name="description" content="application" />
+      </Helmet>
       <ScrollToTop />
       <Header openAuthModal={openAuthModal} onLogout={logout} openPopupCities={openPopupCities} />
       <Content

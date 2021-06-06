@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import ReadAndWatchSection from '../../Containers/ReadAndWatchSection/ReadAndWatchSection';
 import useReadWatch from '../../../hooks/useReadWatch';
 import './ReadAndWatch.css';
@@ -8,6 +9,10 @@ const ReadAndWatch = ({ handleVideoClick }) => {
 
   return (
     <section className="raw content main__section">
+      <Helmet>
+        <title>Читать и смотреть</title>
+        <meta name="description" content="read and watch" />
+      </Helmet>
       <ReadAndWatchSection sectionTitle="Справочник" path="/read-watch/guide" data={guideData} />
       <ReadAndWatchSection
         sectionTitle="Видео"

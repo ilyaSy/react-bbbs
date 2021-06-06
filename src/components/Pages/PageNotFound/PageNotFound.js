@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Lottie from 'lottie-web';
 import { useEffect, useRef } from 'react';
 import animeJson from '../../../animations/Illustration_404.json';
@@ -17,6 +18,10 @@ const PageNotFound = () => {
   }, []);
   return (
     <div className="page-not-found">
+      <Helmet>
+        <title>404</title>
+        <meta name="description" content="404" />
+      </Helmet>
       <div className="page-not-found__img" ref={container} />
       <h1 className="page-not-found__title">404</h1>
       <p className="page-not-found__subtitle">К сожалению, запрашиваемая страница не найдена.</p>

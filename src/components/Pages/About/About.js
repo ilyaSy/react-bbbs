@@ -1,9 +1,14 @@
 import './About.css';
+import { Helmet } from 'react-helmet';
 import logoSbbsBlue from '../../../assets/img/logoSBSS-blue.svg';
 import AboutCard from '../../Cards/AboutCard/AboutCard';
 
 const About = () => (
   <section className="content main__section">
+    <Helmet>
+      <title>О проекте</title>
+      <meta name="description" content="About" />
+    </Helmet>
     <div className="title">
       Наставники.про&nbsp;&mdash; цифровая информационная платформа организации &laquo;Старшие
       Братья Старшие Сестры&raquo;. Созданная для поддержки наставников программы.

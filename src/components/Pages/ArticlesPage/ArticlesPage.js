@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import defineColor from '../../../utils/renderColors';
 import Card from '../../Cards/Card/Card';
 import Pagination from '../../UI/Pagination/Pagination';
@@ -18,6 +19,10 @@ const ArticlesPage = () => {
 
   return (
     <section className="bookpage content main__section">
+      <Helmet>
+        <title>Статьи</title>
+        <meta name="description" content="article" />
+      </Helmet>
       <section className="event-choice">
         <h1 className="heading heading_place_articles">Статьи</h1>
       </section>

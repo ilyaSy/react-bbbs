@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import defineFigure from '../../../utils/renderFigures';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
 import Heading from '../../UI/Heading/Heading';
@@ -18,6 +19,10 @@ const GuidePage = () => {
 
   return (
     <section className="guides content main__section">
+      <Helmet>
+        <title>Справочник</title>
+        <meta name="description" content="guide" />
+      </Helmet>
       <Heading>Справочник</Heading>
       <p className="guides__caption">
         Памятка новичка&nbsp;&mdash; наши метариалы, где сможете найти всю базовую информацию,

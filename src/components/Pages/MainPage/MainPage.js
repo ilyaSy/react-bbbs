@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import MainPageSection from '../../Containers/MainPageSection/MainPageSection';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
@@ -35,6 +36,10 @@ export default function MainPage({
   }, [mainData, events]);
   return (
     <MainPageSection className="mainpage content main__section">
+      <Helmet>
+        <title>Главная</title>
+        <meta name="description" content="main" />
+      </Helmet>
       <MainPageSection className="mainpage__intro">
         {currentUser && userEvent ? (
           <CalendarCard

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
 import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
@@ -30,6 +31,10 @@ const RightsPage = () => {
 
   return (
     <section className="law content main__section">
+      <Helmet>
+        <title>Права детей</title>
+        <meta name="description" content="law" />
+      </Helmet>
       <Heading>Права детей</Heading>
       <div className="scroll-container">
         <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} />

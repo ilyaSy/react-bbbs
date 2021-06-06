@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
@@ -30,6 +31,10 @@ const VideosPage = ({ handleVideoClick }) => {
 
   return (
     <section className="videopage content main__section">
+      <Helmet>
+        <title>Видео</title>
+        <meta name="description" content="video" />
+      </Helmet>
       <Heading>Видео</Heading>
       <div className="scroll-container">
         <ScrollContainer

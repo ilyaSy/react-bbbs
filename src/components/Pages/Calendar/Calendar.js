@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import formatDate from '../../../utils/formatDate';
@@ -52,6 +53,10 @@ const Calendar = ({ handleCalendarCardClick, handleRegisterSubmit, handleDeleteE
 
   return (
     <section className="grid-calendar content main__section">
+      <Helmet>
+        <title>Календарь</title>
+        <meta name="description" content="calendar" />
+      </Helmet>
       <Heading>Календарь</Heading>
       <ScrollContainer
         list={months}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import BookCard from '../../Cards/BookCard/BookCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
@@ -37,6 +38,10 @@ const BooksPage = () => {
 
   return (
     <section className="bookpage content main__section">
+      <Helmet>
+        <title>Книги</title>
+        <meta name="description" content="books" />
+      </Helmet>
       <Heading>Книги</Heading>
       <div className="scroll-container">
         <ScrollContainer list={genres} activeItem={activeGenre} onClick={handleGenreFilter} />

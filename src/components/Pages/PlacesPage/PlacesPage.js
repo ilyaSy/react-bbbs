@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import PlacesFormPreview from '../../Cards/PlacesFormPreview/PlacesFormPreview';
 import Card from '../../Cards/Card/Card';
@@ -62,6 +63,10 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
 
   return (
     <section className="where-to-go content main__section">
+      <Helmet>
+        <title>Куда пойти</title>
+        <meta name="description" content="places" />
+      </Helmet>
       <div className="personal-account__buttons">
         <Button
           className="personal-account__feedback-btn personal-account__text"

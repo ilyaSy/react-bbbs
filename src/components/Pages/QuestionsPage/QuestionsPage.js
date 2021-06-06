@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
@@ -35,6 +36,10 @@ const QuestionsPage = () => {
   return (
     <>
       <section className="content main__section">
+        <Helmet>
+          <title>Вопросы</title>
+          <meta name="description" content="questions" />
+        </Helmet>
         <Heading>Ответы на вопросы</Heading>
         <div className="scroll-container">
           <ScrollContainer list={tagList} activeItems={activeTags} onClick={handleTagFilter} />
