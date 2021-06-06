@@ -21,7 +21,6 @@ const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
         />
       ) : null}
       <div className="mainvideo__description">
-        {/* <Link className="mainlink" to="/read-watch/videos" /> */}
         <div className="mainvideo__name">
           <h3 className="mainvideo__title">{video.title}</h3>
           <p className="mainvideo__caption">{video.info}</p>
