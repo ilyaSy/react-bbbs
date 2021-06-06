@@ -18,7 +18,8 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
   const currentUser = useContext(CurrentUserContext);
   const [activeCategories, setActiveCategories] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
-  const { places, categories } = usePlacesCategories();
+  const currentCity = currentUser?.city || unauthСity;
+  const { places, categories, chosenPlace } = usePlacesCategories(currentCity);
 
   useEffect(() => {
     if (!currentUser && !unauthСity) openPopupCities();
@@ -98,27 +99,15 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
           isPlacePopupOpened={isPlacePopupOpened}
         />
       )}
-      {activeCategories[0] === 'Все' && activeAgeRange === '' && (
-        <Card
-          type="place"
-          data={
-            places
-              .filter((place) => {
-                const currentCity = currentUser?.city || unauthСity;
-                return place.city === currentCity;
-              })
-              .filter((place) => place.chosen)[0] || places.filter((place) => place.chosen)[0]
-          }
-          color="yellow"
-          size="big"
-        />
+      {activeCategories[0] === 'Все' && activeAgeRange === '' && chosenPlace && (
+        <Card type="place" data={chosenPlace} color="yellow" size="big" />
       )}
       <section className="events-grid">
         {places
-          .filter((place) => {
-            const currentCity = currentUser?.city || unauthСity;
-            return currentCity ? place.city === currentCity : place;
-          })
+          .filter((place) =>
+            // const currentCity = currentUser?.city || unauthСity;
+            currentCity ? place.city === currentCity : place
+          )
           .filter((place) => filterItemByFiltersList(activeCategories, place.category))
           .filter((place) => filterAgeRanges(place.age))
           .sort(
