@@ -188,7 +188,7 @@
 }
 
 .buttons-scroll::-webkit-scrollbar {
-  width: 0;
+  display: none;
 }
 
 .buttons-scroll_place_event {

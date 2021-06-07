@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './StoryCard.css';
@@ -6,9 +6,10 @@ import Button from '../../UI/Button/Button';
 import StoryImg from '../../UI/StoryImg/StoryImg';
 
 const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
-  const [leftImg, setLeftImg] = React.useState(0);
-  const [centerImg, setCenterImg] = React.useState(1);
-  const [rightImg, setRightImg] = React.useState(2);
+  const [leftImg, setLeftImg] = useState(0);
+  const [centerImg, setCenterImg] = useState(1);
+  const [rightImg, setRightImg] = useState(2);
+  const scroll = createRef();
 
   const handleBackClick = () => {
     const newCenterImg = rightImg;
@@ -29,6 +30,25 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
     setRightImg(newRightImg);
   };
 
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+  let rememberStart = 0;
+  const handleStart = (e) => {
+    rememberStart = e.touches[0].pageX;
+  };
+
+  const handleEnd = (e) => {
+    setStart(rememberStart);
+    setEnd(e.changedTouches[0].pageX);
+  };
+
+  React.useEffect(() => {
+    if (start && end) {
+      if (start < end) handleForwardClick();
+      if (start > end) handleBackClick();
+    }
+  }, [start, end]);
+
   return (
     <>
       {isStoryPage ? (
@@ -43,14 +63,18 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
-
           <div className="storypage__slider">
             <StoryImg src={fullStory.images[leftImg]} />
             <Button
               className="storypage__button storypage__button_back"
               onClick={handleBackClick}
             />
-            <StoryImg src={fullStory.images[centerImg]} />
+            <StoryImg
+              src={fullStory.images[centerImg]}
+              ref={scroll}
+              onTouchStart={handleStart}
+              onTouchEnd={handleEnd}
+            />
             <Button
               className="storypage__button storypage__button_forward"
               onClick={handleForwardClick}
