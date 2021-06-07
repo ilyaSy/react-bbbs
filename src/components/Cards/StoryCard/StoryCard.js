@@ -1,17 +1,15 @@
-import { useState, useRef } from 'react';
+import React, { useState, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './StoryCard.css';
 import Button from '../../UI/Button/Button';
 import StoryImg from '../../UI/StoryImg/StoryImg';
-import useWindowSize from '../../../hooks/useWindowSize';
 
 const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
   const [leftImg, setLeftImg] = useState(0);
   const [centerImg, setCenterImg] = useState(1);
   const [rightImg, setRightImg] = useState(2);
-  const scroll = useRef(null);
-  const windowSize = useWindowSize();
+  const scroll = createRef();
 
   const handleBackClick = () => {
     const newCenterImg = rightImg;
@@ -32,25 +30,24 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
     setRightImg(newRightImg);
   };
 
-  let moving = false;
-  let initX = null;
-  let transform = 0;
-  const handleDown = (e) => {
-    transform = scroll.current.style.transform;
-    transform = parseFloat(transform.substr(11));
-    initX = e.changedTouches[0].pageX;
-    moving = true;
-    if (!transform) transform = 0;
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+  let rememberStart = 0;
+  const handleStart = (e) => {
+    rememberStart = e.touches[0].pageX;
   };
-  const handleMove = (e) => {
-    if (moving) {
-      const diff = e.changedTouches[0].pageX - initX;
-      scroll.current.style.transform = `translateX(${transform + diff}px)`;
+
+  const handleEnd = (e) => {
+    setStart(rememberStart);
+    setEnd(e.changedTouches[0].pageX);
+  };
+
+  React.useEffect(() => {
+    if (start && end) {
+      if (start < end) handleForwardClick();
+      if (start > end) handleBackClick();
     }
-  };
-  const handleUp = () => {
-    moving = false;
-  };
+  }, [start, end]);
 
   return (
     <>
@@ -66,33 +63,24 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
-          {windowSize > 1024 ? (
-            <div className="storypage__slider">
-              <StoryImg src={fullStory.images[leftImg]} />
-              <Button
-                className="storypage__button storypage__button_back"
-                onClick={handleBackClick}
-              />
-              <StoryImg src={fullStory.images[centerImg]} />
-              <Button
-                className="storypage__button storypage__button_forward"
-                onClick={handleForwardClick}
-              />
-              <StoryImg src={fullStory.images[rightImg]} />
-            </div>
-          ) : (
-            <div
-              className="storypage__slider"
-              onTouchStart={handleDown}
-              onTouchMove={handleMove}
-              onTouchEnd={handleUp}
+          <div className="storypage__slider">
+            <StoryImg src={fullStory.images[leftImg]} />
+            <Button
+              className="storypage__button storypage__button_back"
+              onClick={handleBackClick}
+            />
+            <StoryImg
+              src={fullStory.images[centerImg]}
               ref={scroll}
-            >
-              {fullStory.images.map((img) => (
-                <StoryImg key={img} src={img} />
-              ))}
-            </div>
-          )}
+              onTouchStart={handleStart}
+              onTouchEnd={handleEnd}
+            />
+            <Button
+              className="storypage__button storypage__button_forward"
+              onClick={handleForwardClick}
+            />
+            <StoryImg src={fullStory.images[rightImg]} />
+          </div>
           <div className="storypage__paragraph-flex">
             <p className="storypage__paragraph">{fullStory.p[1]}</p>
             <p className="storypage__paragraph">{fullStory.p[2]}</p>
