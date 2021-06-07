@@ -101,7 +101,12 @@ const PopupMeet = ({
 };
 PopupMeet.propTypes = {
   selectedCalendarCard: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool,
+      PropTypes.arrayOf(PropTypes.any),
+    ])
   ),
   closeModal: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,

@@ -32,7 +32,12 @@ const CalendarCardProfile = ({ event, handleCalendarCardClick }) => {
 };
 CalendarCardProfile.propTypes = {
   event: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool,
+      PropTypes.arrayOf(PropTypes.any),
+    ])
   ).isRequired,
   handleCalendarCardClick: PropTypes.func,
 };
