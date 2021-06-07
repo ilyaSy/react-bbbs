@@ -8,17 +8,26 @@
 
 * React
 
+* React-hooks
+
+* React custom hooks
+
 * JavaScript
 
 * HTML / CSS
 
 * axios ( + axios-mock-adapter)
 
+* react-proptypes
+
 * react-dropzone
 
 * react-hook-form
 
 * react-paginate
+
+* JSON animations (Lottie)
+
 
 ## Сделано
 
@@ -33,6 +42,7 @@
 * Анимация
 
 * Blur
+
 
 ## Основные страницы
 
@@ -54,7 +64,6 @@
 
 * О проекте
 
-## TODO
 
 -----
 **Автор: Сычугов Илья, Ботыгин Андрей, Коротких Анна, Слепухина Мария**
