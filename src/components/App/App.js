@@ -17,6 +17,7 @@ import YoutubeEmbed from '../Modals/YoutubeEmbed/YoutubeEmbed';
 import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
 import useAuth from '../../hooks/useAuth';
 import useMainDataCities from '../../hooks/useMainDataCities';
+import PopupRecomendationSuccess from '../Modals/PopupRecomendationSuccess/PopupRecomendationSuccess';
 
 function App() {
   const [events, setEvents] = useState();
@@ -25,6 +26,7 @@ function App() {
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
+  const [isPopupRecomendationSuccess, setPopupRecomendationSuccess] = useState(false);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
   const [isPopupVideoOpen, setIsPopupVideoOpen] = useState({ isOpened: false });
@@ -60,6 +62,7 @@ function App() {
     setIsPopupCitiesOpen(false);
     setIsPopupVideoOpen({ isOpened: false });
     setRegisterErrorModalOpened(false);
+    setPopupRecomendationSuccess(false);
   };
   // кастомный Хук авторизации
   const { logout, handleSubmitAuth } = useAuth({ setCurrentUser, setEvents, closeAllModal });
@@ -80,7 +83,10 @@ function App() {
     setSelectedConfirmCalendarCard(calendarCard);
     setIsConfirmRegisterOpened(true);
   };
-  console.log(isPopupVideoOpen);
+
+  const handlePlacesFormSubmit = () => {
+    setPopupRecomendationSuccess(true);
+  };
   const handleConfirmRegisterSubmit = (calendarCard) => {
     Api.updateEvent(calendarCard)
       .then((data) => {
@@ -126,6 +132,7 @@ function App() {
         unauthСity={unauthСity}
         isPlacePopupOpened={isPlacePopupOpened}
         handleVideoClick={handleVideoClick}
+        handlePlacesFormSubmit={handlePlacesFormSubmit}
       />
       <Footer />
 
@@ -156,6 +163,9 @@ function App() {
           cities={mainDataCities.cities}
           currentUser={currentUser}
         />
+      ) : null}
+      {isPopupRecomendationSuccess ? (
+        <PopupRecomendationSuccess closeModal={closeAllModal} />
       ) : null}
       {isPopupVideoOpen.isOpened ? (
         <YoutubeEmbed

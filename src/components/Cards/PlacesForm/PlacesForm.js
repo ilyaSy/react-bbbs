@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
 import './PlacesForm.css';
 
-const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs }) => {
+const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormSubmit }) => {
   const {
     register,
     formState: { errors },
@@ -41,6 +41,7 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs }) => {
     // (мб chosen само как-то бэкендом делается, там ещё id вроде будет)
     reset();
     setImage([]);
+    handlePlacesFormSubmit();
     onClose();
   };
 
@@ -169,10 +170,12 @@ PlacesForm.propTypes = {
   onClose: PropTypes.func,
   isPlacePopupOpened: PropTypes.bool.isRequired,
   showInputs: PropTypes.bool.isRequired,
+  handlePlacesFormSubmit: PropTypes.func,
 };
 
 PlacesForm.defaultProps = {
   onClose: () => {},
+  handlePlacesFormSubmit: () => {},
 };
 
 export default PlacesForm;

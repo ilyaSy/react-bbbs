@@ -14,7 +14,13 @@ import './PlacesPage.css';
 
 const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 
-const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePopupOpened }) => {
+const PlacesPage = ({
+  onRecommendPlace,
+  openPopupCities,
+  unauthСity,
+  isPlacePopupOpened,
+  handlePlacesFormSubmit,
+}) => {
   const currentUser = useContext(CurrentUserContext);
   const [activeCategories, setActiveCategories] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
@@ -97,6 +103,7 @@ const PlacesPage = ({ onRecommendPlace, openPopupCities, unauthСity, isPlacePop
         <PlacesFormPreview
           onRecommendPlace={onRecommendPlace}
           isPlacePopupOpened={isPlacePopupOpened}
+          handlePlacesFormSubmit={handlePlacesFormSubmit}
         />
       )}
       {activeCategories[0] === 'Все' && activeAgeRange === '' && chosenPlace && (
@@ -132,11 +139,13 @@ PlacesPage.propTypes = {
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
   isPlacePopupOpened: PropTypes.bool.isRequired,
+  handlePlacesFormSubmit: PropTypes.func,
 };
 PlacesPage.defaultProps = {
   onRecommendPlace: () => {},
   openPopupCities: () => {},
   unauthСity: () => {},
+  handlePlacesFormSubmit: () => {},
 };
 
 export default PlacesPage;
