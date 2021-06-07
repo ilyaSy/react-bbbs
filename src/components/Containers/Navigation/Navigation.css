@@ -1,0 +1,33 @@
+.burger__wrapper {
+  padding-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.burger__city-btn {
+  padding: 0;
+  font-family: 'Proto', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  color: #a7a6a6;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.burger__city-btn:first-of-type {
+  margin-right: 10px;
+}
+
+.burger__city-btn:hover {
+  color: #000000;
+}
+
+@media (max-width: 425px) {
+  .burger__wrapper {
+    padding-top: 50px;
+  }
+}

@@ -1,0 +1,244 @@
+.button {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid #224cff;
+  color: #224cff;
+  border-radius: 100px;
+  font-family: 'Proto', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:disabled {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+  cursor: pointer;
+}
+
+.button_disabled {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.button_nodecoration {
+  text-decoration: none;
+}
+
+/*-----BLUE-----*/
+.button_color_blue {
+  color: #224cff;
+  border: 1px #224cff solid;
+  cursor: pointer;
+}
+
+.button_color_blue:hover {
+  background-color: rgba(200, 209, 255, 1);
+}
+
+.button_color_blue:active {
+  background-color: rgba(34, 76, 255, 1);
+  color: white;
+}
+
+.button_color_blue-round {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-radius: 100px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  outline: none;
+  background-image: url('../../../assets/img/calendar-btn.svg');
+  background-size: cover;
+}
+
+.button_color_blue_onclick.button_color_blue-round {
+  background-color: rgba(200, 209, 255, 1);
+}
+
+.button_color_blue_onclick.button_color_blue-round:hover {
+  background-color: #fff;
+}
+
+.button_color_blue-round:active {
+  background-color: transparent;
+}
+
+.button_color_blue_onclick {
+  background-color: #224cff;
+  color: white;
+}
+
+/*-----trans round-----*/
+.button_type_round {
+  background-image: url('../../../assets/img/trans-blue-plus.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/*-----BLACK-----*/
+.button_color_black {
+  border: 1px black solid;
+  color: black;
+}
+
+.button_color_black_active {
+  background-color: black;
+  color: rgba(243, 242, 242, 1);
+}
+
+.button_color_black:hover {
+  background-color: #e0e0e0;
+}
+
+.button_color_black_active:hover {
+  background-color: #2e2468;
+}
+
+.button_color_black:active {
+  background-color: black;
+  color: rgba(243, 242, 242, 1);
+}
+
+.button_color_black-nonactive {
+  border: 1px #a7a6a6 solid;
+  color: #a7a6a6;
+}
+
+/*-----CALENDAR-----*/
+.button_place_calendar-round {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+}
+
+/*-----POPUP-----*/
+.button-close {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+}
+
+/*-----SCROLL-----*/
+.scroll-container {
+  position: relative;
+  width: 100%;
+  max-width: 1135px;
+  height: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.buttons-scroll {
+  text-align: center;
+  white-space: nowrap;
+  overflow-x: scroll;
+  padding: 0 5%;
+  scrollbar-width: none;
+}
+
+.buttons-scroll::after {
+  position: absolute;
+  content: '';
+  width: 5%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background: linear-gradient(to right, rgba(243, 242, 242, 0), rgba(243, 242, 242, 1));
+}
+
+.buttons-scroll::before {
+  position: absolute;
+  content: '';
+  width: 5%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: linear-gradient(to right, rgba(243, 242, 242, 1), rgba(243, 242, 242, 0));
+}
+
+.buttons-scroll:last-of-type {
+  margin-bottom: 0;
+}
+
+.buttons-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.buttons-scroll_place_event {
+  margin: 0 auto;
+}
+
+.button_place_scroll {
+  margin-bottom: 10px;
+  display: inline;
+}
+
+@media (max-width: 1250px) {
+  .button_color_blue_onclick {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .button {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_color_blue {
+    padding: 11px 15px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .button_place_calendar-round {
+    width: 40px;
+    height: 40px;
+  }
+
+  .button_color_blue-round {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .buttons-scroll_place_event {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 320px) {
+  .button-close {
+    top: 15px;
+    right: 15px;
+  }
+}

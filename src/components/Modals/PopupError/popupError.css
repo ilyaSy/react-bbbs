@@ -1,0 +1,8 @@
+.calendar__error {
+  min-height: 414px;
+  width: 570px;
+  background: rgba(242, 229, 229, 1);
+  color: rgba(255, 78, 78, 1);
+  padding-top: 59px;
+  justify-content: space-between;
+}

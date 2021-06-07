@@ -1,15 +1,22 @@
 import { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MainPage from '../MainPage/MainPage';
-import Calendar from '../Calendar/Calendar';
-import WhereToGo from '../WhereToGo/WhereToGo';
-import QuestionsPage from '../QuestionsPage/QuestionsPage';
-import PersonalAccount from '../PersonalAccount/PersonalAccount';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import About from '../About/About';
-import StoryPage from '../StoryPage/StoryPage';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import MainPage from '../Pages/MainPage/MainPage';
+import Calendar from '../Pages/Calendar/Calendar';
+import PlacesPage from '../Pages/PlacesPage/PlacesPage';
+import QuestionsPage from '../Pages/QuestionsPage/QuestionsPage';
+import PersonalAccount from '../Pages/PersonalAccount/PersonalAccount';
+import About from '../Pages/About/About';
+import StoryPage from '../Pages/StoryPage/StoryPage';
+import PageNotFound from '../Pages/PageNotFound/PageNotFound';
+import ReadAndWatch from '../Pages/ReadAndWatch/ReadAndWatch';
+import BooksPage from '../Pages/BooksPage/BooksPage';
+import MoviesPage from '../Pages/MoviesPage/MoviesPage';
+import VideosPage from '../Pages/VideosPage/VideosPage';
+import ArticlesPage from '../Pages/ArticlesPage/ArticlesPage';
+import GuidePage from '../Pages/GuidePage/GuidePage';
+import RightsPage from '../Pages/RightsPage/RightsPage';
+import ProtectedRoute from '../UI/ProtectedRoute/ProtectedRoute';
 import './content.css';
 
 export default function Content({
@@ -25,6 +32,9 @@ export default function Content({
   updateCity,
   openPopupCities,
   unauthСity,
+  isPlacePopupOpened,
+  handleVideoClick,
+  handlePlacesFormSubmit,
 }) {
   const location = useLocation();
 
@@ -35,74 +45,94 @@ export default function Content({
   }, [location]);
 
   return (
-    <Switch>
-      <Route exact path="/">
-        <main className="main">
+    <main className="main">
+      <Switch>
+        <Route exact path="/">
           <MainPage
             mainData={mainData}
             handleCalendarCardClick={handleCalendarCardClick}
             handleRegisterSubmit={handleRegisterSubmit}
             handleDeleteEvent={handleDeleteEvent}
             events={events}
+            handleVideoClick={handleVideoClick}
           />
-        </main>
-      </Route>
+        </Route>
 
-      <ProtectedRoute
-        path="/calendar"
-        component={Calendar}
-        handleCalendarCardClick={handleCalendarCardClick}
-        handleRegisterSubmit={handleRegisterSubmit}
-        handleDeleteEvent={handleDeleteEvent}
-        events={events}
-      />
+        <ProtectedRoute
+          path="/calendar"
+          component={Calendar}
+          handleCalendarCardClick={handleCalendarCardClick}
+          handleRegisterSubmit={handleRegisterSubmit}
+          handleDeleteEvent={handleDeleteEvent}
+          events={events}
+        />
 
-      <Route exact path="/stories">
-        <main className="main">
+        <Route exact path="/stories">
           <StoryPage />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/about">
-        <main className="main">
+        <Route exact path="/about">
           <About />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/where-to-go">
-        <main className="main">
-          <WhereToGo
+        <Route exact path="/where-to-go">
+          <PlacesPage
             onRecommendPlace={onRecommendPlace}
             openPopupCities={openPopupCities}
             unauthСity={unauthСity}
+            isPlacePopupOpened={isPlacePopupOpened}
+            handlePlacesFormSubmit={handlePlacesFormSubmit}
           />
-        </main>
-      </Route>
+        </Route>
 
-      <Route exact path="/questions">
-        <main className="main">
+        <Route exact path="/questions">
           <QuestionsPage />
-        </main>
-      </Route>
+        </Route>
 
-      {/* Задать вопрос */}
-      {/* <Route exact path="/search">
-      </Route> */}
+        <Route exact path="/read-watch">
+          <ReadAndWatch handleVideoClick={handleVideoClick} />
+        </Route>
 
-      <ProtectedRoute
-        path="/personal-account"
-        component={PersonalAccount}
-        onLogout={onLogout}
-        handleCalendarCardClick={handleCalendarCardClick}
-        events={events}
-        cities={cities}
-        updateCity={updateCity}
-        openPopupCities={openPopupCities}
-      />
-      <Route exact path="*">
-        <PageNotFound />
-      </Route>
-    </Switch>
+        <Route exact path="/rights">
+          <RightsPage />
+        </Route>
+
+        <Route exact path="/read-watch/guide">
+          <GuidePage />
+        </Route>
+
+        <Route exact path="/read-watch/videos">
+          <VideosPage handleVideoClick={handleVideoClick} />
+        </Route>
+
+        <Route exact path="/read-watch/articles">
+          <ArticlesPage />
+        </Route>
+
+        <Route exact path="/read-watch/movies">
+          <MoviesPage handleVideoClick={handleVideoClick} />
+        </Route>
+
+        <Route exact path="/read-watch/books">
+          <BooksPage />
+        </Route>
+
+        <ProtectedRoute
+          path="/personal-account"
+          component={PersonalAccount}
+          onLogout={onLogout}
+          handleCalendarCardClick={handleCalendarCardClick}
+          events={events}
+          cities={cities}
+          updateCity={updateCity}
+          openPopupCities={openPopupCities}
+        />
+
+        <Route exact path="*">
+          <PageNotFound />
+        </Route>
+      </Switch>
+    </main>
   );
 }
 
@@ -119,6 +149,9 @@ Content.propTypes = {
   updateCity: PropTypes.func,
   openPopupCities: PropTypes.func,
   unauthСity: PropTypes.string,
+  isPlacePopupOpened: PropTypes.bool.isRequired,
+  handleVideoClick: PropTypes.func,
+  handlePlacesFormSubmit: PropTypes.func,
 };
 
 Content.defaultProps = {
@@ -128,4 +161,6 @@ Content.defaultProps = {
   updateCity: () => {},
   openPopupCities: () => {},
   unauthСity: '',
+  handleVideoClick: () => {},
+  handlePlacesFormSubmit: () => {},
 };

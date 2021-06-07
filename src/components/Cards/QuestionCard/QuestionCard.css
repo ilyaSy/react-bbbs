@@ -1,0 +1,127 @@
+.question {
+  position: relative;
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 50px 50px 47px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 870px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.question__flex {
+  display: flex;
+  align-items: center;
+  max-width: 970px;
+  position: relative;
+}
+
+.question__title {
+  max-width: 770px;
+  font-family: 'Proto', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  max-width: 770px;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  color: #000000;
+  margin: 0 0 15px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.question__tags {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(100% - 80px);
+}
+
+.question__answer {
+  font-family: 'PT Root';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1a1a1a;
+  padding-bottom: 20px;
+}
+
+.question__btn {
+  position: absolute;
+  right: -100px;
+  top: 44px;
+  width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  flex-shrink: 0;
+  background-image: url('../../../assets/img/questions-button.svg');
+  background-size: contain;
+  z-index: 4;
+  cursor: pointer;
+  transition: transform ease-in-out 0.4s;
+}
+
+.question__btn_rotated {
+  transform: rotate(0.125turn);
+}
+
+@media (max-width: 1024px) {
+  .question {
+    padding: 30px 15px;
+  }
+
+  .question__flex {
+    width: 100%;
+  }
+
+  .question:last-child {
+    display: none;
+  }
+
+  .question__title {
+    font-size: 19px;
+    line-height: 23px;
+    -webkit-line-clamp: 4;
+  }
+
+  .question__answer {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .question__btn {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    position: absolute;
+    top: auto;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .questions {
+    width: 100%;
+  }
+
+  .question:last-child {
+    display: flex;
+  }
+
+  .question__title {
+    font-size: 19px;
+    line-height: 23px;
+  }
+}

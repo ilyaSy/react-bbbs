@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Content from '../Content/Content';
@@ -8,38 +7,34 @@ import Api from '../../utils/api';
 import './App.css';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import AuthPopup from '../AuthPopup/AuthPopup';
-import PopupMeet from '../PopupMeet/PopupMeet';
-import PopupConfirmRegister from '../PopupConfirmRegister/PopupConfirmRegister';
-import PopupRegisterSuccess from '../PopupRegisterSuccess/PopupRegisterSuccess';
-import ScrollToTop from '../ScrollToTop/ScrollToTop';
-import PopupPlaces from '../PopupPlaces/PopupPlaces';
-import PopupCities from '../PopupCities/PopupCities';
+import AuthPopup from '../Modals/AuthPopup/AuthPopup';
+import PopupMeet from '../Modals/PopupMeet/PopupMeet';
+import PopupConfirmRegister from '../Modals/PopupConfirmRegister/PopupConfirmRegister';
+import PopupRegisterSuccess from '../Modals/PopupRegisterSuccess/PopupRegisterSuccess';
+import PopupError from '../Modals/PopupError/PopupError';
+import PopupCities from '../Modals/PopupCities/PopupCities';
+import YoutubeEmbed from '../Modals/YoutubeEmbed/YoutubeEmbed';
+import ScrollToTop from '../UI/ScrollToTop/ScrollToTop';
+import useAuth from '../../hooks/useAuth';
+import useMainDataCities from '../../hooks/useMainDataCities';
+import PopupRecomendationSuccess from '../Modals/PopupRecomendationSuccess/PopupRecomendationSuccess';
 
 function App() {
   const [events, setEvents] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [unauthСity, setUnauthСity] = useState('');
-  const [mainData, setMainData] = useState(null);
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
+  const [isPopupRecomendationSuccess, setPopupRecomendationSuccess] = useState(false);
   const [isPopupCitiesOpen, setIsPopupCitiesOpen] = useState(false);
   const [isPlacePopupOpened, setIsPlacePopupOpened] = useState(false);
+  const [isPopupVideoOpen, setIsPopupVideoOpen] = useState({ isOpened: false });
+  const [isRegisterErrorModalOpened, setRegisterErrorModalOpened] = useState(false);
   const [selectedCalendarCard, setSelectedCalendarCard] = useState(null);
   const [selectedConfirmCalendarCard, setSelectedConfirmCalendarCard] = useState(null);
-  const [cities, setCities] = useState([]);
-  const history = useHistory();
 
-  useEffect(() => {
-    Api.getCities()
-      .then((cittiesData) => {
-        setCities(cittiesData);
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
-  }, []);
+  const mainDataCities = useMainDataCities();
 
   const updateCity = (city) => {
     if (currentUser) {
@@ -48,19 +43,15 @@ function App() {
         id: currentUser.id,
         user: currentUser.user,
       })
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .catch((err) => console.log(err));
+        .then(setCurrentUser)
+        .catch(console.log);
     } else {
       setUnauthСity(city);
     }
   };
   // Выбираем город пользователя !
 
-  const openAuthModal = () => {
-    setIsAuthModalOpened(true);
-  };
+  const openAuthModal = () => setIsAuthModalOpened(true);
 
   const closeAllModal = () => {
     setIsAuthModalOpened(false);
@@ -69,36 +60,19 @@ function App() {
     setIsPlacePopupOpened(false);
     setSelectedCalendarCard(null);
     setIsPopupCitiesOpen(false);
+    setIsPopupVideoOpen({ isOpened: false });
+    setRegisterErrorModalOpened(false);
+    setPopupRecomendationSuccess(false);
   };
-
-  const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('jwt');
-    Api.removeAuthHeader();
-    // localStorage.removeItem('jwtRefresh');
-    history.push('/');
-  };
-  const handleSubmitAuth = (userName, password) => {
-    Api.login({ userName, password })
-      .then((data) => {
-        if (data.refresh && data.access) {
-          Api.setAuthHeader(data.access);
-          localStorage.setItem('jwt', data.access);
-          // localStorage.setItem('jwtRefresh', data.refresh);
-          Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-            setCurrentUser({ userName, ...userData });
-            setEvents(eventsData);
-            closeAllModal();
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
-  };
+  // кастомный Хук авторизации
+  const { logout, handleSubmitAuth } = useAuth({ setCurrentUser, setEvents, closeAllModal });
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
+  };
+
+  const handleVideoClick = (url, title, info) => {
+    setIsPopupVideoOpen({ url, isOpened: true, title, info });
   };
 
   const handleCalendarCardClick = (calendarCard) => {
@@ -110,56 +84,42 @@ function App() {
     setIsConfirmRegisterOpened(true);
   };
 
+  const handlePlacesFormSubmit = () => {
+    setPopupRecomendationSuccess(true);
+  };
   const handleConfirmRegisterSubmit = (calendarCard) => {
     Api.updateEvent(calendarCard)
       .then((data) => {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
-        //  setIsRegisterSuccessModalOpened(true);
         closeAllModal();
+        setIsRegisterSuccessModalOpened(true);
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch(() => setRegisterErrorModalOpened(true));
   };
 
   const handleDeleteEvent = (calendarCard) => {
     Api.updateEvent(calendarCard)
       .then((data) => {
         setEvents(events.map((e) => (e.id === data.id ? data : e)));
-        //  setIsRegisterSuccessModalOpened(true);
         closeAllModal();
       })
-      .catch((err) => {
-        console.log(`Error ошибка: ${err}`);
-      });
+      .catch(console.log);
   };
 
   const handleRecommentdPlace = () => {
-    setIsPlacePopupOpened(true);
+    setIsPlacePopupOpened(!isPlacePopupOpened);
   };
-
-  useEffect(() => {
-    // const jwt = localStorage.getItem('jwt');
-    // if (jwt) {
-    //   Api.setAuthHeader(jwt);
-    //   setCurrentUser(userName);
-    // }
-
-    Api.getMain()
-      .then((data) => {
-        setMainData(data);
-      })
-      .catch((err) => {
-        console.log(`Error: ошибка ${err}`);
-      });
-  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+      <Helmet>
+        <title>Наставники.про | Старшие Братья Старшие Сёстры</title>
+        <meta name="description" content="application" />
+      </Helmet>
       <ScrollToTop />
-      <Header openAuthModal={openAuthModal} />
+      <Header openAuthModal={openAuthModal} onLogout={logout} openPopupCities={openPopupCities} />
       <Content
-        mainData={mainData}
+        {...mainDataCities}
         openAuthModal={openAuthModal}
         onLogout={logout}
         handleCalendarCardClick={handleCalendarCardClick}
@@ -167,41 +127,54 @@ function App() {
         handleDeleteEvent={handleDeleteEvent}
         onRecommendPlace={handleRecommentdPlace}
         events={events}
-        cities={cities}
         updateCity={updateCity}
         openPopupCities={openPopupCities}
         unauthСity={unauthСity}
+        isPlacePopupOpened={isPlacePopupOpened}
+        handleVideoClick={handleVideoClick}
+        handlePlacesFormSubmit={handlePlacesFormSubmit}
       />
       <Footer />
 
-      {isAuthModalOpened && (
+      {isAuthModalOpened ? (
         <AuthPopup closeAuthModal={closeAllModal} submitModal={handleSubmitAuth} />
-      )}
-      {selectedCalendarCard && (
+      ) : null}
+      {selectedCalendarCard ? (
         <PopupMeet
           closeModal={closeAllModal}
           selectedCalendarCard={selectedCalendarCard}
           handleRegisterSubmit={handleConfirmRegisterSubmit}
           handleDeleteEvent={handleDeleteEvent}
         />
-      )}
-      {isConfirmRegisterModalOpened && (
+      ) : null}
+      {isConfirmRegisterModalOpened ? (
         <PopupConfirmRegister
           closeModal={closeAllModal}
           selectedConfirmCalendarCard={selectedConfirmCalendarCard}
           handleConfirmRegisterSubmit={handleConfirmRegisterSubmit}
         />
-      )}
-      {isPlacePopupOpened && <PopupPlaces onClose={closeAllModal} />}
-      {isRegisterSuccessModalOpened && <PopupRegisterSuccess closeModal={closeAllModal} />}
-      {isPopupCitiesOpen && (
+      ) : null}
+      {isRegisterSuccessModalOpened ? <PopupRegisterSuccess closeModal={closeAllModal} /> : null}
+      {isRegisterErrorModalOpened ? <PopupError closeModal={closeAllModal} /> : null}
+      {isPopupCitiesOpen ? (
         <PopupCities
           onClose={closeAllModal}
           updateCity={updateCity}
-          cities={cities}
+          cities={mainDataCities.cities}
           currentUser={currentUser}
         />
-      )}
+      ) : null}
+      {isPopupRecomendationSuccess ? (
+        <PopupRecomendationSuccess closeModal={closeAllModal} />
+      ) : null}
+      {isPopupVideoOpen.isOpened ? (
+        <YoutubeEmbed
+          onClose={closeAllModal}
+          link={isPopupVideoOpen.url || ''}
+          title={isPopupVideoOpen.title}
+          info={isPopupVideoOpen.info}
+        />
+      ) : null}
     </CurrentUserContext.Provider>
   );
 }

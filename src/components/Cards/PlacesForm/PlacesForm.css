@@ -1,0 +1,23 @@
+.popup__form_type_recommendation {
+  opacity: 0;
+  height: 0;
+  transition: height 0.5s ease-out;
+}
+.popup__form_opened {
+  opacity: 1;
+  height: 500px;
+}
+.popup__inputs {
+  padding: 50px 100px;
+  opacity: 0;
+  transition: 0.4s ease;
+}
+.popup__inputs_show {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .popup__inputs {
+    padding: 30px 15px;
+  }
+}

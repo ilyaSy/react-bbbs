@@ -74,6 +74,30 @@ export default class Api {
     return axios.get(`${apiURL}/questions/`).then(Api._handleApiResult.bind(null, 'getQuestions'));
   }
 
+  static getMaterials() {
+    return axios.get(`${apiURL}/materials/`).then(Api._handleApiResult.bind(null, 'getMaterials'));
+  }
+
+  static getVideos() {
+    return axios.get(`${apiURL}/videos/`).then(Api._handleApiResult.bind(null, 'getVideos'));
+  }
+
+  static getArticles() {
+    return axios.get(`${apiURL}/articles/`).then(Api._handleApiResult.bind(null, 'getArticles'));
+  }
+
+  static getMovies() {
+    return axios.get(`${apiURL}/movies/`).then(Api._handleApiResult.bind(null, 'getMovies'));
+  }
+
+  static getBooks() {
+    return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
+  }
+
+  static getRights() {
+    return axios.get(`${apiURL}/rights/`).then(Api._handleApiResult.bind(null, 'getRights'));
+  }
+
   static getEvents() {
     return axios.get(`${apiURL}/afisha/events/`).then(Api._handleApiResult.bind(null, 'getEvents'));
   }

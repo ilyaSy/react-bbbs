@@ -1,0 +1,31 @@
+.where-to-go {
+  margin: 30px auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: visible;
+}
+.event-choice {
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+  .event-choice {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 850px) {
+  .event-choice {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 440px) {
+  .event-choice {
+    padding-bottom: 30px;
+  }
+}
