@@ -55,7 +55,7 @@ const PersonalAccountCardStory = ({
           </p>
         </div>
 
-        <p className="personal-account__textarea-text">{text}</p>
+        <p className="personal-account__textarea-text">{`${text}`}</p>
 
         <div className="personal-account__feedback personal-account__feedback_added">
           <div

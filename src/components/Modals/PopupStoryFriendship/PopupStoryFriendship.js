@@ -13,11 +13,10 @@ const PopupStoryFriendship = ({
   const mode = currentCardStory ? 'edit' : 'add';
 
   const currentPlace = currentCardStory?.place || '';
-  const currentDescription = currentCardStory?.description || '';
+  const currentText = currentCardStory?.text || '';
   const currentDate = currentCardStory?.date || '';
   const currentFeedback = currentCardStory?.feedback || '';
   const currentImage = currentCardStory?.image || '';
-
   // Данные конкретной  карточки для редактирования
 
   const [feedback, setFeedback] = useState(currentFeedback);
@@ -114,11 +113,11 @@ const PopupStoryFriendship = ({
               errors.description ? 'personal-account__input-error' : ''
             }`}
             placeholder="Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось"
-            {...register('description', {
+            {...register('text', {
               required:
                 'Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось*',
             })}
-            defaultValue={currentDescription}
+            defaultValue={currentText}
           />
           <div className="personal-account__feedback">
             <label

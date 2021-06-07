@@ -34,6 +34,7 @@ export default function Content({
   unauthСity,
   isPlacePopupOpened,
   handleVideoClick,
+  handlePlacesFormSubmit,
 }) {
   const location = useLocation();
 
@@ -80,6 +81,7 @@ export default function Content({
             openPopupCities={openPopupCities}
             unauthСity={unauthСity}
             isPlacePopupOpened={isPlacePopupOpened}
+            handlePlacesFormSubmit={handlePlacesFormSubmit}
           />
         </Route>
 
@@ -149,6 +151,7 @@ Content.propTypes = {
   unauthСity: PropTypes.string,
   isPlacePopupOpened: PropTypes.bool.isRequired,
   handleVideoClick: PropTypes.func,
+  handlePlacesFormSubmit: PropTypes.func,
 };
 
 Content.defaultProps = {
@@ -159,4 +162,5 @@ Content.defaultProps = {
   openPopupCities: () => {},
   unauthСity: '',
   handleVideoClick: () => {},
+  handlePlacesFormSubmit: () => {},
 };

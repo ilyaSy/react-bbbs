@@ -4,9 +4,15 @@
 ## Что это ?
 Проект студентов [Яндекс. Практикум](https://praktikum.yandex.ru): сайт для наставников проекта [Старшие Братья, Старшие Сёстры](https://www.nastavniki.org/)
 
+[Ссылка на GitHub Pages](https://droni90.github.io/react-bbbs/)
+
 ## Основные технологии
 
 * React
+
+* React-hooks
+
+* React custom hooks
 
 * JavaScript
 
@@ -14,11 +20,16 @@
 
 * axios ( + axios-mock-adapter)
 
+* react-proptypes
+
 * react-dropzone
 
 * react-hook-form
 
 * react-paginate
+
+* JSON animations (Lottie)
+
 
 ## Сделано
 
@@ -33,6 +44,7 @@
 * Анимация
 
 * Blur
+
 
 ## Основные страницы
 
@@ -54,9 +66,6 @@
 
 * О проекте
 
-## TODO
 
 -----
 **Автор: Сычугов Илья, Ботыгин Андрей, Коротких Анна, Слепухина Мария**
-
-https://droni90.github.io/react-bbbs/

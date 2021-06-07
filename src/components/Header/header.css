@@ -9,7 +9,7 @@
   left: 0;
   background: rgba(243, 242, 242, 1);
   z-index: 10;
-  transition: margin-top ease-in .3s;
+  transition: margin-top ease-in 0.3s;
 }
 
 .header_sticky_hide {
@@ -297,6 +297,7 @@
 }
 
 .header__input {
+  outline: none;
   border: 0;
   border-bottom: 1px solid #000000;
   width: 100%;

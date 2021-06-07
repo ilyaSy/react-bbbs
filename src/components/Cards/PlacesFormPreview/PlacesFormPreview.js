@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PlacesForm from '../PlacesForm/PlacesForm';
 import './PlacesFormPreview.css';
 
-const PlacesFormPreview = ({ onRecommendPlace, isPlacePopupOpened }) => {
+const PlacesFormPreview = ({ onRecommendPlace, isPlacePopupOpened, handlePlacesFormSubmit }) => {
   const [showInputs, setShowInputs] = useState(false);
   const handleRecommendPlace = (e) => {
     e.preventDefault();
@@ -23,7 +23,11 @@ const PlacesFormPreview = ({ onRecommendPlace, isPlacePopupOpened }) => {
           , и мы добавим вашу&nbsp;рекомендацию.
         </p>
       </div>
-      <PlacesForm isPlacePopupOpened={isPlacePopupOpened} showInputs={showInputs} />
+      <PlacesForm
+        isPlacePopupOpened={isPlacePopupOpened}
+        showInputs={showInputs}
+        handlePlacesFormSubmit={handlePlacesFormSubmit}
+      />
     </section>
   );
 };
@@ -31,6 +35,10 @@ const PlacesFormPreview = ({ onRecommendPlace, isPlacePopupOpened }) => {
 PlacesFormPreview.propTypes = {
   onRecommendPlace: PropTypes.func.isRequired,
   isPlacePopupOpened: PropTypes.bool.isRequired,
+  handlePlacesFormSubmit: PropTypes.func,
+};
+PlacesFormPreview.defaultProps = {
+  handlePlacesFormSubmit: () => {},
 };
 
 export default PlacesFormPreview;
