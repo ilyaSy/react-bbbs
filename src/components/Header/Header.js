@@ -95,7 +95,7 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
         ''
       )}
       {isBurgerOpened ? (
-        <div className="header__wrapper">
+        <div className="header__wrapper" ref={burgerRef}>
           <Button className="header__button-search" onClick={toggleSearch} />
           <Button
             type="button"
@@ -109,10 +109,7 @@ const Header = ({ openAuthModal, openPopupCities, onLogout }) => {
           <Button type="button" className="header__burger-btn_close" onClick={handleToggleBurger}>
             &nbsp;
           </Button>
-          <div
-            ref={burgerRef}
-            className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}
-          >
+          <div className={`header__burger ${isBurgerOpened ? '' : 'header__burger_hidden'}`}>
             <Navigation
               type="header-burger"
               onClick={handleToggleBurger}

@@ -439,7 +439,7 @@
   }
 
   .popup__input_type_age {
-    display: none;
+    grid-column: 1/7;
   }
 
   .popup__select_type_relax {
@@ -530,6 +530,9 @@
   }
 
   .popup__input_type_girl {
+    grid-column: 1/7;
+  }
+  .popup__input_type_age {
     grid-column: 1/7;
   }
 }
