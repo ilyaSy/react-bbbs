@@ -9,6 +9,8 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
   const [leftImg, setLeftImg] = React.useState(0);
   const [centerImg, setCenterImg] = React.useState(1);
   const [rightImg, setRightImg] = React.useState(2);
+  const [screen] = React.useState(window.screen.width);
+  const scroll = React.useRef(null);
 
   const handleBackClick = () => {
     const newCenterImg = rightImg;
@@ -29,6 +31,26 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
     setRightImg(newRightImg);
   };
 
+  let moving = false;
+  let initX = null;
+  let transform = 0;
+  const handleDown = (e) => {
+    transform = scroll.current.style.transform;
+    transform = parseFloat(transform.substr(11));
+    initX = e.changedTouches[0].pageX;
+    moving = true;
+    if (!transform) transform = 0;
+  };
+  const handleMove = (e) => {
+    if (moving) {
+      const diff = e.changedTouches[0].pageX - initX;
+      scroll.current.style.transform = `translateX(${transform + diff}px)`;
+    }
+  };
+  const handleUp = () => {
+    moving = false;
+  };
+
   return (
     <>
       {isStoryPage ? (
@@ -43,20 +65,33 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
-
-          <div className="storypage__slider">
-            <StoryImg src={fullStory.images[leftImg]} />
-            <Button
-              className="storypage__button storypage__button_back"
-              onClick={handleBackClick}
-            />
-            <StoryImg src={fullStory.images[centerImg]} />
-            <Button
-              className="storypage__button storypage__button_forward"
-              onClick={handleForwardClick}
-            />
-            <StoryImg src={fullStory.images[rightImg]} />
-          </div>
+          {screen > 1024 ? (
+            <div className="storypage__slider">
+              <StoryImg src={fullStory.images[leftImg]} />
+              <Button
+                className="storypage__button storypage__button_back"
+                onClick={handleBackClick}
+              />
+              <StoryImg src={fullStory.images[centerImg]} />
+              <Button
+                className="storypage__button storypage__button_forward"
+                onClick={handleForwardClick}
+              />
+              <StoryImg src={fullStory.images[rightImg]} />
+            </div>
+          ) : (
+            <div
+              className="storypage__slider"
+              onTouchStart={handleDown}
+              onTouchMove={handleMove}
+              onTouchEnd={handleUp}
+              ref={scroll}
+            >
+              {fullStory.images.map((img) => (
+                <StoryImg src={img} />
+              ))}
+            </div>
+          )}
           <div className="storypage__paragraph-flex">
             <p className="storypage__paragraph">{fullStory.p[1]}</p>
             <p className="storypage__paragraph">{fullStory.p[2]}</p>
