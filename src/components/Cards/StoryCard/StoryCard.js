@@ -1,16 +1,17 @@
-import React from 'react';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './StoryCard.css';
 import Button from '../../UI/Button/Button';
 import StoryImg from '../../UI/StoryImg/StoryImg';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
-  const [leftImg, setLeftImg] = React.useState(0);
-  const [centerImg, setCenterImg] = React.useState(1);
-  const [rightImg, setRightImg] = React.useState(2);
-  const [screen] = React.useState(window.screen.width);
-  const scroll = React.useRef(null);
+  const [leftImg, setLeftImg] = useState(0);
+  const [centerImg, setCenterImg] = useState(1);
+  const [rightImg, setRightImg] = useState(2);
+  const scroll = useRef(null);
+  const windowSize = useWindowSize();
 
   const handleBackClick = () => {
     const newCenterImg = rightImg;
@@ -65,7 +66,7 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
           <blockquote className="storypage__cite">
             <p className="storypage__citetext">{fullStory.bold}</p>
           </blockquote>
-          {screen > 1024 ? (
+          {windowSize > 1024 ? (
             <div className="storypage__slider">
               <StoryImg src={fullStory.images[leftImg]} />
               <Button
@@ -88,7 +89,7 @@ const StoryCard = ({ storyRef, history, fullStory, isStoryPage }) => {
               ref={scroll}
             >
               {fullStory.images.map((img) => (
-                <StoryImg src={img} />
+                <StoryImg key={img} src={img} />
               ))}
             </div>
           )}
