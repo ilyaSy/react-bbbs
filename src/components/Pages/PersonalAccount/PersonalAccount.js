@@ -39,6 +39,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const handleUpdaProfileStory = (card) => {
     Api.updateProfileStory(card)
       .then((data) => {
+        console.log(data);
         setStories(stories.map((e) => (e.id === data.id ? data : e)));
         closePopup();
         setCardStory(null);
