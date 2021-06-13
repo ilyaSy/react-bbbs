@@ -30,7 +30,7 @@ const PopupRecomendationSuccess = ({ closeModal }) => {
           className="button button_color_black success__button"
           onClick={closeModal}
         >
-          Вернуться
+          Вернуться к рекомендациям
         </Button>
       </div>
     </Popup>
