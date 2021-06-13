@@ -16,7 +16,7 @@
   opacity: 1;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 780px) {
   .popup__inputs {
     padding: 30px 15px;
   }
