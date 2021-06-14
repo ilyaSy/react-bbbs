@@ -30,6 +30,7 @@
   color: #000;
   margin: 0 0 16px 0;
   text-align: center;
+  padding: 30px 15px;
 }
 
 .recommendation__text_place_page {
@@ -45,8 +46,11 @@
   color: #2e2468;
 }
 
-/* @media (max-width: 640px) {
+@media (max-width: 640px) {
   .recommendation {
     padding: 30px 15px;
   }
-} */
+  .recommendation__text {
+    font-size: 18px;
+  }
+}

@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  z-index: 5;
+  z-index: 5000;
 }
 
 .popup__button-close {
@@ -401,7 +401,7 @@
   }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 920px) {
   .popup__personal-account {
     max-width: 470px;
   }
@@ -409,9 +409,19 @@
   .popup__buttons {
     width: 170px;
   }
+  .popup__input_type_boy {
+    grid-column: 1/4;
+  }
+
+  .popup__input_type_girl {
+    grid-column: 4/7;
+  }
+  .popup__input_type_age {
+    grid-column: 1/7;
+  }
 }
 
-@media (max-width: 660px) {
+/* @media (max-width: 680px) {
   .popup__personal-account {
     max-width: 320px;
     padding-right: 15px;
@@ -431,13 +441,12 @@
   }
 
   .popup__input_type_boy {
-    grid-column: 1/4;
+    grid-column: 1/7;
   }
 
   .popup__input_type_girl {
-    grid-column: 4/7;
+    grid-column: 1/7;
   }
-
   .popup__input_type_age {
     grid-column: 1/7;
   }
@@ -445,9 +454,14 @@
   .popup__select_type_relax {
     grid-column: 1/7;
   }
-}
+} */
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
+  .popup__personal-account {
+    max-width: 320px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
   .popup__input {
     padding-top: 10px;
     padding-bottom: 13px;
