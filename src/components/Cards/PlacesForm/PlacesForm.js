@@ -46,7 +46,6 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
   };
 
   return (
-    // <Popup popupType="popup_type_recommendation" onClose={onClose}>
     <form
       className={`popup__form popup__form_type_recommendation ${
         isPlacePopupOpened ? 'popup__form_opened' : ''
@@ -162,7 +161,6 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
         </div>
       </div>
     </form>
-    // </Popup>
   );
 };
 
