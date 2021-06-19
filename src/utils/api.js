@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { apiURL, TEST_MODE } from '../config/config';
-import setMockAdapter from './serverApi';
+// import setMockAdapter from './serverApi';
 
-if (TEST_MODE) {
-  setMockAdapter();
-}
+// if (TEST_MODE) {
+//   setMockAdapter();
+// }
 
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -125,10 +125,8 @@ export default class Api {
       return res.data;
     }
 
-    return res.ok
-      ? res.json()
+    return res.statusText === 'OK'
+      ? res.data
       : Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
-  // throw Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
-  //  Promise.reject(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
 }

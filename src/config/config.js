@@ -1,6 +1,11 @@
 // export const apiURL = 'http://127.0.0.1:8000/api/v1';
-export const TEST_MODE = true;
-export const apiURL = '/api/v1';
+// export const TEST_MODE = true;
+// export const apiURL = '/api/v1';
+export const TEST_MODE = false;
+export const apiURL = 'http://84.252.132.223/api/v1';
+
+// http://84.252.132.223/api/v1/main/
+// http://84.252.132.223
 
 export const pages = [
   {
