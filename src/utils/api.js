@@ -67,7 +67,7 @@ export default class Api {
   }
 
   static getPlaces() {
-    return axios.get(`${apiURL}/where-to-go/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
+    return axios.get(`${apiURL}/places/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
   }
 
   static getQuestions() {

@@ -8,7 +8,8 @@ export default function usePlacesCategories(currentCity) {
 
   useEffect(() => {
     Api.getPlaces()
-      .then((data) => {
+      .then((response) => {
+        const data = response.results;
         const filteredByCity = data.filter((place) =>
           currentCity ? place.city === currentCity : place
         );
