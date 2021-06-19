@@ -14,14 +14,14 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal }) => {
     history.push('/');
   }, []);
 
-  const handleSubmitAuth = useCallback((userName, password) => {
-    Api.login({ userName, password })
+  const handleSubmitAuth = useCallback((username, password) => {
+    Api.login({ username, password })
       .then((data) => {
         if (data.refresh && data.access) {
           Api.setAuthHeader(data.access);
           localStorage.setItem(JWT_KEY, data.access);
           Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-            setCurrentUser({ userName, ...userData });
+            setCurrentUser({ username, ...userData });
             setEvents(eventsData);
             closeAllModal();
           });
