@@ -8,7 +8,8 @@ export default function useReadWatch(perPage) {
 
   useEffect(() => {
     Api.getRights()
-      .then((data) => {
+      .then((response) => {
+        const data = response.results;
         setRightsData(data);
         const tagsData = data
           .map((item) => item.tag.name)
