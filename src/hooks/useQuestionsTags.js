@@ -7,7 +7,8 @@ export default function useQuestionsTags() {
 
   useEffect(() => {
     Api.getQuestions()
-      .then((data) => {
+      .then((response) => {
+        const data = response.results;
         const qs = data.map((q) => ({
           tagNames: q.tags.map((tag) => tag.name),
           ...q,
