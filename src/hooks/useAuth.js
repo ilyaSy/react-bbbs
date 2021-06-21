@@ -1,13 +1,13 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Api from '../utils/api';
 
 const JWT_KEY = 'jwt';
 
-const useAuth = ({ setCurrentUser, setEvents, closeAllModal }) => {
+const useAuth = ({ setCurrentUser, setEvents, closeAllModal, openAuthModal }) => {
   const history = useHistory();
 
-  useEffect(() => {
+  const refreshJWT = useCallback((showAuthPopup = false) => {
     const jwt = localStorage.getItem(JWT_KEY);
     const jwtRefresh = localStorage.getItem(`${JWT_KEY}Refresh`);
     if (jwt && jwtRefresh) {
@@ -17,14 +17,19 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal }) => {
             localStorage.setItem(JWT_KEY, data.access);
             Api.setAuthHeader(data.access);
             Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-              // setCurrentUser({ username, ...userData });
               setCurrentUser(userData);
               setEvents(eventsData.results);
               // closeAllModal();
             });
+          } else {
+            history.push('/');
+            if (showAuthPopup) openAuthModal();
           }
         })
         .catch(console.log);
+    } else {
+      history.push('/');
+      if (showAuthPopup) openAuthModal();
     }
   }, []);
 
@@ -53,6 +58,7 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal }) => {
   }, []);
 
   return {
+    refreshJWT,
     logout,
     handleSubmitAuth,
   };

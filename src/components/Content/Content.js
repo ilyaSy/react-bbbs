@@ -35,6 +35,7 @@ export default function Content({
   isPlacePopupOpened,
   handleVideoClick,
   handlePlacesFormSubmit,
+  refreshJWT,
 }) {
   const location = useLocation();
 
@@ -65,6 +66,7 @@ export default function Content({
           handleRegisterSubmit={handleRegisterSubmit}
           handleDeleteEvent={handleDeleteEvent}
           events={events}
+          refreshJWT={refreshJWT}
         />
 
         <Route exact path="/stories">
@@ -126,6 +128,7 @@ export default function Content({
           cities={cities}
           updateCity={updateCity}
           openPopupCities={openPopupCities}
+          refreshJWT={refreshJWT}
         />
 
         <Route exact path="*">
@@ -152,6 +155,7 @@ Content.propTypes = {
   isPlacePopupOpened: PropTypes.bool.isRequired,
   handleVideoClick: PropTypes.func,
   handlePlacesFormSubmit: PropTypes.func,
+  refreshJWT: PropTypes.func,
 };
 
 Content.defaultProps = {
@@ -163,4 +167,5 @@ Content.defaultProps = {
   unauthСity: '',
   handleVideoClick: () => {},
   handlePlacesFormSubmit: () => {},
+  refreshJWT: () => {},
 };
