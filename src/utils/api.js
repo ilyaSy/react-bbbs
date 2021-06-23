@@ -24,6 +24,12 @@ export default class Api {
     return axios.post(`${apiURL}/token/`, userData).then(Api._handleApiResult.bind(null, 'login'));
   }
 
+  static refreshUserInfo(jwtRefresh) {
+    return axios
+      .post(`${apiURL}/token/refresh/`, jwtRefresh)
+      .then(Api._handleApiResult.bind(null, 'refreshUserInfo'));
+  }
+
   static getUserInfo() {
     return axios.get(`${apiURL}/profile/`).then(Api._handleApiResult.bind(null, 'getUserInfo'));
   }

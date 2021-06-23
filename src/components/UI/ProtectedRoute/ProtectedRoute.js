@@ -1,7 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, Route } from 'react-router-dom';
+// import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+// import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
+
+// const JWT_KEY = 'jwt';
 
 export default function ProtectedRoute({
   component: Component,
@@ -14,12 +18,16 @@ export default function ProtectedRoute({
   cities,
   updateCity,
   openPopupCities,
+  refreshJWT,
 }) {
   const currentUser = useContext(CurrentUserContext);
+  useEffect(() => {
+    refreshJWT(true);
+  }, []);
 
   return (
     <Route>
-      {currentUser ? (
+      {currentUser && (
         <Component
           exact
           path={path}
@@ -32,8 +40,6 @@ export default function ProtectedRoute({
           updateCity={updateCity}
           openPopupCities={openPopupCities}
         />
-      ) : (
-        <Redirect to={{ pathname: '/', state: { isAuthModalOpened: true } }} />
       )}
     </Route>
   );
@@ -51,6 +57,7 @@ ProtectedRoute.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.any),
   updateCity: PropTypes.func,
   openPopupCities: PropTypes.func,
+  refreshJWT: PropTypes.func,
 };
 
 ProtectedRoute.defaultProps = {
@@ -60,6 +67,7 @@ ProtectedRoute.defaultProps = {
   onLogout: () => {},
   events: [],
   cities: [],
+  refreshJWT: () => {},
   updateCity: () => {},
   openPopupCities: () => {},
 };

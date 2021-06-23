@@ -65,7 +65,12 @@ function App() {
     setPopupRecomendationSuccess(false);
   };
   // кастомный Хук авторизации
-  const { logout, handleSubmitAuth } = useAuth({ setCurrentUser, setEvents, closeAllModal });
+  const { refreshJWT, logout, handleSubmitAuth } = useAuth({
+    setCurrentUser,
+    setEvents,
+    closeAllModal,
+    openAuthModal,
+  });
 
   const openPopupCities = () => {
     setIsPopupCitiesOpen(true);
@@ -133,6 +138,7 @@ function App() {
         isPlacePopupOpened={isPlacePopupOpened}
         handleVideoClick={handleVideoClick}
         handlePlacesFormSubmit={handlePlacesFormSubmit}
+        refreshJWT={refreshJWT}
       />
       <Footer />
 
