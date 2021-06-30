@@ -108,7 +108,6 @@ function App() {
     Api.deleteEvent({ event: calendarCard.id })
       .then(() => {
         const card = { ...calendarCard, booked: false };
-        console.log(card);
         setEvents(events.map((e) => (e.id === card.id ? card : e)));
         closeAllModal();
       })
