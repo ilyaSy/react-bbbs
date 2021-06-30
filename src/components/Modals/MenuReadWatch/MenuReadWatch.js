@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import './MenuReadWatch.css';
 
 const MenuReadWatch = () => (
   <ul className="header__menu-raw">
