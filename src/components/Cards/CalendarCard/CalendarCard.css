@@ -48,6 +48,7 @@
 }
 
 .calendar__event {
+  min-width: 200px;
   max-width: 320px;
   margin: 0;
   padding: 0;
@@ -221,6 +222,7 @@
   }
 
   .calendar__event {
+    min-width: 144px;
     max-width: 246px;
     font-size: 19px;
     line-height: 23px;
