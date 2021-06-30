@@ -11,8 +11,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default class Api {
   static setAuthHeader(authHeader) {
-    axios.defaults.headers.get.Authorization = `Bearer ${authHeader}`;
-    axios.defaults.headers.post.Authorization = `Bearer ${authHeader}`;
+    axios.defaults.headers.common.Authorization = `Bearer ${authHeader}`;
   }
 
   static removeAuthHeader() {
@@ -116,7 +115,7 @@ export default class Api {
 
   static deleteEvent(eventData) {
     return axios
-      .delete(`${apiURL}/afisha/event-participants/`, eventData)
+      .delete(`${apiURL}/afisha/event-participants/`, { data: { ...eventData } })
       .then(Api._handleApiResult.bind(null, 'deleteEvent'));
   }
 
@@ -131,7 +130,9 @@ export default class Api {
       return res.data;
     }
 
-    return res.statusText === 'OK'
+    console.log(res);
+
+    return ['OK', 'Created', 'No Content'].includes(res.statusText)
       ? res.data
       : Error(`Ошибка получения результата в ${fnName}: ${res.status} ${res.statusText}`);
   }
