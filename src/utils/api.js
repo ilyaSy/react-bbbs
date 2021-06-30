@@ -15,8 +15,7 @@ export default class Api {
   }
 
   static removeAuthHeader() {
-    axios.defaults.headers.get.Authorization = '';
-    axios.defaults.headers.post.Authorization = '';
+    axios.defaults.headers.common.Authorization = '';
   }
 
   static login(userData) {
@@ -130,7 +129,7 @@ export default class Api {
       return res.data;
     }
 
-    console.log(res);
+    // console.log(res);
 
     return ['OK', 'Created', 'No Content'].includes(res.statusText)
       ? res.data
