@@ -51,6 +51,7 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal, openAuthModal }) =>
             setCurrentUser({ username, ...userData });
             setEvents(eventsData.results);
             closeAllModal();
+            history.goBack();
           });
         }
       })

@@ -93,9 +93,11 @@ function App() {
     setPopupRecomendationSuccess(true);
   };
   const handleConfirmRegisterSubmit = (calendarCard) => {
-    Api.updateEvent(calendarCard)
+    Api.setEvent({ event: calendarCard.id })
       .then((data) => {
-        setEvents(events.map((e) => (e.id === data.id ? data : e)));
+        const card = { ...calendarCard };
+        if (data.id) card.booked = true;
+        setEvents(events.map((e) => (e.id === card.id ? card : e)));
         closeAllModal();
         setIsRegisterSuccessModalOpened(true);
       })
@@ -103,9 +105,10 @@ function App() {
   };
 
   const handleDeleteEvent = (calendarCard) => {
-    Api.updateEvent(calendarCard)
-      .then((data) => {
-        setEvents(events.map((e) => (e.id === data.id ? data : e)));
+    Api.deleteEvent({ event: calendarCard.id })
+      .then(() => {
+        const card = { ...calendarCard, booked: false };
+        setEvents(events.map((e) => (e.id === card.id ? card : e)));
         closeAllModal();
       })
       .catch(console.log);

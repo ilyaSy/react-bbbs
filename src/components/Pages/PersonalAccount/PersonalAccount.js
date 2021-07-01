@@ -17,7 +17,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const [cardStory, setCardStory] = useState(null);
 
   useEffect(() => {
-    Api.getProfileStory().then(setStories).catch(console.log);
+    // Api.getProfileStory().then(setStories).catch(console.log);
   }, []);
 
   const openPopupStory = () => setPopupAddStoryOpen(true);

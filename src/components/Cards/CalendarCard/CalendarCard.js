@@ -10,7 +10,7 @@ const CalendarCard = ({
   handleRegisterSubmit,
   handleDeleteEvent,
 }) => {
-  const { address, contact, title, seats, takenSeats, startAt, endAt, booked, tags } = event;
+  const { address, contact, title, seats, takenSeats, startAt, endAt, booked, tags = [] } = event;
   const startAtDate = new Date(startAt);
   const endAtDate = new Date(endAt);
   const day = formatDate(startAtDate, 'dd');
