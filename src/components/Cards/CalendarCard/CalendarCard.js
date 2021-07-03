@@ -36,7 +36,7 @@ const CalendarCard = ({
   };
   // преобразует объект из массива ивентов в строку - Волонтеры или Волонтеры + дети
   const tagsToStr = () =>
-    tags.reduce((str, tag) => {
+    tags?.reduce((str, tag) => {
       if (!str) {
         return str + tag.name;
       }

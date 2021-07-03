@@ -31,7 +31,7 @@ export default function MainPage({
   const { videosData } = useVideos(1);
   useEffect(() => {
     if (mainData && events) {
-      setUserEvent(events.sort((a, b) => new Date(b.startAt) - new Date(a.startAt))[0]);
+      setUserEvent(events[0]);
     }
   }, [mainData, events]);
   return (
