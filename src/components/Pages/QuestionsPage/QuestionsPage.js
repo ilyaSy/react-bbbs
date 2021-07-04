@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
+import Api from '../../../utils/api';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import QuestionCard from '../../Cards/QuestionCard/QuestionCard';
 import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsContainer';
@@ -24,7 +25,7 @@ const QuestionsPage = () => {
   const { reset } = useForm();
 
   const onSubmit = (questionData) => {
-    console.log(questionData);
+    Api.postQuestion(questionData).catch((e) => console.log(e));
     setDidAsk(true);
     reset();
   };

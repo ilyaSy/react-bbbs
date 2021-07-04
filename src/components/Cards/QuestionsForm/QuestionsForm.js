@@ -25,7 +25,7 @@ const QuestionsForm = ({ didAsk, onSubmit }) => {
           <input
             className={`questions__input ${errors.questionText ? 'questions__input_error' : ''}`}
             type="text"
-            {...register('questionText', {
+            {...register('question', {
               required: 'Задайте свой вопрос',
               minLength: {
                 value: 2,
