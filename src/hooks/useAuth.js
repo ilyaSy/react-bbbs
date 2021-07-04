@@ -16,11 +16,19 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal, openAuthModal }) =>
           if (data.access) {
             localStorage.setItem(JWT_KEY, data.access);
             Api.setAuthHeader(data.access);
-            Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-              setCurrentUser(userData);
-              setEvents(eventsData.results);
-              // closeAllModal();
-            });
+            Promise.all([Api.getUserInfo(), Api.getCities(), Api.getEvents()]).then(
+              ([userData, citiesData, eventsData]) => {
+                citiesData.forEach((city) => {
+                  if (city.id === userData.city)
+                    setCurrentUser({
+                      cityName: city.name,
+                      user: userData.user,
+                      city: userData.city,
+                    });
+                });
+                setEvents(eventsData.results);
+              }
+            );
           } else {
             history.push('/');
             if (showAuthPopup) openAuthModal();
@@ -47,12 +55,21 @@ const useAuth = ({ setCurrentUser, setEvents, closeAllModal, openAuthModal }) =>
           Api.setAuthHeader(data.access);
           localStorage.setItem(JWT_KEY, data.access);
           localStorage.setItem(`${JWT_KEY}Refresh`, data.refresh);
-          Promise.all([Api.getUserInfo(), Api.getEvents()]).then(([userData, eventsData]) => {
-            setCurrentUser({ username, ...userData });
-            setEvents(eventsData.results);
-            closeAllModal();
-            history.goBack();
-          });
+          Promise.all([Api.getUserInfo(), Api.getCities(), Api.getEvents()]).then(
+            ([userData, citiesData, eventsData]) => {
+              citiesData.forEach((city) => {
+                if (city.id === userData.city)
+                  setCurrentUser({
+                    cityName: city.name,
+                    user: userData.user,
+                    city: userData.city,
+                  });
+              });
+              setEvents(eventsData.results);
+              closeAllModal();
+              history.goBack();
+            }
+          );
         }
       })
       .catch(console.log);

@@ -59,8 +59,8 @@ const PlacesPage = ({
   };
 
   const changeCity = () => {
-    if (currentUser?.city) {
-      return `${currentUser.city}. Изменить город` || 'Изменить ваш город';
+    if (currentUser) {
+      return `${currentUser.cityName}. Изменить город` || 'Изменить ваш город';
     }
     if (unauthСity) {
       return `${unauthСity}. Изменить город`;

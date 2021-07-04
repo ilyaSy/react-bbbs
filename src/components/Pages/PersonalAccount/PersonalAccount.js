@@ -67,7 +67,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
           className="personal-account__feedback-btn personal-account__text"
           onClick={openPopupCities}
         >
-          {currentUser.city ? `${currentUser.city}. Изменить город` : 'Изменить ваш город'}
+          {currentUser ? `${currentUser.cityName}. Изменить город` : 'Изменить ваш город'}
         </Button>
         <Button
           className="personal-account__feedback-btn personal-account__text"
