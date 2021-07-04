@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import Button from '../../UI/Button/Button';
 import './PlacesForm.css';
+import Api from '../../../utils/api';
 
 const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormSubmit }) => {
   const {
@@ -27,14 +28,23 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
     },
   });
 
+  const activityType = (type) => {
+    if (type === 'Активный') return 1;
+    if (type === 'Развлекательный') return 2;
+    if (type === 'Познавательный') return 3;
+    return null;
+  };
+
   const onSubmit = (placeData) => {
     const extendedPlaceData = {
       ...placeData,
+      gender: placeData.gender === 'Мальчик' ? 'M' : 'F',
+      activityType: activityType(placeData.activityType),
       imageUrl: image[0].url,
       chosen: true,
+      city: 2,
     };
-
-    console.log(extendedPlaceData);
+    Api.postPlace(extendedPlaceData).catch((e) => console.log(e));
     // placeData — то, что соберётся с формы;
     // extendedPlaceData — добавлен адрес картинки и атрибут,
     // указывающий, что это "выбор наставника"; вот это и пойдёт на сервер
@@ -46,7 +56,6 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
   };
 
   return (
-    // <Popup popupType="popup_type_recommendation" onClose={onClose}>
     <form
       className={`popup__form popup__form_type_recommendation ${
         isPlacePopupOpened ? 'popup__form_opened' : ''
@@ -88,7 +97,7 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
               className={`custom-radio ${errors.sex ? 'custom-radio-error' : ''}`}
               type="radio"
               value="Мальчик"
-              {...register('sex', { required: 'Мальчик' })}
+              {...register('gender', { required: 'M' })}
               id="boy"
             />
             Мальчик
@@ -100,7 +109,7 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
               className={`custom-radio ${errors.sex ? 'custom-radio-error' : ''}`}
               type="radio"
               value="Девочка"
-              {...register('sex', { required: 'Девочка' })}
+              {...register('gender', { required: 'Девочка' })}
               id="girl"
             />
             Девочка
@@ -114,7 +123,7 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
           placeholder={errors.age ? errors.age.message : 'Возраст*'}
         />
         <select
-          {...register('type', { required: 'Тип отдыха*' })}
+          {...register('activityType', { required: 'Тип отдыха*' })}
           className={`popup__select ${
             errors.type ? 'popup__select-error' : ''
           } popup__select_type_relax`}
@@ -162,7 +171,6 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
         </div>
       </div>
     </form>
-    // </Popup>
   );
 };
 

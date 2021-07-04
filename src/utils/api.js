@@ -50,6 +50,14 @@ export default class Api {
       .then(Api._handleApiResult.bind(null, 'postProfileStory'));
   }
 
+  static postQuestion(data) {
+    return axios.post(`${apiURL}/question/`, data);
+  }
+
+  static postPlace(data) {
+    return axios.post(`${apiURL}/place/`, data);
+  }
+
   static deleteProfileStory(storyData) {
     return axios
       .delete(`${apiURL}/profile-stories/`, storyData)
