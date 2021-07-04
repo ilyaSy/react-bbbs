@@ -36,7 +36,6 @@ const PlacesForm = ({ onClose, isPlacePopupOpened, showInputs, handlePlacesFormS
   };
 
   const onSubmit = (placeData) => {
-    console.log(placeData);
     const extendedPlaceData = {
       ...placeData,
       gender: placeData.gender === 'Мальчик' ? 'M' : 'F',
