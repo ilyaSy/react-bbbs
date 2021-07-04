@@ -40,10 +40,18 @@ function App() {
     if (currentUser) {
       Api.updateUserInfo({
         city,
-        id: currentUser.id,
         user: currentUser.user,
       })
-        .then(setCurrentUser)
+        .then((data) => {
+          mainDataCities.cities.forEach((c) => {
+            if (c.id === data.city)
+              setCurrentUser({
+                cityName: c.name,
+                user: data.user,
+                city: data.city,
+              });
+          });
+        })
         .catch(console.log);
     } else {
       setUnauthСity(city);

@@ -5,7 +5,7 @@ import './PopupCities.css';
 
 const PopupCities = ({ onClose, updateCity, cities }) => {
   const handleCityClick = (event) => {
-    updateCity(event.target.textContent);
+    updateCity(event.target.id);
     onClose();
   };
   return (

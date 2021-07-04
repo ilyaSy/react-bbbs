@@ -8,6 +8,7 @@ import { apiURL, TEST_MODE } from '../config/config';
 
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.patch['Content-Type'] = 'application/json';
 
 export default class Api {
   static setAuthHeader(authHeader) {

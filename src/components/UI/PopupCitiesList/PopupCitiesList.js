@@ -7,7 +7,7 @@ const PopupCitiesList = ({ cities, handleCityClick, isPrimary }) => (
       (city) =>
         city.isPrimary === isPrimary && (
           <li key={city.id} className="cities__item">
-            <Button className="cities__button" onClick={handleCityClick}>
+            <Button id={city.id} className="cities__button" onClick={handleCityClick}>
               {city.name}
             </Button>
           </li>
