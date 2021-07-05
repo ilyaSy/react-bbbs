@@ -2,20 +2,20 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
-import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
+import { filterItemByFiltersList } from '../../../utils/filters';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import Heading from '../../UI/Heading/Heading';
-import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
+// import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import Pagination from '../../UI/Pagination/Pagination';
 import useRightsTags from '../../../hooks/useRightsTags';
 import './RightsPage.css';
 
 const RightsPage = () => {
-  const [activeTags, setActiveTags] = useState(['Все']);
+  const [activeTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 16;
   const offset = currentPage * perPage;
-  const { rightsData, tags, pageCount } = useRightsTags(perPage);
+  const { rightsData, pageCount } = useRightsTags(perPage);
 
   const currentPageData = rightsData
     .slice(offset, offset + perPage)
@@ -25,9 +25,9 @@ const RightsPage = () => {
       <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
     ));
 
-  const handleTagFilter = (tag) => {
-    setActiveTags(setActiveFilters(activeTags, tag));
-  };
+  // const handleTagFilter = (tag) => {
+  //   setActiveTags(setActiveFilters(activeTags, tag));
+  // };
 
   return (
     <section className="law content main__section">
@@ -37,7 +37,7 @@ const RightsPage = () => {
       </Helmet>
       <Heading>Права детей</Heading>
       <div className="scroll-container">
-        <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} />
+        {/* <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} /> */}
       </div>
       <ul className="law__list">{currentPageData}</ul>
       <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
