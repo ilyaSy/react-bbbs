@@ -76,8 +76,15 @@ export default function MainPage({
       <MainPageSection className="mainpage__blocks-col">
         <FacebookPlugin />
         <QuestionsContainer place="main">
-          {mainData?.questions.map(({ id: key, ...props }) => (
-            <QuestionCard place="main" key={key} {...props} />
+          {mainData?.questions.map(({ id, question, answer, tag }) => (
+            <QuestionCard
+              place="main"
+              path={id}
+              title={question}
+              tags={tag}
+              answerText={answer}
+              key={id}
+            />
           ))}
         </QuestionsContainer>
       </MainPageSection>
