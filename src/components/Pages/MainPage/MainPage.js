@@ -56,8 +56,8 @@ export default function MainPage({
       <MainPageSection className="mainpage__blocks">
         <Card type="place" data={mainData?.place} size="big" color="yellow" />
       </MainPageSection>
-      <MainPageSection className="mainpage__block">
-        <ArticleCard article={mainData?.articles[0]} />
+      <MainPageSection className="mainpage__blocks">
+        <ArticleCard article={mainData?.articles[0]} color="#C8D1FF" />
       </MainPageSection>
       <MainPageSection className="mainpage__block">
         <MoviesContainer
@@ -88,8 +88,8 @@ export default function MainPage({
           ))}
         </QuestionsContainer>
       </MainPageSection>
-      <MainPageSection className="mainpage__block">
-        <ArticleCard article={mainData?.articles[1]} />
+      <MainPageSection className="mainpage__blocks">
+        <ArticleCard article={mainData?.articles[1]} color="#8CDD94" />
       </MainPageSection>
     </MainPageSection>
   );
