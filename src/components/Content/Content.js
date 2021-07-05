@@ -31,7 +31,7 @@ export default function Content({
   cities,
   updateCity,
   openPopupCities,
-  unauthСity,
+  unauthCity,
   isPlacePopupOpened,
   handleVideoClick,
   handlePlacesFormSubmit,
@@ -81,7 +81,7 @@ export default function Content({
           <PlacesPage
             onRecommendPlace={onRecommendPlace}
             openPopupCities={openPopupCities}
-            unauthСity={unauthСity}
+            unauthCity={unauthCity}
             isPlacePopupOpened={isPlacePopupOpened}
             handlePlacesFormSubmit={handlePlacesFormSubmit}
           />
@@ -151,7 +151,7 @@ Content.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.any),
   updateCity: PropTypes.func,
   openPopupCities: PropTypes.func,
-  unauthСity: PropTypes.string,
+  unauthCity: PropTypes.objectOf(PropTypes.any),
   isPlacePopupOpened: PropTypes.bool.isRequired,
   handleVideoClick: PropTypes.func,
   handlePlacesFormSubmit: PropTypes.func,
@@ -164,7 +164,7 @@ Content.defaultProps = {
   cities: [],
   updateCity: () => {},
   openPopupCities: () => {},
-  unauthСity: '',
+  unauthCity: {},
   handleVideoClick: () => {},
   handlePlacesFormSubmit: () => {},
   refreshJWT: () => {},

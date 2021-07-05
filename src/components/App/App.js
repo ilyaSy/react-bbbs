@@ -22,7 +22,7 @@ import PopupRecomendationSuccess from '../Modals/PopupRecomendationSuccess/Popup
 function App() {
   const [events, setEvents] = useState();
   const [currentUser, setCurrentUser] = useState(null);
-  const [unauthСity, setUnauthСity] = useState('');
+  const [unauthCity, setUnauthCity] = useState({});
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const [isConfirmRegisterModalOpened, setIsConfirmRegisterOpened] = useState(false);
   const [isRegisterSuccessModalOpened, setIsRegisterSuccessModalOpened] = useState(false);
@@ -54,7 +54,11 @@ function App() {
         })
         .catch(console.log);
     } else {
-      setUnauthСity(city);
+      mainDataCities.cities.forEach((c) => {
+        if (c.id === parseInt(city, 10)) {
+          setUnauthCity({ cityId: c.id, cityName: c.name });
+        }
+      });
     }
   };
   // Выбираем город пользователя !
@@ -145,7 +149,7 @@ function App() {
         events={events}
         updateCity={updateCity}
         openPopupCities={openPopupCities}
-        unauthСity={unauthСity}
+        unauthCity={unauthCity}
         isPlacePopupOpened={isPlacePopupOpened}
         handleVideoClick={handleVideoClick}
         handlePlacesFormSubmit={handlePlacesFormSubmit}
