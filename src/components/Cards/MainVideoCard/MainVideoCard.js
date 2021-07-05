@@ -30,7 +30,7 @@ const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
         </a>
       </div>
       <img
-        src={`http://img.youtube.com/vi/${embedId}/0.jpg`}
+        src={`http://img.youtube.com/vi/${embedId}/maxresdefault.jpg`}
         alt="видео отсутствует"
         className="mainvideo__video"
         onClick={handleClick}

@@ -5,12 +5,13 @@ import './MoviesContainer.css';
 function MoviesContainer({ movies, handleVideoClick, isMovesPage }) {
   return (
     <ul className="movies">
-      {movies.map(({ id: key, ...props }) => (
+      {movies.map(({ id, tag, ...props }) => (
         <VideoCard
           type="movie"
           isMovesPage={isMovesPage}
           handleVideoClick={handleVideoClick}
-          key={key}
+          key={id}
+          tags={tag}
           {...props}
         />
       ))}
