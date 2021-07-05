@@ -6,21 +6,11 @@ export default function useQuestionsTags() {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    Api.getQuestions()
-      .then((response) => {
-        const data = response.results;
-        const qs = data.map((q) => ({
-          tagNames: q.tags.map((tag) => tag.name),
-          ...q,
-        }));
+    Promise.all([Api.getQuestions(), Api.getQuestionsTags()])
+      .then(([questionResp, tagsResp]) => {
+        const qs = questionResp.results;
         setQuestions(qs);
-
-        const tagsData = qs
-          .map((q) => q.tagNames)
-          .flat()
-          .filter((item, i, arr) => arr.indexOf(item) === i);
-
-        setTagList(['Все', ...tagsData]);
+        setTagList(tagsResp);
       })
       .catch(console.log);
   }, []);

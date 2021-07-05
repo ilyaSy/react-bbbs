@@ -8,20 +8,19 @@ import QuestionsContainer from '../../Containers/QuestionsContainer/QuestionsCon
 import QuestionsForm from '../../Cards/QuestionsForm/QuestionsForm';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
-import {
-  setActiveFilters,
-  filterItemByFiltersList,
-  getMultipleTagsIndex,
-} from '../../../utils/filters';
+// import {
+//   setActiveFilters,
+//   filterItemByFiltersList,
+//   getMultipleTagsIndex,
+// } from '../../../utils/filters';
 import useQuestionsTags from '../../../hooks/useQuestionsTags';
 import './QuestionsPage.css';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
-  const [activeTags, setActiveTags] = useState(['Все']);
-  const [didAsk, setDidAsk] = useState(false);
   const { questions, tagList } = useQuestionsTags();
-
+  const [activeTags, setActiveTags] = useState(tagList[0]);
+  const [didAsk, setDidAsk] = useState(false);
   const { reset } = useForm();
 
   const onSubmit = (questionData) => {
@@ -31,7 +30,8 @@ const QuestionsPage = () => {
   };
 
   const handleTagFilter = (tag) => {
-    setActiveTags(setActiveFilters(activeTags, tag));
+    // setActiveTags(setActiveFilters(activeTags, tag));
+    setActiveTags(tag);
   };
 
   return (
@@ -47,18 +47,18 @@ const QuestionsPage = () => {
         </div>
         <QuestionsContainer place="questions">
           {questions
-            .filter((q) => filterItemByFiltersList(activeTags, q.tagNames))
-            .sort(
-              (a, b) =>
-                getMultipleTagsIndex(activeTags, a.tagNames) >
-                getMultipleTagsIndex(activeTags, b.tagNames)
-            )
-            .map(({ title, answerText, tags, id }) => (
+            // .filter((q) => filterItemByFiltersList(activeTags, q.tagNames))
+            // .sort(
+            //   (a, b) =>
+            //     getMultipleTagsIndex(activeTags, a.tagNames) >
+            //     getMultipleTagsIndex(activeTags, b.tagNames)
+            // )
+            .map(({ question, answer, tag, id }) => (
               <QuestionCard
                 path={id}
-                title={title}
-                tags={tags}
-                answerText={answerText}
+                title={question}
+                tags={tag}
+                answerText={answer}
                 place="questions"
                 key={id}
               />
