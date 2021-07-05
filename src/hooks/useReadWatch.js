@@ -19,7 +19,7 @@ export default function useReadWatch() {
       Api.getBooks(),
     ])
       .then(([materials, videos, articles, movies, books]) => {
-        setGuideData(materials);
+        setGuideData(materials.results);
         // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
         setVideosData(
           videos.filter(

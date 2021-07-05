@@ -22,6 +22,7 @@ const QuestionsPage = () => {
   const [activeTags, setActiveTags] = useState(tagList[0]);
   const [didAsk, setDidAsk] = useState(false);
   const { reset } = useForm();
+  console.log(activeTags);
 
   const onSubmit = (questionData) => {
     Api.postQuestion(questionData).catch((e) => console.log(e));
@@ -64,9 +65,7 @@ const QuestionsPage = () => {
               />
             ))}
         </QuestionsContainer>
-        {currentUser && activeTags.includes('Все') && (
-          <QuestionsForm didAsk={didAsk} onSubmit={onSubmit} />
-        )}
+        {currentUser && <QuestionsForm didAsk={didAsk} onSubmit={onSubmit} />}
       </section>
     </>
   );
