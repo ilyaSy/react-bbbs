@@ -31,7 +31,7 @@ export function filterItemByFiltersList(filters, item) {
 
 export function getMultipleTagsIndex(filters, items) {
   let index = 100;
-  items.forEach((item) => {
+  items?.forEach((item) => {
     const itemIndex = filters.includes(item) ? filters.indexOf(item) : 10;
     index = Math.min(itemIndex, index);
   });

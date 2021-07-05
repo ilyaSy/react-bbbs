@@ -87,6 +87,12 @@ export default class Api {
     return axios.get(`${apiURL}/questions/`).then(Api._handleApiResult.bind(null, 'getQuestions'));
   }
 
+  static getQuestionsTags() {
+    return axios
+      .get(`${apiURL}/questions/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getQuestionsTags'));
+  }
+
   static getMaterials() {
     return axios.get(`${apiURL}/materials/`).then(Api._handleApiResult.bind(null, 'getMaterials'));
   }

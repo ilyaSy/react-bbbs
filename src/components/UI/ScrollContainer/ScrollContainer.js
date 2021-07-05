@@ -26,10 +26,10 @@ export default function ScrollContainer({
         <Button
           className={`button button_color_black button_place_scroll ${setActiveClass(item)}`}
           type="button"
-          key={item}
+          key={item.id}
           onClick={() => onClick(item)}
         >
-          {item}
+          {item.name}
         </Button>
       ))}
     </div>
