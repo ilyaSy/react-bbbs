@@ -39,7 +39,7 @@ function App() {
   const updateCity = (city) => {
     if (currentUser) {
       Api.updateUserInfo({
-        city,
+        city: [city],
         user: currentUser.user,
       })
         .then((data) => {
