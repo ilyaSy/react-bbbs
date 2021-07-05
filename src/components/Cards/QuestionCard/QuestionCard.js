@@ -51,7 +51,7 @@ const QuestionCard = ({ anchor, title, tags, answerText, place }) => {
 QuestionCard.propTypes = {
   anchor: PropTypes.string,
   title: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.any).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.any),
   answerText: PropTypes.string,
   place: PropTypes.string.isRequired,
 };
@@ -59,6 +59,7 @@ QuestionCard.propTypes = {
 QuestionCard.defaultProps = {
   anchor: '',
   answerText: '',
+  tags: [],
 };
 
 export default QuestionCard;

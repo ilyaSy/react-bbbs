@@ -5,8 +5,7 @@ import youtubeLinkParser from '../../../utils/youtubeLinkParser';
 import './VideoCard.css';
 
 const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPage }) => {
-  let tagsText;
-  if (tags) tagsText = tags.map((tag) => tag.name);
+  const tagsText = tags.map((tag) => tag.name);
 
   const clickHandler = () => {
     handleVideoClick(link, title, info);

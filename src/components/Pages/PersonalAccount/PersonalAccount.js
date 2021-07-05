@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import Button from '../../UI/Button/Button';
 import PersonalAccountCardStory from '../../Cards/PersonalAccountCardStory/PersonalAccountCardStory';
@@ -15,10 +15,6 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
   const [stories, setStories] = useState([]);
   const [isPopupAddStoryOpen, setPopupAddStoryOpen] = useState(false);
   const [cardStory, setCardStory] = useState(null);
-
-  useEffect(() => {
-    // Api.getProfileStory().then(setStories).catch(console.log);
-  }, []);
 
   const openPopupStory = () => setPopupAddStoryOpen(true);
 
@@ -36,7 +32,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
       .catch(console.log);
   };
 
-  const handleUpdaProfileStory = (card) => {
+  const handleUpdateProfileStory = (card) => {
     Api.updateProfileStory(card)
       .then((data) => {
         console.log(data);
@@ -67,7 +63,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
           className="personal-account__feedback-btn personal-account__text"
           onClick={openPopupCities}
         >
-          {currentUser.city ? `${currentUser.city}. Изменить город` : 'Изменить ваш город'}
+          {currentUser ? `${currentUser.cityName}. Изменить город` : 'Изменить ваш город'}
         </Button>
         <Button
           className="personal-account__feedback-btn personal-account__text"
@@ -98,7 +94,7 @@ const PersonalAccount = ({ onLogout, handleCalendarCardClick, openPopupCities, e
         <PopupStoryFriendship
           closePopup={closePopup}
           postStoriesData={handlePostProfileStory}
-          updateStoriesData={handleUpdaProfileStory}
+          updateStoriesData={handleUpdateProfileStory}
           currentCardStory={cardStory}
         />
       ) : (

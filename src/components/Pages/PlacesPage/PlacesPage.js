@@ -17,19 +17,23 @@ const ages = ['8-10 лет', '11-13 лет', '14-18 лет', '18+ лет'];
 const PlacesPage = ({
   onRecommendPlace,
   openPopupCities,
-  unauthСity,
+  unauthCity,
   isPlacePopupOpened,
   handlePlacesFormSubmit,
 }) => {
   const currentUser = useContext(CurrentUserContext);
   const [activeCategories, setActiveCategories] = useState(['Все']);
   const [activeAgeRange, setActiveAgeRange] = useState('');
-  const currentCity = currentUser?.city || unauthСity;
+  const [currentCity, setCurrentCity] = useState(null);
   const { places, categories, chosenPlace } = usePlacesCategories(currentCity);
 
   useEffect(() => {
-    if (!currentUser && !unauthСity) openPopupCities();
+    if (!currentUser && !unauthCity.cityId) openPopupCities();
   }, []);
+
+  useEffect(() => {
+    setCurrentCity(currentUser?.city || unauthCity.cityId);
+  }, [currentUser, unauthCity]);
 
   const handleCategoryFilter = (category) => {
     setActiveCategories(setActiveFilters(activeCategories, category));
@@ -59,11 +63,11 @@ const PlacesPage = ({
   };
 
   const changeCity = () => {
-    if (currentUser?.city) {
-      return `${currentUser.city}. Изменить город` || 'Изменить ваш город';
+    if (currentUser) {
+      return `${currentUser.cityName}. Изменить город` || 'Изменить ваш город';
     }
-    if (unauthСity) {
-      return `${unauthСity}. Изменить город`;
+    if (unauthCity.cityName) {
+      return `${unauthCity.cityName}. Изменить город`;
     }
     return 'Изменить ваш город';
   };
@@ -111,10 +115,7 @@ const PlacesPage = ({
       )}
       <section className="events-grid">
         {places
-          .filter((place) =>
-            // const currentCity = currentUser?.city || unauthСity;
-            currentCity ? place.city === currentCity : place
-          )
+          .filter((place) => (currentCity ? place.city === currentCity : place))
           .filter((place) => filterItemByFiltersList(activeCategories, place.category))
           .filter((place) => filterAgeRanges(place.age))
           .sort(
@@ -137,14 +138,14 @@ const PlacesPage = ({
 PlacesPage.propTypes = {
   onRecommendPlace: PropTypes.func,
   openPopupCities: PropTypes.func,
-  unauthСity: PropTypes.string,
+  unauthCity: PropTypes.objectOf(PropTypes.any),
   isPlacePopupOpened: PropTypes.bool.isRequired,
   handlePlacesFormSubmit: PropTypes.func,
 };
 PlacesPage.defaultProps = {
   onRecommendPlace: () => {},
   openPopupCities: () => {},
-  unauthСity: () => {},
+  unauthCity: {},
   handlePlacesFormSubmit: () => {},
 };
 
