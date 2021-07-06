@@ -10,7 +10,7 @@ import Pagination from '../../UI/Pagination/Pagination';
 const GuidePage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { materialsData, pageCount } = useGuide();
-  console.log(currentPage); // не понятно пока, что делать с currentPage
+  console.log('GuidePage', currentPage); // не понятно пока, что делать с currentPage
   const currentPageData = materialsData.map(({ id: key, ...args }, i) => (
     <GuideCard key={key} figure={defineFigure(i)} {...args} />
   ));

@@ -109,6 +109,12 @@ export default class Api {
     return axios.get(`${apiURL}/videos/`).then(Api._handleApiResult.bind(null, 'getVideos'));
   }
 
+  static getVideosTags() {
+    return axios
+      .get(`${apiURL}/videos/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getVideosTags'));
+  }
+
   static getArticles() {
     return axios.get(`${apiURL}/articles/`).then(Api._handleApiResult.bind(null, 'getArticles'));
   }

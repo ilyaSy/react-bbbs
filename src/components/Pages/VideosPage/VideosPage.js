@@ -6,27 +6,27 @@ import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import Pagination from '../../UI/Pagination/Pagination';
-import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
+// import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
 import useVideos from '../../../hooks/useVideos';
 import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
   const [activeTags, setActiveTags] = useState(['Все']);
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 16;
-  const offset = currentPage * perPage;
-  const { videosData, chosenVideo, videoTags, pageCount } = useVideos(perPage);
+  // const perPage = 16;
+  // const offset = currentPage * perPage;
+  const { videosData, chosenVideo, videoTags, pageCount } = useVideos(currentPage);
 
   const currentPageData = videosData
-    .slice(offset, offset + perPage)
-    .filter((video) => filterItemByFiltersList(activeTags, video.tag.name))
-    .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
-    .map(({ tag, id: key, ...args }) => (
-      <VideoCard type="video" key={key} handleVideoClick={handleVideoClick} tag={[tag]} {...args} />
+    // .slice(offset, offset + perPage)
+    // .filter((video) => filterItemByFiltersList(activeTags, video.tag.name))
+    // .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
+    .map(({ id: key, ...args }) => (
+      <VideoCard type="video" key={key} handleVideoClick={handleVideoClick} {...args} />
     ));
 
   const handleTagFilter = (tag) => {
-    setActiveTags(setActiveFilters(activeTags, tag));
+    setActiveTags(tag);
   };
 
   return (
