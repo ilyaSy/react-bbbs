@@ -15,8 +15,8 @@ const Card = ({ type, size, color, data }) => (
                 : 'profile-grid__column_size_thin event-soon__description_size_small'
             }`}
           >
-            {type === 'place' && data.category && (
-              <Tag modifier="tag_place_event" tagText={data.category} />
+            {type === 'place' && data.chosen && (
+              <Tag modifier="tag_place_event" tagText="Выбор наставника" />
             )}
             <div
               className={`event-soon__caption ${
@@ -65,8 +65,7 @@ const Card = ({ type, size, color, data }) => (
                     : 'event-article__title_size_small'
                 }`}
               >
-                {data.sex && `${data.sex}. `}
-                {data.age && `${data.age} лет. `}
+                {data.info}
                 {data.type}
               </div>
               <p
@@ -74,7 +73,7 @@ const Card = ({ type, size, color, data }) => (
                   size === 'big' ? 'event-article__paragraph_size_big' : ''
                 }`}
               >
-                {data.text}
+                {data.description}
               </p>
             </article>
           </div>

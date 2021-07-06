@@ -79,8 +79,16 @@ export default class Api {
     return axios.get(`${apiURL}/main/`).then(Api._handleApiResult.bind(null, 'getMain'));
   }
 
-  static getPlaces() {
-    return axios.get(`${apiURL}/places/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
+  static getPlaces(cityId) {
+    return axios
+      .get(`${apiURL}/places/?city=${cityId}`)
+      .then(Api._handleApiResult.bind(null, 'getPlaces'));
+  }
+
+  static getPlacesTags() {
+    return axios
+      .get(`${apiURL}/places/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getPlacesTags'));
   }
 
   static getQuestions() {

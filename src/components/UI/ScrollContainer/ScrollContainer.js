@@ -19,7 +19,6 @@ export default function ScrollContainer({
 
     return '';
   };
-  console.log(list);
   return (
     <div className={`${sectionClass} ${sectionSubClass}`}>
       {list.map((item) => (
