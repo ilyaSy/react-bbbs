@@ -123,6 +123,12 @@ export default class Api {
     return axios.get(`${apiURL}/movies/`).then(Api._handleApiResult.bind(null, 'getMovies'));
   }
 
+  static getMoviesTags() {
+    return axios
+      .get(`${apiURL}/movies/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getMoviesTags'));
+  }
+
   static getBooks() {
     return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
   }

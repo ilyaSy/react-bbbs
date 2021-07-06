@@ -8,27 +8,26 @@ import Pagination from '../../UI/Pagination/Pagination';
 import useMoviesGenres from '../../../hooks/useMoviesGenres';
 import {
   setActiveFilters,
-  filterItemByFiltersList,
-  getMultipleTagsIndex,
+  // filterItemByFiltersList,
+  // getMultipleTagsIndex,
 } from '../../../utils/filters';
 import './MoviesPage.css';
 
 const MoviesPage = ({ handleVideoClick }) => {
   const [activeGenres, setActiveGenres] = useState(['Все']);
-  const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 16;
-  const offset = currentPage * perPage;
-  const { moviesData, genres, pageCount } = useMoviesGenres(perPage);
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const perPage = 16;
+  // const offset = currentPage * perPage;
+  const { moviesData, genres, pageCount } = useMoviesGenres();
 
   const currentPageData = moviesData
-    .slice(offset, offset + perPage)
-    // .filter((movie) => {
-    .filter((movie) => filterItemByFiltersList(activeGenres, movie.tagNames))
-    .sort(
-      (a, b) =>
-        getMultipleTagsIndex(activeGenres, a.tagNames) >
-        getMultipleTagsIndex(activeGenres, b.tagNames)
-    )
+    // .slice(offset, offset + perPage)
+    // .filter((movie) => filterItemByFiltersList(activeGenres, movie.tagNames))
+    // .sort(
+    //   (a, b) =>
+    //     getMultipleTagsIndex(activeGenres, a.tagNames) >
+    //     getMultipleTagsIndex(activeGenres, b.tagNames)
+    // )
     .map(({ id: key, ...args }) => (
       <VideoCard key={key} type="movie" {...args} handleVideoClick={handleVideoClick} />
     ));
@@ -48,7 +47,7 @@ const MoviesPage = ({ handleVideoClick }) => {
         <ScrollContainer list={genres} activeItems={activeGenres} onClick={handleGenreFilter} />
       </div>
       <ul className="filmpage__list">{currentPageData}</ul>
-      <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
+      <Pagination pageCount={pageCount} />
     </section>
   );
 };
