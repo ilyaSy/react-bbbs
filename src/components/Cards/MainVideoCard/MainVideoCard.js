@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import youtubeLinkParser from '../../../utils/youtubeLinkParser';
+import { getUrlThumbnail } from '../../../utils/youtubeLinkParser';
 import './MainVideoCard.css';
 
 const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
@@ -8,8 +8,7 @@ const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
     handleVideoClick(video.link, video.title, video.info);
   };
 
-  const embedId = youtubeLinkParser(video.link);
-
+  const imgUrl = getUrlThumbnail(video.link);
   return (
     <div className="mainvideo">
       {!isVideosPage ? (
@@ -30,7 +29,7 @@ const MainVideoCard = ({ video, handleVideoClick, isVideosPage }) => {
         </a>
       </div>
       <img
-        src={`http://img.youtube.com/vi/${embedId}/maxresdefault.jpg`}
+        src={imgUrl}
         alt="видео отсутствует"
         className="mainvideo__video"
         onClick={handleClick}

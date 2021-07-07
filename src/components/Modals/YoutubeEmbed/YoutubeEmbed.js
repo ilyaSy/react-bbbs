@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Popup from '../Popup/Popup';
-import youtubeLinkParser from '../../../utils/youtubeLinkParser';
+import { youtubeParser } from '../../../utils/youtubeLinkParser';
 import './youtubeEmbed.css';
 
 const YoutubeEmbed = ({ onClose, link, title, info }) => {
-  const embedId = youtubeLinkParser(link);
+  const embedId = youtubeParser(link);
 
   return (
     <Popup popupType="popup_type_video" onClose={onClose}>

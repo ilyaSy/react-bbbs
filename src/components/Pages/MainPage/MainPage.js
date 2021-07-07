@@ -23,7 +23,6 @@ export default function MainPage({
   events,
   handleVideoClick,
 }) {
-  console.log(mainData);
   const currentUser = useContext(CurrentUserContext);
   const [userEvent, setUserEvent] = useState(null);
 
@@ -52,7 +51,7 @@ export default function MainPage({
         <StoryCard history={mainData?.history} isStoryPage={false} />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <Card type="place" data={mainData?.place} size="big" color="yellow" />
+        <Card type="place" data={mainData?.place[0]} size="big" color="yellow" />
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
         <ArticleCard article={mainData?.articles[0]} color="#C8D1FF" />

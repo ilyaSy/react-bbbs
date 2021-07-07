@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import Api from '../utils/api';
 
-export default function useReadWatch(perPage) {
+export default function useGuide() {
   const [materialsData, setMaterialsData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     Api.getMaterials()
       .then((data) => {
-        setMaterialsData(data);
-        setPageCount(Math.ceil(data.length / perPage));
+        setMaterialsData(data.results);
+        setPageCount(data.count);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch(console.log);
   }, []);
 
   return { materialsData, pageCount };

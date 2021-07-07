@@ -79,8 +79,16 @@ export default class Api {
     return axios.get(`${apiURL}/main/`).then(Api._handleApiResult.bind(null, 'getMain'));
   }
 
-  static getPlaces() {
-    return axios.get(`${apiURL}/places/`).then(Api._handleApiResult.bind(null, 'getPlaces'));
+  static getPlaces(cityId) {
+    return axios
+      .get(`${apiURL}/places/?city=${cityId}`)
+      .then(Api._handleApiResult.bind(null, 'getPlaces'));
+  }
+
+  static getPlacesTags() {
+    return axios
+      .get(`${apiURL}/places/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getPlacesTags'));
   }
 
   static getQuestions() {
@@ -101,6 +109,12 @@ export default class Api {
     return axios.get(`${apiURL}/videos/`).then(Api._handleApiResult.bind(null, 'getVideos'));
   }
 
+  static getVideosTags() {
+    return axios
+      .get(`${apiURL}/videos/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getVideosTags'));
+  }
+
   static getArticles() {
     return axios.get(`${apiURL}/articles/`).then(Api._handleApiResult.bind(null, 'getArticles'));
   }
@@ -109,12 +123,24 @@ export default class Api {
     return axios.get(`${apiURL}/movies/`).then(Api._handleApiResult.bind(null, 'getMovies'));
   }
 
+  static getMoviesTags() {
+    return axios
+      .get(`${apiURL}/movies/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getMoviesTags'));
+  }
+
   static getBooks() {
     return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
   }
 
   static getRights() {
     return axios.get(`${apiURL}/rights/`).then(Api._handleApiResult.bind(null, 'getRights'));
+  }
+
+  static getRightsTags() {
+    return axios
+      .get(`${apiURL}/rights/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getRightsTags'));
   }
 
   static getEvents() {
