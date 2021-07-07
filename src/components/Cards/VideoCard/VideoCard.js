@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Tag from '../../UI/Tag/Tag';
-import youtubeLinkParser from '../../../utils/youtubeLinkParser';
+import { getUrlThumbnail } from '../../../utils/youtubeLinkParser';
 import './VideoCard.css';
 
 const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPage }) => {
@@ -9,7 +9,7 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPag
     handleVideoClick(link, title, info);
   };
 
-  const embedId = youtubeLinkParser(link);
+  const imgUrl = getUrlThumbnail(link);
 
   return (
     <li className="movie movie__card">
@@ -24,7 +24,7 @@ const VideoCard = ({ type, tags, title, info, link, handleVideoClick, isMovesPag
       <div className="movie__img">
         <img
           className="movie__poster"
-          src={`http://img.youtube.com/vi/${embedId}/0.jpg`}
+          src={imgUrl}
           alt={title}
           onClick={clickHandler}
           aria-hidden="true"
