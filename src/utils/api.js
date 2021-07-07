@@ -137,6 +137,12 @@ export default class Api {
     return axios.get(`${apiURL}/rights/`).then(Api._handleApiResult.bind(null, 'getRights'));
   }
 
+  static getRightsTags() {
+    return axios
+      .get(`${apiURL}/rights/tags/`)
+      .then(Api._handleApiResult.bind(null, 'getRightsTags'));
+  }
+
   static getEvents() {
     return axios.get(`${apiURL}/afisha/events/`).then(Api._handleApiResult.bind(null, 'getEvents'));
   }
