@@ -8,8 +8,8 @@ export default function useQuestionsTags() {
   useEffect(() => {
     Promise.all([Api.getQuestions(), Api.getQuestionsTags()])
       .then(([questionResp, tagsResp]) => {
-        const qs = questionResp.results;
-        setQuestions(qs);
+        setQuestions(questionResp.results);
+        tagsResp.unshift({ name: 'Все', id: 0 });
         setTagList(tagsResp);
       })
       .catch(console.log);

@@ -11,6 +11,7 @@ export default function usePlacesTags(currentCity) {
         .then(([placesResp, placesTags]) => {
           const data = placesResp.results;
           setPlaces(data);
+          placesTags.unshift({ name: 'Все', id: 0 });
           setTags(placesTags);
         })
         .catch(console.log);
