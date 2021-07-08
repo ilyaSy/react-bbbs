@@ -14,7 +14,7 @@ export default function useVideos() {
         setVideosData(videos.results);
         setChosenVideo(main.video[0]); // выбранное модератором
         setVideoTags(tags);
-        setPageCount(videos.count);
+        setPageCount(videos.totalPages);
       })
       .catch(console.log);
   }, []);

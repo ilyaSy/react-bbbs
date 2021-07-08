@@ -11,7 +11,7 @@ export default function useMoviesGenres() {
       .then(([movies, tags]) => {
         setMoviesData(movies.results);
         setGenres(tags);
-        setPageCount(movies.count);
+        setPageCount(movies.totalPages);
       })
       .catch(console.log);
   }, []);
