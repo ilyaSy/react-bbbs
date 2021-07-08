@@ -13,12 +13,12 @@ import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 //   filterItemByFiltersList,
 //   getMultipleTagsIndex,
 // } from '../../../utils/filters';
-import useQuestionsTags from '../../../hooks/useQuestionsTags';
+import useQuestions from '../../../hooks/useQuestions';
 import './QuestionsPage.css';
 
 const QuestionsPage = () => {
   const currentUser = useContext(CurrentUserContext);
-  const { questions, tagList } = useQuestionsTags();
+  const { questions, tagList } = useQuestions();
   const [activeTags, setActiveTags] = useState(tagList[0]);
   const [didAsk, setDidAsk] = useState(false);
   const { reset } = useForm();
