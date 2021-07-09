@@ -8,17 +8,10 @@ import Heading from '../../UI/Heading/Heading';
 import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
-import { setActiveFilters } from '../../../utils/filters';
 import usePlaces from '../../../hooks/usePlaces';
+import Api from '../../../utils/api';
+import tagsFilter from '../../../utils/filtering';
 import './PlacesPage.css';
-
-// поместить эти данные на бэк
-const ages = [
-  { id: 1, name: '8-10 лет', slug: '8-10' },
-  { id: 2, name: '11-13 лет', slug: '11-13' },
-  { id: 3, name: '14-18 лет', slug: '14-18' },
-  { id: 4, name: '18+ лет', slug: '18+' },
-];
 
 const PlacesPage = ({
   onRecommendPlace,
@@ -28,49 +21,46 @@ const PlacesPage = ({
   handlePlacesFormSubmit,
 }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [activeCategories, setActiveCategories] = useState();
-  const [activeAgeRange, setActiveAgeRange] = useState('');
   const [currentCity, setCurrentCity] = useState(null);
-  const { places, tags, chosenPlace } = usePlaces(currentCity);
+  const [activeTags, setActiveTags] = useState([]);
+  const [params, setParams] = useState([]);
+  const [places, setPlaces] = useState([]);
+  const [tags, setTags] = useState([]);
+  // const [ageTags, setAgeTags] = useState([]);
+  const tagAll = { name: 'Все', id: 0, slug: '' };
+  const { chosenPlace } = usePlaces(currentCity);
 
   useEffect(() => {
     if (!currentUser && !unauthCity.cityId) openPopupCities();
+    Api.getPlacesTags()
+      .then((tagsData) => {
+        console.log(tagsData);
+        tagsData.unshift(tagAll);
+        setTags(tagsData);
+      })
+      .catch(console.log);
   }, []);
 
   // получение айди текущего города для отправки запроса по местам этого города
   useEffect(() => {
-    setCurrentCity(currentUser?.city || unauthCity?.cityId);
-  }, [currentUser, unauthCity]);
+    const city = currentUser?.city || unauthCity?.cityId;
+    setCurrentCity(city);
+    Api.getPlaces(city, params)
+      .then((placesData) => {
+        setPlaces(placesData.results);
+      })
+      .catch(console.log);
+  }, [currentUser, unauthCity, params]);
 
-  // ?
-  const handleCategoryFilter = (category) => {
-    setActiveCategories(setActiveFilters(activeCategories, category));
+  // фильтр по тегам места
+  const handleCategoryFilter = (tag) => {
+    tagsFilter(tag, activeTags, setParams, setActiveTags);
   };
 
-  // ?
-  const handleAgeFilter = (age) => {
-    if (activeAgeRange && activeAgeRange === age) {
-      setActiveAgeRange('');
-    } else {
-      setActiveAgeRange(age);
-    }
+  // фильтр по тегам возраста
+  const handleAgeFilter = (tag) => {
+    tagsFilter(tag, activeTags, setParams, setActiveTags);
   };
-
-  // ?
-  // const filterAgeRanges = (age) => {
-  //   switch (activeAgeRange) {
-  //     case '8-10 лет':
-  //       return age >= 8 && age <= 10;
-  //     case '11-13 лет':
-  //       return age >= 11 && age <= 13;
-  //     case '14-18 лет':
-  //       return age >= 14 && age < 18;
-  //     case '18+ лет':
-  //       return age >= 18;
-  //     default:
-  //       return age;
-  //   }
-  // };
 
   const changeCity = () => {
     if (currentUser) {
@@ -101,13 +91,13 @@ const PlacesPage = ({
         <div className="scroll-container">
           <ScrollContainer
             list={tags}
-            activeItems={activeCategories}
+            activeItems={activeTags}
             onClick={handleCategoryFilter}
             sectionSubClass="buttons-scroll_place_event"
           />
           <ScrollContainer
-            list={ages}
-            activeItem={activeAgeRange}
+            list={tags}
+            activeItem={activeTags}
             onClick={handleAgeFilter}
             sectionSubClass="buttons-scroll_place_event"
           />
@@ -120,7 +110,7 @@ const PlacesPage = ({
           handlePlacesFormSubmit={handlePlacesFormSubmit}
         />
       )}
-      {/* нужно понять как будет рисоваться большая карточка, при каких условиях */}
+      {/* сейчас большая карточка берется из getMain:places */}
       {(currentCity || unauthCity.id) && (
         <Card type="place" data={chosenPlace} color="yellow" size="big" />
       )}
