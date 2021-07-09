@@ -1,39 +1,47 @@
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import Pagination from '../../UI/Pagination/Pagination';
-import useMoviesGenres from '../../../hooks/useMoviesGenres';
-import {
-  setActiveFilters,
-  // filterItemByFiltersList,
-  // getMultipleTagsIndex,
-} from '../../../utils/filters';
+import tagsFilter from '../../../utils/filtering';
+import Api from '../../../utils/api';
 import './MoviesPage.css';
 
 const MoviesPage = ({ handleVideoClick }) => {
-  const [activeGenres, setActiveGenres] = useState(['Все']);
-  // const [currentPage, setCurrentPage] = useState(0);
-  // const perPage = 16;
-  // const offset = currentPage * perPage;
-  const { moviesData, genres, pageCount } = useMoviesGenres();
+  const tagAll = { name: 'Все', id: 0, slug: '' };
+  const [params, setParams] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [activeTags, setActiveTags] = useState([]);
 
-  const currentPageData = moviesData
-    // .slice(offset, offset + perPage)
-    // .filter((movie) => filterItemByFiltersList(activeGenres, movie.tagNames))
-    // .sort(
-    //   (a, b) =>
-    //     getMultipleTagsIndex(activeGenres, a.tagNames) >
-    //     getMultipleTagsIndex(activeGenres, b.tagNames)
-    // )
-    .map(({ id: key, ...args }) => (
-      <VideoCard key={key} type="movie" {...args} handleVideoClick={handleVideoClick} />
-    ));
+  useEffect(() => {
+    Api.getMoviesTags()
+      .then((tagsData) => {
+        tagsData.unshift(tagAll);
+        setTags(tagsData);
+        setActiveTags([tagAll]);
+      })
+      .catch(console.log);
+  }, []);
 
-  const handleGenreFilter = (genre) => {
-    setActiveGenres(setActiveFilters(activeGenres, genre));
+  useEffect(() => {
+    Api.getMovies(params.join())
+      .then((moviesData) => {
+        setMovies(moviesData.results);
+        setPageCount(moviesData.totalPages);
+      })
+      .catch(console.log);
+  }, [params]);
+
+  const currentPageData = movies.map(({ id: key, ...args }) => (
+    <VideoCard key={key} type="movie" {...args} handleVideoClick={handleVideoClick} />
+  ));
+
+  const handleTagFilter = (tag) => {
+    tagsFilter(tag, activeTags, setParams, setActiveTags);
   };
 
   return (
@@ -44,7 +52,7 @@ const MoviesPage = ({ handleVideoClick }) => {
       </Helmet>
       <Heading>Фильмы</Heading>
       <div className="scroll-container">
-        <ScrollContainer list={genres} activeItems={activeGenres} onClick={handleGenreFilter} />
+        <ScrollContainer list={tags} activeItems={activeTags} onClick={handleTagFilter} />
       </div>
       <ul className="filmpage__list">{currentPageData}</ul>
       <Pagination pageCount={pageCount} />

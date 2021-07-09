@@ -130,8 +130,11 @@ export default class Api {
     return axios.get(`${apiURL}/articles/`).then(Api._handleApiResult.bind(null, 'getArticles'));
   }
 
-  static getMovies() {
-    return axios.get(`${apiURL}/movies/`).then(Api._handleApiResult.bind(null, 'getMovies'));
+  static getMovies(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/movies/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getMovies'));
   }
 
   static getMoviesTags() {

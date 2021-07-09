@@ -12,7 +12,7 @@ import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
   const tagAll = { name: 'Все', id: 0, slug: '' };
-  const [activeTags, setActiveTags] = useState([tagAll]);
+  const [activeTags, setActiveTags] = useState([]);
   const [params, setParams] = useState([]);
   const [videos, setVideos] = useState([]);
   const [tags, setTags] = useState([]);
@@ -63,7 +63,7 @@ const VideosPage = ({ handleVideoClick }) => {
           sectionClass="grid-calendar__buttons"
         />
       </div>
-      {activeTags[0].slug === tagAll.slug && (
+      {chosenVideo && (
         <section className="mainvideo videopage__bigvideo">
           <MainVideoCard video={chosenVideo} handleVideoClick={handleVideoClick} />
         </section>
