@@ -2,7 +2,8 @@
 // export const TEST_MODE = true;
 // export const apiURL = '/api/v1';
 export const TEST_MODE = false;
-export const apiURL = 'http://194.87.101.228/api/v1';
+export const baseUrl = 'http://194.87.101.228';
+export const apiURL = `${baseUrl}/api/v1`;
 
 // http://84.252.132.223/api/v1/main/
 // http://84.252.132.223

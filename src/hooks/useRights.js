@@ -11,7 +11,7 @@ export default function useRights() {
       .then(([rightsData, tagsData]) => {
         setRights(rightsData.results);
         setTags(tagsData);
-        setPageCount(rightsData.count);
+        setPageCount(rightsData.totalPages);
       })
       .catch(console.log);
   }, []);

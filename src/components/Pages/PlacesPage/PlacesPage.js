@@ -9,7 +9,7 @@ import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import { setActiveFilters } from '../../../utils/filters';
-import usePlacesTags from '../../../hooks/usePlacesCategories';
+import usePlaces from '../../../hooks/usePlaces';
 import './PlacesPage.css';
 
 // поместить эти данные на бэк
@@ -31,7 +31,7 @@ const PlacesPage = ({
   const [activeCategories, setActiveCategories] = useState();
   const [activeAgeRange, setActiveAgeRange] = useState('');
   const [currentCity, setCurrentCity] = useState(null);
-  const { places, tags } = usePlacesTags(currentCity);
+  const { places, tags, chosenPlace } = usePlaces(currentCity);
 
   useEffect(() => {
     if (!currentUser && !unauthCity.cityId) openPopupCities();
@@ -121,7 +121,9 @@ const PlacesPage = ({
         />
       )}
       {/* нужно понять как будет рисоваться большая карточка, при каких условиях */}
-      <Card type="place" data={places[2]} color="yellow" size="big" />
+      {(currentCity || unauthCity.id) && (
+        <Card type="place" data={chosenPlace} color="yellow" size="big" />
+      )}
       <section className="events-grid">
         {places &&
           places.map((place, i) => (

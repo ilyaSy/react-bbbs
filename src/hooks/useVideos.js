@@ -13,8 +13,9 @@ export default function useVideos() {
         // Неавторизованный пользователь не видит видео с тегом "Ресурсная группа"
         setVideosData(videos.results);
         setChosenVideo(main.video[0]); // выбранное модератором
+        tags.unshift({ name: 'Все', id: 0 });
         setVideoTags(tags);
-        setPageCount(videos.count);
+        setPageCount(videos.totalPages);
       })
       .catch(console.log);
   }, []);

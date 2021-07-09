@@ -91,8 +91,11 @@ export default class Api {
       .then(Api._handleApiResult.bind(null, 'getPlacesTags'));
   }
 
-  static getQuestions() {
-    return axios.get(`${apiURL}/questions/`).then(Api._handleApiResult.bind(null, 'getQuestions'));
+  static getQuestions(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/questions/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getQuestions'));
   }
 
   static getQuestionsTags() {
@@ -131,6 +134,10 @@ export default class Api {
 
   static getBooks() {
     return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
+  }
+
+  static getBooksTags() {
+    return axios.get(`${apiURL}/books/tags/`).then(Api._handleApiResult.bind(null, 'getBooksTags'));
   }
 
   static getRights() {

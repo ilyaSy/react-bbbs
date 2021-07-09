@@ -9,7 +9,7 @@ export default function useGuide() {
     Api.getMaterials()
       .then((data) => {
         setMaterialsData(data.results);
-        setPageCount(data.count);
+        setPageCount(data.totalPages);
       })
       .catch(console.log);
   }, []);

@@ -12,7 +12,7 @@ export default function useArticles() {
         setArticlesData(data.results);
         const chosen = data.filter((article) => article.chosen)[0];
         setChosenArticle(chosen);
-        setPageCount(data.count);
+        setPageCount(data.totalPages);
       })
       .catch(console.log);
   }, []);

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './Card.css';
 import PropTypes from 'prop-types';
 import Tag from '../../UI/Tag/Tag';
+import { baseUrl } from '../../../config/config';
 
 const Card = ({ type, size, color, data }) => (
   <section className="event-soon-card">
@@ -36,7 +37,7 @@ const Card = ({ type, size, color, data }) => (
             </div>
             {data.chosen && size === 'big' && (
               <Link className="event-soon__img" to="/where-to-go">
-                <img src={data.imageUrl} className="event-soon__img" alt="Локация" />
+                <img src={`${baseUrl}${data.imageUrl}`} className="event-soon__img" alt="Локация" />
               </Link>
             )}
             {data.link && (

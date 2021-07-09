@@ -3,22 +3,15 @@ import Button from '../Button/Button';
 
 export default function ScrollContainer({
   list,
-  activeItem,
   activeItems,
   onClick,
   sectionClass,
   sectionSubClass,
 }) {
-  const setActiveClass = (item) => {
-    if (Array.isArray(activeItems) && activeItems.length && activeItems.includes(item)) {
-      return 'button_color_black_active';
-    }
-    if (activeItem && item === activeItem) {
-      return 'button_color_black_active';
-    }
-
-    return '';
-  };
+  const setActiveClass = (item) =>
+    activeItems.some((activeItem) => activeItem.slug === item.slug)
+      ? 'button_color_black_active'
+      : '';
   return (
     <div className={`${sectionClass} ${sectionSubClass}`}>
       {list.map((item) => (
@@ -37,7 +30,6 @@ export default function ScrollContainer({
 
 ScrollContainer.propTypes = {
   onClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.string,
   activeItems: PropTypes.oneOfType(PropTypes.string),
   list: PropTypes.oneOfType(PropTypes.any),
   sectionClass: PropTypes.string,
@@ -46,7 +38,6 @@ ScrollContainer.propTypes = {
 
 ScrollContainer.defaultProps = {
   list: [],
-  activeItem: '',
   activeItems: [],
   sectionClass: 'buttons-scroll',
   sectionSubClass: '',
