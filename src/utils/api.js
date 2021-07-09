@@ -91,8 +91,11 @@ export default class Api {
       .then(Api._handleApiResult.bind(null, 'getPlacesTags'));
   }
 
-  static getQuestions() {
-    return axios.get(`${apiURL}/questions/`).then(Api._handleApiResult.bind(null, 'getQuestions'));
+  static getQuestions(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/questions/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getQuestions'));
   }
 
   static getQuestionsTags() {
