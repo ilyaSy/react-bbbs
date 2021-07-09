@@ -26,7 +26,7 @@ const PlacesPage = ({
   const [params, setParams] = useState([]);
   const [places, setPlaces] = useState([]);
   const [tags, setTags] = useState([]);
-  // const [ageTags, setAgeTags] = useState([]);
+  const [ageTags, setAgeTags] = useState([]);
   const tagAll = { name: 'Все', id: 0, slug: '' };
   const { chosenPlace } = usePlaces(currentCity);
 
@@ -35,8 +35,11 @@ const PlacesPage = ({
     Api.getPlacesTags()
       .then((tagsData) => {
         console.log(tagsData);
-        tagsData.unshift(tagAll);
-        setTags(tagsData);
+        const activity = tagsData.tagActivity;
+        const age = tagsData.tagAge;
+        activity.unshift(tagAll);
+        setTags(activity);
+        setAgeTags(age);
       })
       .catch(console.log);
   }, []);
@@ -96,7 +99,7 @@ const PlacesPage = ({
             sectionSubClass="buttons-scroll_place_event"
           />
           <ScrollContainer
-            list={tags}
+            list={ageTags}
             activeItem={activeTags}
             onClick={handleAgeFilter}
             sectionSubClass="buttons-scroll_place_event"

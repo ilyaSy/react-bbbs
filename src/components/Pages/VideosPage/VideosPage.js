@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import MainVideoCard from '../../Cards/MainVideoCard/MainVideoCard';
@@ -6,27 +6,46 @@ import VideoCard from '../../Cards/VideoCard/VideoCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import Pagination from '../../UI/Pagination/Pagination';
-// import { setActiveFilters, filterItemByFiltersList } from '../../../utils/filters';
-import useVideos from '../../../hooks/useVideos';
+import tagsFilter from '../../../utils/filtering';
+import Api from '../../../utils/api';
 import './VideosPage.css';
 
 const VideosPage = ({ handleVideoClick }) => {
-  const [activeTags, setActiveTags] = useState(['Все']);
-  const [currentPage, setCurrentPage] = useState(0);
-  // const perPage = 16;
-  // const offset = currentPage * perPage;
-  const { videosData, chosenVideo, videoTags, pageCount } = useVideos(currentPage);
+  const tagAll = { name: 'Все', id: 0, slug: '' };
+  const [activeTags, setActiveTags] = useState([tagAll]);
+  const [params, setParams] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [chosenVideo, setChosenVideo] = useState(null);
 
-  const currentPageData = videosData
-    // .slice(offset, offset + perPage)
-    // .filter((video) => filterItemByFiltersList(activeTags, video.tag.name))
-    // .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
-    .map(({ id: key, ...args }) => (
-      <VideoCard type="video" key={key} handleVideoClick={handleVideoClick} {...args} />
-    ));
+  useEffect(() => {
+    Api.getVideosTags()
+      .then((tagsResp) => {
+        tagsResp.unshift(tagAll);
+        setTags(tagsResp);
+        setActiveTags([tagAll]);
+      })
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    Api.getVideos(params.join())
+      .then((videosResp) => {
+        const videosData = videosResp.results;
+        setChosenVideo(videosData.shift());
+        setVideos(videosData);
+        setPageCount(videosResp.totalPages);
+      })
+      .catch(console.log);
+  }, [params]);
+
+  const currentPageData = videos.map(({ id: key, ...args }) => (
+    <VideoCard type="video" key={key} handleVideoClick={handleVideoClick} {...args} />
+  ));
 
   const handleTagFilter = (tag) => {
-    setActiveTags(tag);
+    tagsFilter(tag, activeTags, setParams, setActiveTags);
   };
 
   return (
@@ -38,19 +57,19 @@ const VideosPage = ({ handleVideoClick }) => {
       <Heading>Видео</Heading>
       <div className="scroll-container">
         <ScrollContainer
-          list={videoTags}
+          list={tags}
           activeItems={activeTags}
           onClick={handleTagFilter}
           sectionClass="grid-calendar__buttons"
         />
       </div>
-      {activeTags[0] === 'Все' && (
+      {activeTags[0].slug === tagAll.slug && (
         <section className="mainvideo videopage__bigvideo">
           <MainVideoCard video={chosenVideo} handleVideoClick={handleVideoClick} />
         </section>
       )}
       <ul className="videopage__list">{currentPageData}</ul>
-      <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
+      <Pagination pageCount={pageCount} />
     </section>
   );
 };

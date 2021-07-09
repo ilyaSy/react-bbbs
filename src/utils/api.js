@@ -113,8 +113,11 @@ export default class Api {
     return axios.get(`${apiURL}/materials/`).then(Api._handleApiResult.bind(null, 'getMaterials'));
   }
 
-  static getVideos() {
-    return axios.get(`${apiURL}/videos/`).then(Api._handleApiResult.bind(null, 'getVideos'));
+  static getVideos(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/videos/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getVideos'));
   }
 
   static getVideosTags() {
