@@ -1,32 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import defineColor from '../../../utils/renderColors';
 import defineFigure from '../../../utils/renderFigures';
-import { setActiveFilters } from '../../../utils/filters';
 import RightsCard from '../../Cards/RightsCard/RightsCard';
 import Heading from '../../UI/Heading/Heading';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import Pagination from '../../UI/Pagination/Pagination';
-import useRights from '../../../hooks/useRights';
+import Api from '../../../utils/api';
+import tagsFilter from '../../../utils/filtering';
 import './RightsPage.css';
 
 const RightsPage = () => {
-  const [activeTags, setActiveTags] = useState(['Все']);
-  // const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 16;
-  // const offset = currentPage * perPage;
-  const { rights, tags, pageCount } = useRights(perPage);
+  const tagAll = { name: 'Все', id: 0, slug: '' };
+  const [params, setParams] = useState([]);
+  const [rights, setRights] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [activeTags, setActiveTags] = useState([]);
 
-  const currentPageData = rights
-    // .slice(offset, offset + perPage)
-    // .filter((item) => filterItemByFiltersList(activeTags, item.tag.name))
-    // .sort((a, b) => activeTags.indexOf(a.tag.name) > activeTags.indexOf(b.tag.name))
-    .map(({ id: key, ...args }, i) => (
-      <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
-    ));
+  useEffect(() => {
+    Api.getRightsTags()
+      .then((tagsData) => {
+        tagsData.unshift(tagAll);
+        setTags(tagsData);
+        setActiveTags([tagAll]);
+      })
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    Api.getRights(params.join())
+      .then((rightsData) => {
+        setRights(rightsData.results);
+        setPageCount(rightsData.totalPages);
+      })
+      .catch(console.log);
+  }, [params]);
+
+  const currentPageData = rights.map(({ id: key, ...args }, i) => (
+    <RightsCard key={key} color={defineColor(i)} figure={defineFigure(i)} {...args} />
+  ));
 
   const handleTagFilter = (tag) => {
-    setActiveTags(setActiveFilters(activeTags, tag));
+    tagsFilter(tag, activeTags, setParams, setActiveTags);
   };
 
   return (

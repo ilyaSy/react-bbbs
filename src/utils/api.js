@@ -143,16 +143,20 @@ export default class Api {
       .then(Api._handleApiResult.bind(null, 'getMoviesTags'));
   }
 
-  static getBooks() {
-    return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
+  static getBooks(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios.get(`${apiURL}/books/${search}`).then(Api._handleApiResult.bind(null, 'getBooks'));
   }
 
   static getBooksTags() {
     return axios.get(`${apiURL}/books/tags/`).then(Api._handleApiResult.bind(null, 'getBooksTags'));
   }
 
-  static getRights() {
-    return axios.get(`${apiURL}/rights/`).then(Api._handleApiResult.bind(null, 'getRights'));
+  static getRights(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/rights/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getRights'));
   }
 
   static getRightsTags() {

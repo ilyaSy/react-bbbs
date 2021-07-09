@@ -34,7 +34,6 @@ const PlacesPage = ({
     if (!currentUser && !unauthCity.cityId) openPopupCities();
     Api.getPlacesTags()
       .then((tagsData) => {
-        console.log(tagsData);
         const activity = tagsData.tagActivity;
         const age = tagsData.tagAge;
         activity.unshift(tagAll);
