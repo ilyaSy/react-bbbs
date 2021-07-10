@@ -79,10 +79,17 @@ export default class Api {
     return axios.get(`${apiURL}/main/`).then(Api._handleApiResult.bind(null, 'getMain'));
   }
 
-  static getPlaces(cityId) {
-    return axios
-      .get(`${apiURL}/places/?city=${cityId}`)
-      .then(Api._handleApiResult.bind(null, 'getPlaces'));
+  static getPlaces(cityId = null, params) {
+    const search = params ? `search=${params}` : '';
+    if (cityId)
+      return axios
+        .get(`${apiURL}/places/?city=${cityId}&${search}`)
+        .then(Api._handleApiResult.bind(null, 'getPlaces'));
+    if (search)
+      return axios
+        .get(`${apiURL}/places/?${search}`)
+        .then(Api._handleApiResult.bind(null, 'getPlaces'));
+    return new Promise(() => []);
   }
 
   static getPlacesTags() {
@@ -108,8 +115,11 @@ export default class Api {
     return axios.get(`${apiURL}/materials/`).then(Api._handleApiResult.bind(null, 'getMaterials'));
   }
 
-  static getVideos() {
-    return axios.get(`${apiURL}/videos/`).then(Api._handleApiResult.bind(null, 'getVideos'));
+  static getVideos(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/videos/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getVideos'));
   }
 
   static getVideosTags() {
@@ -122,8 +132,11 @@ export default class Api {
     return axios.get(`${apiURL}/articles/`).then(Api._handleApiResult.bind(null, 'getArticles'));
   }
 
-  static getMovies() {
-    return axios.get(`${apiURL}/movies/`).then(Api._handleApiResult.bind(null, 'getMovies'));
+  static getMovies(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/movies/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getMovies'));
   }
 
   static getMoviesTags() {
@@ -132,16 +145,20 @@ export default class Api {
       .then(Api._handleApiResult.bind(null, 'getMoviesTags'));
   }
 
-  static getBooks() {
-    return axios.get(`${apiURL}/books/`).then(Api._handleApiResult.bind(null, 'getBooks'));
+  static getBooks(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios.get(`${apiURL}/books/${search}`).then(Api._handleApiResult.bind(null, 'getBooks'));
   }
 
   static getBooksTags() {
     return axios.get(`${apiURL}/books/tags/`).then(Api._handleApiResult.bind(null, 'getBooksTags'));
   }
 
-  static getRights() {
-    return axios.get(`${apiURL}/rights/`).then(Api._handleApiResult.bind(null, 'getRights'));
+  static getRights(params) {
+    const search = params ? `?search=${params}` : '';
+    return axios
+      .get(`${apiURL}/rights/${search}`)
+      .then(Api._handleApiResult.bind(null, 'getRights'));
   }
 
   static getRightsTags() {

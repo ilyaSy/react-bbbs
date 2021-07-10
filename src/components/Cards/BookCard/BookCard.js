@@ -10,7 +10,7 @@ const BookCard = ({ title, author, year, description, genre }) => (
         <h3 className="book__heading">{title}</h3>
         <div className="book__caption">
           <p className="book__author">{author}</p>
-          <p className="book__year">{`${year} год`}</p>
+          <p className="book__year">{year}</p>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ const BookCard = ({ title, author, year, description, genre }) => (
 BookCard.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  year: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };

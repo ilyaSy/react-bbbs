@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import defineFigure from '../../../utils/renderFigures';
 import GuideCard from '../../Cards/GuideCard/GuideCard';
@@ -8,9 +7,7 @@ import './GuidePage.css';
 import Pagination from '../../UI/Pagination/Pagination';
 
 const GuidePage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
   const { materialsData, pageCount } = useGuide();
-  console.log('GuidePage', currentPage); // не понятно пока, что делать с currentPage
   const currentPageData = materialsData.map(({ id: key, ...args }, i) => (
     <GuideCard key={key} figure={defineFigure(i)} {...args} />
   ));
@@ -28,7 +25,7 @@ const GuidePage = () => {
         и&nbsp;напомнить себе о&nbsp;чем-то.
       </p>
       <ul className="guide guide_type_all">{currentPageData}</ul>
-      <Pagination pageCount={pageCount} setCurrentPage={setCurrentPage} />
+      <Pagination pageCount={pageCount} />
     </section>
   );
 };

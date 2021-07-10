@@ -86,7 +86,7 @@ export default function MainPage({
         </QuestionsContainer>
       </MainPageSection>
       <MainPageSection className="mainpage__blocks">
-        <ArticleCard article={mainData?.rights[1]} color="#8CDD94" />
+        <ArticleCard article={mainData?.articles[0]} color="#8CDD94" />
       </MainPageSection>
     </MainPageSection>
   );
