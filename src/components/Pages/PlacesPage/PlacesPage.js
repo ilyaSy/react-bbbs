@@ -8,7 +8,6 @@ import Heading from '../../UI/Heading/Heading';
 import Button from '../../UI/Button/Button';
 import ScrollContainer from '../../UI/ScrollContainer/ScrollContainer';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
-import usePlaces from '../../../hooks/usePlaces';
 import Api from '../../../utils/api';
 import tagsFilter from '../../../utils/filtering';
 import './PlacesPage.css';
@@ -21,14 +20,13 @@ const PlacesPage = ({
   handlePlacesFormSubmit,
 }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [currentCity, setCurrentCity] = useState(null);
   const [activeTags, setActiveTags] = useState([]);
   const [params, setParams] = useState([]);
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState(null);
   const [tags, setTags] = useState([]);
   const [ageTags, setAgeTags] = useState([]);
+  const [chosenPlace, setChosenPlace] = useState(null);
   const tagAll = { name: 'Все', id: 0, slug: '' };
-  const { chosenPlace } = usePlaces(currentCity);
 
   useEffect(() => {
     if (!currentUser && !unauthCity.cityId) openPopupCities();
@@ -39,17 +37,22 @@ const PlacesPage = ({
         activity.unshift(tagAll);
         setTags(activity);
         setAgeTags(age);
+        setActiveTags([tagAll]);
       })
       .catch(console.log);
   }, []);
 
-  // получение айди текущего города для отправки запроса по местам этого города
   useEffect(() => {
+    // получение айди текущего города для отправки запроса по местам этого города
     const city = currentUser?.city || unauthCity?.cityId;
-    setCurrentCity(city);
-    Api.getPlaces(city, params)
-      .then((placesData) => {
-        setPlaces(placesData.results);
+    Api.getPlaces(city, params.join())
+      .then((placesResp) => {
+        const chosenIdx = placesResp.findIndex((itm) => itm.chosen === true);
+        if (chosenIdx !== -1) {
+          const chosen = placesResp.splice(chosenIdx, 1);
+          setChosenPlace(chosen);
+        } else setChosenPlace(null);
+        setPlaces(placesResp);
       })
       .catch(console.log);
   }, [currentUser, unauthCity, params]);
@@ -99,7 +102,7 @@ const PlacesPage = ({
           />
           <ScrollContainer
             list={ageTags}
-            activeItem={activeTags}
+            activeItems={activeTags}
             onClick={handleAgeFilter}
             sectionSubClass="buttons-scroll_place_event"
           />
@@ -112,9 +115,12 @@ const PlacesPage = ({
           handlePlacesFormSubmit={handlePlacesFormSubmit}
         />
       )}
-      {/* сейчас большая карточка берется из getMain:places */}
-      {(currentCity || unauthCity.id) && (
-        <Card type="place" data={chosenPlace} color="yellow" size="big" />
+      {/* сейчас большая карточка - первая из массива places */}
+      {chosenPlace && (
+        <>
+          <Card type="place" data={chosenPlace} color="yellow" size="big" />
+          <p>Hello</p>
+        </>
       )}
       <section className="events-grid">
         {places &&

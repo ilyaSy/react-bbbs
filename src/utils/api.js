@@ -80,14 +80,16 @@ export default class Api {
   }
 
   static getPlaces(cityId = null, params) {
-    const search = params ? `?search=${params}` : '';
-    if (cityId && params)
+    const search = params ? `search=${params}` : '';
+    if (cityId)
       return axios
-        .get(`${apiURL}/places/?city=${cityId}/${search}`)
+        .get(`${apiURL}/places/?city=${cityId}&${search}`)
         .then(Api._handleApiResult.bind(null, 'getPlaces'));
-    return axios
-      .get(`${apiURL}/places/${search}`)
-      .then(Api._handleApiResult.bind(null, 'getPlaces'));
+    if (search)
+      return axios
+        .get(`${apiURL}/places/?${search}`)
+        .then(Api._handleApiResult.bind(null, 'getPlaces'));
+    return new Promise(() => []);
   }
 
   static getPlacesTags() {
