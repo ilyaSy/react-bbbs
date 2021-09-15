@@ -1,12 +1,12 @@
-# Старшие Братья, Старшие Сёстры
-[Старшие Братья, Старшие Сёстры](https://www.nastavniki.org/)
+# Big Brothers, Big Sisters
+[Current website](https://www.nastavniki.org/)
 
-## Что это ?
-Проект студентов [Яндекс. Практикум](https://praktikum.yandex.ru): сайт для наставников проекта [Старшие Братья, Старшие Сёстры](https://www.nastavniki.org/)
+## What is this project about?
+This project was created as a part of a contest in developing a website for a non-profit organization Big Brothers, Big Sisters.
 
-[Ссылка на GitHub Pages](https://droni90.github.io/react-bbbs/)
+[Project at GitHub Pages](https://droni90.github.io/react-bbbs/)
 
-## Основные технологии
+## Technologies:
 
 * React
 
@@ -30,42 +30,26 @@
 
 * JSON animations (Lottie)
 
+## Pages is this project:
 
-## Сделано
+* Main
 
-* Работа с API
+* Profile
 
-* Routing
+* Calendar
 
-* Аутентификация и авторизация
+* Where to go?
 
-* Эмуляция взаимодействия с сервером
+* Questions
 
-* Анимация
+* Rights
 
-* Blur
+* Stories
 
+* Read and Watch
 
-## Основные страницы
-
-* Главная
-
-* Страница профиля
-
-* Календарь
-
-* Куда пойти
-
-* Вопросы
-
-* Права детей
-
-* Истории
-
-* Читать / смотреть
-
-* О проекте
+* About
 
 
 -----
-**Автор: Сычугов Илья, Ботыгин Андрей, Коротких Анна, Слепухина Мария**
+**Developers: Sychugov Ilya, Botygin Andrey, Korotkih Anna, Slepukhina Mariia**
